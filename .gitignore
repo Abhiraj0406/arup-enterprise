@@ -1,0 +1,54 @@
+# ============================================================
+# .gitignore — Arup Enterprise / DipBan Technical Services
+# ============================================================
+
+# ----- NEVER commit these -----
+.env
+.env.local
+.env.*.local
+*.env
+
+# ----- Uploads (user/admin submitted files) -----
+uploads/
+admin/Uploads/
+admin/uploads/
+
+# ----- System / IDE files -----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.orig
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ----- PHP composer -----
+vendor/
+composer.lock
+
+# ----- Node (if ever used) -----
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# ----- Log files -----
+*.log
+error_log
+php_error.log
+
+# ----- Database dumps -----
+*.sql
+*.sql.gz
+*.dump
+
+# ----- Backup files -----
+*.bak
+*.backup
+*~
+
+# ----- Cache directories -----
+cache/
+tmp/
+temp/

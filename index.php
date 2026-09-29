@@ -1,0 +1,1295 @@
+<?php
+// ============================================================
+// ✅ CRITICAL ORDER: session_start + ob_start FIRST, before ANY output
+// ============================================================
+session_start();
+ob_start();
+date_default_timezone_set('Asia/Kolkata');
+$page_title = "Home";
+
+require_once 'includes/db.php';
+
+// ============================================================
+// ✅ PHPMailer Autoload
+// ============================================================
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+// ============================================================
+// ✅ CONTACT FORM — runs BEFORE include header.php
+// ============================================================
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $first_name   = trim($_POST['first_name']   ?? '');
+    $last_name    = trim($_POST['last_name']    ?? '');
+    $phone        = trim($_POST['phone']        ?? '');
+    $email        = trim($_POST['email']        ?? '');
+    $message      = trim($_POST['message']      ?? '');
+    $product_name = trim($_POST['product_name'] ?? '');
+    $source       = 'Homepage Quote Form';
+    $ip_address   = $_SERVER['REMOTE_ADDR'] ?? '';
+
+    $errors = [];
+    if (empty($first_name))                                           $errors[] = "First name is required";
+    if (empty($phone))                                                $errors[] = "Phone number is required";
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Valid email is required";
+
+    if (empty($errors) && isset($conn) && $conn) {
+
+        // Check if table exists
+        $tableCheck = $conn->query("SHOW TABLES LIKE 'contact_enquiries'");
+        if ($tableCheck && $tableCheck->num_rows > 0) {
+            $stmt = $conn->prepare("
+                INSERT INTO contact_enquiries
+                    (first_name, last_name, phone, email, message, product_name, source, ip_address, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'new')
+            ");
+
+            if ($stmt) {
+                $stmt->bind_param("ssssssss",
+                    $first_name, $last_name, $phone, $email,
+                    $message, $product_name, $source, $ip_address
+                );
+
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    
+                    // ============================================================
+                    // ✅ SEND EMAIL USING PHPMailer
+                    // ============================================================
+                    $mail = new PHPMailer(true);
+                    
+                    try {
+                       
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port       = 587;
+
+                        // Recipients
+                        $mail->setFrom('noreply@dipbantechnicalservices.in', 'DipBan Technical Services');
+                        $mail->addAddress('sudip@dipbantechnicalservices.in');  // Main email
+                      
+
+                        // Reply-to
+                        $mail->addReplyTo($email, $first_name . ' ' . $last_name);
+
+                        // Content
+                        $mail->isHTML(true);
+                        $mail->Subject = "New Quote Enquiry" . $first_name . " " . $last_name;
+
+                        $submitted_at = date('d M Y');
+                        $ip_display   = htmlspecialchars($ip_address ?: 'Unknown');
+
+                        $mail->Body = '
+                        <!DOCTYPE html>
+                        <html>
+                        <head><meta charset="UTF-8"></head>
+                        <body style="margin:0;padding:0;background:#F5EED8;font-family:Arial,Helvetica,sans-serif;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5EED8;padding:32px 16px;">
+                                <tr>
+                                    <td align="center">
+                                        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid rgba(201,146,10,0.25);max-width:600px;">
+                                            <tr>
+                                                <td style="background:#1a1410;padding:24px 32px;border-bottom:3px solid #C9920A;">
+                                                    <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">DipBan Technical Services</span>
+                                                    <h1 style="color:#FFFFFF;font-size:20px;margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;">New Quote Enquiry</h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:24px 32px 0;">
+                                                    <p style="margin:0;color:#4a3f37;font-size:14px;line-height:1.6;">
+                                                        A new quote request was submitted through the website on <strong>' . $submitted_at . '</strong>.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:20px 32px;">
+                                                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                                                        <tr>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;width:130px;vertical-align:top;">First Name</td>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#1e1e1e;font-size:14px;vertical-align:top;">' . htmlspecialchars($first_name) . '</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Last Name</td>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#1e1e1e;font-size:14px;vertical-align:top;">' . htmlspecialchars($last_name) . '</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Phone</td>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#1e1e1e;font-size:14px;vertical-align:top;"><a href="tel:' . htmlspecialchars($phone) . '" style="color:#1e1e1e;text-decoration:none;">' . htmlspecialchars($phone) . '</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Email</td>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#1e1e1e;font-size:14px;vertical-align:top;"><a href="mailto:' . htmlspecialchars($email) . '" style="color:#1e1e1e;text-decoration:none;">' . htmlspecialchars($email) . '</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Product</td>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#1e1e1e;font-size:14px;vertical-align:top;">' . htmlspecialchars($product_name ?: 'Not specified') . '</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Source</td>
+                                                            <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#1e1e1e;font-size:14px;vertical-align:top;">' . htmlspecialchars($source) . '</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:10px 0;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">IP Address</td>
+                                                            <td style="padding:10px 0;color:#999999;font-size:12px;vertical-align:top;">' . $ip_display . '</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 32px 28px;">
+                                                    <div style="background:#F5EED8;border-left:4px solid #C9920A;border-radius:8px;padding:16px 18px;">
+                                                        <p style="margin:0 0 8px;color:#8B6508;font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:0.6px;">Message</p>
+                                                        <p style="margin:0;color:#1e1e1e;font-size:14px;line-height:1.7;white-space:pre-wrap;">' . nl2br(htmlspecialchars($message)) . '</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 32px 32px;">
+                                                    <a href="mailto:' . htmlspecialchars($email) . '?subject=Re:%20Quote%20Enquiry" style="display:inline-block;background:linear-gradient(135deg,#C9920A,#8B6508);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 26px;border-radius:8px;">Reply to ' . htmlspecialchars($first_name) . '</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="background:#FAF6EE;padding:16px 32px;border-top:1px solid #f0e6d2;">
+                                                    <p style="margin:0;color:#999999;font-size:11px;line-height:1.6;">
+                                                        This enquiry was also saved to the admin dashboard. Sent automatically from the DipBan Technical Services website.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </body>
+                        </html>';
+
+                        // Plain text alternative
+                        $mail->AltBody = "New Quote Enquiry\n\n"
+                            . "First Name: $first_name\n"
+                            . "Last Name: $last_name\n"
+                            . "Phone: $phone\n"
+                            . "Email: $email\n"
+                            . "Product: " . ($product_name ?: 'Not specified') . "\n"
+                            . "Source: $source\n"
+                            . "Date: $submitted_at\n"
+                            . "IP: " . ($ip_address ?: 'Unknown') . "\n\n"
+                            . "Message:\n$message\n";
+
+                        $mail->send();
+
+                        $_SESSION['quote_success'] = "Thanks, " . htmlspecialchars($first_name) .
+                            "! Your enquiry has been received. Our team will contact you within 24 hours.";
+
+                    } catch (Exception $e) {
+                        // Email failed but database saved
+                        $_SESSION['quote_success'] = "Thanks, " . htmlspecialchars($first_name) .
+                            "! Your enquiry has been received. Our team will contact you within 24 hours.";
+                        error_log("PHPMailer Error: " . $mail->ErrorInfo);
+                    }
+
+                    ob_end_clean();
+                    header("Location: index.php?submitted=1#contact-form");
+                    exit();
+
+                } else {
+                    $_SESSION['quote_error'] = "DB Error: " . $conn->error;
+                    $stmt->close();
+                }
+            } else {
+                $_SESSION['quote_error'] = "Prepare failed: " . $conn->error;
+            }
+        } else {
+            // Table doesn't exist - show success anyway (for testing)
+            $_SESSION['quote_success'] = "Thanks, " . htmlspecialchars($first_name) .
+                "! Your enquiry has been received. Our team will contact you within 24 hours.";
+            ob_end_clean();
+            header("Location: index.php?submitted=1#contact-form");
+            exit();
+        }
+
+        ob_end_clean();
+        header("Location: index.php#contact-form");
+        exit();
+
+    } else {
+        $_SESSION['quote_error'] = !empty($errors)
+            ? implode(", ", $errors)
+            : "Database connection error. Please call us directly at +91 9903126940.";
+        ob_end_clean();
+        header("Location: index.php#contact-form");
+        exit();
+    }
+}
+
+// ============================================================
+// Now safe to output HTML
+// ============================================================
+include 'includes/header.php';
+
+// ============================================================
+// FETCH PRODUCTS from DB
+// ============================================================
+$products = [];
+if (isset($conn) && $conn) {
+    // Check if products table exists
+    $tableCheck = $conn->query("SHOW TABLES LIKE 'products'");
+    if ($tableCheck && $tableCheck->num_rows > 0) {
+        $result = $conn->query("SELECT * FROM products WHERE status='active' ORDER BY featured DESC, sort_order ASC LIMIT 12");
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $products[] = $row;
+            }
+        }
+    }
+}
+
+// Fallback products if table is empty or doesn't exist
+if (empty($products)) {
+    $products = [
+        ['id'=>1, 'name'=>'Hi-90 R High Speed Router',    'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=900&auto=format&fit=crop','description'=>'High-speed CNC routing for precision woodworking panels with auto tool-change capability.'],
+        ['id'=>2, 'name'=>'Hi-50 P Portable Edge Bander', 'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=900&auto=format&fit=crop','description'=>'Portable edge banding machine delivering flawless finish on all panel types up to 60mm.'],
+        ['id'=>3, 'name'=>'CNC Bending Machine',          'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=900&auto=format&fit=crop','description'=>'CNC-controlled hydraulic bending machine for accurate metal forming across varied thicknesses.'],
+        ['id'=>4, 'name'=>'Metal Sheet Shearing Machine', 'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1565514020179-026b92b2d70b?q=80&w=900&auto=format&fit=crop','description'=>'Heavy-duty guillotine shearing machine for clean, precise cuts on steel and aluminium sheets.'],
+        ['id'=>5, 'name'=>'CNC Boring Machine',           'category'=>'CNC Machines',      'image'=>'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=900&auto=format&fit=crop','description'=>'Multi-spindle CNC boring with programmable depth control for furniture panel drilling.'],
+        ['id'=>6, 'name'=>'Hydraulic Press Machine',      'category'=>'Hydraulic Systems', 'image'=>'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=900&auto=format&fit=crop','description'=>'Industrial hydraulic press for bending, forming, and punching with high tonnage output.'],
+        ['id'=>7, 'name'=>'Panel Saw Machine',            'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1567789884554-0b844b597180?q=80&w=900&auto=format&fit=crop','description'=>'High-precision panel saw for cutting wood, MDF, and particle boards with ease.'],
+        ['id'=>8, 'name'=>'CNC Laser Cutter',             'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=900&auto=format&fit=crop','description'=>'Fiber laser cutting machine for sheet metal with high speed and accuracy.'],
+        ['id'=>9, 'name'=>'Hydraulic Bending Press',      'category'=>'Hydraulic Systems', 'image'=>'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=900&auto=format&fit=crop','description'=>'Heavy-duty hydraulic bending press for metal fabrication and forming operations.'],
+        ['id'=>10,'name'=>'Edge Banding Machine',         'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=900&auto=format&fit=crop','description'=>'Automatic edge banding machine for furniture panels with glue pot and trimming units.'],
+        ['id'=>11,'name'=>'CNC Drilling Machine',         'category'=>'CNC Machines',      'image'=>'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=900&auto=format&fit=crop','description'=>'Precision CNC drilling machine with multi-spindle heads for mass production.'],
+        ['id'=>12,'name'=>'Pneumatic Punching Machine',   'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=900&auto=format&fit=crop','description'=>'Pneumatic punching press for metal sheets with high speed and easy operation.'],
+    ];
+}
+
+// ============================================================
+// FETCH CATEGORIES for Industries section
+// ============================================================
+$industry_categories = [];
+if (isset($conn) && $conn) {
+    $tableCheck = $conn->query("SHOW TABLES LIKE 'categories'");
+    if ($tableCheck && $tableCheck->num_rows > 0) {
+        $result = $conn->query("SELECT * FROM categories WHERE status='active' ORDER BY sort_order ASC LIMIT 4");
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $industry_categories[] = $row;
+            }
+        }
+    }
+}
+if (empty($industry_categories)) {
+    $industry_categories = [
+        ['name'=>'Wood Working',      'icon'=>'fa-tree'],
+        ['name'=>'Sheet Metal',       'icon'=>'fa-layer-group'],
+        ['name'=>'CNC Machines',      'icon'=>'fa-microchip'],
+        ['name'=>'Hydraulic Systems', 'icon'=>'fa-cogs'],
+    ];
+}
+
+// ============================================================
+// STATIC DATA
+// ============================================================
+$stats = [
+    ['value'=>'50+', 'label'=>'Machinery Models',  'icon'=>'fa-cog'],
+    ['value'=>'200+','label'=>'Installations Done', 'icon'=>'fa-tools'],
+    ['value'=>'15+', 'label'=>'Service Engineers',  'icon'=>'fa-solid fa-users'],
+    ['value'=>'01',   'label'=>'Pan India',    'icon'=>'fa-map-marker-alt'],
+];
+$kpis = [
+    ['icon'=>'fa-headset',        'title'=>'24/7 Support',     'desc'=>'Round-the-clock customer service. Our engineers stand by whenever you need them.'],
+    ['icon'=>'fa-bolt',           'title'=>'Quick Response',   'desc'=>'Expert teams deployed rapidly. Minimal downtime is our promise to every client.'],
+    ['icon'=>'fa-boxes',          'title'=>'Spares Ready',     'desc'=>'Critical spare parts always in stock so your production line never stops.'],
+    ['icon'=>'fa-star',           'title'=>'Wide Range',       'desc'=>'Comprehensive after-sales support across all machinery categories we supply.'],
+    ['icon'=>'fa-graduation-cap', 'title'=>'Trained Engineers','desc'=>'Every field engineer is factory-trained and certified on our full product portfolio.'],
+];
+$why = [
+    ['icon'=>'fa-lightbulb','title'=>'Innovation',   'desc'=>'We continuously push technological limits — exploring new frontiers in industrial machinery design and automation.'],
+    ['icon'=>'fa-gem',      'title'=>'Quality',      'desc'=>'Machines engineered to the highest standards. Unrivaled durability and performance built into every component.'],
+    ['icon'=>'fa-handshake','title'=>'Satisfaction', 'desc'=>'Understanding your unique needs is our priority. Tailored solutions and exceptional service at every turn.'],
+    ['icon'=>'fa-leaf',     'title'=>'Sustainability','desc'=>'Energy-efficient, eco-friendly designs that reduce waste and minimize environmental impact while maximizing output.'],
+];
+$process_steps = [
+    ['step'=>'01','icon'=>'fa-comments',        'title'=>'Consult',  'desc'=>'Tell us your production volume, floor size and budget — we recommend the right machine class.'],
+    ['step'=>'02','icon'=>'fa-drafting-compass','title'=>'Configure','desc'=>'We finalise specifications, power requirements and optional tooling for your exact line.'],
+    ['step'=>'03','icon'=>'fa-truck-loading',   'title'=>'Install',  'desc'=>'Our engineers handle delivery, commissioning and operator training on-site.'],
+    ['step'=>'04','icon'=>'fa-life-ring',       'title'=>'Support',  'desc'=>'24/7 helpline, genuine spares and scheduled maintenance keep you running for years.'],
+];
+$faqs = [
+    ['q'=>'Do you provide on-site installation and training?',  'a'=>'Yes. Every machine purchase includes on-site commissioning and hands-on operator training by our factory-trained engineers.'],
+    ['q'=>'What is your typical delivery timeline?',            'a'=>'Standard machines ship within 7–15 working days; custom configurations take 3–5 weeks depending on specification.'],
+    ['q'=>'Do you stock spare parts for older machine models?', 'a'=>'Yes, genuine spares are kept in stock across our service centers, including for legacy models we no longer manufacture new.'],
+    ['q'=>'Can I get a demo before purchasing?',                'a'=>'Absolutely — book a factory demo and our team will walk you through live machine operation before you decide.'],
+    ['q'=>'What warranty do your machines carry?',              'a'=>'All machinery ships with a standard 12-month manufacturer warranty, extendable through our AMC service plans.'],
+];
+$testimonials = [
+    ['initials'=>'RK','name'=>'Rajan Kumar',    'role'=>'Furniture Manufacturer, Howrah', 'stars'=>5,  'text'=>"DipBan's Hi-90 R router transformed our production line. The precision and speed exceeded every expectation. Installation was fast and the after-sales team is always available."],
+    ['initials'=>'SM','name'=>'Sanjay Mehta',   'role'=>'Sheet Metal Workshop, Kolkata',  'stars'=>5,  'text'=>"Reliable machines, quick spare parts delivery, and an engineering team that truly understands industrial requirements. DipBan is our go-to machinery partner for new projects."],
+    ['initials'=>'AP','name'=>'Arvind Pandey',  'role'=>'Auto Component Factory, Durgapur','stars'=>5, 'text'=>"We've used their hydraulic press for over a year with zero downtime. The 24/7 support line gave us confidence from day one. Highly recommend DipBan."],
+    ['initials'=>'MD','name'=>'Manoj Das',      'role'=>'Plywood Industries, Liluah',     'stars'=>5,  'text'=>"Switched from an imported edge bander to DipBan's unit — finish quality is identical at half the service turnaround time. Excellent value."],
+    ['initials'=>'PB','name'=>'Pritam Banerjee','role'=>'Steel Fabrication Unit, Howrah', 'stars'=>5,  'text'=>"Their CNC boring machine runs three shifts a day without complaint. Genuinely impressed by the build quality and response time from the service team."],
+    ['initials'=>'KS','name'=>'Kunal Saha',     'role'=>'Modular Furniture Brand, Kolkata','stars'=>5, 'text'=>"From quotation to installation took under two weeks. The team configured the panel saw exactly to our cutting list requirements. Very professional."],
+];
+
+function dipban_stars($r){
+    $h=''; for($i=0;$i<floor($r);$i++) $h.='<i class="fas fa-star"></i>';
+    if($r-floor($r)>=0.5) $h.='<i class="fas fa-star-half-alt"></i>';
+    return $h;
+}
+?>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-video-wrap">
+        <video autoplay muted loop playsinline class="hero-video"
+               poster="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=1600&auto=format&fit=crop">
+            <source src="assets/video/machine-hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-gears" aria-hidden="true">
+        <svg class="gear gear-1" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
+        <svg class="gear gear-2" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
+        <svg class="gear gear-3" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
+    </div>
+    <svg style="display:none"><symbol id="gear-svg" viewBox="0 0 100 100"><path d="M43 2h14l2 10a35 35 0 0 1 8.5 3.5l9-5 10 10-5 9A35 35 0 0 1 85 38l10 2v14l-10 2a35 35 0 0 1-3.5 8.5l5 9-10 10-9-5A35 35 0 0 1 59 82l-2 10H43l-2-10a35 35 0 0 1-8.5-3.5l-9 5-10-10 5-9A35 35 0 0 1 15 56L5 54V40l10-2a35 35 0 0 1 3.5-8.5l-5-9 10-10 9 5A35 35 0 0 1 41 12zm7 22a26 26 0 1 0 0 52 26 26 0 0 0 0-52zm0 10a16 16 0 1 1 0 32 16 16 0 0 1 0-32z" fill="currentColor"/></symbol></svg>
+    <div class="hero-content">
+        <div class="hero-badge"><span class="badge-dot"></span>Manufacturer · Supplier · Service Provider</div>
+        <h1 class="hero-headline">Where <em>Precision</em><br>Meets Innovation</h1>
+        <p class="hero-sub">Advanced industrial machinery crafted for woodworking &amp; sheet metal industries. Engineering excellence that keeps your production running at full power — 24 × 7.</p>
+        <div class="hero-ctas">
+            <a href="#contact-form" class="cta-primary"><i class="fas fa-paper-plane"></i> Get a Free Quote</a>
+            <a href="#products" class="cta-secondary"><i class="fas fa-th-large"></i> Explore Products</a>
+        </div>
+        <div class="hero-trust">
+            <div class="trust-item"><i class="fas fa-check-circle"></i> Industry certified Quality</div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i> 24/7 Support</div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i> Pan-India Service</div>
+        </div>
+    </div>
+    <div class="hero-scroll-hint"><span>Scroll to explore</span><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="section-stats">
+    <div class="stats-inner">
+        <?php foreach($stats as $s): ?>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas <?php echo $s['icon']; ?>"></i></div>
+            <div class="stat-value"><?php echo $s['value']; ?></div>
+            <div class="stat-label"><?php echo $s['label']; ?></div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section section-about-intro" id="about">
+    <div class="container">
+        <div class="about-intro-grid">
+            <div class="about-intro-visual">
+                <div class="about-img-stack">
+                    <div class="about-img-main"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1000&auto=format&fit=crop" alt="DipBan engineer inspecting CNC machinery" loading="lazy"></div>
+                    <div class="about-badge-float"><i class="fas fa-award"></i><div><strong>Est. 2022</strong><span>Trusted Since Day One</span></div></div>
+                    <div class="about-img-secondary"><img src="images/pro.jpeg" alt="Shearing machine"></div>
+                </div>
+            </div>
+            <div class="about-intro-content">
+                <span class="section-eyebrow">Who We Are</span>
+                <h2 class="section-title">Engineering the Future of <span>Industrial Machinery</span></h2>
+                <p>At DipBan Technical Services, we are dedicated to providing high-performance industrial machinery solutions tailored for woodworking and sheet metal industries. Since our establishment in 2022, we have built a reputation as a trusted manufacturer, supplier, and service provider.</p>
+                <p>We specialize in <strong>Wood Working Panel Processing Machinery</strong>, <strong>Hydraulic Machines</strong>, <strong>CNC Boring Machines</strong>, and other state-of-the-art equipment — all built to meet the highest industry standards.</p>
+                <div class="about-features">
+                    <div class="af-item"><i class="fas fa-check"></i> Precision CNC Engineering</div>
+                    <div class="af-item"><i class="fas fa-check"></i> Energy-Efficient Designs</div>
+                    <div class="af-item"><i class="fas fa-check"></i> Rigorous Quality Testing</div>
+                    <div class="af-item"><i class="fas fa-check"></i> Pan-India After-Sales Service</div>
+                </div>
+                <a href="about.php" class="btn-outline-gold">Discover Our Story <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== KPI ===== -->
+<section class="section-kpi">
+    <div class="kpi-header"><div class="container"><span class="section-eyebrow light">Our 5 Commitments</span><h2 class="section-title light">Why Businesses Trust DipBan</h2></div></div>
+    <div class="kpi-cards-wrap"><div class="container"><div class="kpi-grid">
+        <?php foreach($kpis as $k): ?>
+        <div class="kpi-card"><div class="kpi-icon"><i class="fas <?php echo $k['icon']; ?>"></i></div><h3><?php echo $k['title']; ?></h3><p><?php echo $k['desc']; ?></p></div>
+        <?php endforeach; ?>
+    </div></div></div>
+</section>
+
+<!-- ===== MADE IN INDIA VIDEO SECTION ===== -->
+<section class="made-india-section">
+    <div class="container">
+        <div class="made-india-grid">
+
+            <!-- Content Side -->
+            <div class="made-india-content">
+                <span class="section-eyebrow">Manufacturing Excellence</span>
+
+                <h2>
+                    Proudly Engineered &
+                    <span>Manufactured in India</span>
+                </h2>
+
+                <p>
+                    At DipBan Technical Services, every machine is designed and
+                    manufactured with precision, innovation, and world-class
+                    engineering standards. We proudly support India's industrial
+                    growth through reliable and high-performance machinery.
+                </p>
+
+                <p>
+                    Our commitment to quality, durability, and advanced technology
+                    helps businesses achieve higher productivity while contributing
+                    to the vision of a stronger manufacturing ecosystem.
+                </p>
+
+                <div class="india-features">
+                    <div><i class="fas fa-check-circle"></i> Indian Engineering Excellence</div>
+                    <div><i class="fas fa-check-circle"></i> Premium Quality Manufacturing</div>
+                    <div><i class="fas fa-check-circle"></i> Pan India Installation Support</div>
+                    <div><i class="fas fa-check-circle"></i> Trusted Industrial Solutions</div>
+                </div>
+
+                <a href="#products" class="india-btn">
+                    Explore Our Products
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <!-- Video Side -->
+            <div class="made-india-video">
+                <div class="video-badge">
+                    🇮🇳 MADE IN INDIA
+                </div>
+
+                <video autoplay muted loop playsinline>
+                    <source src="assets/video/v2.mp4" type="video/mp4">
+                </video>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="section section-products" id="products">
+    <div class="container">
+        <div class="section-head">
+            <span class="section-eyebrow">What We Offer</span>
+            <h2 class="section-title">Our <span>Premium Products</span></h2>
+            <p class="section-desc">Precision-engineered industrial machines for every production requirement.</p>
+        </div>
+        <div class="product-tabs">
+            <button class="tab-btn active" data-filter="all">All Products</button>
+            <button class="tab-btn" data-filter="Wood Working">Wood Working</button>
+            <button class="tab-btn" data-filter="Sheet Metal">Sheet Metal</button>
+            <button class="tab-btn" data-filter="CNC Machines">CNC Machines</button>
+            <button class="tab-btn" data-filter="Hydraulic Systems">Hydraulic</button>
+        </div>
+        <div class="products-grid" id="productsGrid">
+            <?php foreach($products as $p):
+                $img = (string)($p['image'] ?? '');
+                $is_remote = ($img && stripos($img,'http')===0);
+                $is_local  = ($img && !$is_remote && file_exists($img));
+                $src = ($is_remote||$is_local) ? htmlspecialchars($img) : 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=900&auto=format&fit=crop';
+            ?>
+            <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']??''); ?>">
+                <div class="product-img-wrap">
+                    <img src="<?php echo $src; ?>" alt="<?php echo htmlspecialchars($p['name']??''); ?>" loading="lazy"/>
+                    <div class="product-category-tag"><?php echo htmlspecialchars($p['category']??'Machinery'); ?></div>
+                    <?php if(!empty($p['featured'])): ?><div class="product-feat-tag"><i class="fas fa-star"></i> Featured</div><?php endif; ?>
+                </div>
+                <div class="product-card-body">
+                    <h3 class="product-name"><?php echo htmlspecialchars($p['name']??''); ?></h3>
+                    <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,95)); ?>...</p>
+                    <div class="product-card-footer">
+                        <a href="product-detail.php?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://wa.me/919903126940?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="products-cta-wrap"><a href="products.php" class="btn-outline-gold">View All Products <i class="fas fa-th-large"></i></a></div>
+    </div>
+</section>
+
+<!-- ===== WHY ===== -->
+<section class="section section-why" id="why">
+    <div class="container">
+        <div class="section-head"><span class="section-eyebrow">Our Strengths</span><h2 class="section-title">Why Choose <span>DipBan</span></h2></div>
+        <div class="why-grid">
+            <?php foreach($why as $w): ?>
+            <div class="why-card"><div class="why-icon"><i class="fas <?php echo $w['icon']; ?>"></i></div><h3><?php echo $w['title']; ?></h3><p><?php echo $w['desc']; ?></p></div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="section section-process" id="process">
+    <div class="container">
+        <div class="section-head"><span class="section-eyebrow">How It Works</span><h2 class="section-title">From Enquiry to <span>Full Production</span></h2><p class="section-desc">A four-step path from your first call to a machine running on your floor.</p></div>
+        <div class="process-grid">
+            <?php foreach($process_steps as $i=>$step): ?>
+            <div class="process-card">
+                <div class="process-step-num"><?php echo $step['step']; ?></div>
+                <div class="process-icon"><i class="fas <?php echo $step['icon']; ?>"></i></div>
+                <h3><?php echo $step['title']; ?></h3><p><?php echo $step['desc']; ?></p>
+                <?php if($i<3): ?><div class="process-connector"><i class="fas fa-arrow-right"></i></div><?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ===== INDUSTRIES ===== -->
+<section class="section section-industries">
+    <div class="container">
+        <div class="section-head"><span class="section-eyebrow">Solutions We Offer</span><h2 class="section-title">Industries <span>We Serve</span></h2></div>
+        <div class="industry-grid">
+            <?php foreach($industry_categories as $cat): ?>
+            <a href="products.php?cat=<?php echo urlencode($cat['name']); ?>" class="industry-card">
+                <div class="industry-icon"><i class="fas <?php echo $cat['icon']??'fa-tag'; ?>"></i></div>
+                <h3><?php echo htmlspecialchars($cat['name']); ?></h3>
+                <p>Explore our <?php echo htmlspecialchars($cat['name']); ?> machinery range</p>
+                <span class="industry-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS CAROUSEL ===== -->
+<section class="section-testimonials" id="testimonials">
+    <div class="testi-bg-decor" aria-hidden="true"></div>
+    <div class="container">
+        <div class="section-head">
+            <span class="section-eyebrow">Client Feedback</span>
+            <h2 class="section-title" style="color:#fff">What Our <span>Clients Say</span></h2>
+            <p class="section-desc" style="color:#888">Real reviews from workshops and factories we've equipped across India.</p>
+        </div>
+        <div class="testi-carousel-wrap">
+            <button class="testi-nav testi-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+            <button class="testi-nav testi-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            <div class="testi-track-outer">
+                <div class="testi-track" id="testiTrack">
+                    <?php foreach($testimonials as $idx=>$t): ?>
+                    <div class="testi-slide">
+                        <div class="testi-card">
+                            <div class="testi-quote-icon"><i class="fas fa-quote-left"></i></div>
+                            <div class="testi-stars-row">
+                                <?php echo dipban_stars($t['stars']); ?>
+                                <span class="testi-rating-num"><?php echo $t['stars']; ?>/5</span>
+                            </div>
+                            <p class="testi-text"><?php echo htmlspecialchars($t['text']); ?></p>
+                            <div class="testi-author-row">
+                                <div class="testi-avatar"><?php echo $t['initials']; ?></div>
+                                <div class="testi-author-info">
+                                    <strong><?php echo htmlspecialchars($t['name']); ?></strong>
+                                    <span><?php echo htmlspecialchars($t['role']); ?></span>
+                                </div>
+                                <div class="testi-verified"><i class="fas fa-check-circle"></i> Verified Client</div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="testi-dots" id="testiDots">
+                <?php foreach($testimonials as $idx=>$t): ?>
+                <button class="testi-dot<?php echo $idx===0?' active':''; ?>" data-goto="<?php echo $idx; ?>"></button>
+                <?php endforeach; ?>
+            </div>
+            <div class="testi-progress"><div class="testi-progress-bar" id="testiProgress"></div></div>
+        </div>
+        <div class="testi-trust-strip">
+            <div class="trust-strip-item"><i class="fas fa-star"></i><div><strong>4.9/5</strong><span>Average Rating</span></div></div>
+            <div class="trust-strip-divider"></div>
+            <div class="trust-strip-item"><i class="fas fa-users"></i><div><strong>200+</strong><span>Happy Clients</span></div></div>
+            <div class="trust-strip-divider"></div>
+            <div class="trust-strip-item"><i class="fas fa-map-marker-alt"></i><div><strong>Pan-India</strong><span>Service Network</span></div></div>
+            <div class="trust-strip-divider"></div>
+            <div class="trust-strip-item"><i class="fas fa-award"></i><div><strong>Since 2022</strong><span>Trusted Brand</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section section-faq" id="faq">
+    <div class="container">
+        <div class="section-head"><span class="section-eyebrow">Common Questions</span><h2 class="section-title">Frequently Asked <span>Questions</span></h2></div>
+        <div class="faq-list">
+            <?php foreach($faqs as $faq): ?>
+            <div class="faq-item">
+                <button class="faq-question"><span><?php echo htmlspecialchars($faq['q']); ?></span><i class="fas fa-plus faq-toggle-icon"></i></button>
+                <div class="faq-answer"><p><?php echo htmlspecialchars($faq['a']); ?></p></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA BAND + FORM ===== -->
+<section class="section-cta-band" id="contact-form">
+    <div class="container">
+        <div class="cta-band-grid">
+            <div class="cta-band-content">
+                <span class="section-eyebrow light">Get In Touch</span>
+                <h2 class="section-title light">Ready to Upgrade Your <span style="color:#F0C040">Production Line?</span></h2>
+                <p>Whether you need a quote, technical consultation, or after-sales support — our experts are just one message away.</p>
+
+                <!-- ✅ SUCCESS TOAST -->
+                <?php if (!empty($_SESSION['quote_success'])): ?>
+                <div class="form-toast form-toast-success" id="formToast">
+                    <div class="toast-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="toast-text">
+                        <strong>Enquiry Submitted Successfully!</strong>
+                        <span><?php echo htmlspecialchars($_SESSION['quote_success']); unset($_SESSION['quote_success']); ?></span>
+                    </div>
+                    <button type="button" class="toast-close" onclick="this.closest('.form-toast').remove()">&times;</button>
+                </div>
+                <?php endif; ?>
+
+                <!-- ✅ ERROR TOAST -->
+                <?php if (!empty($_SESSION['quote_error'])): ?>
+                <div class="form-toast form-toast-error" id="formToast">
+                    <div class="toast-icon"><i class="fas fa-exclamation-circle"></i></div>
+                    <div class="toast-text">
+                        <strong>Please check your details</strong>
+                        <span><?php echo htmlspecialchars($_SESSION['quote_error']); unset($_SESSION['quote_error']); ?></span>
+                    </div>
+                    <button type="button" class="toast-close" onclick="this.closest('.form-toast').remove()">&times;</button>
+                </div>
+                <?php endif; ?>
+
+                <div class="cta-contact-items">
+                    <a href="https://wa.me/919903126940" target="_blank" class="cta-whatsapp-premium">
+                        <div class="whatsapp-icon-wrap"><i class="fab fa-whatsapp"></i></div>
+                        <div class="whatsapp-text"><span>Chat with us</span><strong>WhatsApp Now</strong></div>
+                        <div class="whatsapp-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </a>
+                    <a href="tel:+919903126940" class="cta-contact-item"><i class="fas fa-phone-alt"></i><div><span>Call Us Now</span><strong>+91 9903126940</strong></div></a>
+                    <a href="mailto:sudip@dipbantechnicalservices.in" class="cta-contact-item"><i class="fas fa-envelope"></i><div><span>Email Us</span><strong>sudip@dipbantechnicalservices.in</strong></div></a>
+                </div>
+            </div>
+
+            <!-- ✅ FORM -->
+            <div class="cta-band-form">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>#contact-form" id="quickForm">
+                    <h3><i class="fas fa-paper-plane" style="color:var(--gold);margin-right:8px;"></i>Request a Free Quote</h3>
+                    <div class="form-row">
+                        <div class="form-group"><input type="text"  name="first_name"   placeholder="First Name *" required></div>
+                        <div class="form-group"><input type="text"  name="last_name"    placeholder="Last Name"></div>
+                    </div>
+                    <div class="form-group"><input type="tel"   name="phone"        placeholder="Phone Number *" required></div>
+                    <div class="form-group"><input type="email" name="email"        placeholder="Email Address *" required></div>
+                    <div class="form-group"><input type="text"  name="product_name" placeholder="Product you're interested in (optional)"></div>
+                    <div class="form-group"><textarea name="message" placeholder="Tell us about your machinery requirements..." rows="4"></textarea></div>
+                    <button type="submit" name="submit_quote" class="btn-quote" id="quoteSubmitBtn">
+                        <i class="fas fa-paper-plane" id="submitIcon"></i>
+                        <span id="submitLabel">Send Enquiry</span>
+                    </button>
+                    <p class="form-note"><i class="fas fa-lock"></i> Your information is safe with us. No spam, ever.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php include 'includes/footer.php'; ?>
+
+<!-- ✅ FIX: CSS Styles -->
+<style>
+:root{
+    --cream:#fef7ed;--ivory:#faf3e8;--gold:#C9920A;--gold-dark:#a87a08;
+    --gold-light:#e6c9a0;--charcoal:#1e1e1e;--mid-gray:#4a3f37;
+    --light-gray:#e8ddd0;--white:#fff;--wa-deep:#0c3d2e;--wa-mid:#145c43;
+    --sh-sm:0 4px 14px rgba(0,0,0,.05);--sh-md:0 12px 40px rgba(0,0,0,.08);
+    --sh-gold:0 8px 30px rgba(201,146,10,.3);
+    --tr:0.3s cubic-bezier(.2,.9,.3,1);
+    --font:'Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--cream);color:var(--charcoal);line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section-head{text-align:center;margin-bottom:52px}
+.section-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;background:rgba(201,146,10,.08);padding:4px 14px;border-radius:20px;border:1px solid rgba(201,146,10,.2)}
+.section-eyebrow.light{background:rgba(201,146,10,.15);border-color:rgba(201,146,10,.3)}
+.section-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--charcoal);line-height:1.2;margin-bottom:14px}
+.section-title span{color:var(--gold)}
+.section-title.light{color:#fff}
+.section-desc{color:var(--mid-gray);font-size:1rem;max-width:600px;margin:0 auto}
+.btn-outline-gold{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--gold);color:var(--gold);font-weight:700;font-size:.88rem;padding:11px 24px;border-radius:8px;transition:all var(--tr)}
+.btn-outline-gold:hover{background:var(--gold);color:#fff;transform:translateY(-2px)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;margin-top:0}
+.hero-video-wrap{position:absolute;inset:0;z-index:0}
+.hero-video{width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,28,28,.92) 0%,rgba(28,28,28,.70) 60%,rgba(201,146,10,.08) 100%)}
+.hero-gears{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.gear{position:absolute;color:var(--gold);opacity:.05}
+.gear-1{width:420px;top:-80px;right:-80px;animation:gspin 42s linear infinite}
+.gear-2{width:200px;bottom:10%;left:5%;animation:gspin 28s linear infinite reverse}
+.gear-3{width:140px;top:40%;right:15%;animation:gspin 20s linear infinite}
+@keyframes gspin{to{transform:rotate(360deg)}}
+.hero-content{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto;padding:120px 24px 100px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,146,10,.15);border:1px solid rgba(201,146,10,.4);color:var(--gold-light);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px}
+.badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:bdot 2s ease-in-out infinite}
+@keyframes bdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-headline{font-size:clamp(2.4rem,6vw,5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px;max-width:680px}
+.hero-headline em{color:var(--gold);font-style:normal}
+.hero-sub{color:rgba(255,255,255,.75);font-size:clamp(1rem,1.5vw,1.15rem);max-width:560px;margin-bottom:36px;line-height:1.7}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+.cta-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;font-size:.95rem;font-weight:700;padding:14px 28px;border-radius:10px;box-shadow:var(--sh-gold);transition:all var(--tr)}
+.cta-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,146,10,.5)}
+.cta-secondary{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.4);color:#fff;font-size:.95rem;font-weight:600;padding:14px 28px;border-radius:10px;transition:all var(--tr)}
+.cta-secondary:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,146,10,.1)}
+.hero-trust{display:flex;gap:20px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:.82rem;font-weight:500}
+.trust-item i{color:var(--gold)}
+.hero-scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.5);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;animation:hscroll 2s ease-in-out infinite;z-index:2}
+.scroll-mouse{width:22px;height:34px;border:2px solid rgba(255,255,255,.4);border-radius:11px;display:flex;justify-content:center;padding-top:5px}
+.scroll-dot{width:4px;height:8px;background:var(--gold);border-radius:2px;animation:sdot 2s ease-in-out infinite}
+@keyframes sdot{0%,100%{transform:translateY(0);opacity:1}60%{transform:translateY(12px);opacity:0}}
+@keyframes hscroll{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* STATS */
+.section-stats{background:linear-gradient(135deg,var(--charcoal),#2a2a2a);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);padding:40px 24px}
+.stats-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-card{text-align:center;padding:24px 20px;border-right:1px solid rgba(255,255,255,.08);transition:background var(--tr)}
+.stat-card:last-child{border-right:none}
+.stat-card:hover{background:rgba(201,146,10,.08)}
+.stat-icon{font-size:1.5rem;color:var(--gold);margin-bottom:8px}
+.stat-value{font-size:2.4rem;font-weight:900;color:#fff;line-height:1;margin-bottom:6px}
+.stat-label{color:#aaa;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+
+/* ABOUT */
+.section-about-intro{background:var(--cream)}
+.about-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img-stack{position:relative;padding-bottom:36px}
+.about-img-main{border-radius:16px;overflow:hidden;box-shadow:var(--sh-md);border:2px solid rgba(201,146,10,.18)}
+.about-img-main img{width:100%;height:380px;object-fit:cover;display:block}
+.about-img-secondary{position:absolute;bottom:0;left:-28px;width:145px;height:108px;border-radius:12px;overflow:hidden;border:4px solid var(--cream);box-shadow:var(--sh-md)}
+.about-img-secondary img{width:100%;height:100%;object-fit:cover}
+.about-badge-float{position:absolute;bottom:20px;right:-20px;background:var(--gold);color:#fff;padding:13px 17px;border-radius:12px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh-gold);font-size:.82rem;z-index:2}
+.about-badge-float i{font-size:1.5rem}
+.about-badge-float strong{display:block;font-size:1rem}
+.about-badge-float span{opacity:.85;font-size:.7rem}
+.about-intro-content p{color:var(--mid-gray);margin-bottom:14px}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:20px 0 28px}
+.af-item{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--charcoal)}
+.af-item i{color:var(--gold);font-size:.78rem}
+
+/* KPI */
+.section-kpi{background:linear-gradient(135deg,#1a1a1a,#111);padding:72px 0}
+.kpi-header{text-align:center;margin-bottom:40px}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.kpi-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,146,10,.18);border-radius:12px;padding:28px 18px;text-align:center;transition:all var(--tr)}
+.kpi-card:hover{background:rgba(201,146,10,.08);border-color:var(--gold);transform:translateY(-6px)}
+.kpi-icon{width:54px;height:54px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.2rem;color:#fff;box-shadow:var(--sh-gold)}
+.kpi-card h3{font-size:.93rem;font-weight:700;color:#fff;margin-bottom:8px}
+.kpi-card p{color:#888;font-size:.79rem;line-height:1.6}
+
+/* PRODUCTS */
+.section-products{background:var(--ivory)}
+.product-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.tab-btn{padding:8px 20px;border:2px solid var(--light-gray);background:transparent;border-radius:30px;font-size:.82rem;font-weight:600;color:var(--mid-gray);cursor:pointer;transition:all var(--tr);font-family:var(--font)}
+.tab-btn:hover,.tab-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-bottom:48px}
+.product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm);transition:all var(--tr);border:1px solid rgba(201,146,10,.1)}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--gold)}
+.product-img-wrap{position:relative;height:210px;overflow:hidden;background:var(--ivory)}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.product-card:hover .product-img-wrap img{transform:scale(1.06)}
+.product-category-tag{position:absolute;top:11px;left:11px;background:var(--gold);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.product-feat-tag{position:absolute;top:11px;right:11px;background:rgba(28,28,28,.88);color:#F0C040;font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:20px;display:flex;align-items:center;gap:4px}
+.product-card-body{padding:18px 18px 14px}
+.product-name{font-size:1rem;font-weight:700;color:var(--charcoal);margin-bottom:7px;line-height:1.3}
+.product-desc{color:var(--mid-gray);font-size:.82rem;line-height:1.6;margin-bottom:14px}
+.product-card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid rgba(201,146,10,.08);padding-top:11px}
+.btn-product-detail{display:inline-flex;align-items:center;gap:5px;color:var(--gold-dark);font-size:.81rem;font-weight:700;transition:all var(--tr)}
+.btn-product-detail:hover{gap:10px;color:var(--gold)}
+.btn-product-quote{width:36px;height:36px;background:linear-gradient(135deg,var(--wa-mid),var(--wa-deep));color:#a8e6c0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all var(--tr);box-shadow:0 3px 12px rgba(12,61,46,.3);border:1px solid rgba(201,146,10,.2)}
+.btn-product-quote:hover{transform:scale(1.12);color:#fff}
+.products-cta-wrap{text-align:center}
+
+/* WHY */
+.section-why{background:var(--cream)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.why-card{background:#fff;border-radius:14px;padding:30px 22px;border:1px solid rgba(201,146,10,.12);transition:all var(--tr);text-align:center}
+.why-card:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:var(--sh-md)}
+.why-icon{width:60px;height:60px;background:rgba(201,146,10,.09);border:2px solid rgba(201,146,10,.22);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.35rem;color:var(--gold);transition:all var(--tr)}
+.why-card:hover .why-icon{background:var(--gold);color:#fff;border-color:var(--gold)}
+.why-card h3{font-size:1rem;font-weight:700;margin-bottom:9px}
+.why-card p{color:var(--mid-gray);font-size:.84rem;line-height:1.6}
+
+/* PROCESS */
+.section-process{background:var(--ivory)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.process-card{position:relative;background:#fff;border:1px solid rgba(201,146,10,.14);border-radius:14px;padding:28px 20px;text-align:center;transition:all var(--tr)}
+.process-card:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--gold)}
+.process-step-num{font-size:.72rem;font-weight:800;color:rgba(201,146,10,.4);letter-spacing:.12em;margin-bottom:10px}
+.process-icon{width:54px;height:54px;margin:0 auto 15px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:var(--sh-gold)}
+.process-card h3{font-size:.98rem;font-weight:700;margin-bottom:7px}
+.process-card p{color:var(--mid-gray);font-size:.81rem;line-height:1.6}
+.process-connector{display:none;position:absolute;top:50%;right:-30px;transform:translateY(-50%);color:rgba(201,146,10,.35);font-size:1.1rem}
+@media(min-width:1025px){.process-connector{display:block}}
+
+/* INDUSTRIES */
+.section-industries{background:var(--cream)}
+.industry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.industry-card{position:relative;background:#fff;border:1px solid rgba(201,146,10,.15);border-radius:14px;padding:30px 22px 26px;text-align:center;transition:all var(--tr);overflow:hidden;text-decoration:none}
+.industry-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--gold-dark));opacity:0;transition:opacity var(--tr);z-index:0}
+.industry-card:hover::before{opacity:1}
+.industry-card>*{position:relative;z-index:1}
+.industry-card:hover h3,.industry-card:hover p{color:#fff}
+.industry-card:hover .industry-icon{color:#fff}
+.industry-icon{font-size:2.4rem;color:var(--gold);margin-bottom:14px;transition:color var(--tr);display:flex;align-items:center;justify-content:center;height:54px}
+.industry-card h3{font-size:1.02rem;font-weight:700;margin-bottom:7px;color:var(--charcoal);transition:color var(--tr)}
+.industry-card p{color:var(--mid-gray);font-size:.81rem;line-height:1.6;transition:color var(--tr)}
+.industry-arrow{display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(201,146,10,.12);border-radius:50%;margin:12px auto 0;color:var(--gold);font-size:.75rem;transition:all var(--tr)}
+.industry-card:hover .industry-arrow{background:rgba(255,255,255,.2);color:#fff}
+
+/* TESTIMONIALS */
+.section-testimonials{background:linear-gradient(160deg,#0f0f0f,#1a1a1a 50%,#0d0d0d);padding:90px 0 70px;position:relative;overflow:hidden}
+.testi-bg-decor{position:absolute;inset:0;background:radial-gradient(ellipse 700px 400px at 10% 50%,rgba(201,146,10,.06),transparent 70%),radial-gradient(ellipse 500px 300px at 90% 20%,rgba(201,146,10,.04),transparent 70%);pointer-events:none}
+.testi-carousel-wrap{position:relative;max-width:920px;margin:0 auto 40px;padding:0 56px}
+.testi-track-outer{overflow:hidden;border-radius:20px}
+.testi-track{display:flex;transition:transform .58s cubic-bezier(.4,0,.2,1);will-change:transform}
+.testi-slide{flex:0 0 100%;min-width:100%;padding:4px}
+.testi-card{background:linear-gradient(145deg,#1e1e1e,#161616);border:1px solid rgba(201,146,10,.18);border-radius:20px;padding:44px 48px 40px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.04)}
+.testi-quote-icon{position:absolute;top:28px;right:36px;font-size:4rem;color:rgba(201,146,10,.07);line-height:1;pointer-events:none}
+.testi-stars-row{display:flex;align-items:center;gap:4px;margin-bottom:20px}
+.testi-stars-row .fa-star,.testi-stars-row .fa-star-half-alt{color:var(--gold);font-size:1rem}
+.testi-rating-num{font-size:.78rem;font-weight:700;color:var(--gold);margin-left:8px;background:rgba(201,146,10,.12);padding:2px 8px;border-radius:20px;border:1px solid rgba(201,146,10,.25)}
+.testi-text{font-size:1.05rem;color:#ccc;line-height:1.8;font-style:italic;margin-bottom:32px;position:relative;z-index:1}
+.testi-author-row{display:flex;align-items:center;gap:16px;border-top:1px solid rgba(255,255,255,.06);padding-top:24px}
+.testi-avatar{width:52px;height:52px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(201,146,10,.35);border:2px solid rgba(201,146,10,.4)}
+.testi-author-info{flex:1}
+.testi-author-info strong{display:block;font-size:1rem;font-weight:700;color:#fff;margin-bottom:2px}
+.testi-author-info span{font-size:.8rem;color:#777}
+.testi-verified{display:flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;color:#4ade80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);padding:4px 10px;border-radius:20px;white-space:nowrap}
+.testi-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:2px solid rgba(201,146,10,.3);background:rgba(201,146,10,.08);color:var(--gold);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;z-index:10}
+.testi-nav:hover{background:var(--gold);border-color:var(--gold);color:#fff;transform:translateY(-50%) scale(1.1);box-shadow:0 6px 20px rgba(201,146,10,.4)}
+.testi-prev{left:0}.testi-next{right:0}
+.testi-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
+.testi-dot{width:8px;height:8px;border-radius:50%;border:none;background:rgba(255,255,255,.15);cursor:pointer;transition:all .35s;padding:0}
+.testi-dot.active{background:var(--gold);width:28px;border-radius:4px;box-shadow:0 2px 10px rgba(201,146,10,.5)}
+.testi-progress{height:2px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:16px;overflow:hidden}
+.testi-progress-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;transition:width .1s linear}
+.testi-trust-strip{display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(201,146,10,.12);border-radius:14px;padding:20px 32px;flex-wrap:wrap;gap:0;row-gap:16px}
+.trust-strip-item{display:flex;align-items:center;gap:10px;padding:0 28px}
+.trust-strip-item i{font-size:1.3rem;color:var(--gold)}
+.trust-strip-item strong{display:block;font-size:1.1rem;font-weight:800;color:#fff}
+.trust-strip-item span{font-size:.75rem;color:#777}
+.trust-strip-divider{width:1px;height:40px;background:rgba(255,255,255,.08);flex-shrink:0}
+
+/* FAQ */
+.section-faq{background:var(--ivory)}
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{background:#fff;border:1px solid rgba(201,146,10,.15);border-radius:12px;overflow:hidden;transition:border-color var(--tr)}
+.faq-item.open{border-color:var(--gold)}
+.faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:none;padding:17px 22px;text-align:left;font-family:var(--font);font-size:.91rem;font-weight:700;color:var(--charcoal);cursor:pointer;transition:color var(--tr)}
+.faq-item.open .faq-question{color:var(--gold-dark)}
+.faq-toggle-icon{color:var(--gold);transition:transform var(--tr);flex-shrink:0}
+.faq-item.open .faq-toggle-icon{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .38s ease,padding .38s ease;padding:0 22px}
+.faq-item.open .faq-answer{max-height:220px;padding:0 22px 20px}
+.faq-answer p{color:var(--mid-gray);font-size:.86rem;line-height:1.7;margin:0}
+
+/* CTA BAND */
+.section-cta-band{background:linear-gradient(135deg,#1a1a1a,#0d0d0d);padding:80px 0;border-top:3px solid var(--gold)}
+.cta-band-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.cta-band-content p{color:#aaa;margin:16px 0 22px;font-size:.98rem;line-height:1.7}
+.form-toast{display:flex;align-items:flex-start;gap:14px;padding:18px 22px;border-radius:14px;margin-bottom:18px;animation:toastIn .45s var(--tr);position:relative}
+@keyframes toastIn{from{opacity:0;transform:translateY(-18px) scale(.96)}to{opacity:1;transform:none}}
+.form-toast-success{background:rgba(47,143,107,.12);border:1px solid rgba(47,143,107,.28);border-left:5px solid #2f8f6b}
+.form-toast-error{background:rgba(231,76,60,.12);border:1px solid rgba(231,76,60,.28);border-left:5px solid #e74c3c}
+.toast-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0}
+.form-toast-success .toast-icon{background:linear-gradient(135deg,#2f8f6b,#145c43)}
+.form-toast-error .toast-icon{background:linear-gradient(135deg,#e74c3c,#c0392b)}
+.toast-text strong{display:block;font-size:.92rem;font-weight:800;margin-bottom:3px}
+.form-toast-success .toast-text strong{color:#d4f5e9}
+.form-toast-error .toast-text strong{color:#fde8e8}
+.toast-text span{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.5}
+.toast-close{position:absolute;top:10px;right:14px;background:none;border:none;color:rgba(255,255,255,.5);font-size:1.2rem;cursor:pointer;transition:color .2s}
+.toast-close:hover{color:#fff}
+
+/* WHATSAPP */
+.cta-contact-items{display:flex;flex-direction:column;gap:10px}
+.cta-whatsapp-premium{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--wa-mid),var(--wa-deep));border-radius:14px;padding:15px 20px;transition:all .4s var(--tr);box-shadow:0 6px 26px rgba(12,61,46,.45);border:1px solid rgba(201,146,10,.28);text-decoration:none}
+.cta-whatsapp-premium:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 10px 34px rgba(12,61,46,.6);border-color:var(--gold)}
+.whatsapp-icon-wrap{width:46px;height:46px;background:rgba(201,146,10,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gold-light);flex-shrink:0;border:2px solid rgba(201,146,10,.28)}
+.whatsapp-text{flex:1}
+.whatsapp-text span{display:block;font-size:.68rem;font-weight:500;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em}
+.whatsapp-text strong{display:block;font-size:1.05rem;font-weight:800;color:#fff}
+.whatsapp-arrow{width:36px;height:36px;background:rgba(201,146,10,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-light);font-size:.85rem;transition:all .35s}
+.cta-whatsapp-premium:hover .whatsapp-arrow{transform:translateX(5px)}
+.cta-contact-item{display:flex;align-items:center;gap:12px;background:rgba(201,146,10,.08);border:1px solid rgba(201,146,10,.2);border-radius:10px;padding:13px 16px;transition:all var(--tr);text-decoration:none}
+.cta-contact-item:hover{border-color:var(--gold);background:rgba(201,146,10,.14)}
+.cta-contact-item i{font-size:1.1rem;color:var(--gold)}
+.cta-contact-item span{display:block;font-size:.7rem;color:#888;text-transform:uppercase;letter-spacing:.08em}
+.cta-contact-item strong{color:#fff;font-size:.9rem}
+
+/* FORM */
+.cta-band-form{background:var(--cream);border-radius:18px;padding:36px;border:2px solid rgba(201,146,10,.2);box-shadow:0 12px 48px rgba(0,0,0,.15)}
+.cta-band-form h3{font-size:1.25rem;font-weight:700;color:var(--charcoal);margin-bottom:22px;display:flex;align-items:center;gap:8px;padding-bottom:14px;border-bottom:2px solid var(--ivory)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{margin-bottom:12px}
+.form-group input,.form-group textarea{width:100%;padding:12px 15px;border:1.5px solid var(--light-gray);border-radius:9px;font-family:var(--font);font-size:.88rem;color:var(--charcoal);background:#fff;transition:border-color var(--tr),box-shadow var(--tr);outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,146,10,.1)}
+.form-group input.input-error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.1)}
+.form-group textarea{resize:vertical;min-height:98px}
+.btn-quote{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:700;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all var(--tr);box-shadow:var(--sh-gold);margin-top:4px}
+.btn-quote:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,146,10,.45)}
+.btn-quote:disabled{opacity:.68;cursor:not-allowed;transform:none}
+.form-note{text-align:center;font-size:.7rem;color:#999;margin-top:10px}
+.form-note i{color:var(--gold);margin-right:4px}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+    .kpi-grid{grid-template-columns:repeat(3,1fr)}
+    .why-grid,.industry-grid{grid-template-columns:repeat(2,1fr)}
+    .process-grid{grid-template-columns:repeat(2,1fr)}
+    .products-grid{grid-template-columns:repeat(2,1fr)}
+    .about-intro-grid,.cta-band-grid{grid-template-columns:1fr;gap:40px}
+    .stats-inner{grid-template-columns:repeat(2,1fr)}
+    .testi-trust-strip{gap:0}
+    .trust-strip-item{padding:0 16px}
+}
+@media(max-width:768px){
+    .testi-carousel-wrap{padding:0 44px}
+    .testi-card{padding:28px 22px}
+    .testi-verified{display:none}
+    .testi-trust-strip{flex-direction:column;gap:16px}
+    .trust-strip-divider{width:60px;height:1px}
+}
+@media(max-width:640px){
+    .section{padding:52px 0}
+    .kpi-grid{grid-template-columns:1fr 1fr}
+    .why-grid,.industry-grid,.products-grid,.process-grid{grid-template-columns:1fr}
+    .hero-headline{font-size:2rem}
+    .form-row{grid-template-columns:1fr}
+    .hero-ctas{flex-direction:column}
+    .about-img-secondary{display:none}
+    .testi-carousel-wrap{padding:0 36px}
+    .testi-card{padding:22px 16px}
+    .testi-text{font-size:.92rem}
+}
+@media(prefers-reduced-motion:reduce){
+    .testi-track,.gear{animation:none;transition:none}
+}
+
+/* ===== MADE IN INDIA ===== */
+
+.made-india-section{
+    padding:90px 0;
+    background:#111;
+    position:relative;
+    overflow:hidden;
+}
+
+.made-india-section::before{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(201,146,10,0.08);
+    border-radius:50%;
+    top:-200px;
+    right:-150px;
+    filter:blur(100px);
+}
+
+.made-india-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.made-india-video{
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid rgba(201,146,10,.4);
+    box-shadow:0 0 40px rgba(201,146,10,.2);
+}
+
+.made-india-video video{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    display:block;
+}
+
+.video-badge{
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index:2;
+    background:#C9920A;
+    color:#fff;
+    padding:10px 18px;
+    border-radius:50px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.made-india-content h2{
+    color:#fff;
+    font-size:48px;
+    line-height:1.2;
+    margin-bottom:20px;
+    font-weight:800;
+}
+
+.made-india-content h2 span{
+    color:#C9920A;
+}
+
+.made-india-content p{
+    color:#bdbdbd;
+    margin-bottom:18px;
+    line-height:1.8;
+    font-size:16px;
+}
+
+.india-features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin:30px 0;
+}
+
+.india-features div{
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+}
+
+.india-features i{
+    color:#C9920A;
+    margin-right:8px;
+}
+
+.india-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(135deg,#C9920A,#a67a08);
+    color:#fff;
+    padding:14px 28px;
+    border-radius:8px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.india-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(201,146,10,.35);
+}
+
+@media(max-width:991px){
+
+    .made-india-grid{
+        grid-template-columns:1fr;
+    }
+
+    .made-india-content h2{
+        font-size:34px;
+    }
+
+    .made-india-video video{
+        height:350px;
+    }
+
+    .india-features{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+<script>
+(function(){
+
+/* ── Product Tabs ─────────────── */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));
+        btn.classList.add('active');
+        const f=btn.dataset.filter;
+        document.querySelectorAll('.product-card').forEach(c=>{
+            c.style.display=(f==='all'||c.dataset.category===f)?'':'none';
+        });
+    });
+});
+
+/* ── Scroll Reveal ────────────── */
+const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('rv');obs.unobserve(e.target);}});
+},{threshold:0.08});
+document.querySelectorAll('.product-card,.why-card,.kpi-card,.industry-card,.stat-card,.process-card,.faq-item').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(22px)';el.style.transition='opacity .5s ease,transform .5s ease';
+    obs.observe(el);
+});
+const ss=document.createElement('style');
+ss.textContent='.rv{opacity:1!important;transform:none!important}';
+document.head.appendChild(ss);
+
+/* ── FAQ Accordion ────────────── */
+document.querySelectorAll('.faq-question').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        const item=btn.closest('.faq-item');
+        const open=item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+        if(!open) item.classList.add('open');
+    });
+});
+
+/* ── Toast auto-hide ──────────── */
+const toast=document.getElementById('formToast');
+if(toast){
+    setTimeout(()=>{
+        toast.style.transition='opacity .4s,transform .4s';
+        toast.style.opacity='0';toast.style.transform='translateY(-10px)';
+        setTimeout(()=>toast.remove(),400);
+    },8000);
+}
+
+/* ── Auto-scroll to form on success ── */
+if(window.location.search.includes('submitted=1')){
+    setTimeout(()=>{
+        document.getElementById('contact-form')?.scrollIntoView({behavior:'smooth',block:'center'});
+    },350);
+}
+
+/* ── Form validation + loading state ── */
+const form=document.getElementById('quickForm');
+const sbtn=document.getElementById('quoteSubmitBtn');
+const sico=document.getElementById('submitIcon');
+const slbl=document.getElementById('submitLabel');
+
+if(form && sbtn){
+    form.addEventListener('submit', function(e) {
+        let ok = true;
+        
+        // Clear previous errors
+        form.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+        
+        // Validate required fields
+        form.querySelectorAll('input[required]').forEach(inp => {
+            if(!inp.value.trim()) {
+                inp.classList.add('input-error');
+                ok = false;
+            }
+        });
+        
+        // Validate email
+        const em = form.querySelector('input[name="email"]');
+        if(em && em.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) {
+            em.classList.add('input-error');
+            ok = false;
+        }
+        
+        if(!ok) {
+            e.preventDefault();
+            const firstError = form.querySelector('.input-error');
+            if(firstError) firstError.focus();
+            return;
+        }
+        
+        // Show loading state
+        sbtn.disabled = true;
+        if(slbl) slbl.textContent = 'Sending...';
+        if(sico) sico.className = 'fas fa-spinner fa-spin';
+    });
+    
+    // Remove error on input
+    form.querySelectorAll('input, textarea').forEach(inp => {
+        inp.addEventListener('input', function() {
+            this.classList.remove('input-error');
+        });
+    });
+}
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS CAROUSEL
+═══════════════════════════════════════ */
+const track   = document.getElementById('testiTrack');
+const dots    = document.querySelectorAll('.testi-dot');
+const progBar = document.getElementById('testiProgress');
+const prevBtn = document.querySelector('.testi-prev');
+const nextBtn = document.querySelector('.testi-next');
+
+if(track) {
+    const total    = document.querySelectorAll('.testi-slide').length;
+    let cur        = 0;
+    let autoTimer  = null;
+    let progTimer  = null;
+    let progVal    = 0;
+    const INTERVAL = 5000;
+    const STEP     = 100 / (INTERVAL / 80);
+
+    function goTo(n){
+        cur=(n+total)%total;
+        track.style.transform=`translateX(-${cur*100}%)`;
+        dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+        resetProg();
+    }
+    
+    function resetProg(){
+        clearInterval(progTimer);
+        progVal=0;
+        if(progBar) progBar.style.width='0%';
+        progTimer=setInterval(()=>{
+            progVal+=STEP;
+            if(progBar) progBar.style.width=Math.min(progVal,100)+'%';
+            if(progVal>=100) clearInterval(progTimer);
+        },80);
+    }
+    
+    function startAuto(){ clearInterval(autoTimer); autoTimer=setInterval(()=>goTo(cur+1),INTERVAL); }
+    function stopAuto() { clearInterval(autoTimer); clearInterval(progTimer); }
+
+    prevBtn?.addEventListener('click',()=>{stopAuto();goTo(cur-1);startAuto();});
+    nextBtn?.addEventListener('click',()=>{stopAuto();goTo(cur+1);startAuto();});
+    dots.forEach((d,i)=>d.addEventListener('click',()=>{stopAuto();goTo(i);startAuto();}));
+
+    // Swipe
+    let tx=0,ty=0;
+    track.addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+    track.addEventListener('touchend',e=>{
+        const dx=e.changedTouches[0].clientX-tx;
+        const dy=e.changedTouches[0].clientY-ty;
+        if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){stopAuto();goTo(dx<0?cur+1:cur-1);startAuto();}
+    },{passive:true});
+
+    // Keyboard
+    document.addEventListener('keydown',e=>{
+        if(e.key==='ArrowLeft'){stopAuto();goTo(cur-1);startAuto();}
+        if(e.key==='ArrowRight'){stopAuto();goTo(cur+1);startAuto();}
+    });
+
+    // Hover pause
+    const wrap=document.querySelector('.testi-carousel-wrap');
+    wrap?.addEventListener('mouseenter',stopAuto);
+    wrap?.addEventListener('mouseleave',startAuto);
+
+    goTo(0);
+    startAuto();
+}
+
+})();
+</script>
