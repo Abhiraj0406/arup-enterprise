@@ -128,11 +128,11 @@ include 'includes/navbar.php';
 
     <style>
         :root {
-            --gold:#C9920A; --gold-dark:#8B6508; --gold-light:#F0C040;
-            --cream:#FAF6EE; --ivory:#F0E8D0; --charcoal:#1C1C1C;
-            --mid:#4A4A4A; --light:#D5CDB8; --white:#fff;
+            --gold:#DC2626; --gold-dark:#B91C1C; --gold-light:#EF4444;
+            --cream:#FFF5F5; --ivory:#FEE2E2; --charcoal:#111827;
+            --mid:#4B5563; --light:#FECACA; --white:#fff;
             --shadow-md:0 6px 24px rgba(0,0,0,0.07);
-            --shadow-gold:0 4px 20px rgba(201,146,10,0.2);
+            --shadow-gold:0 4px 20px rgba(220,38,38,0.2);
         }
         *{box-sizing:border-box;margin:0;padding:0}
         body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--charcoal);font-size:14px}
@@ -144,7 +144,7 @@ include 'includes/navbar.php';
             border-radius: 12px;
             padding: 12px 18px;
             margin-bottom: 18px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
@@ -191,7 +191,7 @@ include 'includes/navbar.php';
 
         .form-card {
             background:var(--white);
-            border:1px solid rgba(201,146,10,0.1);
+            border:1px solid rgba(220,38,38,0.1);
             border-radius:12px;
             box-shadow:var(--shadow-md);
             overflow:hidden;
@@ -199,7 +199,7 @@ include 'includes/navbar.php';
         }
         .form-card-head {
             background:linear-gradient(135deg,var(--cream),var(--ivory));
-            border-bottom:1px solid rgba(201,146,10,0.1);
+            border-bottom:1px solid rgba(220,38,38,0.1);
             padding:10px 16px;
             display:flex;
             align-items:center;
@@ -238,7 +238,7 @@ include 'includes/navbar.php';
         }
         .form-control:focus,.form-select:focus {
             border-color:var(--gold);
-            box-shadow:0 0 0 3px rgba(201,146,10,0.12);
+            box-shadow:0 0 0 3px rgba(220,38,38,0.12);
             background:var(--white);
             outline:none;
         }
@@ -261,7 +261,7 @@ include 'includes/navbar.php';
             overflow:hidden;
             margin-bottom:8px;
         }
-        .img-upload-box:hover { border-color:var(--gold); background:rgba(201,146,10,0.04); }
+        .img-upload-box:hover { border-color:var(--gold); background:rgba(220,38,38,0.04); }
         .img-upload-box img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
         .img-upload-box .upload-ph {
             text-align:center;
@@ -275,7 +275,7 @@ include 'includes/navbar.php';
 
         .status-card {
             background:var(--ivory);
-            border:1px solid rgba(201,146,10,0.12);
+            border:1px solid rgba(220,38,38,0.12);
             border-radius:10px;
             padding:14px;
             margin-bottom:10px;
@@ -287,7 +287,7 @@ include 'includes/navbar.php';
             align-items:center;
             gap:8px;
             background:var(--ivory);
-            border:1px solid rgba(201,146,10,0.12);
+            border:1px solid rgba(220,38,38,0.12);
             border-radius:10px;
             padding:10px 14px;
             margin-bottom:10px;
@@ -326,7 +326,7 @@ include 'includes/navbar.php';
             box-shadow:var(--shadow-gold);
             margin-bottom:8px;
         }
-        .btn-save:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,146,10,0.4); }
+        .btn-save:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(220,38,38,0.4); }
         .btn-back {
             width:100%;
             padding:9px;

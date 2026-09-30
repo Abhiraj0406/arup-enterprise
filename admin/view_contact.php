@@ -109,17 +109,17 @@ $page_title = "Contact Messages Admin";
     <style>
         /* ✅ Admin Panel CSS */
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --gold-light: #e6c9a0;
-            --cream: #fef7ed;
-            --ivory: #faf3e8;
-            --mustard: #d4a373;
-            --charcoal: #1e1e1e;
-            --mid-gray: #4a3f37;
-            --light-gray: #e8ddd0;
+            --gold: #DC2626;
+            --gold-dark: #B91C1C;
+            --gold-light: #EF4444;
+            --cream: #FFF5F5;
+            --ivory: #FEE2E2;
+            --mustard: #F87171;
+            --charcoal: #111827;
+            --mid-gray: #4B5563;
+            --light-gray: #FECACA;
             --white: #ffffff;
-            --shadow-gold: 0 4px 20px rgba(201,146,10,0.15);
+            --shadow-gold: 0 4px 20px rgba(220,38,38,0.2);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
         }
 
@@ -142,7 +142,7 @@ $page_title = "Contact Messages Admin";
             border-radius: 16px;
             padding: 16px 24px;
             margin-bottom: 24px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
@@ -189,7 +189,7 @@ $page_title = "Contact Messages Admin";
             background: var(--cream);
             padding: 6px 16px;
             border-radius: 24px;
-            border: 1px solid rgba(201,146,10,0.15);
+            border: 1px solid rgba(220,38,38,0.15);
             transition: all 0.3s;
         }
         .stat-item:hover {
@@ -224,7 +224,7 @@ $page_title = "Contact Messages Admin";
             color: #166534;
             font-weight: 500;
             font-size: 0.85rem;
-            border: 1px solid rgba(201,146,10,0.15);
+            border: 1px solid rgba(220,38,38,0.15);
         }
         .alert-custom i { 
             color: var(--gold); 
@@ -234,7 +234,7 @@ $page_title = "Contact Messages Admin";
         /* ✅ Main Card */
         .card-premium {
             background: var(--white);
-            border: 1px solid rgba(201,146,10,0.1);
+            border: 1px solid rgba(220,38,38,0.1);
             border-radius: 16px;
             box-shadow: var(--shadow-md);
             overflow: hidden;
@@ -243,7 +243,7 @@ $page_title = "Contact Messages Admin";
         .card-premium .card-head {
             padding: 14px 22px;
             background: linear-gradient(135deg, var(--cream), var(--ivory));
-            border-bottom: 2px solid rgba(201,146,10,0.08);
+            border-bottom: 2px solid rgba(220,38,38,0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -286,17 +286,17 @@ $page_title = "Contact Messages Admin";
             text-transform: uppercase;
             font-size: 0.6rem;
             letter-spacing: 0.8px;
-            border-bottom: 2px solid rgba(201,146,10,0.15);
+            border-bottom: 2px solid rgba(220,38,38,0.15);
             background: var(--cream);
         }
         .table tbody td {
             padding: 12px 14px;
             vertical-align: middle;
-            border-bottom: 1px solid rgba(201,146,10,0.06);
+            border-bottom: 1px solid rgba(220,38,38,0.06);
             font-size: 0.8rem;
         }
         .table tbody tr:hover { 
-            background: rgba(201,146,10,0.04); 
+            background: rgba(220,38,38,0.04); 
         }
         .table tbody tr:last-child td { 
             border-bottom: none; 
@@ -368,7 +368,7 @@ $page_title = "Contact Messages Admin";
         }
 
         .btn-view {
-            background: rgba(201,146,10,0.1);
+            background: rgba(220,38,38,0.1);
             color: var(--gold-dark);
             border: none;
             border-radius: 20px;
@@ -463,7 +463,7 @@ $page_title = "Contact Messages Admin";
         .detail-item {
             display: flex;
             padding: 10px 0;
-            border-bottom: 1px solid rgba(201,146,10,0.08);
+            border-bottom: 1px solid rgba(220,38,38,0.08);
         }
         .detail-item:last-child { border-bottom: none; }
         .detail-item .label {
@@ -645,7 +645,7 @@ $page_title = "Contact Messages Admin";
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="badge" style="background:rgba(201,146,10,0.12); color:var(--gold-dark); padding:4px 12px; font-size:0.7rem; font-weight:600;">
+                                                <span class="badge" style="background:rgba(220,38,38,0.12); color:var(--gold-dark); padding:4px 12px; font-size:0.7rem; font-weight:600;">
                                                     <?php echo htmlspecialchars($row['subject'] ?? 'General Inquiry'); ?>
                                                 </span>
                                             </td>

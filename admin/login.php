@@ -16,14 +16,14 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --cream: #fef7ed;
-            --charcoal: #1e1e1e;
+            --gold: #EF4444;
+            --gold-dark: #DC2626;
+            --cream: #FFF5F5;
+            --charcoal: #111827;
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--cream);
+            background: #FFF5F5;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -31,13 +31,13 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
             margin: 0;
         }
         .login-card {
-            background: #fff;
+            background: #ffffff;
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(201,146,10,0.1);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.12);
             width: 100%;
             max-width: 400px;
-            border: 1px solid rgba(201,146,10,0.2);
+            border: 1px solid rgba(239, 68, 68, 0.2);
             text-align: center;
         }
         .login-logo img {
@@ -50,7 +50,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
             margin-bottom: 5px;
         }
         .login-subtitle {
-            color: var(--gold);
+            color: #EF4444;
             font-size: 0.9rem;
             margin-bottom: 30px;
             font-weight: 600;
@@ -58,15 +58,15 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
         .form-control {
             border-radius: 8px;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #FECACA;
             margin-bottom: 20px;
         }
         .form-control:focus {
-            box-shadow: 0 0 0 3px rgba(201,146,10,0.2);
-            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+            border-color: #EF4444;
         }
         .btn-login {
-            background: var(--gold);
+            background: linear-gradient(135deg, #EF4444, #DC2626);
             color: #fff;
             border: none;
             width: 100%;
@@ -77,16 +77,16 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
             transition: all 0.3s;
         }
         .btn-login:hover {
-            background: var(--gold-dark);
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(201,146,10,0.3);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
         }
     </style>
 </head>
 <body>
     <div class="login-card">
         <div class="login-logo">
-            <img src="../assets/images/logo.png" alt="Arup Enterprise" onerror="this.style.display='none'">
+            <img src="images/logo.png" alt="Arup Enterprise" onerror="this.src='../assets/images/logo.png'">
         </div>
         <h3 class="login-title">Welcome Back</h3>
         <p class="login-subtitle">Arup Enterprise Admin Panel</p>

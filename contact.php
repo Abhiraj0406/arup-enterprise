@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5EED8;padding:32px 16px;">
                             <tr>
                                 <td align="center">
-                                    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid rgba(201,146,10,0.25);max-width:600px;">
+                                    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid rgba(239,68,68,0.25);max-width:600px;">
 
                                         <!-- Header -->
                                         <tr>
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     <tr>
                                                         <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;color:#8B6508;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Subject</td>
                                                         <td style="padding:10px 0;border-bottom:1px solid #f0e6d2;vertical-align:top;">
-                                                            <span style="display:inline-block;background:rgba(201,146,10,0.12);color:#8B6508;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;">' . $subject . '</span>
+                                                            <span style="display:inline-block;background:rgba(239,68,68,0.12);color:#8B6508;font-size:12px;font-weight:bold;padding:4px 12px;border-radius:20px;">' . $subject . '</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -297,8 +297,8 @@ include 'includes/header.php';
           <stop offset="60%" stop-color="#8B5E2A"/><stop offset="100%" stop-color="#7A5025"/>
         </linearGradient>
         <radialGradient id="crtGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#C9920A" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="#C9920A" stop-opacity="0"/>
+          <stop offset="0%" stop-color="#EF4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
         </radialGradient>
         <filter id="glow4"><feGaussianBlur stdDeviation="3" result="b"/>
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -308,82 +308,82 @@ include 'includes/header.php';
         </filter>
       </defs>
 
-      <rect x="40" y="170" width="260" height="200" rx="10" fill="url(#wbody)" stroke="#C9920A" stroke-width="1"/>
-      <rect x="52" y="182" width="108" height="76" rx="5" fill="rgba(255,255,255,0.03)" stroke="#C9920A" stroke-width="0.6" stroke-dasharray="4 2" opacity="0.5"/>
-      <rect x="172" y="182" width="108" height="76" rx="5" fill="rgba(255,255,255,0.03)" stroke="#C9920A" stroke-width="0.6" stroke-dasharray="4 2" opacity="0.5"/>
-      <rect x="60" y="272" width="80" height="3" rx="1" fill="#C9920A" opacity="0.25"/>
-      <rect x="60" y="278" width="80" height="3" rx="1" fill="#C9920A" opacity="0.2"/>
-      <rect x="196" y="272" width="80" height="3" rx="1" fill="#C9920A" opacity="0.25"/>
-      <rect x="196" y="278" width="80" height="3" rx="1" fill="#C9920A" opacity="0.2"/>
-      <rect x="30" y="158" width="280" height="20" rx="4" fill="url(#wtop)" stroke="#C9920A" stroke-width="1"/>
-      <line x1="60" y1="162" x2="60" y2="174" stroke="#C9920A" stroke-width="0.5" opacity="0.4"/>
-      <line x1="90" y1="162" x2="90" y2="174" stroke="#C9920A" stroke-width="0.5" opacity="0.4"/>
-      <line x1="120" y1="162" x2="120" y2="174" stroke="#C9920A" stroke-width="0.5" opacity="0.4"/>
-      <line x1="150" y1="162" x2="150" y2="174" stroke="#C9920A" stroke-width="0.5" opacity="0.4"/>
-      <line x1="180" y1="162" x2="180" y2="174" stroke="#C9920A" stroke-width="0.5" opacity="0.4"/>
-      <line x1="210" y1="162" x2="210" y2="174" stroke="#C9920A" stroke-width="0.5" opacity="0.4"/>
-      <line x1="240" y1="162" x2="240" y2="174" stroke="#C9920A" stroke-width="0.5" opacity="0.4"/>
+      <rect x="40" y="170" width="260" height="200" rx="10" fill="url(#wbody)" stroke="#EF4444" stroke-width="1"/>
+      <rect x="52" y="182" width="108" height="76" rx="5" fill="rgba(255,255,255,0.03)" stroke="#EF4444" stroke-width="0.6" stroke-dasharray="4 2" opacity="0.5"/>
+      <rect x="172" y="182" width="108" height="76" rx="5" fill="rgba(255,255,255,0.03)" stroke="#EF4444" stroke-width="0.6" stroke-dasharray="4 2" opacity="0.5"/>
+      <rect x="60" y="272" width="80" height="3" rx="1" fill="#EF4444" opacity="0.25"/>
+      <rect x="60" y="278" width="80" height="3" rx="1" fill="#EF4444" opacity="0.2"/>
+      <rect x="196" y="272" width="80" height="3" rx="1" fill="#EF4444" opacity="0.25"/>
+      <rect x="196" y="278" width="80" height="3" rx="1" fill="#EF4444" opacity="0.2"/>
+      <rect x="30" y="158" width="280" height="20" rx="4" fill="url(#wtop)" stroke="#EF4444" stroke-width="1"/>
+      <line x1="60" y1="162" x2="60" y2="174" stroke="#EF4444" stroke-width="0.5" opacity="0.4"/>
+      <line x1="90" y1="162" x2="90" y2="174" stroke="#EF4444" stroke-width="0.5" opacity="0.4"/>
+      <line x1="120" y1="162" x2="120" y2="174" stroke="#EF4444" stroke-width="0.5" opacity="0.4"/>
+      <line x1="150" y1="162" x2="150" y2="174" stroke="#EF4444" stroke-width="0.5" opacity="0.4"/>
+      <line x1="180" y1="162" x2="180" y2="174" stroke="#EF4444" stroke-width="0.5" opacity="0.4"/>
+      <line x1="210" y1="162" x2="210" y2="174" stroke="#EF4444" stroke-width="0.5" opacity="0.4"/>
+      <line x1="240" y1="162" x2="240" y2="174" stroke="#EF4444" stroke-width="0.5" opacity="0.4"/>
       <rect x="30" y="130" width="480" height="30" rx="3" fill="url(#woodGrain)" opacity="0.85"/>
       <line x1="30" y1="136" x2="510" y2="136" stroke="#6B3E1A" stroke-width="0.5" opacity="0.4"/>
       <line x1="30" y1="141" x2="510" y2="141" stroke="#9B6830" stroke-width="0.8" opacity="0.3"/>
       <line x1="30" y1="146" x2="510" y2="146" stroke="#6B3E1A" stroke-width="0.5" opacity="0.4"/>
       <line x1="30" y1="151" x2="510" y2="151" stroke="#9B6830" stroke-width="0.6" opacity="0.3"/>
       <ellipse cx="200" cy="145" rx="12" ry="7" fill="none" stroke="#5A3010" stroke-width="0.8" opacity="0.5"/>
-      <circle cx="170" cy="148" r="38" fill="none" stroke="#C9920A" stroke-width="1.4" stroke-dasharray="5 3" filter="url(#glow4)" opacity="0.85"/>
-      <circle cx="170" cy="148" r="28" fill="none" stroke="#C9920A" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.5"/>
-      <circle cx="170" cy="148" r="16" fill="rgba(201,146,10,0.08)" stroke="#C9920A" stroke-width="1" opacity="0.7"/>
-      <circle cx="170" cy="148" r="5" fill="#C9920A" opacity="0.8"/>
-      <circle cx="170" cy="110" r="3" fill="#C9920A" opacity="0.6"/>
-      <circle cx="197" cy="121" r="3" fill="#C9920A" opacity="0.6"/>
-      <circle cx="206" cy="150" r="3" fill="#C9920A" opacity="0.6"/>
-      <circle cx="197" cy="177" r="3" fill="#C9920A" opacity="0.6"/>
-      <circle cx="143" cy="121" r="3" fill="#C9920A" opacity="0.6"/>
+      <circle cx="170" cy="148" r="38" fill="none" stroke="#EF4444" stroke-width="1.4" stroke-dasharray="5 3" filter="url(#glow4)" opacity="0.85"/>
+      <circle cx="170" cy="148" r="28" fill="none" stroke="#EF4444" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.5"/>
+      <circle cx="170" cy="148" r="16" fill="rgba(239,68,68,0.08)" stroke="#EF4444" stroke-width="1" opacity="0.7"/>
+      <circle cx="170" cy="148" r="5" fill="#EF4444" opacity="0.8"/>
+      <circle cx="170" cy="110" r="3" fill="#EF4444" opacity="0.6"/>
+      <circle cx="197" cy="121" r="3" fill="#EF4444" opacity="0.6"/>
+      <circle cx="206" cy="150" r="3" fill="#EF4444" opacity="0.6"/>
+      <circle cx="197" cy="177" r="3" fill="#EF4444" opacity="0.6"/>
+      <circle cx="143" cy="121" r="3" fill="#EF4444" opacity="0.6"/>
       <line x1="170" y1="125" x2="170" y2="175" stroke="#E8B84B" stroke-width="2" opacity="0.9" filter="url(#softglow)" class="ct-cut-line"/>
       <circle cx="170" cy="130" r="1.5" fill="#E8B84B" opacity="0.9"/>
-      <circle cx="165" cy="127" r="1" fill="#C9920A" opacity="0.7"/>
-      <circle cx="175" cy="128" r="1" fill="#C9920A" opacity="0.7"/>
-      <rect x="30" y="108" width="480" height="8" rx="3" fill="url(#wtop)" stroke="#C9920A" stroke-width="0.8" opacity="0.9"/>
-      <rect x="30" y="160" width="480" height="5" rx="2" fill="#C9920A" opacity="0.4" filter="url(#glow4)"/>
-      <rect x="30" y="60" width="480" height="14" rx="4" fill="url(#wtop)" stroke="#C9920A" stroke-width="1"/>
-      <rect x="30" y="60" width="14" height="110" rx="3" fill="url(#wbody)" stroke="#C9920A" stroke-width="0.8"/>
-      <rect x="496" y="60" width="14" height="110" rx="3" fill="url(#wbody)" stroke="#C9920A" stroke-width="0.8"/>
-      <rect x="320" y="165" width="50" height="70" rx="6" fill="url(#wbody)" stroke="#C9920A" stroke-width="1"/>
+      <circle cx="165" cy="127" r="1" fill="#EF4444" opacity="0.7"/>
+      <circle cx="175" cy="128" r="1" fill="#EF4444" opacity="0.7"/>
+      <rect x="30" y="108" width="480" height="8" rx="3" fill="url(#wtop)" stroke="#EF4444" stroke-width="0.8" opacity="0.9"/>
+      <rect x="30" y="160" width="480" height="5" rx="2" fill="#EF4444" opacity="0.4" filter="url(#glow4)"/>
+      <rect x="30" y="60" width="480" height="14" rx="4" fill="url(#wtop)" stroke="#EF4444" stroke-width="1"/>
+      <rect x="30" y="60" width="14" height="110" rx="3" fill="url(#wbody)" stroke="#EF4444" stroke-width="0.8"/>
+      <rect x="496" y="60" width="14" height="110" rx="3" fill="url(#wbody)" stroke="#EF4444" stroke-width="0.8"/>
+      <rect x="320" y="165" width="50" height="70" rx="6" fill="url(#wbody)" stroke="#EF4444" stroke-width="1"/>
       <rect x="327" y="172" width="36" height="28" rx="3" fill="#0d1a0d" stroke="#27ae60" stroke-width="0.8"/>
       <rect x="329" y="174" width="32" height="24" rx="2" fill="url(#crtGlow)" opacity="0.8"/>
       <text x="345" y="184" fill="#00ff88" font-size="5.5" text-anchor="middle" font-family="monospace" opacity="0.9">RPM 4200</text>
       <text x="345" y="191" fill="#00ff88" font-size="5" text-anchor="middle" font-family="monospace" opacity="0.9">FEED 18mm</text>
       <text x="345" y="197" fill="#00cc55" font-size="4.5" text-anchor="middle" font-family="monospace" opacity="0.8">● RUNNING</text>
       <circle cx="333" cy="208" r="4" fill="rgba(39,174,96,0.3)" stroke="#27ae60" stroke-width="0.8"/>
-      <circle cx="345" cy="208" r="4" fill="rgba(201,146,10,0.3)" stroke="#C9920A" stroke-width="0.8"/>
+      <circle cx="345" cy="208" r="4" fill="rgba(239,68,68,0.3)" stroke="#EF4444" stroke-width="0.8"/>
       <circle cx="357" cy="208" r="4" fill="rgba(231,76,60,0.3)" stroke="#e74c3c" stroke-width="0.8"/>
       <circle cx="345" cy="222" r="7" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1.2"/>
       <text x="345" y="225" fill="#e74c3c" font-size="4" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700">STOP</text>
-      <path d="M 310 200 Q 290 220 270 210 Q 250 200 240 220" fill="none" stroke="#C9920A" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
-      <rect x="400" y="180" width="140" height="170" rx="8" fill="url(#wbody)" stroke="#C9920A" stroke-width="0.9" opacity="0.9"/>
-      <rect x="395" y="172" width="150" height="16" rx="4" fill="url(#wtop)" stroke="#C9920A" stroke-width="0.8" opacity="0.8"/>
-      <ellipse cx="430" cy="172" rx="18" ry="8" fill="rgba(201,146,10,0.12)" stroke="#C9920A" stroke-width="1" opacity="0.7"/>
-      <ellipse cx="520" cy="220" rx="22" ry="22" fill="none" stroke="#C9920A" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.6"/>
-      <ellipse cx="520" cy="220" rx="14" ry="14" fill="rgba(201,146,10,0.07)" stroke="#C9920A" stroke-width="0.8" opacity="0.6"/>
-      <ellipse cx="520" cy="220" rx="5" ry="5" fill="#C9920A" opacity="0.5"/>
-      <line x1="395" y1="238" x2="540" y2="238" stroke="#C9920A" stroke-width="1.8" opacity="0.7" filter="url(#glow4)"/>
-      <rect x="405" y="230" width="12" height="16" rx="3" fill="rgba(201,146,10,0.12)" stroke="#C9920A" stroke-width="0.8" opacity="0.7"/>
-      <rect x="425" y="230" width="12" height="16" rx="3" fill="rgba(201,146,10,0.12)" stroke="#C9920A" stroke-width="0.8" opacity="0.7"/>
-      <rect x="408" y="254" width="86" height="70" rx="5" fill="#111" stroke="#C9920A" stroke-width="0.6" opacity="0.8"/>
+      <path d="M 310 200 Q 290 220 270 210 Q 250 200 240 220" fill="none" stroke="#EF4444" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+      <rect x="400" y="180" width="140" height="170" rx="8" fill="url(#wbody)" stroke="#EF4444" stroke-width="0.9" opacity="0.9"/>
+      <rect x="395" y="172" width="150" height="16" rx="4" fill="url(#wtop)" stroke="#EF4444" stroke-width="0.8" opacity="0.8"/>
+      <ellipse cx="430" cy="172" rx="18" ry="8" fill="rgba(239,68,68,0.12)" stroke="#EF4444" stroke-width="1" opacity="0.7"/>
+      <ellipse cx="520" cy="220" rx="22" ry="22" fill="none" stroke="#EF4444" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.6"/>
+      <ellipse cx="520" cy="220" rx="14" ry="14" fill="rgba(239,68,68,0.07)" stroke="#EF4444" stroke-width="0.8" opacity="0.6"/>
+      <ellipse cx="520" cy="220" rx="5" ry="5" fill="#EF4444" opacity="0.5"/>
+      <line x1="395" y1="238" x2="540" y2="238" stroke="#EF4444" stroke-width="1.8" opacity="0.7" filter="url(#glow4)"/>
+      <rect x="405" y="230" width="12" height="16" rx="3" fill="rgba(239,68,68,0.12)" stroke="#EF4444" stroke-width="0.8" opacity="0.7"/>
+      <rect x="425" y="230" width="12" height="16" rx="3" fill="rgba(239,68,68,0.12)" stroke="#EF4444" stroke-width="0.8" opacity="0.7"/>
+      <rect x="408" y="254" width="86" height="70" rx="5" fill="#111" stroke="#EF4444" stroke-width="0.6" opacity="0.8"/>
       <rect x="414" y="259" width="50" height="32" rx="3" fill="#0d1a0d" stroke="#27ae60" stroke-width="0.7"/>
       <text x="439" y="270" fill="#00ff88" font-size="5" text-anchor="middle" font-family="monospace" opacity="0.85">GLUE TEMP</text>
       <text x="439" y="278" fill="#E8B84B" font-size="7" text-anchor="middle" font-family="monospace" font-weight="700" opacity="0.9">185°C</text>
       <text x="439" y="287" fill="#00cc55" font-size="4" text-anchor="middle" font-family="monospace" opacity="0.7">● READY</text>
-      <rect x="52" y="368" width="20" height="8" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-      <rect x="268" y="368" width="20" height="8" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-      <rect x="410" y="348" width="18" height="8" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-      <rect x="468" y="348" width="18" height="8" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-      <line x1="20" y1="376" x2="560" y2="376" stroke="#C9920A" stroke-width="0.8" opacity="0.25"/>
-      <line x1="40" y1="45" x2="510" y2="45" stroke="#C9920A" stroke-width="0.6" opacity="0.3"/>
-      <line x1="40" y1="41" x2="40" y2="49" stroke="#C9920A" stroke-width="0.6" opacity="0.3"/>
-      <line x1="510" y1="41" x2="510" y2="49" stroke="#C9920A" stroke-width="0.6" opacity="0.3"/>
-      <text x="275" y="43" fill="#C9920A" font-size="8" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.45" letter-spacing="1">3600mm PANEL WORKING WIDTH</text>
-      <rect x="0" y="393" width="580" height="22" fill="rgba(201,146,10,0.05)"/>
-      <text x="290" y="407" fill="#C9920A" font-size="8" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" letter-spacing="3.5" opacity="0.55">DIPBAN PANEL SAW + EDGE BANDING LINE  ·  HOWRAH</text>
+      <rect x="52" y="368" width="20" height="8" rx="2" fill="#111" stroke="#EF4444" stroke-width="0.5"/>
+      <rect x="268" y="368" width="20" height="8" rx="2" fill="#111" stroke="#EF4444" stroke-width="0.5"/>
+      <rect x="410" y="348" width="18" height="8" rx="2" fill="#111" stroke="#EF4444" stroke-width="0.5"/>
+      <rect x="468" y="348" width="18" height="8" rx="2" fill="#111" stroke="#EF4444" stroke-width="0.5"/>
+      <line x1="20" y1="376" x2="560" y2="376" stroke="#EF4444" stroke-width="0.8" opacity="0.25"/>
+      <line x1="40" y1="45" x2="510" y2="45" stroke="#EF4444" stroke-width="0.6" opacity="0.3"/>
+      <line x1="40" y1="41" x2="40" y2="49" stroke="#EF4444" stroke-width="0.6" opacity="0.3"/>
+      <line x1="510" y1="41" x2="510" y2="49" stroke="#EF4444" stroke-width="0.6" opacity="0.3"/>
+      <text x="275" y="43" fill="#EF4444" font-size="8" text-anchor="middle" font-family="Inter,sans-serif" opacity="0.45" letter-spacing="1">3600mm PANEL WORKING WIDTH</text>
+      <rect x="0" y="393" width="580" height="22" fill="rgba(239,68,68,0.05)"/>
+      <text x="290" y="407" fill="#EF4444" font-size="8" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" letter-spacing="3.5" opacity="0.55">DIPBAN PANEL SAW + EDGE BANDING LINE  ·  HOWRAH</text>
     </svg>
   </div>
 
@@ -691,26 +691,26 @@ include 'includes/header.php';
 
 <style>
 :root {
-  --gold:    #C9920A;
-  --gold-lt: #E8B84B;
-  --gold-dk: #8B6508;
+  --gold:    #EF4444;
+  --gold-lt: #F87171;
+  --gold-dk: #DC2626;
   --char:    #0E0E0E;
-  --cream:   #F5EED8;
-  --ivory:   #FAFAF5;
+  --cream:   #FFF5F5;
+  --ivory:   #FEE2E2;
   --smoke:   #6B6560;
   --white:   #FFFFFF;
-  --border:  rgba(201,146,10,0.15);
+  --border:  rgba(239,68,68,0.15);
   --font-d:  'Bebas Neue','Impact',sans-serif;
   --font-b:  'Inter',-apple-system,sans-serif;
   --ease:    cubic-bezier(0.4,0,0.2,1);
-  --sg:      0 8px 32px rgba(201,146,10,0.22);
+  --sg:      0 8px 32px rgba(239,68,68,0.22);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font-b);}
 a{text-decoration:none;color:inherit;}
 .container{max-width:1240px;margin:0 auto;padding:0 24px;}
 
-.ct-eyebrow{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);background:rgba(201,146,10,.09);border:1px solid rgba(201,146,10,.22);border-radius:100px;padding:4px 14px;margin-bottom:12px;}
+.ct-eyebrow{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.22);border-radius:100px;padding:4px 14px;margin-bottom:12px;}
 .ct-sec-head{text-align:center;margin-bottom:52px;}
 .ct-h2{font-family:var(--font-d);font-size:clamp(2rem,4vw,3rem);letter-spacing:.02em;color:var(--char);line-height:1.1;}
 .ct-h2 em{color:var(--gold);font-style:normal;}
@@ -718,8 +718,8 @@ a{text-decoration:none;color:inherit;}
 /* HERO */
 .ct-hero{position:relative;min-height:100vh;background:var(--char);display:flex;align-items:center;overflow:hidden;border-bottom:2px solid var(--gold);}
 .ct-sparks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.65;}
-.ct-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(201,146,10,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(201,146,10,.035) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
-.ct-hero-machine{position:absolute;right:-30px;top:50%;transform:translateY(-50%);width:clamp(360px,48vw,620px);opacity:.36;pointer-events:none;filter:drop-shadow(0 0 40px rgba(201,146,10,.14));}
+.ct-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(239,68,68,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(239,68,68,.035) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;}
+.ct-hero-machine{position:absolute;right:-30px;top:50%;transform:translateY(-50%);width:clamp(360px,48vw,620px);opacity:.36;pointer-events:none;filter:drop-shadow(0 0 40px rgba(239,68,68,.14));}
 .ct-machine-svg{width:100%;}
 .ct-cut-line{animation:cutPulse 1.8s ease-in-out infinite;}
 @keyframes cutPulse{0%,100%{opacity:.5;stroke-width:1.5;}50%{opacity:1;stroke-width:2.5;}}
@@ -727,16 +727,16 @@ a{text-decoration:none;color:inherit;}
 .ct-breadcrumb{display:flex;align-items:center;gap:8px;font-size:.78rem;color:#666;margin-bottom:24px;}
 .ct-breadcrumb a{color:var(--gold);}
 .ct-breadcrumb a:hover{color:var(--gold-lt);}
-.ct-hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,146,10,.3);border-radius:100px;padding:6px 18px;margin-bottom:24px;background:rgba(201,146,10,.07);}
+.ct-hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(239,68,68,.3);border-radius:100px;padding:6px 18px;margin-bottom:24px;background:rgba(239,68,68,.07);}
 .ct-badge-dot{width:7px;height:7px;background:#27ae60;border-radius:50%;box-shadow:0 0 8px #27ae60;animation:dotPulse 2s ease-in-out infinite;}
 @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(1.4);}}
 .ct-hero-title{display:flex;flex-direction:column;margin-bottom:20px;}
 .ct-tl1{font-family:var(--font-d);font-size:clamp(2.5rem,6vw,5rem);letter-spacing:.08em;color:rgba(255,255,255,.45);line-height:1;}
-.ct-tl2{font-family:var(--font-d);font-size:clamp(5rem,14vw,10.5rem);letter-spacing:.01em;color:var(--gold);line-height:.9;text-shadow:0 0 80px rgba(201,146,10,.32);}
+.ct-tl2{font-family:var(--font-d);font-size:clamp(5rem,14vw,10.5rem);letter-spacing:.01em;color:var(--gold);line-height:.9;text-shadow:0 0 80px rgba(239,68,68,.32);}
 .ct-hero-sub{color:rgba(255,255,255,.56);font-size:1rem;line-height:1.72;max-width:480px;margin-bottom:36px;}
 .ct-hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px;}
 .ct-btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dk) 100%);color:white;font-weight:700;font-size:.92rem;padding:13px 26px;border-radius:10px;box-shadow:var(--sg);transition:all .25s var(--ease);}
-.ct-btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,146,10,.4);}
+.ct-btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(239,68,68,.4);}
 .ct-btn-secondary{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.3);color:rgba(255,255,255,.85);font-weight:600;font-size:.92rem;padding:13px 26px;border-radius:10px;transition:all .25s var(--ease);}
 .ct-btn-secondary:hover{border-color:var(--gold);color:var(--gold-lt);}
 .ct-hero-trust{display:flex;gap:20px;flex-wrap:wrap;}
@@ -749,7 +749,7 @@ a{text-decoration:none;color:inherit;}
 
 /* Form panel */
 .ct-form-panel{background:var(--white);border-radius:20px;padding:38px 40px;border:1px solid var(--border);box-shadow:0 16px 56px rgba(0,0,0,.07);}
-.ct-form-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(201,146,10,.1);}
+.ct-form-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(239,68,68,.1);}
 .ct-form-title{font-family:var(--font-b);font-size:1.5rem;font-weight:900;color:var(--char);margin-bottom:4px;}
 .ct-form-sub{font-size:.86rem;color:var(--smoke);}
 .ct-online-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(39,174,96,.09);border:1px solid rgba(39,174,96,.25);color:#1a7a44;font-size:.7rem;font-weight:700;padding:5px 12px;border-radius:100px;white-space:nowrap;flex-shrink:0;}
@@ -775,11 +775,11 @@ a{text-decoration:none;color:inherit;}
 .ct-field{margin-bottom:18px;}
 .ct-field label{display:block;font-size:.8rem;font-weight:700;color:var(--char);margin-bottom:7px;letter-spacing:.02em;}
 .ct-field label span{color:var(--gold);}
-.ct-field input,.ct-field textarea{width:100%;padding:12px 16px;border:2px solid rgba(201,146,10,.15);border-radius:10px;font-family:var(--font-b);font-size:.9rem;color:var(--char);background:var(--cream);transition:all .22s var(--ease);outline:none;}
-.ct-field input:focus,.ct-field textarea:focus{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 4px rgba(201,146,10,.09);}
+.ct-field input,.ct-field textarea{width:100%;padding:12px 16px;border:2px solid rgba(239,68,68,.15);border-radius:10px;font-family:var(--font-b);font-size:.9rem;color:var(--char);background:var(--cream);transition:all .22s var(--ease);outline:none;}
+.ct-field input:focus,.ct-field textarea:focus{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 4px rgba(239,68,68,.09);}
 .ct-field textarea{resize:vertical;min-height:120px;}
 .ct-select-wrap{position:relative;}
-.ct-select-wrap select{width:100%;padding:12px 40px 12px 16px;border:2px solid rgba(201,146,10,.15);border-radius:10px;font-family:var(--font-b);font-size:.9rem;color:var(--char);background:var(--cream);appearance:none;cursor:pointer;outline:none;transition:border-color .22s;}
+.ct-select-wrap select{width:100%;padding:12px 40px 12px 16px;border:2px solid rgba(239,68,68,.15);border-radius:10px;font-family:var(--font-b);font-size:.9rem;color:var(--char);background:var(--cream);appearance:none;cursor:pointer;outline:none;transition:border-color .22s;}
 .ct-select-wrap select:focus{border-color:var(--gold);background:var(--white);}
 .ct-select-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--gold);pointer-events:none;}
 .ct-char-count{font-size:.72rem;color:var(--smoke);text-align:right;margin-top:5px;}
@@ -789,7 +789,7 @@ a{text-decoration:none;color:inherit;}
 .ct-agree label{font-size:.82rem;color:var(--smoke);line-height:1.5;cursor:pointer;}
 .ct-agree label a{color:var(--gold);font-weight:600;}
 .ct-submit{width:100%;padding:15px 28px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dk) 100%);border:none;border-radius:12px;color:white;font-family:var(--font-b);font-size:1rem;font-weight:700;cursor:pointer;transition:all .25s var(--ease);box-shadow:var(--sg);display:flex;align-items:center;justify-content:center;gap:9px;}
-.ct-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,146,10,.42);}
+.ct-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(239,68,68,.42);}
 .ct-submit:disabled{opacity:.65;cursor:not-allowed;transform:none;}
 .ct-form-note{text-align:center;font-size:.72rem;color:#999;margin-top:12px;}
 .ct-form-note i{color:var(--gold);}
@@ -797,7 +797,7 @@ a{text-decoration:none;color:inherit;}
 /* Info col */
 .ct-info-title{font-family:var(--font-d);font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:.04em;color:var(--char);margin-bottom:8px;}
 .ct-info-sub{font-size:.9rem;color:var(--smoke);margin-bottom:24px;line-height:1.7;}
-.ct-wa-card{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#0c3d2e 0%,#145c43 100%);border:1px solid rgba(201,146,10,.28);border-radius:16px;padding:18px 20px;margin-bottom:22px;transition:all .28s var(--ease);box-shadow:0 6px 24px rgba(12,61,46,.38);color:white;}
+.ct-wa-card{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#0c3d2e 0%,#145c43 100%);border:1px solid rgba(239,68,68,.28);border-radius:16px;padding:18px 20px;margin-bottom:22px;transition:all .28s var(--ease);box-shadow:0 6px 24px rgba(12,61,46,.38);color:white;}
 .ct-wa-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(12,61,46,.5);border-color:var(--gold);}
 .ct-wa-icon{width:50px;height:50px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#25D366;flex-shrink:0;}
 .ct-wa-text{flex:1;}
@@ -808,7 +808,7 @@ a{text-decoration:none;color:inherit;}
 .ct-info-items{display:flex;flex-direction:column;gap:14px;margin-bottom:24px;}
 .ct-info-item{display:flex;align-items:flex-start;gap:14px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:border-color .25s,transform .25s;}
 .ct-info-item:hover{border-color:var(--gold);transform:translateX(4px);}
-.ct-info-ico{width:40px;height:40px;background:rgba(201,146,10,.09);border:1px solid rgba(201,146,10,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1rem;flex-shrink:0;transition:all .25s;}
+.ct-info-ico{width:40px;height:40px;background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1rem;flex-shrink:0;transition:all .25s;}
 .ct-info-item:hover .ct-info-ico{background:var(--gold);color:white;border-color:var(--gold);}
 .ct-info-body strong{display:block;font-size:.82rem;font-weight:700;color:var(--char);margin-bottom:3px;}
 .ct-info-body span{display:block;font-size:.83rem;color:var(--smoke);line-height:1.6;}
@@ -819,7 +819,7 @@ a{text-decoration:none;color:inherit;}
 .ct-social-row{display:flex;gap:10px;}
 .ct-social-row a{width:40px;height:40px;background:var(--white);border:2px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--smoke);font-size:.9rem;transition:all .25s var(--ease);}
 .ct-social-row a:hover{background:var(--gold);border-color:var(--gold);color:white;transform:translateY(-3px);box-shadow:var(--sg);}
-.ct-pdf{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#1a1a1a,#2a2520);border:1px solid rgba(201,146,10,.28);border-radius:14px;padding:14px 18px;color:white;transition:all .25s var(--ease);}
+.ct-pdf{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#1a1a1a,#2a2520);border:1px solid rgba(239,68,68,.28);border-radius:14px;padding:14px 18px;color:white;transition:all .25s var(--ease);}
 .ct-pdf:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.22);border-color:var(--gold-lt);}
 .ct-pdf-icon{font-size:1.7rem;color:var(--gold);flex-shrink:0;}
 .ct-pdf div{flex:1;}
@@ -831,12 +831,12 @@ a{text-decoration:none;color:inherit;}
 .ct-map-section{background:var(--cream);padding:0 0 60px;}
 .ct-map-wrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.1);border:1px solid var(--border);}
 .ct-map-btn{position:absolute;bottom:20px;right:20px;display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:white;font-weight:700;font-size:.82rem;padding:10px 20px;border-radius:100px;box-shadow:var(--sg);transition:all .25s;}
-.ct-map-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,146,10,.4);}
+.ct-map-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(239,68,68,.4);}
 
 /* FAQ */
 .ct-faq{background:var(--ivory);padding:80px 0;}
 .ct-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;max-width:980px;margin:0 auto;}
-.ct-faq-item{border-bottom:1px solid rgba(201,146,10,.1);}
+.ct-faq-item{border-bottom:1px solid rgba(239,68,68,.1);}
 .ct-faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;padding:16px 0;font-family:var(--font-b);font-size:.9rem;font-weight:700;color:var(--char);text-align:left;cursor:pointer;transition:color .2s;}
 .ct-faq-q:hover{color:var(--gold);}
 .ct-faq-icon{color:var(--gold);flex-shrink:0;transition:transform .3s var(--ease);}

@@ -7,7 +7,7 @@ $admin_name = $_SESSION['admin_name'] ?? 'Administrator';
 $admin_email = $_SESSION['admin_email'] ?? '';
 ?>
 <style>
-    /* ========== GOLD + CREAM + CHARCOAL THEME ========== */
+    /* ========== LIGHT RED + WHITE THEME (MATCHING LOGO) ========== */
     * {
         margin: 0;
         padding: 0;
@@ -16,8 +16,8 @@ $admin_email = $_SESSION['admin_email'] ?? '';
 
     body {
         font-family: 'Inter', sans-serif;
-        background: #fef7ed;
-        color: #1e1e1e;
+        background: #fff5f5;
+        color: #111827;
         padding-top: 60px;
     }
 
@@ -29,30 +29,30 @@ $admin_email = $_SESSION['admin_email'] ?? '';
         top: 0;
         left: 0;
         background: #ffffff;
-        color: #1e1e1e;
+        color: #111827;
         padding-top: 20px;
         z-index: 1050;
         transition: left 0.3s ease;
-        border-right: 2px solid rgba(201,146,10,0.12);
+        border-right: 2px solid rgba(220,38,38,0.12);
         overflow-y: auto;
-        box-shadow: 2px 0 24px rgba(201,146,10,0.06);
+        box-shadow: 2px 0 24px rgba(220,38,38,0.06);
     }
 
     #sidebar::-webkit-scrollbar {
         width: 4px;
     }
     #sidebar::-webkit-scrollbar-track {
-        background: #fef7ed;
+        background: #fff5f5;
     }
     #sidebar::-webkit-scrollbar-thumb {
-        background: #C9920A;
+        background: #dc2626;
         border-radius: 4px;
     }
 
     .sidebar-header {
         padding: 0 20px 20px;
         margin-bottom: 16px;
-        border-bottom: 2px solid rgba(201,146,10,0.12);
+        border-bottom: 2px solid rgba(220,38,38,0.12);
         text-align: center;
     }
 
@@ -73,30 +73,30 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     .sidebar-logo span {
         font-size: 1.2rem;
         font-weight: 800;
-        color: #1e1e1e;
+        color: #111827;
         letter-spacing: 0.5px;
     }
 
     .sidebar-logo span .gold {
-        color: #C9920A;
+        color: #dc2626;
     }
 
     .admin-info {
         padding: 10px 14px;
-        background: linear-gradient(135deg, #fef7ed, #faf0e0);
+        background: linear-gradient(135deg, #fff5f5, #fee2e2);
         border-radius: 10px;
-        border: 1px solid rgba(201,146,10,0.12);
+        border: 1px solid rgba(220,38,38,0.18);
     }
 
     .admin-name {
         font-weight: 700;
-        color: #a87a08;
+        color: #b91c1c;
         display: block;
         font-size: 0.82rem;
     }
 
     .admin-name i {
-        color: #C9920A;
+        color: #dc2626;
         margin-right: 6px;
     }
 
@@ -107,7 +107,7 @@ $admin_email = $_SESSION['admin_email'] ?? '';
 
     /* ===== NAV LINKS ===== */
     #sidebar .nav-link {
-        color: #4a3f37;
+        color: #374151;
         font-weight: 500;
         font-size: 0.82rem;
         padding: 10px 18px;
@@ -130,19 +130,19 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     }
 
     #sidebar .nav-link:hover {
-        background: linear-gradient(135deg, #fef7ed, #faf0e0);
-        color: #a87a08;
+        background: linear-gradient(135deg, #fff5f5, #fee2e2);
+        color: #dc2626;
         transform: translateX(4px);
     }
 
     #sidebar .nav-link:hover i {
-        color: #C9920A;
+        color: #dc2626;
     }
 
     #sidebar .nav-link.active {
-        background: linear-gradient(135deg, #C9920A, #a87a08);
+        background: linear-gradient(135deg, #dc2626, #b91c1c);
         color: #ffffff;
-        box-shadow: 0 4px 16px rgba(201,146,10,0.3);
+        box-shadow: 0 4px 16px rgba(220,38,38,0.3);
     }
 
     #sidebar .nav-link.active i {
@@ -151,7 +151,7 @@ $admin_email = $_SESSION['admin_email'] ?? '';
 
     .sidebar-divider {
         border: none;
-        border-top: 1px solid rgba(201,146,10,0.08);
+        border-top: 1px solid rgba(220,38,38,0.08);
         margin: 10px 20px;
     }
 
@@ -170,14 +170,14 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     }
 
     #closeSidebar:hover {
-        color: #a87a08;
+        color: #dc2626;
     }
 
     /* ========== TOP NAVBAR ========== */
     .admin-topbar {
-        background: rgba(255, 255, 255, 0.97) !important;
+        background: rgba(255, 255, 255, 0.98) !important;
         backdrop-filter: blur(12px);
-        border-bottom: 2px solid rgba(201,146,10,0.1);
+        border-bottom: 2px solid rgba(220,38,38,0.12);
         padding: 10px 24px;
         position: fixed;
         top: 0;
@@ -191,7 +191,7 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     }
 
     .admin-topbar .brand {
-        color: #1e1e1e !important;
+        color: #111827 !important;
         font-size: 0.95rem;
         font-weight: 700;
         text-decoration: none;
@@ -199,7 +199,7 @@ $admin_email = $_SESSION['admin_email'] ?? '';
 
     .admin-topbar .brand i {
         margin-right: 10px;
-        color: #C9920A;
+        color: #dc2626;
     }
 
     .btn-settings-top {
@@ -208,20 +208,20 @@ $admin_email = $_SESSION['admin_email'] ?? '';
         gap: 6px;
         padding: 5px 14px;
         border-radius: 30px;
-        background: linear-gradient(135deg, #fef7ed, #faf0e0);
-        color: #a87a08;
+        background: linear-gradient(135deg, #fff5f5, #fee2e2);
+        color: #b91c1c;
         font-size: 0.68rem;
         font-weight: 700;
         text-decoration: none;
-        border: 1px solid rgba(201,146,10,0.15);
+        border: 1px solid rgba(220,38,38,0.2);
         transition: all 0.3s;
     }
 
     .btn-settings-top:hover {
-        background: #C9920A;
+        background: #dc2626;
         color: #ffffff;
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(201,146,10,0.3);
+        box-shadow: 0 6px 20px rgba(220,38,38,0.3);
     }
 
     .text-dim {
@@ -231,7 +231,7 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     .btn-toggle-sidebar {
         background: none;
         border: none;
-        color: #a87a08;
+        color: #dc2626;
         font-size: 1.2rem;
         padding: 4px 8px;
         cursor: pointer;
@@ -239,7 +239,7 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     }
 
     .btn-toggle-sidebar:hover {
-        color: #C9920A;
+        color: #b91c1c;
     }
 
     /* ========== CONTENT ========== */
@@ -303,7 +303,7 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     
     <div class="sidebar-header">
         <div class="sidebar-logo">
-            <img src="../assets/images/logo.png" alt="Arup Enterprise" onerror="this.style.display='none'">
+            <img src="images/logo.png" alt="Arup Enterprise" onerror="this.src='../admin/images/logo.png'">
             <span>Arup<span class="gold"> Enterprise</span></span>
         </div>
         <div class="admin-info">
@@ -418,20 +418,20 @@ $admin_email = $_SESSION['admin_email'] ?? '';
 <!-- ===== LOGOUT MODAL ===== -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background: #ffffff; border: 2px solid #C9920A; border-radius: 16px;">
-            <div class="modal-header" style="border-bottom-color: rgba(201,146,10,0.12); padding: 16px 20px;">
-                <h5 class="modal-title" id="logoutModalLabel" style="color: #a87a08; font-weight: 700;">
+        <div class="modal-content" style="background: #ffffff; border: 2px solid #dc2626; border-radius: 16px;">
+            <div class="modal-header" style="border-bottom-color: rgba(220,38,38,0.12); padding: 16px 20px;">
+                <h5 class="modal-title" id="logoutModalLabel" style="color: #b91c1c; font-weight: 700;">
                     <i class="fas fa-sign-out-alt me-2"></i> Confirm Logout
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center py-4" style="color: #4a3f37;">
-                <i class="fas fa-question-circle fa-3x mb-3" style="color: #C9920A;"></i>
+            <div class="modal-body text-center py-4" style="color: #374151;">
+                <i class="fas fa-question-circle fa-3x mb-3" style="color: #dc2626;"></i>
                 <p class="mb-0" style="font-size:0.95rem;">Are you sure you want to logout?</p>
             </div>
             <div class="modal-footer" style="border-top: none; padding: 16px 20px;">
-                <button type="button" class="btn" data-bs-dismiss="modal" style="background: #e8ddd0; color: #4a3f37; border-radius: 30px; padding: 8px 24px; border: none; font-weight:600; font-size:0.8rem;">Cancel</button>
-                <a href="logout.php" class="btn" style="background: #C9920A; color: white; border-radius: 30px; padding: 8px 24px; border: none; font-weight:600; font-size:0.8rem; text-decoration: none;">
+                <button type="button" class="btn" data-bs-dismiss="modal" style="background: #fee2e2; color: #b91c1c; border-radius: 30px; padding: 8px 24px; border: none; font-weight:600; font-size:0.8rem;">Cancel</button>
+                <a href="logout.php" class="btn" style="background: #dc2626; color: white; border-radius: 30px; padding: 8px 24px; border: none; font-weight:600; font-size:0.8rem; text-decoration: none;">
                     <i class="fas fa-sign-out-alt"></i> Yes, Logout
                 </a>
             </div>

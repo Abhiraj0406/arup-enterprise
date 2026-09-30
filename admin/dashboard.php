@@ -103,16 +103,16 @@ include 'includes/navbar.php';
            GLOBAL
         ============================================= */
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --gold-light: #e6c9a0;
-            --cream: #fef7ed;
-            --ivory: #faf3e8;
-            --charcoal: #1e1e1e;
-            --mid-gray: #4a3f37;
-            --light-gray: #e8ddd0;
+            --gold: #DC2626;
+            --gold-dark: #B91C1C;
+            --gold-light: #EF4444;
+            --cream: #FFF5F5;
+            --ivory: #FEE2E2;
+            --charcoal: #111827;
+            --mid-gray: #4B5563;
+            --light-gray: #FECACA;
             --white: #ffffff;
-            --shadow-gold: 0 4px 20px rgba(201,146,10,0.15);
+            --shadow-gold: 0 4px 20px rgba(220,38,38,0.2);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
         }
 
@@ -149,7 +149,7 @@ include 'includes/navbar.php';
             border-radius: 12px;
             padding: 12px 18px;
             margin-bottom: 18px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
@@ -184,7 +184,7 @@ include 'includes/navbar.php';
             background: var(--cream);
             padding: 3px 12px;
             border-radius: 20px;
-            border: 1px solid rgba(201,146,10,0.08);
+            border: 1px solid rgba(220,38,38,0.08);
             display: inline-block;
         }
 
@@ -192,11 +192,11 @@ include 'includes/navbar.php';
            WELCOME BANNER
         ============================================= */
         .welcome-banner {
-            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            background: linear-gradient(135deg, #111827, #1f2937);
             border-radius: 12px;
             padding: 14px 20px;
             margin-bottom: 16px;
-            border: 1px solid rgba(201,146,10,0.15);
+            border: 1px solid rgba(220,38,38,0.18);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -212,7 +212,7 @@ include 'includes/navbar.php';
             color: var(--gold);
         }
         .welcome-banner p {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.7);
             margin: 0;
             font-size: 0.75rem;
         }
@@ -259,7 +259,7 @@ include 'includes/navbar.php';
             background: var(--white);
             border-radius: 12px;
             padding: 16px 18px;
-            border: 1px solid rgba(201,146,10,0.08);
+            border: 1px solid rgba(220,38,38,0.08);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             transition: all 0.3s ease;
             position: relative;
@@ -278,7 +278,7 @@ include 'includes/navbar.php';
         .stat-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            border-color: rgba(201,146,10,0.15);
+            border-color: rgba(220,38,38,0.15);
         }
         .stat-card .stat-icon {
             width: 38px;
@@ -289,7 +289,7 @@ include 'includes/navbar.php';
             justify-content: center;
             font-size: 1rem;
             color: var(--gold);
-            background: rgba(201,146,10,0.08);
+            background: rgba(220,38,38,0.08);
             margin-bottom: 6px;
         }
         .stat-card .stat-number {
@@ -323,7 +323,7 @@ include 'includes/navbar.php';
         .widget-card {
             background: var(--white);
             border-radius: 12px;
-            border: 1px solid rgba(201,146,10,0.08);
+            border: 1px solid rgba(220,38,38,0.08);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             overflow: hidden;
             transition: all 0.3s ease;
@@ -333,7 +333,7 @@ include 'includes/navbar.php';
         }
         .widget-card .widget-header {
             padding: 10px 16px;
-            border-bottom: 1px solid rgba(201,146,10,0.06);
+            border-bottom: 1px solid rgba(220,38,38,0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -362,16 +362,16 @@ include 'includes/navbar.php';
             display: flex;
             align-items: center;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(201,146,10,0.05);
+            border-bottom: 1px solid rgba(220,38,38,0.05);
             gap: 10px;
         }
         .recent-item:last-child { border-bottom: none; }
-        .recent-item:hover { background: rgba(201,146,10,0.03); padding-left: 4px; }
+        .recent-item:hover { background: rgba(220,38,38,0.03); padding-left: 4px; }
         .recent-item .item-icon {
             width: 32px;
             height: 32px;
             border-radius: 8px;
-            background: rgba(201,146,10,0.08);
+            background: rgba(220,38,38,0.08);
             display: flex;
             align-items: center;
             justify-content: center;

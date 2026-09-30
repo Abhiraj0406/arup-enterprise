@@ -103,17 +103,17 @@ include 'includes/navbar.php';
 
     <style>
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --gold-light: #e6c9a0;
-            --cream: #fef7ed;
-            --ivory: #faf3e8;
-            --mustard: #d4a373;
-            --charcoal: #1e1e1e;
-            --mid-gray: #4a3f37;
-            --light-gray: #e8ddd0;
+            --gold: #DC2626;
+            --gold-dark: #B91C1C;
+            --gold-light: #EF4444;
+            --cream: #FFF5F5;
+            --ivory: #FEE2E2;
+            --mustard: #F87171;
+            --charcoal: #111827;
+            --mid-gray: #4B5563;
+            --light-gray: #FECACA;
             --white: #ffffff;
-            --shadow-gold: 0 4px 20px rgba(201,146,10,0.15);
+            --shadow-gold: 0 4px 20px rgba(220,38,38,0.2);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
         }
 
@@ -135,7 +135,7 @@ include 'includes/navbar.php';
             border-radius: 12px;
             padding: 12px 18px;
             margin-bottom: 18px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
@@ -175,13 +175,13 @@ include 'includes/navbar.php';
             color: #166534;
             font-weight: 500;
             font-size: 0.82rem;
-            border: 1px solid rgba(201,146,10,0.15);
+            border: 1px solid rgba(220,38,38,0.15);
         }
         .alert-custom i { color: var(--gold); margin-right: 8px; }
 
         .card-premium {
             background: var(--white);
-            border: 1px solid rgba(201,146,10,0.1);
+            border: 1px solid rgba(220,38,38,0.1);
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             overflow: hidden;
@@ -190,7 +190,7 @@ include 'includes/navbar.php';
         .card-premium .card-head {
             padding: 10px 16px;
             background: linear-gradient(135deg, var(--cream), var(--ivory));
-            border-bottom: 1px solid rgba(201,146,10,0.08);
+            border-bottom: 1px solid rgba(220,38,38,0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -241,7 +241,7 @@ include 'includes/navbar.php';
         #productSearchInput {
             width: 100%;
             padding: 8px 32px 8px 32px;
-            border: 1.5px solid rgba(201,146,10,0.22);
+            border: 1.5px solid rgba(220,38,38,0.22);
             border-radius: 20px;
             background: var(--cream);
             font-family: 'Inter', sans-serif;
@@ -250,11 +250,11 @@ include 'includes/navbar.php';
             outline: none;
             transition: all 0.25s ease;
         }
-        #productSearchInput::placeholder { color: #b8a98f; }
+        #productSearchInput::placeholder { color: #f87171; opacity: 0.7; }
         #productSearchInput:focus {
             border-color: var(--gold);
             background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(201,146,10,0.12);
+            box-shadow: 0 0 0 3px rgba(220,38,38,0.12);
         }
         .product-search-wrap:has(#productSearchInput:focus) i.search-ico { color: var(--gold); }
         .search-clear-btn {
@@ -265,7 +265,7 @@ include 'includes/navbar.php';
             width: 19px;
             height: 19px;
             border: none;
-            background: rgba(201,146,10,0.14);
+            background: rgba(220,38,38,0.14);
             color: var(--gold-dark);
             border-radius: 50%;
             font-size: 0.62rem;
@@ -303,7 +303,7 @@ include 'includes/navbar.php';
             display: none;
         }
         mark.search-highlight {
-            background: rgba(201,146,10,0.3);
+            background: rgba(220,38,38,0.22);
             color: inherit;
             border-radius: 3px;
             padding: 0 2px;
@@ -325,16 +325,16 @@ include 'includes/navbar.php';
             text-transform: uppercase;
             font-size: 0.55rem;
             letter-spacing: 0.6px;
-            border-bottom: 2px solid rgba(201,146,10,0.12);
+            border-bottom: 2px solid rgba(220,38,38,0.12);
             background: var(--cream);
         }
         .table tbody td {
             padding: 8px 12px;
             vertical-align: middle;
-            border-bottom: 1px solid rgba(201,146,10,0.05);
+            border-bottom: 1px solid rgba(220,38,38,0.05);
             font-size: 0.78rem;
         }
-        .table tbody tr:hover { background: rgba(201,146,10,0.03); }
+        .table tbody tr:hover { background: rgba(220,38,38,0.03); }
         .table tbody tr:last-child td { border-bottom: none; }
 
         .btn-gold {
@@ -355,7 +355,7 @@ include 'includes/navbar.php';
             background: var(--gold-dark);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(201,146,10,0.3);
+            box-shadow: 0 6px 18px rgba(220,38,38,0.3);
         }
 
         .btn-outline-gold {
@@ -396,7 +396,7 @@ include 'includes/navbar.php';
             height: 50px;
             object-fit: cover;
             border-radius: 6px;
-            border: 2px solid rgba(201,146,10,0.1);
+            border: 2px solid rgba(220,38,38,0.1);
         }
         .image-placeholder {
             width: 50px;
@@ -408,7 +408,7 @@ include 'includes/navbar.php';
             justify-content: center;
             color: var(--gold);
             font-size: 1.2rem;
-            border: 2px solid rgba(201,146,10,0.1);
+            border: 2px solid rgba(220,38,38,0.1);
         }
 
         @media (max-width: 768px) {
@@ -527,7 +527,7 @@ include 'includes/navbar.php';
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <span class="badge" style="background:rgba(201,146,10,0.12);color:var(--gold-dark);font-weight:500;font-size:0.7rem;">
+                                                <span class="badge" style="background:rgba(239,68,68,0.12);color:var(--gold-dark);font-weight:500;font-size:0.7rem;">
                                                     <?php echo htmlspecialchars($p['category']); ?>
                                                 </span>
                                             </td>

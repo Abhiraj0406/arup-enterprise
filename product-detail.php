@@ -31,7 +31,7 @@ if (!$product) { ?>
             <i class="fas fa-box-open" style="font-size:3.5rem;color:#D5CDB8;display:block;margin-bottom:20px;"></i>
             <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#1C1C1C;margin-bottom:10px;">Product Not Found</h2>
             <p style="color:#4A4A4A;margin-bottom:28px;">The product you are looking for does not exist or has been removed.</p>
-            <a href="products.php" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#C9920A,#8B6508);color:white;padding:13px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-family:'Inter',sans-serif;">
+            <a href="products.php" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#EF4444,#8B6508);color:white;padding:13px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-family:'Inter',sans-serif;">
                 <i class="fas fa-arrow-left"></i> Back to Products
             </a>
         </div>
@@ -125,7 +125,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
                         <div class="pd-zoom-hint"><i class="fas fa-search-plus"></i> Click to zoom</div>
                     <?php else: ?>
                         <div class="pd-img-placeholder">
-                            <i class="fas fa-cogs" style="font-size:5rem;color:#C9920A;opacity:0.5;"></i>
+                            <i class="fas fa-cogs" style="font-size:5rem;color:#EF4444;opacity:0.5;"></i>
                         </div>
                     <?php endif; ?>
 
@@ -333,7 +333,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
 /* ── Breadcrumb ──────────────────────────────────────────── */
 .pd-breadcrumb {
     background: #1C1C1C;
-    border-bottom: 3px solid #C9920A;
+    border-bottom: 3px solid #EF4444;
     padding: 14px 0;
 }
 .pd-breadcrumb .pd-container {
@@ -349,17 +349,17 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     text-decoration: none;
     transition: color .3s;
 }
-.pd-breadcrumb a:hover { color: #C9920A; }
+.pd-breadcrumb a:hover { color: #EF4444; }
 .pd-breadcrumb i.fa-chevron-right { color: #666; font-size: 0.6rem; }
 .pd-breadcrumb span {
-    color: #C9920A;
+    color: #EF4444;
     font-size: 0.78rem;
     font-weight: 600;
 }
 
 /* ── Main Section ────────────────────────────────────────── */
 .pd-section {
-    background: linear-gradient(180deg, #FAF6EE 0%, #ffffff 100%);
+    background: linear-gradient(180deg, #FFF5F5 0%, #ffffff 100%);
     padding: 60px 0 80px;
 }
 .pd-grid {
@@ -374,14 +374,14 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     border-radius: 20px;
     overflow: hidden;
     background: #ffffff;
-    border: 2px solid rgba(201,146,10,0.15);
+    border: 2px solid rgba(239,68,68,0.15);
     box-shadow: 0 8px 40px rgba(0,0,0,0.08);
     position: relative;
     margin-bottom: 20px;
     transition: box-shadow .4s ease;
 }
 .pd-image-card:hover {
-    box-shadow: 0 12px 56px rgba(201,146,10,0.15);
+    box-shadow: 0 12px 56px rgba(239,68,68,0.15);
 }
 .pd-main-img {
     width: 100%;
@@ -395,7 +395,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
 .pd-img-placeholder {
     width: 100%;
     height: 460px;
-    background: linear-gradient(135deg, #F0E8D0, #FAF6EE);
+    background: linear-gradient(135deg, #FEE2E2, #FFF5F5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -450,7 +450,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    border: 1px solid rgba(201,146,10,0.3);
+    border: 1px solid rgba(239,68,68,0.3);
     transform: scale(0.96);
     transition: transform 0.25s ease;
     cursor: default;
@@ -463,7 +463,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1.5px solid rgba(201,146,10,0.4);
+    border: 1.5px solid rgba(239,68,68,0.4);
     background: rgba(255,255,255,0.06);
     color: #F0E0B0;
     font-size: 1.1rem;
@@ -475,9 +475,9 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     z-index: 1;
 }
 .pd-lightbox-close:hover {
-    background: #C9920A;
+    background: #EF4444;
     color: #1C1C1C;
-    border-color: #C9920A;
+    border-color: #EF4444;
     transform: rotate(90deg);
 }
 .pd-lightbox-hint {
@@ -507,7 +507,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     flex-wrap: wrap;
 }
 .pd-cat-tag {
-    background: rgba(201,146,10,0.95);
+    background: rgba(239,68,68,0.95);
     color: white;
     font-size: 0.65rem;
     font-weight: 700;
@@ -519,7 +519,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     align-items: center;
     gap: 6px;
     backdrop-filter: blur(4px);
-    box-shadow: 0 4px 16px rgba(201,146,10,0.3);
+    box-shadow: 0 4px 16px rgba(239,68,68,0.3);
 }
 .pd-featured-tag {
     background: rgba(28,28,28,0.9);
@@ -574,12 +574,12 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     font-size: 0.85rem;
     text-decoration: none;
     transition: all .3s cubic-bezier(.2,.9,.3,1);
-    border: 1px solid rgba(201,146,10,0.35);
+    border: 1px solid rgba(239,68,68,0.35);
     box-shadow: 0 6px 22px rgba(12,61,46,0.4);
 }
 .pd-btn-whatsapp:hover {
     background: linear-gradient(135deg, var(--wa-deep) 0%, #08291f 100%);
-    border-color: #C9920A;
+    border-color: #EF4444;
     transform: translateY(-2px);
     box-shadow: 0 10px 28px rgba(12,61,46,0.55);
     color: #ffffff;
@@ -590,13 +590,13 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     justify-content: center;
     width: 22px; height: 22px;
     border-radius: 50%;
-    background: rgba(201,146,10,0.22);
-    border: 1px solid rgba(201,146,10,0.4);
+    background: rgba(239,68,68,0.22);
+    border: 1px solid rgba(239,68,68,0.4);
     flex-shrink: 0;
 }
 .pd-wa-icon-wrap i { font-size: 0.85rem; color: var(--gold-light); }
 .pd-btn-whatsapp:hover .pd-wa-icon-wrap i,
-.pd-btn-primary:hover .pd-wa-icon-wrap i { color: #C9920A; }
+.pd-btn-primary:hover .pd-wa-icon-wrap i { color: #EF4444; }
 
 .pd-btn-call {
     display: inline-flex;
@@ -630,7 +630,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     align-items: center;
     gap: 8px;
     background: #ffffff;
-    border: 1px solid rgba(201,146,10,0.12);
+    border: 1px solid rgba(239,68,68,0.12);
     border-radius: 10px;
     padding: 10px 14px;
     font-size: 0.75rem;
@@ -639,12 +639,12 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     transition: all .3s;
 }
 .pd-trust-item:hover {
-    border-color: #C9920A;
-    background: rgba(201,146,10,0.05);
+    border-color: #EF4444;
+    background: rgba(239,68,68,0.05);
     transform: translateY(-2px);
 }
 .pd-trust-item i {
-    color: #C9920A;
+    color: #EF4444;
     font-size: 0.9rem;
     flex-shrink: 0;
 }
@@ -670,15 +670,15 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     display: flex;
     align-items: center;
     gap: 6px;
-    background: #F0E8D0;
-    border: 1px solid rgba(201,146,10,0.18);
+    background: #FEE2E2;
+    border: 1px solid rgba(239,68,68,0.18);
     border-radius: 20px;
     padding: 5px 14px;
     font-size: 0.75rem;
     font-weight: 600;
     color: #4A4A4A;
 }
-.pd-meta-item i { color: #C9920A; font-size: 0.7rem; }
+.pd-meta-item i { color: #EF4444; font-size: 0.7rem; }
 .pd-in-stock {
     color: #27ae60;
     background: #e8f8ef;
@@ -699,15 +699,15 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     line-height: 1.8;
     margin-bottom: 20px;
     padding: 16px 20px;
-    background: rgba(201,146,10,0.04);
+    background: rgba(239,68,68,0.04);
     border-radius: 12px;
-    border-left: 4px solid #C9920A;
+    border-left: 4px solid #EF4444;
 }
 
 /* Block (features / specs) */
 .pd-block {
     background: #ffffff;
-    border: 1px solid rgba(201,146,10,0.1);
+    border: 1px solid rgba(239,68,68,0.1);
     border-radius: 14px;
     padding: 18px 22px;
     margin-bottom: 16px;
@@ -715,7 +715,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     transition: box-shadow .3s;
 }
 .pd-block:hover {
-    box-shadow: 0 4px 20px rgba(201,146,10,0.08);
+    box-shadow: 0 4px 20px rgba(239,68,68,0.08);
 }
 .pd-block-title {
     font-family: 'Playfair Display', serif;
@@ -727,9 +727,9 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     align-items: center;
     gap: 8px;
     padding-bottom: 10px;
-    border-bottom: 2px solid rgba(201,146,10,0.12);
+    border-bottom: 2px solid rgba(239,68,68,0.12);
 }
-.pd-block-title i { color: #C9920A; }
+.pd-block-title i { color: #EF4444; }
 
 .pd-features-list { list-style: none; padding: 0; }
 .pd-features-list li {
@@ -739,12 +739,12 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     padding: 8px 0;
     font-size: 0.87rem;
     color: #4A4A4A;
-    border-bottom: 1px solid rgba(201,146,10,0.06);
+    border-bottom: 1px solid rgba(239,68,68,0.06);
     line-height: 1.5;
 }
 .pd-features-list li:last-child { border-bottom: none; }
 .pd-features-list li i {
-    color: #C9920A;
+    color: #EF4444;
     margin-top: 2px;
     flex-shrink: 0;
 }
@@ -756,12 +756,12 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     gap: 10px;
     font-size: 0.86rem;
     color: #4A4A4A;
-    background: #FAF6EE;
+    background: #FFF5F5;
     padding: 8px 14px;
     border-radius: 8px;
-    border-left: 3px solid #C9920A;
+    border-left: 3px solid #EF4444;
 }
-.pd-spec-row i { color: #C9920A; flex-shrink: 0; }
+.pd-spec-row i { color: #EF4444; flex-shrink: 0; }
 
 /* Quality Points */
 .pd-quality-points {
@@ -770,9 +770,9 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     gap: 8px;
     margin: 16px 0 24px;
     padding: 16px 18px;
-    background: linear-gradient(135deg, rgba(201,146,10,0.06), rgba(201,146,10,0.02));
+    background: linear-gradient(135deg, rgba(239,68,68,0.06), rgba(239,68,68,0.02));
     border-radius: 12px;
-    border: 1px solid rgba(201,146,10,0.1);
+    border: 1px solid rgba(239,68,68,0.1);
 }
 .pd-qp-item {
     display: flex;
@@ -783,7 +783,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     color: #4A4A4A;
     line-height: 1.4;
 }
-.pd-qp-item i { color: #C9920A; flex-shrink: 0; }
+.pd-qp-item i { color: #EF4444; flex-shrink: 0; }
 
 /* CTA Row */
 .pd-cta-row {
@@ -803,12 +803,12 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     font-size: 0.9rem;
     text-decoration: none;
     transition: all .3s cubic-bezier(.2,.9,.3,1);
-    border: 1px solid rgba(201,146,10,0.35);
+    border: 1px solid rgba(239,68,68,0.35);
     box-shadow: 0 6px 26px rgba(12,61,46,0.42);
 }
 .pd-btn-primary:hover {
     background: linear-gradient(135deg, var(--wa-deep) 0%, #08291f 100%);
-    border-color: #C9920A;
+    border-color: #EF4444;
     transform: translateY(-3px);
     box-shadow: 0 10px 32px rgba(12,61,46,0.55);
     color: #ffffff;
@@ -817,8 +817,8 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: 2px solid #C9920A;
-    color: #C9920A;
+    border: 2px solid #EF4444;
+    color: #EF4444;
     background: transparent;
     padding: 12px 28px;
     border-radius: 12px;
@@ -828,17 +828,17 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     transition: all .3s;
 }
 .pd-btn-outline:hover {
-    background: #C9920A;
+    background: #EF4444;
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 4px 20px rgba(201,146,10,0.3);
+    box-shadow: 0 4px 20px rgba(239,68,68,0.3);
 }
 
 /* ── Related Products ────────────────────────────────────── */
 .pd-related {
-    background: #F0E8D0;
+    background: #FEE2E2;
     padding: 60px 0 80px;
-    border-top: 4px solid #C9920A;
+    border-top: 4px solid #EF4444;
 }
 .pd-related-head {
     margin-bottom: 40px;
@@ -850,7 +850,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     color: #1C1C1C;
     margin-bottom: 4px;
 }
-.pd-related-head h2 span { color: #C9920A; }
+.pd-related-head h2 span { color: #EF4444; }
 .pd-related-head p { color: #4A4A4A; font-size: 0.9rem; }
 
 .pd-related-grid {
@@ -862,7 +862,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     background: #ffffff;
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(201,146,10,0.1);
+    border: 1px solid rgba(239,68,68,0.1);
     box-shadow: 0 2px 16px rgba(0,0,0,0.06);
     text-decoration: none;
     color: inherit;
@@ -873,13 +873,13 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
 .pd-related-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-    border-color: #C9920A;
+    border-color: #EF4444;
 }
 .pd-rc-img-wrap {
     position: relative;
     height: 180px;
     overflow: hidden;
-    background: #F0E8D0;
+    background: #FEE2E2;
 }
 .pd-rc-img-wrap img {
     width: 100%; height: 100%;
@@ -892,15 +892,15 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #C9920A;
+    color: #EF4444;
     font-size: 2.4rem;
-    background: #F0E8D0;
+    background: #FEE2E2;
 }
 .pd-rc-cat {
     position: absolute;
     top: 12px;
     left: 12px;
-    background: rgba(201,146,10,0.92);
+    background: rgba(239,68,68,0.92);
     color: white;
     font-size: 0.6rem;
     font-weight: 700;
@@ -936,7 +936,7 @@ $whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
     gap: 6px;
     font-size: 0.78rem;
     font-weight: 700;
-    color: #C9920A;
+    color: #EF4444;
     transition: gap .3s;
 }
 .pd-related-card:hover .pd-rc-link { gap: 12px; }

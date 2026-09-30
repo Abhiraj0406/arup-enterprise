@@ -372,14 +372,14 @@ include 'includes/header.php';
 <style>
 /* ── GLOBAL TOKENS ── */
 :root {
-  --ae-gold:      #C9920A;
-  --ae-gold-hover:#B38008;
+  --ae-gold:      #EF4444;
+  --ae-gold-hover:#DC2626;
   --ae-dark:      #1A1A1A;
   --ae-charcoal:  #242424;
   --ae-text:      #555555;
   --ae-text-dark: #222222;
-  --ae-light-bg:  #F9F9F9;
-  --ae-border:    #EAEAEA;
+  --ae-light-bg:  #FFF5F5;
+  --ae-border:    #FEE2E2;
   --ae-font-head: 'Bebas Neue', 'Inter', sans-serif;
   --ae-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --ae-radius:    8px;
@@ -754,7 +754,7 @@ body { font-family: var(--ae-font-body); color: var(--ae-text); line-height: 1.6
 .ae-skill-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--ae-gold), #E8B84B);
+  background: linear-gradient(90deg, var(--ae-gold), #F87171);
   border-radius: 100px;
   transition: width 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }

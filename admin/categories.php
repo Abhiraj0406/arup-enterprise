@@ -186,17 +186,17 @@ $icons = [
 
     <style>
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --gold-light: #e6c9a0;
-            --cream: #fef7ed;
-            --ivory: #faf3e8;
-            --mustard: #d4a373;
-            --charcoal: #1e1e1e;
-            --mid-gray: #4a3f37;
-            --light-gray: #e8ddd0;
+            --gold: #DC2626;
+            --gold-dark: #B91C1C;
+            --gold-light: #EF4444;
+            --cream: #FFF5F5;
+            --ivory: #FEE2E2;
+            --mustard: #F87171;
+            --charcoal: #111827;
+            --mid-gray: #4B5563;
+            --light-gray: #FECACA;
             --white: #ffffff;
-            --shadow-gold: 0 4px 20px rgba(201,146,10,0.15);
+            --shadow-gold: 0 4px 20px rgba(220,38,38,0.2);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
         }
 
@@ -214,7 +214,7 @@ $icons = [
             border-radius: 12px;
             padding: 12px 18px;
             margin-bottom: 18px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
@@ -261,7 +261,7 @@ $icons = [
             background: var(--gold-dark);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(201,146,10,0.3);
+            box-shadow: 0 6px 20px rgba(220,38,38,0.3);
         }
 
         .btn-outline-gold {
@@ -287,13 +287,13 @@ $icons = [
             color: #166534;
             font-weight: 500;
             font-size: 0.8rem;
-            border: 1px solid rgba(201,146,10,0.15);
+            border: 1px solid rgba(220,38,38,0.15);
         }
         .alert-custom i { color: var(--gold); margin-right: 8px; }
 
         .card-premium {
             background: var(--white);
-            border: 1px solid rgba(201,146,10,0.1);
+            border: 1px solid rgba(220,38,38,0.1);
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             overflow: hidden;
@@ -302,7 +302,7 @@ $icons = [
         .card-premium .card-head {
             padding: 10px 16px;
             background: linear-gradient(135deg, var(--cream), var(--ivory));
-            border-bottom: 1px solid rgba(201,146,10,0.08);
+            border-bottom: 1px solid rgba(220,38,38,0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -341,16 +341,16 @@ $icons = [
             text-transform: uppercase;
             font-size: 0.55rem;
             letter-spacing: 0.6px;
-            border-bottom: 2px solid rgba(201,146,10,0.12);
+            border-bottom: 2px solid rgba(220,38,38,0.12);
             background: var(--cream);
         }
         .table tbody td {
             padding: 8px 12px;
             vertical-align: middle;
-            border-bottom: 1px solid rgba(201,146,10,0.05);
+            border-bottom: 1px solid rgba(220,38,38,0.05);
             font-size: 0.78rem;
         }
-        .table tbody tr:hover { background: rgba(201,146,10,0.03); }
+        .table tbody tr:hover { background: rgba(220,38,38,0.03); }
         .table tbody tr:last-child td { border-bottom: none; }
 
         .badge-status {
@@ -401,7 +401,7 @@ $icons = [
         }
         .icon-picker-grid .icon-option:hover {
             border-color: var(--gold);
-            background: rgba(201,146,10,0.08);
+            background: rgba(220,38,38,0.08);
             color: var(--gold);
             transform: scale(1.05);
         }
@@ -409,7 +409,7 @@ $icons = [
             border-color: var(--gold);
             background: var(--gold);
             color: white;
-            box-shadow: 0 0 0 3px rgba(201,146,10,0.15);
+            box-shadow: 0 0 0 3px rgba(220,38,38,0.15);
         }
 
         .icon-preview-box {
@@ -443,7 +443,7 @@ $icons = [
         }
         .modal-content-custom .modal-footer {
             padding: 12px 18px;
-            border-top: 1px solid rgba(201,146,10,0.08);
+            border-top: 1px solid rgba(220,38,38,0.08);
         }
 
         .form-switch .form-check-input {
@@ -474,7 +474,7 @@ $icons = [
         }
         .form-control:focus, .form-select:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,146,10,0.08);
+            box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
         }
 
         .pin-badge {

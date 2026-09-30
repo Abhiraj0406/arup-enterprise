@@ -194,17 +194,17 @@ if (isset($conn) && $conn) {
 
     <style>
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --gold-light: #e6c9a0;
-            --cream: #fef7ed;
-            --ivory: #faf3e8;
-            --mustard: #d4a373;
-            --charcoal: #1e1e1e;
-            --mid-gray: #4a3f37;
-            --light-gray: #e8ddd0;
+            --gold: #DC2626;
+            --gold-dark: #B91C1C;
+            --gold-light: #EF4444;
+            --cream: #FFF5F5;
+            --ivory: #FEE2E2;
+            --mustard: #F87171;
+            --charcoal: #111827;
+            --mid-gray: #4B5563;
+            --light-gray: #FECACA;
             --white: #ffffff;
-            --shadow-gold: 0 4px 20px rgba(201,146,10,0.15);
+            --shadow-gold: 0 4px 20px rgba(220,38,38,0.2);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
         }
 
@@ -223,7 +223,7 @@ if (isset($conn) && $conn) {
             border-radius: 12px;
             padding: 16px 20px;
             margin-bottom: 18px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
@@ -269,7 +269,7 @@ if (isset($conn) && $conn) {
             background: var(--gold-dark);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(201,146,10,0.3);
+            box-shadow: 0 6px 20px rgba(220,38,38,0.3);
         }
 
         .btn-outline-gold {
@@ -326,7 +326,7 @@ if (isset($conn) && $conn) {
             color: #166534;
             font-weight: 500;
             font-size: 0.8rem;
-            border: 1px solid rgba(201,146,10,0.15);
+            border: 1px solid rgba(220,38,38,0.15);
         }
         .alert-custom i { color: var(--gold); margin-right: 8px; }
         .alert-custom.alert-danger {
@@ -338,7 +338,7 @@ if (isset($conn) && $conn) {
         /* ===== CARD ===== */
         .card-premium {
             background: var(--white);
-            border: 1px solid rgba(201,146,10,0.1);
+            border: 1px solid rgba(220,38,38,0.1);
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             overflow: hidden;
@@ -347,7 +347,7 @@ if (isset($conn) && $conn) {
         .card-premium .card-head {
             padding: 12px 16px;
             background: linear-gradient(135deg, var(--cream), var(--ivory));
-            border-bottom: 1px solid rgba(201,146,10,0.08);
+            border-bottom: 1px solid rgba(220,38,38,0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -388,17 +388,17 @@ if (isset($conn) && $conn) {
             text-transform: uppercase;
             font-size: 0.55rem;
             letter-spacing: 0.5px;
-            border-bottom: 2px solid rgba(201,146,10,0.12);
+            border-bottom: 2px solid rgba(220,38,38,0.12);
             background: var(--cream);
             white-space: nowrap;
         }
         .table tbody td {
             padding: 8px 10px;
             vertical-align: middle;
-            border-bottom: 1px solid rgba(201,146,10,0.05);
+            border-bottom: 1px solid rgba(220,38,38,0.05);
             font-size: 0.78rem;
         }
-        .table tbody tr:hover { background: rgba(201,146,10,0.03); }
+        .table tbody tr:hover { background: rgba(220,38,38,0.03); }
         .table tbody tr:last-child td { border-bottom: none; }
 
         .table .message-preview {
@@ -429,7 +429,7 @@ if (isset($conn) && $conn) {
         .filter-bar .form-control:focus,
         .filter-bar .form-select:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,146,10,0.08);
+            box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
         }
 
         .content {
@@ -447,7 +447,7 @@ if (isset($conn) && $conn) {
             background: var(--white);
             border-radius: 10px;
             padding: 12px 16px;
-            border: 1px solid rgba(201,146,10,0.1);
+            border: 1px solid rgba(220,38,38,0.1);
             text-align: center;
             transition: all 0.3s;
             text-decoration: none;
@@ -637,7 +637,7 @@ if (isset($conn) && $conn) {
                                         </td>
                                         <td>
                                             <?php if (!empty($e['product_name'])): ?>
-                                                <span class="badge" style="background:rgba(201,146,10,0.15);color:var(--gold-dark);font-weight:600;font-size:0.65rem;">
+                                                <span class="badge" style="background:rgba(220,38,38,0.15);color:var(--gold-dark);font-weight:600;font-size:0.65rem;">
                                                     <i class="fas fa-cube"></i> <?php echo htmlspecialchars($e['product_name']); ?>
                                                 </span>
                                             <?php else: ?>

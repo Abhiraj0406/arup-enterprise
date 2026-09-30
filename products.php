@@ -70,8 +70,8 @@ $total_count = count($products);
 ============================================= -->
 <style>
     :root{
-        --gold:#C9920A; --gold-dark:#a87a08; --gold-light:#e6c9a0;
-        --charcoal:#1e1e1e; --mid-gray:#4a3f37; --cream:#fef7ed; --ivory:#faf3e8; --light-gray:#e8ddd0;
+        --gold:#EF4444; --gold-dark:#DC2626; --gold-light:#F87171;
+        --charcoal:#111827; --mid-gray:#4B5563; --cream:#FFF5F5; --ivory:#FEE2E2; --light-gray:#FECACA;
         /* premium "classic WhatsApp" accent — deep forest green + gold trim, not the stock neon green */
         --wa-deep:#0c3d2e; --wa-mid:#145c43; --wa-light:#2f8f6b;
     }
@@ -96,7 +96,7 @@ $total_count = count($products);
     .page-header-bg::after {
         content: '';
         position: absolute; inset: 0;
-        background: linear-gradient(135deg, rgba(20,20,20,0.93) 0%, rgba(20,20,20,0.74) 55%, rgba(201,146,10,0.18) 100%);
+        background: linear-gradient(135deg, rgba(20,20,20,0.93) 0%, rgba(20,20,20,0.74) 55%, rgba(239,68,68,0.18) 100%);
     }
     .page-header-gears { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.06; }
     .page-header-gears svg { position: absolute; color: var(--gold); }
@@ -107,7 +107,7 @@ $total_count = count($products);
     .page-header-content { position: relative; z-index: 1; }
     .ph-badge {
         display: inline-flex; align-items: center; gap: 8px;
-        background: rgba(201,146,10,0.16); border: 1px solid rgba(201,146,10,0.4);
+        background: rgba(239,68,68,0.16); border: 1px solid rgba(239,68,68,0.4);
         color: var(--gold-light); font-size: 0.7rem; font-weight: 700;
         letter-spacing: 0.16em; text-transform: uppercase;
         padding: 6px 16px; border-radius: 20px; margin-bottom: 18px;
@@ -149,7 +149,7 @@ $total_count = count($products);
         padding: 22px 26px;
         margin: -46px auto 40px;
         box-shadow: 0 16px 50px -10px rgba(30,20,5,0.18);
-        border: 1px solid rgba(201,146,10,0.12);
+        border: 1px solid rgba(239,68,68,0.12);
         position: relative;
         z-index: 5;
     }
@@ -174,7 +174,7 @@ $total_count = count($products);
     }
     .filter-bar .search-box input:focus {
         border-color: var(--gold);
-        box-shadow: 0 0 0 3px rgba(201,146,10,0.12);
+        box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
         background: #ffffff;
     }
     .filter-bar .search-box i {
@@ -202,7 +202,7 @@ $total_count = count($products);
     }
     .filter-bar .category-filter select:focus {
         border-color: var(--gold);
-        box-shadow: 0 0 0 3px rgba(201,146,10,0.12);
+        box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
         background-color: #ffffff;
     }
 
@@ -221,18 +221,18 @@ $total_count = count($products);
         gap: 8px;
         justify-content: center;
         transition: all 0.3s cubic-bezier(.2,.9,.3,1);
-        box-shadow: 0 6px 22px rgba(201,146,10,0.3);
+        box-shadow: 0 6px 22px rgba(239,68,68,0.3);
         white-space: nowrap;
     }
     .btn-gold:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(201,146,10,0.4);
+        box-shadow: 0 8px 28px rgba(239,68,68,0.4);
     }
 
     .active-filters { display:flex; gap:10px; align-items:center; margin-top:14px; flex-wrap:wrap; }
     .active-filters .chip {
         display:inline-flex; align-items:center; gap:8px;
-        background: var(--ivory); border:1px solid rgba(201,146,10,0.25);
+        background: var(--ivory); border:1px solid rgba(239,68,68,0.25);
         color: var(--mid-gray); font-size:0.8rem; font-weight:600;
         padding:6px 12px; border-radius:20px;
     }
@@ -253,12 +253,12 @@ $total_count = count($products);
         overflow: hidden;
         box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         transition: all 0.4s ease;
-        border: 1px solid rgba(201,146,10,0.06);
+        border: 1px solid rgba(239,68,68,0.06);
     }
     .product-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 14px 38px rgba(0,0,0,0.12);
-        border-color: rgba(201,146,10,0.25);
+        border-color: rgba(239,68,68,0.25);
     }
 
     .product-img-wrap {
@@ -288,7 +288,7 @@ $total_count = count($products);
         font-size: 0.6rem;
         font-weight: 700;
         text-transform: uppercase;
-        box-shadow: 0 4px 20px rgba(201,146,10,0.3);
+        box-shadow: 0 4px 20px rgba(239,68,68,0.3);
     }
     .product-img-wrap .featured-badge i {
         margin-right: 4px;
@@ -370,7 +370,7 @@ $total_count = count($products);
         padding: 0 14px 0 12px;
         background: linear-gradient(135deg, var(--wa-mid) 0%, var(--wa-deep) 100%);
         color: var(--gold-light);
-        border: 1px solid rgba(201,146,10,0.35);
+        border: 1px solid rgba(239,68,68,0.35);
         border-radius: 20px;
         font-size: 0.78rem;
         font-weight: 700;
@@ -394,7 +394,7 @@ $total_count = count($products);
         padding: 70px 20px;
         background: #fff;
         border-radius: 16px;
-        border: 1px solid rgba(201,146,10,0.12);
+        border: 1px solid rgba(239,68,68,0.12);
         margin-bottom: 50px;
     }
     .no-products i {

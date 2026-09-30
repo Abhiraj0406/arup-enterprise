@@ -192,16 +192,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <style>
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --gold-light: #e6c9a0;
-            --cream: #fef7ed;
-            --ivory: #faf3e8;
-            --charcoal: #1e1e1e;
-            --mid-gray: #4a3f37;
-            --light-gray: #e8ddd0;
+            --gold: #DC2626;
+            --gold-dark: #B91C1C;
+            --gold-light: #EF4444;
+            --cream: #FFF5F5;
+            --ivory: #FEE2E2;
+            --charcoal: #111827;
+            --mid-gray: #4B5563;
+            --light-gray: #FECACA;
             --white: #ffffff;
-            --shadow-gold: 0 4px 20px rgba(201,146,10,0.15);
+            --shadow-gold: 0 4px 20px rgba(220,38,38,0.2);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 14px;
             padding: 16px 24px;
             margin-bottom: 20px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: 0 2px 10px rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
@@ -251,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-decoration: none;
             transition: all 0.3s;
         }
-        .btn-back:hover { background: #d5cdbc; transform: translateY(-2px); }
+        .btn-back:hover { background: #fca5a5; transform: translateY(-2px); }
 
         .settings-grid {
             display: grid;
@@ -262,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .settings-card {
             background: var(--white);
             border-radius: 12px;
-            border: 1px solid rgba(201,146,10,0.08);
+            border: 1px solid rgba(220,38,38,0.08);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             padding: 18px 20px;
             position: relative;
@@ -271,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .settings-card:hover {
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            border-color: rgba(201,146,10,0.15);
+            border-color: rgba(220,38,38,0.15);
         }
         .settings-card::before {
             content: '';
@@ -322,7 +322,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .field-input:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,146,10,0.08);
+            box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
             background: var(--white);
         }
         .field-eye {
@@ -366,7 +366,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .btn-save:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(201,146,10,0.3);
+            box-shadow: 0 8px 25px rgba(220,38,38,0.3);
         }
         .btn-save:disabled {
             opacity: 0.5;
@@ -389,12 +389,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .alert-box ul { margin: 0; padding-left: 16px; }
 
         .setup-note {
-            background: #fff7e6;
+            background: #fff5f5;
             border: 1px dashed var(--gold);
             border-radius: 10px;
             padding: 10px 14px;
             font-size: 0.72rem;
-            color: #7a5a10;
+            color: #b91c1c;
             margin-bottom: 16px;
         }
         .setup-note code {

@@ -123,17 +123,17 @@ if (isset($_POST['update_product'])) {
 
     <style>
         :root {
-            --gold: #C9920A;
-            --gold-dark: #a87a08;
-            --gold-light: #e6c9a0;
-            --cream: #fef7ed;
-            --ivory: #faf3e8;
-            --mustard: #d4a373;
-            --charcoal: #1e1e1e;
-            --mid-gray: #4a3f37;
-            --light-gray: #e8ddd0;
+            --gold: #DC2626;
+            --gold-dark: #B91C1C;
+            --gold-light: #EF4444;
+            --cream: #FFF5F5;
+            --ivory: #FEE2E2;
+            --mustard: #F87171;
+            --charcoal: #111827;
+            --mid-gray: #4B5563;
+            --light-gray: #FECACA;
             --white: #ffffff;
-            --shadow-gold: 0 4px 20px rgba(201,146,10,0.15);
+            --shadow-gold: 0 4px 20px rgba(220,38,38,0.2);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.06);
         }
 
@@ -151,7 +151,7 @@ if (isset($_POST['update_product'])) {
             border-radius: 16px;
             padding: 16px 24px;
             margin-bottom: 24px;
-            border: 1px solid rgba(201,146,10,0.12);
+            border: 1px solid rgba(220,38,38,0.12);
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
@@ -191,13 +191,13 @@ if (isset($_POST['update_product'])) {
             color: #166534;
             font-weight: 500;
             font-size: 0.85rem;
-            border: 1px solid rgba(201,146,10,0.15);
+            border: 1px solid rgba(220,38,38,0.15);
         }
         .alert-custom i { color: var(--gold); margin-right: 10px; }
 
         .card-premium {
             background: var(--white);
-            border: 1px solid rgba(201,146,10,0.1);
+            border: 1px solid rgba(220,38,38,0.1);
             border-radius: 16px;
             box-shadow: var(--shadow-md);
             overflow: hidden;
@@ -206,7 +206,7 @@ if (isset($_POST['update_product'])) {
         .card-premium .card-head {
             padding: 14px 22px;
             background: linear-gradient(135deg, var(--cream), var(--ivory));
-            border-bottom: 2px solid rgba(201,146,10,0.08);
+            border-bottom: 2px solid rgba(220,38,38,0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -234,7 +234,7 @@ if (isset($_POST['update_product'])) {
             background: var(--gold-dark);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(201,146,10,0.3);
+            box-shadow: 0 6px 20px rgba(220,38,38,0.3);
         }
 
         .btn-outline-gold {
@@ -269,7 +269,7 @@ if (isset($_POST['update_product'])) {
         }
         .image-preview-container:hover {
             border-color: var(--gold);
-            background: rgba(201,146,10,0.05);
+            background: rgba(220,38,38,0.05);
         }
         .image-preview-container img {
             width: 100%;
@@ -311,7 +311,7 @@ if (isset($_POST['update_product'])) {
         }
         .form-control:focus, .form-select:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,146,10,0.1);
+            box-shadow: 0 0 0 3px rgba(220,38,38,0.1);
         }
         textarea.form-control {
             resize: vertical;
@@ -332,7 +332,7 @@ if (isset($_POST['update_product'])) {
             max-width: 100px;
             max-height: 100px;
             border-radius: 8px;
-            border: 2px solid rgba(201,146,10,0.15);
+            border: 2px solid rgba(220,38,38,0.15);
             margin-bottom: 8px;
         }
 

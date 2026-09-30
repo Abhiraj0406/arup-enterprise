@@ -144,7 +144,7 @@ $gallery_items = [
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    border: 1px solid rgba(201,146,10,0.15);
+    border: 1px solid rgba(239,68,68,0.15);
     transition: all var(--ease);
     display: flex;
     flex-direction: column;
@@ -208,7 +208,7 @@ $gallery_items = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid rgba(201,146,10,0.1);
+    border-top: 1px solid rgba(239,68,68,0.1);
     padding-top: 12px;
 }
 .gallery-card-footer a {

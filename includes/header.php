@@ -117,7 +117,7 @@ foreach ($pinned_categories as $pc) {
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="<?php echo htmlspecialchars($site_settings['meta_description'] ?? 'Arup Enterprise'); ?>"/>
-    <meta name="theme-color" content="#C9920A"/>
+    <meta name="theme-color" content="#DC2626"/>
     <title><?php echo isset($page_title) ? $page_title . ' | ' . htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise') : htmlspecialchars($site_settings['meta_title'] ?? 'Arup Enterprise'); ?></title>
 
     <link rel="icon" type="image/png" href="assets/images/logo.png">
@@ -143,17 +143,17 @@ foreach ($pinned_categories as $pc) {
     }
 
     :root {
-        --gold:        #C9920A;
-        --gold-dark:   #8B6508;
-        --gold-light:  #F0C040;
-        --gold-glow:   rgba(201,146,10,0.18);
-        --charcoal:    #1C1C1C;
-        --charcoal2:   #2a2a2a;
-        --mid:         #4A4A4A;
-        --lightgray:   #D5CDB8;
+        --gold:        #DC2626;
+        --gold-dark:   #B91C1C;
+        --gold-light:  #EF4444;
+        --gold-glow:   rgba(220,38,38,0.18);
+        --charcoal:    #111827;
+        --charcoal2:   #1F2937;
+        --mid:         #4B5563;
+        --lightgray:   #FECACA;
         --white:       #FFFFFF;
-        --cream:       #FAF6EE;
-        --ivory:       #F0E8D0;
+        --cream:       #FFF5F5;
+        --ivory:       #FEE2E2;
         --header-h:    76px;
         --topbar-h:    36px;
         --font-serif:  'Playfair Display', Georgia, serif;
@@ -161,7 +161,7 @@ foreach ($pinned_categories as $pc) {
         --ease:        0.3s cubic-bezier(0.4,0,0.2,1);
         --shadow-sm:   0 2px 12px rgba(0,0,0,0.07);
         --shadow-md:   0 6px 28px rgba(0,0,0,0.10);
-        --shadow-gold: 0 4px 20px rgba(201,146,10,0.28);
+        --shadow-gold: 0 4px 20px rgba(220,38,38,0.28);
     }
 
     /* =============================================
@@ -338,7 +338,7 @@ foreach ($pinned_categories as $pc) {
     }
     .db-logo:hover .db-logo-icon {
         transform: rotate(-6deg) scale(1.05);
-        box-shadow: 0 8px 28px rgba(201,146,10,0.42);
+        box-shadow: 0 8px 28px rgba(239,68,68,0.42);
     }
     .db-logo-icon svg { width: 28px; height: 28px; fill: #fff; }
 
@@ -411,7 +411,7 @@ foreach ($pinned_categories as $pc) {
         left: 50%;
         transform: translateX(-50%) translateY(-10px);
         background: var(--white);
-        border: 1px solid rgba(201,146,10,0.15);
+        border: 1px solid rgba(239,68,68,0.15);
         border-top: 3px solid var(--gold);
         border-radius: 14px;
         box-shadow: var(--shadow-md);
@@ -504,7 +504,7 @@ foreach ($pinned_categories as $pc) {
         display: inline-flex;
         align-items: center;
         gap: 7px;
-        border: 2px solid rgba(201,146,10,0.35);
+        border: 2px solid rgba(239,68,68,0.35);
         background: transparent;
         color: var(--charcoal);
         font-family: var(--font-sans);
@@ -544,7 +544,7 @@ foreach ($pinned_categories as $pc) {
     }
     .db-btn-quote:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(201,146,10,0.45);
+        box-shadow: 0 8px 28px rgba(239,68,68,0.45);
         color: #fff;
     }
 
@@ -667,7 +667,7 @@ foreach ($pinned_categories as $pc) {
         transition: all var(--ease);
         flex-shrink: 0;
     }
-    .db-mn-close:hover { background: rgba(201,146,10,0.25); color: var(--gold-light); }
+    .db-mn-close:hover { background: rgba(239,68,68,0.25); color: var(--gold-light); }
 
     .db-mn-body {
         flex: 1;
@@ -676,7 +676,7 @@ foreach ($pinned_categories as $pc) {
         overscroll-behavior: contain;
     }
     .db-mn-body::-webkit-scrollbar { width: 3px; }
-    .db-mn-body::-webkit-scrollbar-thumb { background: rgba(201,146,10,0.3); border-radius: 2px; }
+    .db-mn-body::-webkit-scrollbar-thumb { background: rgba(239,68,68,0.3); border-radius: 2px; }
 
     .db-mn-link {
         display: flex;
@@ -755,7 +755,7 @@ foreach ($pinned_categories as $pc) {
         transition: all var(--ease);
     }
     .db-mn-sub a i { color: var(--gold); width: 16px; font-size: 0.78rem; }
-    .db-mn-sub a:hover { color: var(--gold-dark); background: rgba(201,146,10,0.07); padding-left: 44px; }
+    .db-mn-sub a:hover { color: var(--gold-dark); background: rgba(239,68,68,0.07); padding-left: 44px; }
     .db-mn-sub a:last-child { border-bottom: none; }
 
     .db-mn-footer {
@@ -800,7 +800,7 @@ foreach ($pinned_categories as $pc) {
         transition: all var(--ease);
         box-shadow: var(--shadow-gold);
     }
-    .db-mn-btn-quote:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,146,10,0.45); }
+    .db-mn-btn-quote:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(239,68,68,0.45); }
     .db-mn-contact-row {
         display: flex;
         align-items: center;
@@ -1242,7 +1242,7 @@ foreach ($pinned_categories as $pc) {
 
         <!-- RIGHT ACTIONS -->
         <div class="db-header-actions">
-            <a href="products.php" title="Search Products" class="db-btn-quote" style="border-radius: 50%; padding: 12px 14px; background: #008B8B;">
+            <a href="products.php" title="Search Products" class="db-btn-quote" style="border-radius: 50%; padding: 12px 14px; background: #DC2626;">
                 <i class="fas fa-search" aria-hidden="true"></i>
             </a>
             <button class="db-hamburger" id="dbHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="dbMobileNav">
@@ -1258,7 +1258,7 @@ foreach ($pinned_categories as $pc) {
      ============================================================ -->
 <?php if (!empty($announcement_strips)): ?>
     <?php foreach ($announcement_strips as $strip): ?>
-    <div class="db-announcement-strip" id="announcementStrip" style="background:<?php echo $strip['bg_color'] ?? '#C9920A'; ?>;color:<?php echo $strip['text_color'] ?? '#FFFFFF'; ?>;">
+    <div class="db-announcement-strip" id="announcementStrip" style="background:<?php echo $strip['bg_color'] ?? '#DC2626'; ?>;color:<?php echo $strip['text_color'] ?? '#FFFFFF'; ?>;">
         <div class="db-announcement-inner">
             <div class="db-announcement-content">
                 <i class="fas <?php echo $strip['icon'] ?? 'fa-bullhorn'; ?>" aria-hidden="true"></i>
