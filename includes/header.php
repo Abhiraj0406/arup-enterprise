@@ -2,7 +2,7 @@
 // includes/header.php - Premium Frontend Header with Announcement Strip
 require_once __DIR__ . '/db.php';
 
-$current_page = basename($_SERVER['PHP_SELF']);
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
 $is_products_page = in_array($current_page, ['products', 'product-detail']);
 $is_home_page     = ($current_page === 'index');
 $is_about_page    = ($current_page === 'about');
@@ -1135,7 +1135,7 @@ foreach ($pinned_categories as $pc) {
     <div class="db-header-inner">
 
         <!-- LOGO -->
-        <a href="index" class="db-logo" aria-label="Arup Enterprise — Home">
+        <a href="<?php echo $base_url; ?>/" class="db-logo" aria-label="Arup Enterprise — Home">
             <?php if ($logo_path): ?>
                 <div class="db-logo-img-wrap">
                     <img src="<?php echo htmlspecialchars($logo_path); ?>"
@@ -1149,8 +1149,8 @@ foreach ($pinned_categories as $pc) {
                     </svg>
                 </div>
                 <div class="db-logo-text-wrap">
-                    <span class="db-logo-name">Dip<em>Ban</em></span>
-                    <span class="db-logo-tag">Technical Services</span>
+                    <span class="db-logo-name">Arup<em>Enterprise</em></span>
+                    <span class="db-logo-tag">Magnetic Separators</span>
                 </div>
             <?php endif; ?>
         </a>
@@ -1159,7 +1159,7 @@ foreach ($pinned_categories as $pc) {
         <nav class="db-nav" role="navigation" aria-label="Main navigation">
             <!-- Home -->
             <div class="db-nav-item">
-                <a href="<?php echo $base_url; ?>/index.php" class="db-nav-link <?php echo $is_home_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/" class="db-nav-link <?php echo $is_home_page?'active':''; ?>">
                     Home
                 </a>
             </div>
@@ -1186,7 +1186,7 @@ foreach ($pinned_categories as $pc) {
 
             <!-- Our Products -->
             <div class="db-nav-item">
-                <a href="<?php echo $base_url; ?>/products.php" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/products" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
                     Our Products
                 </a>
             </div>
@@ -1200,14 +1200,14 @@ foreach ($pinned_categories as $pc) {
 
             <!-- About Us -->
             <div class="db-nav-item">
-                <a href="<?php echo $base_url; ?>/about.php" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/about" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
                     About Us
                 </a>
             </div>
 
             <!-- Contact Us -->
             <div class="db-nav-item">
-                <a href="<?php echo $base_url; ?>/contact.php" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/contact" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
                     Contact Us
                 </a>
             </div>
@@ -1277,7 +1277,7 @@ foreach ($pinned_categories as $pc) {
 
     <div class="db-mn-body">
 
-        <a href="<?php echo $base_url; ?>/index.php" class="db-mn-link <?php echo $is_home_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/" class="db-mn-link <?php echo $is_home_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Home
             </span>
@@ -1304,7 +1304,7 @@ foreach ($pinned_categories as $pc) {
             </a>
         </div>
 
-        <a href="<?php echo $base_url; ?>/products.php" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/products" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Our Products
             </span>
@@ -1316,13 +1316,13 @@ foreach ($pinned_categories as $pc) {
             </span>
         </a>
 
-        <a href="<?php echo $base_url; ?>/about.php" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/about" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 About Us
             </span>
         </a>
 
-        <a href="<?php echo $base_url; ?>/contact.php" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/contact" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Contact Us
             </span>

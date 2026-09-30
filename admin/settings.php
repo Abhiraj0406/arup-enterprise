@@ -13,7 +13,7 @@ date_default_timezone_set('Asia/Kolkata');
 try {
     $conn->query("CREATE TABLE IF NOT EXISTS site_settings (
         id INT PRIMARY KEY,
-        company_name VARCHAR(150) NOT NULL DEFAULT 'DipBan Technical Services',
+        company_name VARCHAR(150) NOT NULL DEFAULT 'Arup Enterprise',
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )");
 } catch (mysqli_sql_exception $e) {
@@ -45,7 +45,7 @@ if ($admin_id) {
 }
 
 // ---- Load company settings (single row, id = 1) ----
-$company_name = "DipBan Technical Services";
+$company_name = "Arup Enterprise";
 $settings_row = null;
 try {
     $settings_check = $conn->query("SELECT * FROM site_settings WHERE id = 1 LIMIT 1");

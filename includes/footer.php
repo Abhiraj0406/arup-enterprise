@@ -85,11 +85,11 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
             <div class="footer-col">
                 <h4 class="footer-heading">Quick Links</h4>
                 <ul class="footer-links">
-                    <li><a href="<?php echo $base_url; ?>/index.php"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="<?php echo $base_url; ?>/about.php"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="<?php echo $base_url; ?>/products.php"><i class="fas fa-chevron-right"></i> All Products</a></li>
-                    <li><a href="<?php echo $base_url; ?>/contact.php"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
-                    <li><a href="<?php echo $base_url; ?>/contact.php#quote"><i class="fas fa-chevron-right"></i> Get a Quote</a></li>
+                    <li><a href="<?php echo $base_url; ?>/"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="<?php echo $base_url; ?>/about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="<?php echo $base_url; ?>/products"><i class="fas fa-chevron-right"></i> All Products</a></li>
+                    <li><a href="<?php echo $base_url; ?>/contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="<?php echo $base_url; ?>/contact#quote"><i class="fas fa-chevron-right"></i> Get a Quote</a></li>
                 </ul>
             </div>
 
@@ -127,7 +127,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     foreach ($footer_categories as $cat): 
                     ?>
                     <li>
-                        <a href="<?php echo $base_url; ?>/products.php?category=<?php echo urlencode($cat['name']); ?>">
+                        <a href="<?php echo $base_url; ?>/products?category=<?php echo urlencode($cat['name']); ?>">
                             <i class="fas <?php echo $cat['icon'] ?? 'fa-tag'; ?>"></i> 
                             <?php echo htmlspecialchars($cat['name']); ?>
                         </a>

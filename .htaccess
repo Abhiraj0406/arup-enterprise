@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the requested URL is not a directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # And if the requested URL plus .php is a valid file
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    # Rewrite the URL to append .php internally
+    RewriteRule ^(.*)$ $1.php [L]
+</IfModule>

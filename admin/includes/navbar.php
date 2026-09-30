@@ -303,8 +303,8 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     
     <div class="sidebar-header">
         <div class="sidebar-logo">
-            <img src="../../assets/images/logo.png" alt="DipBan Technical Services" onerror="this.style.display='none'">
-            <span>Dip<span class="gold">Ban</span></span>
+            <img src="../assets/images/logo.png" alt="Arup Enterprise" onerror="this.style.display='none'">
+            <span>Arup<span class="gold"> Enterprise</span></span>
         </div>
         <div class="admin-info">
             <span class="admin-name">

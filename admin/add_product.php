@@ -1,5 +1,5 @@
 <?php
-// admin/add_product.php — DipBan Admin Panel
+// admin/add_product.php — Arup Enterprise Admin Panel
 session_start();
 if (empty($_SESSION['admin_logged_in'])) {
     header("Location: login.php");
@@ -110,7 +110,7 @@ include 'includes/navbar.php';
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <title><?php echo $page_title; ?> | DipBan Admin</title>
+    <title><?php echo $page_title; ?> | Arup Enterprise Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
