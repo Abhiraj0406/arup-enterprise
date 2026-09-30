@@ -1,5 +1,5 @@
 <?php
-// footer.php — DipBan Technical Services
+// footer.php — Arup Enterprise
 // PDF filenames (place your PDFs in /uploads/pdfs/ folder)
 $pdf_dipban   = 'uploads/pdfs/dipban-technical-products.pdf';
 $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
@@ -26,7 +26,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                 <a href="assets/folder/Dipban-Technical-Services-Brochure.pdf" download class="pdf-btn">
                     <i class="fas fa-download"></i>
                     <div>
-                        <span class="pdf-btn-title">DipBan Technical</span>
+                        <span class="pdf-btn-title">Arup Enterprise Technical</span>
                         <span class="pdf-btn-sub">Product Catalogue PDF</span>
                     </div>
                 </a>
@@ -53,7 +53,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                         $logo_path = 'assets/images/logo.png';
                         if (file_exists(__DIR__ . '/../' . $logo_path)): 
                         ?>
-                            <img src="<?php echo $logo_path; ?>" alt="DipBan Technical Services" style="width:100%;height:100%;object-fit:contain;background:#ffffff;border-radius:8px;padding:4px;">
+                            <img src="<?php echo $logo_path; ?>" alt="Arup Enterprise" style="width:100%;height:100%;object-fit:contain;background:#ffffff;border-radius:8px;padding:4px;">
                         <?php else: ?>
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 2a2 2 0 0 1 2 2v2.17A10 10 0 0 1 26 16a10 10 0 0 1-10 10A10 10 0 0 1 6 16a10 10 0 0 1 8-9.83V4a2 2 0 0 1 2-2zm0 7a7 7 0 1 0 0 14A7 7 0 0 0 16 9zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>
@@ -72,12 +72,12 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                 <div class="footer-socials">
                     <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://www.youtube.com/@dipbantechnicalservices" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://wa.me/919903126940" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/918013635806" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <div class="footer-badges">
                     <div class="badge"><i class="fas fa-certificate"></i><span>ISO Certified</span></div>
-                    <div class="badge"><i class="fas fa-shield-alt"></i><span>Trusted Since 2022</span></div>
+                    <div class="badge"><i class="fas fa-shield-alt"></i><span>Trusted 38+ Years</span></div>
                 </div>
             </div>
 
@@ -151,21 +151,21 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     <li>
                         <span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
                         <span>
-                            <a href="tel:+919903126940">+91 9903126940</a><br>
-                            <a href="tel:33-45081559">+91 33-45081559</a>
+                            <a href="tel:+918013635806">+91 8013635806</a><br>
+                            <a href="tel:8839019950">+91 8839019950</a>
                         </span>
                     </li>
                     <li>
                         <span class="contact-icon"><i class="fas fa-envelope"></i></span>
                         <span>
-                            <a href="mailto:sudip@dipbantechnicalservices.in">sudip@dipbantechnicalservices.in</a><br>
+                            <a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a><br>
                             <a href="mailto:banerjee86@gmail.com">banerjee86@gmail.com</a>
                         </span>
                     </li>
                     <li>
                         <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
                         <span>
-                            <a href="https://wa.me/919903126940" target="_blank">WhatsApp: +91 9903126940</a>
+                            <a href="https://wa.me/918013635806" target="_blank">WhatsApp: +91 8013635806</a>
                         </span>
                     </li>
                 </ul>
@@ -238,7 +238,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
     <div class="footer-bottom">
         <div class="footer-bottom-inner">
             <p class="footer-copy">
-                &copy; <?php echo date('Y'); ?> DipBan Technical Services. All rights reserved.
+                &copy; <?php echo date('Y'); ?> Arup Enterprise. All rights reserved.
             </p>
             <p class="footer-credit">
                 Powered by <a href="https://ai-digitalsolution.com/">AI Digital Innovation</a> &nbsp;|&nbsp; Designed with <i class="fas fa-heart" style="color:var(--gold)"></i>

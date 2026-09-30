@@ -1,5 +1,5 @@
 <?php
-// product-detail.php — DipBan Technical Services
+// product-detail.php — Arup Enterprise
 // Single Product Detail Page
 // ============================================================
 
@@ -88,8 +88,8 @@ if (isset($product['in_stock'])) {
 }
 
 // ── WhatsApp Message ──────────────────────────────────────────
-$whatsapp_msg = "Hi DipBan Technical Services,%0A%0AI am interested in your product:%0A%0A📌 *" . urlencode($product['name']) . "*%0A📂 Category: " . urlencode($product['category']) . "%0A%0ACould you please share more details, price, and availability?%0A%0AThank you!";
-$whatsapp_url = "https://wa.me/919903126940?text=" . $whatsapp_msg;
+$whatsapp_msg = "Hi Arup Enterprise,%0A%0AI am interested in your product:%0A%0A📌 *" . urlencode($product['name']) . "*%0A📂 Category: " . urlencode($product['category']) . "%0A%0ACould you please share more details, price, and availability?%0A%0AThank you!";
+$whatsapp_url = "https://wa.me/918013635806?text=" . $whatsapp_msg;
 ?>
 
 <!-- ============================================================
@@ -152,7 +152,7 @@ $whatsapp_url = "https://wa.me/919903126940?text=" . $whatsapp_msg;
                     <a href="<?php echo $whatsapp_url; ?>" target="_blank" class="pd-btn-whatsapp">
                         <span class="pd-wa-icon-wrap"><i class="fab fa-whatsapp"></i></span> Enquire on WhatsApp
                     </a>
-                    <a href="tel:+919903126940" class="pd-btn-call">
+                    <a href="tel:+918013635806" class="pd-btn-call">
                         <i class="fas fa-phone-alt"></i> Call Now
                     </a>
                 </div>
@@ -252,7 +252,7 @@ $whatsapp_url = "https://wa.me/919903126940?text=" . $whatsapp_msg;
                         <i class="fas fa-check-circle"></i> Energy-efficient operation for reduced costs
                     </div>
                     <div class="pd-qp-item">
-                        <i class="fas fa-check-circle"></i> Backed by DipBan 24/7 after-sales service
+                        <i class="fas fa-check-circle"></i> Backed by Arup Enterprise 24/7 after-sales service
                     </div>
                     <div class="pd-qp-item">
                         <i class="fas fa-check-circle"></i> Genuine spare parts always available

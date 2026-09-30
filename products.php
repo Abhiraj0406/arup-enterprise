@@ -533,7 +533,7 @@ $total_count = count($products);
                             <a href="product-detail.php?id=<?php echo (int)($p['id'] ?? 0); ?>" class="btn-detail">
                                 View Details <i class="fas fa-arrow-right"></i>
                             </a>
-                            <a href="https://wa.me/919903126940?text=Hi%2C%20I%20need%20a%20quote%20for%20<?php echo urlencode($p['name'] ?? 'this product'); ?>" target="_blank" class="btn-quote-small" title="Request Quote">
+                            <a href="https://wa.me/918013635806?text=Hi%2C%20I%20need%20a%20quote%20for%20<?php echo urlencode($p['name'] ?? 'this product'); ?>" target="_blank" class="btn-quote-small" title="Request Quote">
                                 <i class="fab fa-whatsapp"></i> <span>Quote</span>
                             </a>
                         </div>

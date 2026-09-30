@@ -124,7 +124,7 @@ include 'includes/header.php';
     <h1 class="ab-hero-title">
       <span class="ab-title-line1">Engineering</span>
       <span class="ab-title-line2">Excellence</span>
-      <span class="ab-title-line3">Since 2022</span>
+      <span class="ab-title-line3">38+ Years</span>
     </h1>
 
     <p class="ab-hero-sub">Trusted manufacturer, supplier &amp; service provider of industrial machinery for woodworking and sheet metal industries across India.</p>
@@ -278,9 +278,9 @@ include 'includes/header.php';
       <div class="ab-who-text">
         <span class="ab-eyebrow">Our Story</span>
         <h2 class="ab-h2">Powering Industries with <em>Precision &amp; Innovation</em></h2>
-        <p>DipBan Technical Services was established in 2022 with a clear vision: to deliver world-class industrial machinery that gives businesses a genuine competitive edge. We entered the market as a wholesaler and trader of woodworking panel processing machinery and hydraulic machines — and quickly earned a reputation built on performance, reliability, and true after-sales partnership.</p>
+        <p>Arup Enterprise was established in 2022 with a clear vision: to deliver world-class industrial machinery that gives businesses a genuine competitive edge. We entered the market as a wholesaler and trader of woodworking panel processing machinery and hydraulic machines — and quickly earned a reputation built on performance, reliability, and true after-sales partnership.</p>
         <p>Headquartered in Liluah, Howrah, we serve clients across West Bengal, Odhisha, Assam, Jharkhand, Northeast and beyond, offering a comprehensive range of machines alongside factory-trained service engineers and genuine spare parts always in stock.</p>
-        <p>Our philosophy is straightforward — a machine is only as valuable as the support behind it. That's why every DipBan client benefits from 24×7 technical assistance, rapid response deployment, and a commitment that doesn't end at delivery.</p>
+        <p>Our philosophy is straightforward — a machine is only as valuable as the support behind it. That's why every Arup Enterprise client benefits from 24×7 technical assistance, rapid response deployment, and a commitment that doesn't end at delivery.</p>
 
         <div class="ab-who-tags">
           <span><i class="fas fa-map-marker-alt"></i>Howrah, West Bengal</span>
@@ -359,7 +359,7 @@ include 'includes/header.php';
         <div class="ab-tl-node"></div>
         <div class="ab-tl-card">
           <h4>Founded</h4>
-          <p>DipBan Technical Services established in Howrah as a wholesale trader of woodworking and hydraulic machinery — setting the foundation for a full-service industrial machinery company.</p>
+          <p>Arup Enterprise established in Howrah as a wholesale trader of woodworking and hydraulic machinery — setting the foundation for a full-service industrial machinery company.</p>
         </div>
       </div>
 
@@ -479,7 +479,7 @@ include 'includes/header.php';
         <a href="contact.php#quote" class="ab-btn-primary">
           <i class="fas fa-paper-plane"></i> Get a Free Quote
         </a>
-        <a href="tel:+919903126940" class="ab-btn-secondary">
+        <a href="tel:+918013635806" class="ab-btn-secondary">
           <i class="fas fa-phone-alt"></i> Call Us Now
         </a>
       </div>

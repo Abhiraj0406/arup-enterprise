@@ -119,9 +119,9 @@ foreach ($pinned_categories as $pc) {
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="DipBan Technical Services – Premium Industrial Machinery for Woodworking & Sheet Metal. Manufacturer, Supplier & Service Provider since 2022."/>
+    <meta name="description" content="Arup Enterprise – Premium Industrial Machinery for Industrial Magnetic Separation. Manufacturer, Supplier & Service Provider since 2022."/>
     <meta name="theme-color" content="#C9920A"/>
-    <title><?php echo isset($page_title) ? $page_title . ' | DipBan Technical Services' : 'DipBan Technical Services – Industrial Machinery'; ?></title>
+    <title><?php echo isset($page_title) ? $page_title . ' | Arup Enterprise' : 'Arup Enterprise – Industrial Machinery'; ?></title>
 
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1112,17 +1112,18 @@ foreach ($pinned_categories as $pc) {
 <div class="db-topbar">
     <div class="db-topbar-inner">
         <div class="db-topbar-left">
-            <a href="tel:+919903126940"><i class="fas fa-phone-alt"></i> +91 9903126940</a>
+            <a href="tel:+918013635806"><i class="fas fa-phone-alt"></i> +91 8013635806</a>
             <div class="db-topbar-sep"></div>
-            <a href="tel:33-45081559"><i class="fas fa-phone"></i> +91 33-45081559</a>
+            <a href="tel:8839019950"><i class="fas fa-phone"></i> +91 8839019950</a>
             <div class="db-topbar-sep"></div>
-            <a href="mailto:sudip@dipbantechnicalservices.in"><i class="fas fa-envelope"></i> sudip@dipbantechnicalservices.in</a>
+            <a href="mailto:enterprisearup@gmail.com"><i class="fas fa-envelope"></i> enterprisearup@gmail.com</a>
         </div>
         <div class="db-topbar-right">
-            
-            <a href="https://wa.me/919903126940" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <div class="db-topbar-sep"></div>
-            <a href="https://www.youtube.com/@dipbantechnicalservices" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <div class="db-topbar-sep"></div>
+            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
     </div>
 </div>
@@ -1132,11 +1133,11 @@ foreach ($pinned_categories as $pc) {
     <div class="db-header-inner">
 
         <!-- LOGO -->
-        <a href="index" class="db-logo" aria-label="DipBan Technical Services — Home">
+        <a href="index" class="db-logo" aria-label="Arup Enterprise — Home">
             <?php if ($logo_path): ?>
                 <div class="db-logo-img-wrap">
                     <img src="<?php echo htmlspecialchars($logo_path); ?>"
-                         alt="DipBan Technical Services"
+                         alt="Arup Enterprise"
                          width="220" height="58">
                 </div>
             <?php else: ?>
@@ -1152,28 +1153,19 @@ foreach ($pinned_categories as $pc) {
             <?php endif; ?>
         </a>
 
-        <!-- DESKTOP NAV with PINNED CATEGORIES -->
+        <!-- DESKTOP NAV -->
         <nav class="db-nav" role="navigation" aria-label="Main navigation">
             <!-- Home -->
             <div class="db-nav-item">
                 <a href="index" class="db-nav-link <?php echo $is_home_page?'active':''; ?>">
-                    <i class="fas fa-home" aria-hidden="true"></i> Home
-                </a>
-            </div>
-            
-            <!-- About -->
-            <div class="db-nav-item">
-                <a href="about" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
-                    About Us
+                    Home
                 </a>
             </div>
 
-          
-
-            <!-- Products & Services Dropdown -->
+            <!-- Application Dropdown -->
             <div class="db-nav-item">
-                <a href="products" class="db-nav-link <?php echo $is_products_page && !$is_pinned_category_page ? 'active' : ''; ?>" aria-haspopup="true">
-                    Products &amp; Services <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
+                <a href="#" class="db-nav-link" aria-haspopup="true">
+                    Application <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
                 </a>
                 <div class="db-dropdown" role="menu">
                     <div class="db-dropdown-head">Machine Categories</div>
@@ -1190,19 +1182,28 @@ foreach ($pinned_categories as $pc) {
                 </div>
             </div>
 
-            <!-- ===== PINNED CATEGORIES (Direct Main Menu Items) ===== -->
-            <?php foreach ($pinned_categories as $pc): ?>
+            <!-- Our Products -->
             <div class="db-nav-item">
-                <a href="products?category=<?php echo urlencode($pc['name']); ?>" 
-                   class="db-nav-link <?php echo (strtolower($current_category) == strtolower($pc['name'])) ? 'active' : ''; ?>">
-                    <i class="fas <?php echo !empty($pc['icon']) ? htmlspecialchars($pc['icon']) : 'fa-tag'; ?>" aria-hidden="true"></i>
-                    <?php echo htmlspecialchars($pc['name']); ?>
-                    <span class="pin-indicator"><i class="fas fa-thumbtack"></i></span>
+                <a href="products" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
+                    Our Products
                 </a>
             </div>
-            <?php endforeach; ?>
 
-            <!-- Contact -->
+            <!-- Gallery -->
+            <div class="db-nav-item">
+                <a href="#" class="db-nav-link">
+                    Gallery
+                </a>
+            </div>
+
+            <!-- About Us -->
+            <div class="db-nav-item">
+                <a href="about" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
+                    About Us
+                </a>
+            </div>
+
+            <!-- Contact Us -->
             <div class="db-nav-item">
                 <a href="contact" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
                     Contact Us
@@ -1212,11 +1213,8 @@ foreach ($pinned_categories as $pc) {
 
         <!-- RIGHT ACTIONS -->
         <div class="db-header-actions">
-            <a href="tel:+919903126940" class="db-btn-call" aria-label="Call us">
-                <i class="fas fa-phone-alt" aria-hidden="true"></i> +91 99031 26940
-            </a>
-            <a href="contact" class="db-btn-quote">
-                <i class="fas fa-paper-plane" aria-hidden="true"></i> Get a Quote
+            <a href="#" class="db-btn-quote" style="border-radius: 50%; padding: 12px 14px; background: #008B8B;">
+                <i class="fas fa-search" aria-hidden="true"></i>
             </a>
             <button class="db-hamburger" id="dbHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="dbMobileNav">
                 <span></span><span></span><span></span>
@@ -1258,10 +1256,10 @@ foreach ($pinned_categories as $pc) {
 <nav class="db-mobile-nav" id="dbMobileNav" aria-label="Mobile navigation" aria-hidden="true">
 
     <div class="db-mn-head">
-        <a href="index" class="db-mn-logo" aria-label="DipBan — Home">
+        <a href="index" class="db-mn-logo" aria-label="Arup Enterprise — Home">
             <?php if ($logo_path): ?>
                 <img src="<?php echo htmlspecialchars($logo_path); ?>"
-                     alt="DipBan Technical Services"
+                     alt="Arup Enterprise"
                      class="db-mn-logo-img">
             <?php else: ?>
                 <div>
@@ -1279,25 +1277,16 @@ foreach ($pinned_categories as $pc) {
 
         <a href="index" class="db-mn-link <?php echo $is_home_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
-                <span class="db-mn-icon"><i class="fas fa-home"></i></span>
                 Home
-            </span>
-        </a>
-
-        <a href="about" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
-            <span class="db-mn-link-left">
-                <span class="db-mn-icon"><i class="fas fa-info-circle"></i></span>
-                About Us
             </span>
         </a>
 
      
 
-        <!-- Products accordion -->
+        <!-- Application accordion -->
         <button class="db-mn-link db-mn-product-toggle" id="dbMnProductToggle" aria-expanded="false">
             <span class="db-mn-link-left">
-                <span class="db-mn-icon"><i class="fas fa-cogs"></i></span>
-                Products &amp; Services
+                Application
             </span>
             <i class="fas fa-chevron-down db-mn-chev" aria-hidden="true"></i>
         </button>
@@ -1309,23 +1298,30 @@ foreach ($pinned_categories as $pc) {
             </a>
             <?php endforeach; ?>
             <a href="products" role="menuitem">
-                <i class="fas fa-th-large" aria-hidden="true"></i> All Products
+                All Applications
             </a>
         </div>
-   <!-- PINNED CATEGORIES in Mobile Menu -->
-        <?php foreach ($pinned_categories as $pc): ?>
-        <a href="products?category=<?php echo urlencode($pc['name']); ?>" 
-           class="db-mn-link <?php echo (strtolower($current_category) == strtolower($pc['name'])) ? 'mn-active' : ''; ?>">
+
+        <a href="products" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
-                <span class="db-mn-icon"><i class="fas <?php echo !empty($pc['icon']) ? htmlspecialchars($pc['icon']) : 'fa-tag'; ?>"></i></span>
-                <?php echo htmlspecialchars($pc['name']); ?> <small style="color:var(--gold);font-size:0.6rem;"><i class="fas fa-thumbtack"></i></small>
+                Our Products
             </span>
         </a>
-        <?php endforeach; ?>
+
+        <a href="#" class="db-mn-link">
+            <span class="db-mn-link-left">
+                Gallery
+            </span>
+        </a>
+
+        <a href="about" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
+            <span class="db-mn-link-left">
+                About Us
+            </span>
+        </a>
 
         <a href="contact" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
-                <span class="db-mn-icon"><i class="fas fa-envelope"></i></span>
                 Contact Us
             </span>
         </a>
@@ -1333,7 +1329,7 @@ foreach ($pinned_categories as $pc) {
     </div>
 
     <div class="db-mn-footer">
-        <a href="https://wa.me/919903126940?text=Hi%2C+I+need+a+quote+for+machinery."
+        <a href="https://wa.me/918013635806?text=Hi%2C+I+need+a+quote+for+machinery."
            target="_blank" rel="noopener" class="db-mn-btn-wa">
             <i class="fab fa-whatsapp"></i> Chat on WhatsApp
         </a>
@@ -1341,7 +1337,7 @@ foreach ($pinned_categories as $pc) {
             <i class="fas fa-paper-plane"></i> Get a Free Quote
         </a>
         <div class="db-mn-contact-row">
-            <a href="tel:+919903126940"><i class="fas fa-phone-alt"></i> +91 9903126940</a>
+            <a href="tel:+918013635806"><i class="fas fa-phone-alt"></i> +91 8013635806</a>
             <span class="sep">·</span>
             <a href="mailto:sudip@dipbantechnicalsolution.in"><i class="fas fa-envelope"></i> Email</a>
         </div>

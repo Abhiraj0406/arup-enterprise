@@ -69,8 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->Port       = 587;
 
                         // Recipients
-                        $mail->setFrom('noreply@dipbantechnicalservices.in', 'DipBan Technical Services');
-                        $mail->addAddress('sudip@dipbantechnicalservices.in');  // Main email
+                        $mail->setFrom('noreply@arup-enterprise.com', 'Arup Enterprise');
+                        $mail->addAddress('enterprisearup@gmail.com');  // Main email
                       
 
                         // Reply-to
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid rgba(201,146,10,0.25);max-width:600px;">
                                             <tr>
                                                 <td style="background:#1a1410;padding:24px 32px;border-bottom:3px solid #C9920A;">
-                                                    <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">DipBan Technical Services</span>
+                                                    <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">Arup Enterprise</span>
                                                     <h1 style="color:#FFFFFF;font-size:20px;margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;">New Quote Enquiry</h1>
                                                 </td>
                                             </tr>
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <tr>
                                                 <td style="background:#FAF6EE;padding:16px 32px;border-top:1px solid #f0e6d2;">
                                                     <p style="margin:0;color:#999999;font-size:11px;line-height:1.6;">
-                                                        This enquiry was also saved to the admin dashboard. Sent automatically from the DipBan Technical Services website.
+                                                        This enquiry was also saved to the admin dashboard. Sent automatically from the Arup Enterprise website.
                                                     </p>
                                                 </td>
                                             </tr>
@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $_SESSION['quote_error'] = !empty($errors)
             ? implode(", ", $errors)
-            : "Database connection error. Please call us directly at +91 9903126940.";
+            : "Database connection error. Please call us directly at +91 8013635806.";
         ob_end_clean();
         header("Location: index.php#contact-form");
         exit();
@@ -292,23 +292,23 @@ if (empty($industry_categories)) {
 // STATIC DATA
 // ============================================================
 $stats = [
-    ['value'=>'50+', 'label'=>'Machinery Models',  'icon'=>'fa-cog'],
-    ['value'=>'200+','label'=>'Installations Done', 'icon'=>'fa-tools'],
-    ['value'=>'15+', 'label'=>'Service Engineers',  'icon'=>'fa-solid fa-users'],
-    ['value'=>'01',   'label'=>'Pan India',    'icon'=>'fa-map-marker-alt'],
+    ['value'=>'100%',  'label'=>'Satisfied Clients',       'icon'=>'fa-users'],
+    ['value'=>'7,000+','label'=>'Custom Solutions Delivered','icon'=>'fa-car'],
+    ['value'=>'28k+',  'label'=>'Products Delivered',       'icon'=>'fa-project-diagram'],
+    ['value'=>'38+',   'label'=>'Years Experience',         'icon'=>'fa-award'],
 ];
 $kpis = [
-    ['icon'=>'fa-headset',        'title'=>'24/7 Support',     'desc'=>'Round-the-clock customer service. Our engineers stand by whenever you need them.'],
-    ['icon'=>'fa-bolt',           'title'=>'Quick Response',   'desc'=>'Expert teams deployed rapidly. Minimal downtime is our promise to every client.'],
-    ['icon'=>'fa-boxes',          'title'=>'Spares Ready',     'desc'=>'Critical spare parts always in stock so your production line never stops.'],
-    ['icon'=>'fa-star',           'title'=>'Wide Range',       'desc'=>'Comprehensive after-sales support across all machinery categories we supply.'],
-    ['icon'=>'fa-graduation-cap', 'title'=>'Trained Engineers','desc'=>'Every field engineer is factory-trained and certified on our full product portfolio.'],
+    ['icon'=>'fa-magnet',         'title'=>'High-Efficiency Magnets',  'desc'=>'Our magnetic separators deliver superior separation efficiency, removing ferrous contaminants with precision across all material types.'],
+    ['icon'=>'fa-industry',       'title'=>'Custom Fabrication',       'desc'=>'Every unit is engineered to your exact specifications — size, capacity, material type, and installation environment.'],
+    ['icon'=>'fa-shield-alt',     'title'=>'ISO 9001:2015 Certified',  'desc'=>'Certified quality management ensures every product meets the highest international manufacturing and safety standards.'],
+    ['icon'=>'fa-tools',          'title'=>'After-Sales Support',      'desc'=>'Comprehensive AMC plans, genuine spare parts, and trained service engineers available pan-India.'],
+    ['icon'=>'fa-graduation-cap', 'title'=>'38+ Years Expertise',     'desc'=>'Decades of experience in magnetic separation technology — trusted by industries across minerals, chemicals, food, and recycling.'],
 ];
 $why = [
-    ['icon'=>'fa-lightbulb','title'=>'Innovation',   'desc'=>'We continuously push technological limits — exploring new frontiers in industrial machinery design and automation.'],
-    ['icon'=>'fa-gem',      'title'=>'Quality',      'desc'=>'Machines engineered to the highest standards. Unrivaled durability and performance built into every component.'],
-    ['icon'=>'fa-handshake','title'=>'Satisfaction', 'desc'=>'Understanding your unique needs is our priority. Tailored solutions and exceptional service at every turn.'],
-    ['icon'=>'fa-leaf',     'title'=>'Sustainability','desc'=>'Energy-efficient, eco-friendly designs that reduce waste and minimize environmental impact while maximizing output.'],
+    ['icon'=>'fa-magnet',    'title'=>'Magnetic Excellence', 'desc'=>'Specialising exclusively in magnetic separation technology — we bring unmatched depth of knowledge to every product we manufacture.'],
+    ['icon'=>'fa-gem',       'title'=>'Uncompromised Quality','desc'=>'Every separator is built with premium-grade materials, precision-engineered to deliver consistent performance in the harshest environments.'],
+    ['icon'=>'fa-handshake', 'title'=>'Client-First Approach','desc'=>'We partner with our clients — understanding their process, recommending the right solution, and standing by them long after installation.'],
+    ['icon'=>'fa-leaf',      'title'=>'Eco-Efficient Design', 'desc'=>'Our separators maximise recovery while minimising energy consumption — helping you meet sustainability goals without sacrificing performance.'],
 ];
 $process_steps = [
     ['step'=>'01','icon'=>'fa-comments',        'title'=>'Consult',  'desc'=>'Tell us your production volume, floor size and budget — we recommend the right machine class.'],
@@ -317,19 +317,19 @@ $process_steps = [
     ['step'=>'04','icon'=>'fa-life-ring',       'title'=>'Support',  'desc'=>'24/7 helpline, genuine spares and scheduled maintenance keep you running for years.'],
 ];
 $faqs = [
-    ['q'=>'Do you provide on-site installation and training?',  'a'=>'Yes. Every machine purchase includes on-site commissioning and hands-on operator training by our factory-trained engineers.'],
-    ['q'=>'What is your typical delivery timeline?',            'a'=>'Standard machines ship within 7–15 working days; custom configurations take 3–5 weeks depending on specification.'],
-    ['q'=>'Do you stock spare parts for older machine models?', 'a'=>'Yes, genuine spares are kept in stock across our service centers, including for legacy models we no longer manufacture new.'],
-    ['q'=>'Can I get a demo before purchasing?',                'a'=>'Absolutely — book a factory demo and our team will walk you through live machine operation before you decide.'],
-    ['q'=>'What warranty do your machines carry?',              'a'=>'All machinery ships with a standard 12-month manufacturer warranty, extendable through our AMC service plans.'],
+    ['q'=>'What types of magnetic separators does Arup Enterprise manufacture?', 'a'=>'We manufacture Permanent Drum Type Magnetic Separators, Suspended Electromagnets, Hopper Magnets, Magnet Roller Separators, Magnetic Pulleys, Wet Drum Separators, and more — catering to minerals, chemicals, food, and recycling industries.'],
+    ['q'=>'Do you provide custom-built magnetic separators?',                    'a'=>'Yes. We fabricate separators to your exact specifications including drum diameter, belt width, magnetic intensity, and housing material — for both standard and special applications.'],
+    ['q'=>'What is your typical delivery timeline?',                            'a'=>'Standard models ship within 7–15 working days. Custom configurations typically take 3–5 weeks depending on the complexity and material availability.'],
+    ['q'=>'Do you offer installation and commissioning support?',               'a'=>'Absolutely. Our trained engineers handle on-site installation, commissioning, and operator training to ensure your separator is running at peak efficiency from day one.'],
+    ['q'=>'What warranty do your magnetic separators carry?',                   'a'=>'All products ship with a standard 12-month manufacturer warranty. Extended AMC (Annual Maintenance Contract) plans are also available for long-term peace of mind.'],
 ];
 $testimonials = [
-    ['initials'=>'RK','name'=>'Rajan Kumar',    'role'=>'Furniture Manufacturer, Howrah', 'stars'=>5,  'text'=>"DipBan's Hi-90 R router transformed our production line. The precision and speed exceeded every expectation. Installation was fast and the after-sales team is always available."],
-    ['initials'=>'SM','name'=>'Sanjay Mehta',   'role'=>'Sheet Metal Workshop, Kolkata',  'stars'=>5,  'text'=>"Reliable machines, quick spare parts delivery, and an engineering team that truly understands industrial requirements. DipBan is our go-to machinery partner for new projects."],
-    ['initials'=>'AP','name'=>'Arvind Pandey',  'role'=>'Auto Component Factory, Durgapur','stars'=>5, 'text'=>"We've used their hydraulic press for over a year with zero downtime. The 24/7 support line gave us confidence from day one. Highly recommend DipBan."],
-    ['initials'=>'MD','name'=>'Manoj Das',      'role'=>'Plywood Industries, Liluah',     'stars'=>5,  'text'=>"Switched from an imported edge bander to DipBan's unit — finish quality is identical at half the service turnaround time. Excellent value."],
-    ['initials'=>'PB','name'=>'Pritam Banerjee','role'=>'Steel Fabrication Unit, Howrah', 'stars'=>5,  'text'=>"Their CNC boring machine runs three shifts a day without complaint. Genuinely impressed by the build quality and response time from the service team."],
-    ['initials'=>'KS','name'=>'Kunal Saha',     'role'=>'Modular Furniture Brand, Kolkata','stars'=>5, 'text'=>"From quotation to installation took under two weeks. The team configured the panel saw exactly to our cutting list requirements. Very professional."],
+    ['initials'=>'RK','name'=>'Rajesh Kumar',   'role'=>'Minerals Processing Plant, Rajasthan',   'stars'=>5, 'text'=>"Arup Enterprise's drum magnetic separator has dramatically improved our iron ore separation efficiency. The build quality is outstanding and the team was extremely helpful during installation."],
+    ['initials'=>'SM','name'=>'Suresh Mehta',   'role'=>'Chemical Plant, Gujarat',                'stars'=>5, 'text'=>"We needed a custom suspended magnet for our conveyor line. Arup Enterprise delivered exactly to spec, on time, and within budget. Their 38+ years of expertise really shows."],
+    ['initials'=>'AP','name'=>'Arvind Pandey',  'role'=>'Food Processing Unit, Punjab',           'stars'=>5, 'text'=>"Their hopper magnets have been running 24/7 for over 18 months with zero issues. The after-sales support is prompt and the spare parts are always available."],
+    ['initials'=>'MD','name'=>'Manoj Das',      'role'=>'Recycling Facility, West Bengal',        'stars'=>5, 'text'=>"Switched to Arup Enterprise's eddy current separator for non-ferrous metal recovery — the recovery rate improved significantly. Excellent product, excellent service."],
+    ['initials'=>'PB','name'=>'Pritam Bose',    'role'=>'Steel Plant, Jharkhand',                 'stars'=>5, 'text'=>"Their magnetic pulley on our conveyor belt removes tramp iron flawlessly. Very impressed with the magnetic intensity and the overall build quality of the unit."],
+    ['initials'=>'KS','name'=>'Kunal Shah',     'role'=>'Fertilizer Manufacturer, Maharashtra',   'stars'=>5, 'text'=>"From enquiry to commissioning in under 3 weeks. The Arup Enterprise team was professional throughout. The wet drum separator performs beyond our expectations."],
 ];
 
 function dipban_stars($r){
@@ -356,8 +356,8 @@ function dipban_stars($r){
     <svg style="display:none"><symbol id="gear-svg" viewBox="0 0 100 100"><path d="M43 2h14l2 10a35 35 0 0 1 8.5 3.5l9-5 10 10-5 9A35 35 0 0 1 85 38l10 2v14l-10 2a35 35 0 0 1-3.5 8.5l5 9-10 10-9-5A35 35 0 0 1 59 82l-2 10H43l-2-10a35 35 0 0 1-8.5-3.5l-9 5-10-10 5-9A35 35 0 0 1 15 56L5 54V40l10-2a35 35 0 0 1 3.5-8.5l-5-9 10-10 9 5A35 35 0 0 1 41 12zm7 22a26 26 0 1 0 0 52 26 26 0 0 0 0-52zm0 10a16 16 0 1 1 0 32 16 16 0 0 1 0-32z" fill="currentColor"/></symbol></svg>
     <div class="hero-content">
         <div class="hero-badge"><span class="badge-dot"></span>Manufacturer · Supplier · Service Provider</div>
-        <h1 class="hero-headline">Where <em>Precision</em><br>Meets Innovation</h1>
-        <p class="hero-sub">Advanced industrial machinery crafted for woodworking &amp; sheet metal industries. Engineering excellence that keeps your production running at full power — 24 × 7.</p>
+        <h1 class="hero-headline">Welcome to <em>Arup Enterprise</em><br>Premier Magnetic Separator Manufacturer</h1>
+        <p class="hero-sub">38+ years of excellence in industrial magnetic separation. We design, manufacture and supply Drum Separators, Suspended Magnets, Hopper Magnets & more — trusted by industries pan-India.</p>
         <div class="hero-ctas">
             <a href="#contact-form" class="cta-primary"><i class="fas fa-paper-plane"></i> Get a Free Quote</a>
             <a href="#products" class="cta-secondary"><i class="fas fa-th-large"></i> Explore Products</a>
@@ -390,21 +390,21 @@ function dipban_stars($r){
         <div class="about-intro-grid">
             <div class="about-intro-visual">
                 <div class="about-img-stack">
-                    <div class="about-img-main"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1000&auto=format&fit=crop" alt="DipBan engineer inspecting CNC machinery" loading="lazy"></div>
-                    <div class="about-badge-float"><i class="fas fa-award"></i><div><strong>Est. 2022</strong><span>Trusted Since Day One</span></div></div>
-                    <div class="about-img-secondary"><img src="images/pro.jpeg" alt="Shearing machine"></div>
+                    <div class="about-img-main"><img src="wp-content/uploads/2025/05/bg-logo.png" alt="Arup Enterprise magnetic separator manufacturing facility" loading="lazy"></div>
+                    <div class="about-badge-float"><i class="fas fa-award"></i><div><strong>Est. 1986</strong><span>38+ Years Trusted</span></div></div>
+                    <div class="about-img-secondary"><img src="assets/images/logo.png" alt="Arup Enterprise Logo"></div>
                 </div>
             </div>
             <div class="about-intro-content">
                 <span class="section-eyebrow">Who We Are</span>
-                <h2 class="section-title">Engineering the Future of <span>Industrial Machinery</span></h2>
-                <p>At DipBan Technical Services, we are dedicated to providing high-performance industrial machinery solutions tailored for woodworking and sheet metal industries. Since our establishment in 2022, we have built a reputation as a trusted manufacturer, supplier, and service provider.</p>
-                <p>We specialize in <strong>Wood Working Panel Processing Machinery</strong>, <strong>Hydraulic Machines</strong>, <strong>CNC Boring Machines</strong>, and other state-of-the-art equipment — all built to meet the highest industry standards.</p>
+                <h2 class="section-title">Precision Magnetic Separation <span>Solutions in Bengal – Arup Enterprise</span></h2>
+                <p>At <strong>Arup Enterprise</strong>, we specialize in the design, development, and supply of high-performance magnetic separation equipment tailored for industrial and commercial needs across India. With a strong focus on quality, durability, and performance, we provide systems that help industries eliminate iron contamination efficiently.</p>
+                <p>We manufacture <strong>Permanent Drum Type Magnetic Separators</strong>, <strong>Suspended Electromagnets</strong>, <strong>Hopper Magnets</strong>, <strong>Magnetic Roller Separators</strong>, and many more — all built to meet the highest industry standards.</p>
                 <div class="about-features">
-                    <div class="af-item"><i class="fas fa-check"></i> Precision CNC Engineering</div>
-                    <div class="af-item"><i class="fas fa-check"></i> Energy-Efficient Designs</div>
-                    <div class="af-item"><i class="fas fa-check"></i> Rigorous Quality Testing</div>
-                    <div class="af-item"><i class="fas fa-check"></i> Pan-India After-Sales Service</div>
+                    <div class="af-item"><i class="fas fa-check"></i> ISO 9001:2015 Certified</div>
+                    <div class="af-item"><i class="fas fa-check"></i> Custom Fabrication Available</div>
+                    <div class="af-item"><i class="fas fa-check"></i> Pan-India Installation & Service</div>
+                    <div class="af-item"><i class="fas fa-check"></i> 38+ Years of Industry Experience</div>
                 </div>
                 <a href="about.php" class="btn-outline-gold">Discover Our Story <i class="fas fa-arrow-right"></i></a>
             </div>
@@ -414,7 +414,7 @@ function dipban_stars($r){
 
 <!-- ===== KPI ===== -->
 <section class="section-kpi">
-    <div class="kpi-header"><div class="container"><span class="section-eyebrow light">Our 5 Commitments</span><h2 class="section-title light">Why Businesses Trust DipBan</h2></div></div>
+    <div class="kpi-header"><div class="container"><span class="section-eyebrow light">Our 5 Commitments</span><h2 class="section-title light">Why Businesses Trust Arup Enterprise</h2></div></div>
     <div class="kpi-cards-wrap"><div class="container"><div class="kpi-grid">
         <?php foreach($kpis as $k): ?>
         <div class="kpi-card"><div class="kpi-icon"><i class="fas <?php echo $k['icon']; ?>"></i></div><h3><?php echo $k['title']; ?></h3><p><?php echo $k['desc']; ?></p></div>
@@ -437,7 +437,7 @@ function dipban_stars($r){
                 </h2>
 
                 <p>
-                    At DipBan Technical Services, every machine is designed and
+                    At Arup Enterprise, every machine is designed and
                     manufactured with precision, innovation, and world-class
                     engineering standards. We proudly support India's industrial
                     growth through reliable and high-performance machinery.
@@ -509,7 +509,7 @@ function dipban_stars($r){
                     <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,95)); ?>...</p>
                     <div class="product-card-footer">
                         <a href="product-detail.php?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
-                        <a href="https://wa.me/919903126940?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/918013635806?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -522,7 +522,7 @@ function dipban_stars($r){
 <!-- ===== WHY ===== -->
 <section class="section section-why" id="why">
     <div class="container">
-        <div class="section-head"><span class="section-eyebrow">Our Strengths</span><h2 class="section-title">Why Choose <span>DipBan</span></h2></div>
+        <div class="section-head"><span class="section-eyebrow">Our Strengths</span><h2 class="section-title">Why Choose <span>Arup Enterprise</span></h2></div>
         <div class="why-grid">
             <?php foreach($why as $w): ?>
             <div class="why-card"><div class="why-icon"><i class="fas <?php echo $w['icon']; ?>"></i></div><h3><?php echo $w['title']; ?></h3><p><?php echo $w['desc']; ?></p></div>
@@ -615,7 +615,7 @@ function dipban_stars($r){
             <div class="trust-strip-divider"></div>
             <div class="trust-strip-item"><i class="fas fa-map-marker-alt"></i><div><strong>Pan-India</strong><span>Service Network</span></div></div>
             <div class="trust-strip-divider"></div>
-            <div class="trust-strip-item"><i class="fas fa-award"></i><div><strong>Since 2022</strong><span>Trusted Brand</span></div></div>
+            <div class="trust-strip-item"><i class="fas fa-award"></i><div><strong>38+ Years</strong><span>Trusted Brand</span></div></div>
         </div>
     </div>
 </section>
@@ -669,13 +669,13 @@ function dipban_stars($r){
                 <?php endif; ?>
 
                 <div class="cta-contact-items">
-                    <a href="https://wa.me/919903126940" target="_blank" class="cta-whatsapp-premium">
+                    <a href="https://wa.me/918013635806" target="_blank" class="cta-whatsapp-premium">
                         <div class="whatsapp-icon-wrap"><i class="fab fa-whatsapp"></i></div>
                         <div class="whatsapp-text"><span>Chat with us</span><strong>WhatsApp Now</strong></div>
                         <div class="whatsapp-arrow"><i class="fas fa-arrow-right"></i></div>
                     </a>
-                    <a href="tel:+919903126940" class="cta-contact-item"><i class="fas fa-phone-alt"></i><div><span>Call Us Now</span><strong>+91 9903126940</strong></div></a>
-                    <a href="mailto:sudip@dipbantechnicalservices.in" class="cta-contact-item"><i class="fas fa-envelope"></i><div><span>Email Us</span><strong>sudip@dipbantechnicalservices.in</strong></div></a>
+                    <a href="tel:+918013635806" class="cta-contact-item"><i class="fas fa-phone-alt"></i><div><span>Call Us Now</span><strong>+91 8013635806</strong></div></a>
+                    <a href="mailto:enterprisearup@gmail.com" class="cta-contact-item"><i class="fas fa-envelope"></i><div><span>Email Us</span><strong>enterprisearup@gmail.com</strong></div></a>
                 </div>
             </div>
 

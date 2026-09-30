@@ -1,6 +1,6 @@
 <?php
 // ============================================================
-// contact.php — DipBan Technical Services (COMPLETE FIXED)
+// contact.php — Arup Enterprise (COMPLETE FIXED)
 // ============================================================
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // database save, admin panel, and all page CSS/JS are untouched.
                     // ============================================================
                     $to_recipients = [
-                        env('MAIL_NOTIFY_TO', 'sudip@dipbantechnicalservices.in'),
+                        env('MAIL_NOTIFY_TO', 'enterprisearup@gmail.com'),
                     
                     ];
                     $to = implode(", ", $to_recipients);
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <!-- Header -->
                                         <tr>
                                             <td style="background:#1a1410;padding:24px 32px;border-bottom:3px solid #C9920A;">
-                                                <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">DipBan Technical Services</span>
+                                                <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">Arup Enterprise</span>
                                                 <h1 style="color:#FFFFFF;font-size:20px;margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;">New Contact Enquiry</h1>
                                             </td>
                                         </tr>
@@ -203,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <tr>
                                             <td style="background:#FAF6EE;padding:16px 32px;border-top:1px solid #f0e6d2;">
                                                 <p style="margin:0;color:#999999;font-size:11px;line-height:1.6;">
-                                                    This enquiry was also saved to the admin dashboard. Sent automatically from the DipBan Technical Services website contact form — please do not reply directly to this notification address.
+                                                    This enquiry was also saved to the admin dashboard. Sent automatically from the Arup Enterprise website contact form — please do not reply directly to this notification address.
                                                 </p>
                                             </td>
                                         </tr>
@@ -227,8 +227,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $boundary = md5(uniqid((string)time(), true));
 
-                    $mail_from_addr = env('MAIL_FROM_ADDRESS', 'noreply@dipbantechnicalservices.in');
-                    $mail_from_name = env('MAIL_FROM_NAME', 'DipBan Website');
+                    $mail_from_addr = env('MAIL_FROM_ADDRESS', 'noreply@arup-enterprise.com');
+                    $mail_from_name = env('MAIL_FROM_NAME', 'Arup Enterprise Website');
                     $headers  = "From: {$mail_from_name} <{$mail_from_addr}>\r\n";
 
                     $headers .= "Reply-To: $fullname_raw <$email_raw>\r\n";
@@ -405,7 +405,7 @@ include 'includes/header.php';
     <p class="ct-hero-sub">Have a question about our machinery? Need a custom quote or on-site demo? Our engineers are standing by — reach out through any channel below.</p>
     <div class="ct-hero-actions">
       <a href="#contact-form" class="ct-btn-primary"><i class="fas fa-paper-plane"></i> Send a Message</a>
-      <a href="tel:+919903126940" class="ct-btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
+      <a href="tel:+918013635806" class="ct-btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
     </div>
     <div class="ct-hero-trust">
       <span><i class="fas fa-check-circle"></i> 24/7 Support</span>
@@ -444,7 +444,7 @@ include 'includes/header.php';
             <strong>Message Sent, <?php echo htmlspecialchars($success_name); ?>!</strong>
             <span>Your enquiry has been received. Our team will contact you within 24 hours. You can also reach us on WhatsApp for a faster response.</span>
           </div>
-          <a href="https://wa.me/919903126940" target="_blank" class="ct-success-wa">
+          <a href="https://wa.me/918013635806" target="_blank" class="ct-success-wa">
             <i class="fab fa-whatsapp"></i> Chat Now
           </a>
         </div>
@@ -507,7 +507,7 @@ include 'includes/header.php';
 
           <div class="ct-agree">
             <input type="checkbox" id="ct_agree" name="agree" required>
-            <label for="ct_agree">I agree to the <a href="#">Privacy Policy</a> and consent to being contacted by DipBan's team.</label>
+            <label for="ct_agree">I agree to the <a href="#">Privacy Policy</a> and consent to being contacted by Arup Enterprise's team.</label>
           </div>
 
           <button type="submit" class="ct-submit" id="ctSubmitBtn">
@@ -523,7 +523,7 @@ include 'includes/header.php';
         <h2 class="ct-info-title">Reach Out Directly</h2>
         <p class="ct-info-sub">Multiple ways to connect — pick what's most convenient for you.</p>
 
-        <a href="https://wa.me/919903126940" target="_blank" class="ct-wa-card">
+        <a href="https://wa.me/918013635806" target="_blank" class="ct-wa-card">
           <div class="ct-wa-icon"><i class="fab fa-whatsapp"></i></div>
           <div class="ct-wa-text">
             <span>Fastest Response</span>
@@ -539,22 +539,22 @@ include 'includes/header.php';
             <div class="ct-info-ico"><i class="fas fa-map-marker-alt"></i></div>
             <div class="ct-info-body">
               <strong>Office Address</strong>
-              <span>DipBan Technical Services<br>Liluah, Howrah, West Bengal</span>
+              <span>Arup Enterprise<br>Liluah, Howrah, West Bengal</span>
             </div>
           </div>
           <div class="ct-info-item">
             <div class="ct-info-ico"><i class="fas fa-phone-alt"></i></div>
             <div class="ct-info-body">
               <strong>Phone Numbers</strong>
-              <span><a href="tel:+919903126940">+91 99031 26940</a></span>
-              <span><a href="tel:+91 33-45081559">+91 33-45081559</a></span>
+              <span><a href="tel:+918013635806">+91 99031 26940</a></span>
+              <span><a href="tel:+91 8839019950">+91 8839019950</a></span>
             </div>
           </div>
           <div class="ct-info-item">
             <div class="ct-info-ico"><i class="fas fa-envelope"></i></div>
             <div class="ct-info-body">
               <strong>Email Address</strong>
-              <span><a href="mailto:sudip@dipbantechnicalservices.in">sudip@dipbantechnicalservices.in</a></span>
+              <span><a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a></span>
             </div>
           </div>
           <div class="ct-info-item">
@@ -624,7 +624,7 @@ include 'includes/header.php';
         <rect x="272" y="155" width="230" height="56" rx="8" fill="#1a1a1a" opacity="0.9"/>
         <text x="387" y="178" fill="#C9920A" font-size="13" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800">DIPBAN TECHNICAL SERVICES</text>
         <text x="387" y="197" fill="#aaa" font-size="9.5" text-anchor="middle" font-family="Inter,sans-serif">Liluah, Howrah, West Bengal</text>
-        <text x="1190" y="368" fill="#c9b89a" font-size="9" text-anchor="end" font-family="Inter,sans-serif">Virtual Map · DipBan</text>
+        <text x="1190" y="368" fill="#c9b89a" font-size="9" text-anchor="end" font-family="Inter,sans-serif">Virtual Map · Arup Enterprise</text>
       </svg>
       <a href="https://maps.google.com/?q=Liluah+Howrah+West+Bengal" target="_blank" class="ct-map-btn">
         <i class="fas fa-map-marked-alt"></i> Get Directions
@@ -673,8 +673,8 @@ include 'includes/header.php';
         <p>Expert advice, quotes, and technical support — one call away.</p>
       </div>
       <div class="ct-cta-btns">
-        <a href="tel:+919903126940" class="ct-btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-        <a href="mailto:sudip@dipbantechnicalservices.in" class="ct-btn-secondary"><i class="fas fa-envelope"></i> Email Us</a>
+        <a href="tel:+918013635806" class="ct-btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+        <a href="mailto:enterprisearup@gmail.com" class="ct-btn-secondary"><i class="fas fa-envelope"></i> Email Us</a>
       </div>
     </div>
   </div>
