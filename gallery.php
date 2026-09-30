@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Gallery | Arup Enterprise";
 require_once 'includes/db.php';
 include 'includes/header.php';
@@ -95,7 +95,7 @@ $total = count($gallery_items);
         <div class="gallery-intro">
             <span style="color:var(--gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;font-weight:800;display:block;margin-bottom:8px;">Visual Excellence</span>
             <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:var(--charcoal);margin-bottom:12px;">Industrial Separation Machinery in Action</h2>
-            <p>Explore our range of heavy-duty magnetic separators, drum assemblies, pulleys, and metal recycling equipment &mdash; <strong><?php echo $total; ?> product<?php echo $total !== 1 ? 's' : ''; ?></strong> built for superior durability and maximum ferrous recovery.</p>
+            <p>Explore our range of heavy-duty magnetic separators, drum assemblies, pulleys, and metal recycling equipment built for superior durability and maximum ferrous recovery.</p>
         </div>
 
         <?php if (!empty($unique_cats)): ?>
@@ -112,8 +112,8 @@ $total = count($gallery_items);
             <?php if (empty($gallery_items)): ?>
             <div class="gallery-empty">
                 <i class="fas fa-images"></i>
-                <h3>No products in gallery yet</h3>
-                <p>Add products with images from the <a href="admin/add_product.php" style="color:var(--gold);font-weight:700;">admin panel</a> to populate the gallery automatically.</p>
+                <h3>Gallery Coming Soon</h3>
+                <p>Our product gallery is being updated. Please check back shortly.</p>
             </div>
             <?php else: ?>
             <?php foreach ($gallery_items as $item):
