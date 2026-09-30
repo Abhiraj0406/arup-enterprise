@@ -214,6 +214,23 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
    <!-- ============================================================
      PARTNERS / ASSOCIATES SECTION - DYNAMIC LOGOS
 ============================================================ -->
+<?php
+// Fetch active associates logos from database
+$partner_logos = [];
+if (isset($conn) && $conn) {
+    try {
+        $result = $conn->query("SELECT * FROM associates WHERE status = 'active' ORDER BY sort_order ASC, id DESC");
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $partner_logos[] = $row;
+            }
+        }
+    } catch (Exception $e) {
+        $partner_logos = [];
+    }
+}
+?>
+<?php if (!empty($partner_logos)): ?>
 <div class="partners-section">
     <div class="partners-inner">
         <div class="partners-label">
@@ -222,46 +239,28 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
             <span class="partners-line"></span>
         </div>
         <div class="partners-grid">
-            <?php
-            // Fetch active associates logos from database
-            $partner_logos = [];
-            if (isset($conn) && $conn) {
-                try {
-                    $result = $conn->query("SELECT * FROM associates WHERE status = 'active' ORDER BY sort_order ASC");
-                    if ($result) {
-                        while ($row = $result->fetch_assoc()) {
-                            $partner_logos[] = $row;
-                        }
+            <?php foreach ($partner_logos as $pl): 
+                $pl_logo = trim($pl['logo'] ?? '');
+                $pl_src = '';
+                if (!empty($pl_logo)) {
+                    if (stripos($pl_logo, 'http') === 0) {
+                        $pl_src = $pl_logo;
+                    } elseif (file_exists(__DIR__ . '/../' . ltrim($pl_logo, '/'))) {
+                        $pl_src = ltrim($pl_logo, '/');
                     }
-                } catch (Exception $e) {
-                    $partner_logos = [];
                 }
-            }
-            
-            // If no logos in database, show fallback
-            if (empty($partner_logos)) {
-                $partner_logos = [
-                    ['logo' => 'assets/images/associates/1.png'],
-                    ['logo' => 'assets/images/associates/2.png'],
-                    ['logo' => 'assets/images/associates/3.png'],
-                ];
-            }
-            
-            foreach ($partner_logos as $pl): 
+                if (empty($pl_src)) continue;
             ?>
             <div class="partner-item">
                 <div class="partner-logo">
-                    <?php if (!empty($pl['logo']) && file_exists(__DIR__ . '/../' . $pl['logo'])): ?>
-                        <img src="<?php echo htmlspecialchars($pl['logo']); ?>" alt="Partner Logo" loading="lazy">
-                    <?php else: ?>
-                        <span style="color:#999;font-size:0.7rem;">No Logo</span>
-                    <?php endif; ?>
+                    <img src="<?php echo htmlspecialchars($pl_src); ?>" alt="Partner Logo" loading="lazy">
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
     </div>
 </div>
+<?php endif; ?>
 
     <!-- FOOTER BOTTOM -->
     <div class="footer-bottom">

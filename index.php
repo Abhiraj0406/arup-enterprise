@@ -249,64 +249,67 @@ if (isset($conn) && $conn) {
 // No fallback products to ensure we don't show unrelated dummy data.
 
 // ============================================================
-// FETCH CATEGORIES for Industries section
+// FETCH ACTIVE CATEGORIES from DB (for Tabs & Industries)
 // ============================================================
-$industry_categories = [];
+$active_categories = [];
 if (isset($conn) && $conn) {
     $tableCheck = $conn->query("SHOW TABLES LIKE 'categories'");
     if ($tableCheck && $tableCheck->num_rows > 0) {
-        $result = $conn->query("SELECT * FROM categories WHERE status='active' ORDER BY sort_order ASC LIMIT 4");
+        $result = $conn->query("SELECT * FROM categories WHERE status='active' ORDER BY sort_order ASC, name ASC");
         if ($result) {
             while ($row = $result->fetch_assoc()) {
-                $industry_categories[] = $row;
+                $active_categories[] = $row;
             }
         }
     }
 }
-// No fallback industry categories.
 
 // ============================================================
-// STATIC DATA
+// STATIC DATA (Exact Content from Arup Enterprise)
 // ============================================================
 $stats = [
-    ['value'=>'100%',  'label'=>'Satisfied Clients',       'icon'=>'fa-users'],
-    ['value'=>'7,000+','label'=>'Custom Solutions Delivered','icon'=>'fa-car'],
-    ['value'=>'28k+',  'label'=>'Products Delivered',       'icon'=>'fa-project-diagram'],
-    ['value'=>'38+',   'label'=>'Years Experience',         'icon'=>'fa-award'],
+    ['value'=>'100%',  'label'=>'Satisfied Clients',          'icon'=>'fa-users'],
+    ['value'=>'7,000+','label'=>'Custom Solutions Delivered',  'icon'=>'fa-cogs'],
+    ['value'=>'28k+',  'label'=>'Products Delivered',          'icon'=>'fa-project-diagram'],
+    ['value'=>'38+',   'label'=>'Years Experience',            'icon'=>'fa-award'],
 ];
+
 $kpis = [
-    ['icon'=>'fa-magnet',         'title'=>'High-Efficiency Magnets',  'desc'=>'Our magnetic separators deliver superior separation efficiency, removing ferrous contaminants with precision across all material types.'],
-    ['icon'=>'fa-industry',       'title'=>'Custom Fabrication',       'desc'=>'Every unit is engineered to your exact specifications — size, capacity, material type, and installation environment.'],
-    ['icon'=>'fa-shield-alt',     'title'=>'ISO 9001:2015 Certified',  'desc'=>'Certified quality management ensures every product meets the highest international manufacturing and safety standards.'],
-    ['icon'=>'fa-tools',          'title'=>'After-Sales Support',      'desc'=>'Comprehensive AMC plans, genuine spare parts, and trained service engineers available pan-India.'],
-    ['icon'=>'fa-graduation-cap', 'title'=>'38+ Years Expertise',     'desc'=>'Decades of experience in magnetic separation technology — trusted by industries across minerals, chemicals, food, and recycling.'],
+    ['icon'=>'fa-headset',        'title'=>'Expert Support',       'desc'=>'Reliable service, customized recommendations, and technical guidance from our experienced magnetic separation engineers.'],
+    ['icon'=>'fa-magnet',         'title'=>'Magnet Separators',    'desc'=>'High-gradient magnetic systems engineered to efficiently remove ferrous contaminants from bulk industrial streams.'],
+    ['icon'=>'fa-recycle',        'title'=>'Metal Recovery',       'desc'=>'State-of-the-art separation technology engineered for maximum ferrous recovery, high purity, and machinery protection.'],
+    ['icon'=>'fa-graduation-cap', 'title'=>'Knowledge & Training', 'desc'=>'Decades of operational expertise, on-site commissioning, operator training, and dedicated after-sales support.'],
 ];
+
 $why = [
-    ['icon'=>'fa-magnet',    'title'=>'Magnetic Excellence', 'desc'=>'Specialising exclusively in magnetic separation technology — we bring unmatched depth of knowledge to every product we manufacture.'],
-    ['icon'=>'fa-gem',       'title'=>'Uncompromised Quality','desc'=>'Every separator is built with premium-grade materials, precision-engineered to deliver consistent performance in the harshest environments.'],
-    ['icon'=>'fa-handshake', 'title'=>'Client-First Approach','desc'=>'We partner with our clients — understanding their process, recommending the right solution, and standing by them long after installation.'],
-    ['icon'=>'fa-leaf',      'title'=>'Eco-Efficient Design', 'desc'=>'Our separators maximise recovery while minimising energy consumption — helping you meet sustainability goals without sacrificing performance.'],
+    ['icon'=>'fa-magnet',    'title'=>'Magnetic Excellence', 'desc'=>'Specialising exclusively in magnetic separation technology — we bring unmatched depth of engineering to every separator we manufacture.'],
+    ['icon'=>'fa-gem',       'title'=>'Uncompromised Quality','desc'=>'Every separator is built with heavy-gauge stainless steel and high-grade permanent magnets to deliver consistent performance in abrasive environments.'],
+    ['icon'=>'fa-handshake', 'title'=>'Client-First Approach','desc'=>'We partner closely with clients across mining, plastics, chemicals, and food processing to engineer the optimal solution for their production lines.'],
+    ['icon'=>'fa-leaf',      'title'=>'Eco-Efficient Design', 'desc'=>'Our permanent magnet systems require zero electricity for magnetic field generation, maximising recovery while minimising operational running costs.'],
 ];
+
 $process_steps = [
-    ['step'=>'01','icon'=>'fa-comments',        'title'=>'Consult',  'desc'=>'Tell us your production volume, floor size and budget — we recommend the right machine class.'],
-    ['step'=>'02','icon'=>'fa-drafting-compass','title'=>'Configure','desc'=>'We finalise specifications, power requirements and optional tooling for your exact line.'],
-    ['step'=>'03','icon'=>'fa-truck-loading',   'title'=>'Install',  'desc'=>'Our engineers handle delivery, commissioning and operator training on-site.'],
-    ['step'=>'04','icon'=>'fa-life-ring',       'title'=>'Support',  'desc'=>'24/7 helpline, genuine spares and scheduled maintenance keep you running for years.'],
+    ['step'=>'01','icon'=>'fa-comments',        'title'=>'Consult',  'desc'=>'Share your material type, feed volume, and plant requirements — our engineers recommend the exact separator class.'],
+    ['step'=>'02','icon'=>'fa-drafting-compass','title'=>'Configure','desc'=>'We finalize drum diameter, belt width, gauss intensity, and custom hopper dimensions for your facility.'],
+    ['step'=>'03','icon'=>'fa-truck-loading',   'title'=>'Install',  'desc'=>'Our engineers oversee prompt delivery, on-site mounting, electrical integration, and commissioning.'],
+    ['step'=>'04','icon'=>'fa-life-ring',       'title'=>'Support',  'desc'=>'Comprehensive warranty, readily available genuine spare parts, and dedicated pan-India service assistance.'],
 ];
+
 $faqs = [
-    ['q'=>'What types of magnetic separators does Arup Enterprise manufacture?', 'a'=>'We manufacture Permanent Drum Type Magnetic Separators, Suspended Electromagnets, Hopper Magnets, Magnet Roller Separators, Magnetic Pulleys, Wet Drum Separators, and more — catering to minerals, chemicals, food, and recycling industries.'],
-    ['q'=>'Do you provide custom-built magnetic separators?',                    'a'=>'Yes. We fabricate separators to your exact specifications including drum diameter, belt width, magnetic intensity, and housing material — for both standard and special applications.'],
-    ['q'=>'What is your typical delivery timeline?',                            'a'=>'Standard models ship within 7–15 working days. Custom configurations typically take 3–5 weeks depending on the complexity and material availability.'],
-    ['q'=>'Do you offer installation and commissioning support?',               'a'=>'Absolutely. Our trained engineers handle on-site installation, commissioning, and operator training to ensure your separator is running at peak efficiency from day one.'],
-    ['q'=>'What warranty do your magnetic separators carry?',                   'a'=>'All products ship with a standard 12-month manufacturer warranty. Extended AMC (Annual Maintenance Contract) plans are also available for long-term peace of mind.'],
+    ['q'=>'What types of magnetic separators does Arup Enterprise manufacture?', 'a'=>'We manufacture Single & Double Drum Type Magnetic Separators, Chalna Vibrating Feeder Separators, Overband Magnetic Separators, Magnetic Head Pulleys, High-Intensity Rollers, Floor Sweepers, and Permanent Lifting Magnets.'],
+    ['q'=>'Do you provide custom-built magnetic separators?',                    'a'=>'Yes! We customize drum diameter, width, magnetic intensity (NdFeB Rare Earth or Ferrite), housing materials (SS 304 / SS 316), and drive configurations to match your plant capacity.'],
+    ['q'=>'What is your typical delivery timeline?',                            'a'=>'Standard configurations ship within 7–15 working days. Custom turnkey systems typically take 3–4 weeks depending on engineering specifications.'],
+    ['q'=>'Do you offer installation and commissioning support?',               'a'=>'Absolutely. Our trained field engineers handle on-site installation, commissioning, alignment, and operator training pan-India.'],
+    ['q'=>'What warranty do your magnetic separators carry?',                   'a'=>'All machines include a comprehensive 12-month manufacturer warranty with optional Annual Maintenance Contract (AMC) plans.'],
 ];
+
 $testimonials = [
     ['initials'=>'RK','name'=>'Rajesh Kumar',   'role'=>'Minerals Processing Plant, Rajasthan',   'stars'=>5, 'text'=>"Arup Enterprise's drum magnetic separator has dramatically improved our iron ore separation efficiency. The build quality is outstanding and the team was extremely helpful during installation."],
     ['initials'=>'SM','name'=>'Suresh Mehta',   'role'=>'Chemical Plant, Gujarat',                'stars'=>5, 'text'=>"We needed a custom suspended magnet for our conveyor line. Arup Enterprise delivered exactly to spec, on time, and within budget. Their 38+ years of expertise really shows."],
-    ['initials'=>'AP','name'=>'Arvind Pandey',  'role'=>'Food Processing Unit, Punjab',           'stars'=>5, 'text'=>"Their hopper magnets have been running 24/7 for over 18 months with zero issues. The after-sales support is prompt and the spare parts are always available."],
-    ['initials'=>'MD','name'=>'Manoj Das',      'role'=>'Recycling Facility, West Bengal',        'stars'=>5, 'text'=>"Switched to Arup Enterprise's eddy current separator for non-ferrous metal recovery — the recovery rate improved significantly. Excellent product, excellent service."],
-    ['initials'=>'PB','name'=>'Pritam Bose',    'role'=>'Steel Plant, Jharkhand',                 'stars'=>5, 'text'=>"Their magnetic pulley on our conveyor belt removes tramp iron flawlessly. Very impressed with the magnetic intensity and the overall build quality of the unit."],
-    ['initials'=>'KS','name'=>'Kunal Shah',     'role'=>'Fertilizer Manufacturer, Maharashtra',   'stars'=>5, 'text'=>"From enquiry to commissioning in under 3 weeks. The Arup Enterprise team was professional throughout. The wet drum separator performs beyond our expectations."],
+    ['initials'=>'AP','name'=>'Arvind Pandey',  'role'=>'Food Processing Unit, Punjab',           'stars'=>5, 'text'=>"Their vibrating feeder chalna machine has been running 24/7 with zero issues. Downstream equipment is completely protected and purity has reached 99.8%."],
+    ['initials'=>'MD','name'=>'Manoj Das',      'role'=>'Recycling Facility, West Bengal',        'stars'=>5, 'text'=>"Switched to Arup Enterprise's magnetic pulley and overband separator — tramp iron removal improved significantly. Excellent product, excellent service."],
+    ['initials'=>'PB','name'=>'Pritam Bose',    'role'=>'Steel & Foundry Plant, Jharkhand',       'stars'=>5, 'text'=>"Their permanent lifting magnets handle our heavy steel plates effortlessly with complete operator safety. Highly impressed with the build quality."],
+    ['initials'=>'KS','name'=>'Kunal Shah',     'role'=>'Ceramics & Glass Manufacturer, Gujarat', 'stars'=>5, 'text'=>"From enquiry to commissioning in under 3 weeks. The high-intensity roller magnetic separator exceeded all our expectations for silica sand purification."],
 ];
 
 function dipban_stars($r){
@@ -320,7 +323,7 @@ function dipban_stars($r){
 <section class="hero" id="home">
     <div class="hero-video-wrap">
         <video autoplay muted loop playsinline class="hero-video"
-               poster="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=1600&auto=format&fit=crop">
+               poster="assets/images/about/hero-section.avif">
             <source src="assets/video/machine-hero.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -332,16 +335,16 @@ function dipban_stars($r){
     </div>
     <svg style="display:none"><symbol id="gear-svg" viewBox="0 0 100 100"><path d="M43 2h14l2 10a35 35 0 0 1 8.5 3.5l9-5 10 10-5 9A35 35 0 0 1 85 38l10 2v14l-10 2a35 35 0 0 1-3.5 8.5l5 9-10 10-9-5A35 35 0 0 1 59 82l-2 10H43l-2-10a35 35 0 0 1-8.5-3.5l-9 5-10-10 5-9A35 35 0 0 1 15 56L5 54V40l10-2a35 35 0 0 1 3.5-8.5l-5-9 10-10 9 5A35 35 0 0 1 41 12zm7 22a26 26 0 1 0 0 52 26 26 0 0 0 0-52zm0 10a16 16 0 1 1 0 32 16 16 0 0 1 0-32z" fill="currentColor"/></symbol></svg>
     <div class="hero-content">
-        <div class="hero-badge"><span class="badge-dot"></span>Manufacturer · Supplier · Service Provider</div>
-        <h1 class="hero-headline">Welcome to <em>Arup Enterprise</em><br>Premier Magnetic Separator Manufacturer</h1>
-        <p class="hero-sub">38+ years of excellence in industrial magnetic separation. We design, manufacture and supply Drum Separators, Suspended Magnets, Hopper Magnets & more — trusted by industries pan-India.</p>
+        <div class="hero-badge"><span class="badge-dot"></span>Manufacturer · Supplier · Exporter</div>
+        <h1 class="hero-headline">Industrial Magnetic Separator Manufacturer | <em>Arup Enterprise</em></h1>
+        <p class="hero-sub">Empowering industries with superior magnetic separation solutions. 38+ years of engineering excellence in Drum Separators, Suspended Magnets, Roller Separators, and custom magnetic machinery across India.</p>
         <div class="hero-ctas">
             <a href="#contact-form" class="cta-primary"><i class="fas fa-paper-plane"></i> Get a Free Quote</a>
             <a href="#products" class="cta-secondary"><i class="fas fa-th-large"></i> Explore Products</a>
         </div>
         <div class="hero-trust">
-            <div class="trust-item"><i class="fas fa-check-circle"></i> Industry certified Quality</div>
-            <div class="trust-item"><i class="fas fa-check-circle"></i> 24/7 Support</div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i> ISO 9001:2015 Certified</div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i> 24/7 Expert Support</div>
             <div class="trust-item"><i class="fas fa-check-circle"></i> Pan-India Service</div>
         </div>
     </div>
@@ -367,19 +370,19 @@ function dipban_stars($r){
         <div class="about-intro-grid">
             <div class="about-intro-visual">
                 <div class="about-img-stack">
-                    <div class="about-img-main"><img src="wp-content/uploads/2025/05/bg-logo.png" alt="Arup Enterprise magnetic separator manufacturing facility" loading="lazy"></div>
+                    <div class="about-img-main"><img src="assets/images/about/ab-scaled.jpg" alt="Arup Enterprise magnetic separator manufacturing facility" loading="lazy"></div>
                     <div class="about-badge-float"><i class="fas fa-award"></i><div><strong>Est. 1986</strong><span>38+ Years Trusted</span></div></div>
                     <div class="about-img-secondary"><img src="assets/images/logo.png" alt="Arup Enterprise Logo"></div>
                 </div>
             </div>
             <div class="about-intro-content">
                 <span class="section-eyebrow">Who We Are</span>
-                <h2 class="section-title">Precision Magnetic Separation <span>Solutions in Bengal – Arup Enterprise</span></h2>
+                <h2 class="section-title">Precision Magnetic Separation <span>Solutions – Arup Enterprise</span></h2>
                 <p>At <strong>Arup Enterprise</strong>, we specialize in the design, development, and supply of high-performance magnetic separation equipment tailored for industrial and commercial needs across India. With a strong focus on quality, durability, and performance, we provide systems that help industries eliminate iron contamination efficiently.</p>
-                <p>We manufacture <strong>Permanent Drum Type Magnetic Separators</strong>, <strong>Suspended Electromagnets</strong>, <strong>Hopper Magnets</strong>, <strong>Magnetic Roller Separators</strong>, and many more — all built to meet the highest industry standards.</p>
+                <p>We manufacture <strong>Permanent Drum Type Magnetic Separators</strong>, <strong>Double Drum Separators</strong>, <strong>Chalna Vibrating Feeder Machines</strong>, <strong>Overband Magnetic Separators</strong>, and <strong>High-Intensity Roller Separators</strong> — all built to meet the highest industry standards.</p>
                 <div class="about-features">
                     <div class="af-item"><i class="fas fa-check"></i> ISO 9001:2015 Certified</div>
-                    <div class="af-item"><i class="fas fa-check"></i> Custom Fabrication Available</div>
+                    <div class="af-item"><i class="fas fa-check"></i> Custom Turnkey Fabrication</div>
                     <div class="af-item"><i class="fas fa-check"></i> Pan-India Installation & Service</div>
                     <div class="af-item"><i class="fas fa-check"></i> 38+ Years of Industry Experience</div>
                 </div>
@@ -391,7 +394,7 @@ function dipban_stars($r){
 
 <!-- ===== KPI ===== -->
 <section class="section-kpi">
-    <div class="kpi-header"><div class="container"><span class="section-eyebrow light">Our 5 Commitments</span><h2 class="section-title light">Why Businesses Trust Arup Enterprise</h2></div></div>
+    <div class="kpi-header"><div class="container"><span class="section-eyebrow light">Our 4 Core Strengths</span><h2 class="section-title light">Why Businesses Trust Arup Enterprise</h2></div></div>
     <div class="kpi-cards-wrap"><div class="container"><div class="kpi-grid">
         <?php foreach($kpis as $k): ?>
         <div class="kpi-card"><div class="kpi-icon"><i class="fas <?php echo $k['icon']; ?>"></i></div><h3><?php echo $k['title']; ?></h3><p><?php echo $k['desc']; ?></p></div>
@@ -399,42 +402,49 @@ function dipban_stars($r){
     </div></div></div>
 </section>
 
-
-
 <!-- ===== PRODUCTS ===== -->
 <section class="section section-products" id="products">
     <div class="container">
         <div class="section-head">
             <span class="section-eyebrow">What We Offer</span>
             <h2 class="section-title">Our <span>Premium Products</span></h2>
-            <p class="section-desc">Precision-engineered industrial machines for every production requirement.</p>
+            <p class="section-desc">High-performance industrial magnetic separators engineered for maximum purity and machinery protection.</p>
         </div>
         <div class="product-tabs">
             <button class="tab-btn active" data-filter="all">All Products</button>
-            <button class="tab-btn" data-filter="Wood Working">Wood Working</button>
-            <button class="tab-btn" data-filter="Sheet Metal">Sheet Metal</button>
-            <button class="tab-btn" data-filter="CNC Machines">CNC Machines</button>
-            <button class="tab-btn" data-filter="Hydraulic Systems">Hydraulic</button>
+            <?php foreach($active_categories as $ac): ?>
+            <button class="tab-btn" data-filter="<?php echo htmlspecialchars($ac['name']); ?>"><?php echo htmlspecialchars($ac['name']); ?></button>
+            <?php endforeach; ?>
         </div>
         <div class="products-grid" id="productsGrid">
             <?php foreach($products as $p):
-                $img = (string)($p['image'] ?? '');
-                $is_remote = ($img && stripos($img,'http')===0);
-                $is_local  = ($img && !$is_remote && file_exists($img));
-                $src = ($is_remote||$is_local) ? htmlspecialchars($img) : 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=900&auto=format&fit=crop';
+                $raw_img = trim((string)($p['image'] ?? ''));
+                $src = '';
+                if (!empty($raw_img)) {
+                    if (stripos($raw_img, 'http') === 0) {
+                        $src = $raw_img;
+                    } elseif (file_exists($raw_img)) {
+                        $src = $raw_img;
+                    } elseif (file_exists('assets/uploads/products/' . basename($raw_img))) {
+                        $src = 'assets/uploads/products/' . basename($raw_img);
+                    }
+                }
+                if (empty($src)) {
+                    $src = 'assets/images/about/hero-section.avif';
+                }
             ?>
             <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']??''); ?>">
                 <div class="product-img-wrap">
-                    <img src="<?php echo $src; ?>" alt="<?php echo htmlspecialchars($p['name']??''); ?>" loading="lazy"/>
-                    <div class="product-category-tag"><?php echo htmlspecialchars($p['category']??'Machinery'); ?></div>
+                    <img src="<?php echo htmlspecialchars($src); ?>" alt="<?php echo htmlspecialchars($p['name']??''); ?>" loading="lazy" onerror="this.src='assets/images/about/hero-section.avif';"/>
+                    <div class="product-category-tag"><?php echo htmlspecialchars($p['category']??'Magnetic Separators'); ?></div>
                     <?php if(!empty($p['featured'])): ?><div class="product-feat-tag"><i class="fas fa-star"></i> Featured</div><?php endif; ?>
                 </div>
                 <div class="product-card-body">
                     <h3 class="product-name"><?php echo htmlspecialchars($p['name']??''); ?></h3>
-                    <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,95)); ?>...</p>
+                    <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,110)); ?>...</p>
                     <div class="product-card-footer">
                         <a href="product-detail.php?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
-                        <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? '918013635806'); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? '918013635806'); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp Enquiry"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -476,13 +486,27 @@ function dipban_stars($r){
 <!-- ===== INDUSTRIES ===== -->
 <section class="section section-industries">
     <div class="container">
-        <div class="section-head"><span class="section-eyebrow">Solutions We Offer</span><h2 class="section-title">Industries <span>We Serve</span></h2></div>
+        <div class="section-head">
+            <span class="section-eyebrow">Solutions We Offer</span>
+            <h2 class="section-title">Industries <span>We Serve</span></h2>
+            <p class="section-desc">Delivering heavy-duty ferrous contamination removal and metal extraction across key processing sectors.</p>
+        </div>
         <div class="industry-grid">
-            <?php foreach($industry_categories as $cat): ?>
-            <a href="products.php?cat=<?php echo urlencode($cat['name']); ?>" class="industry-card">
-                <div class="industry-icon"><i class="fas <?php echo $cat['icon']??'fa-tag'; ?>"></i></div>
-                <h3><?php echo htmlspecialchars($cat['name']); ?></h3>
-                <p>Explore our <?php echo htmlspecialchars($cat['name']); ?> machinery range</p>
+            <?php
+            $industries_list = [
+                ['name' => 'Mineral & Mining',          'icon' => 'fa-mountain',   'desc' => 'High recovery separation for iron ore, silica sand, quartz, and feldspar.'],
+                ['name' => 'Recycling & Scrap',         'icon' => 'fa-recycle',    'desc' => 'Tramp iron and metal extraction in scrap yards, e-waste, and waste processing.'],
+                ['name' => 'Food & Grain Milling',      'icon' => 'fa-wheat-awn',  'desc' => 'Ensuring food safety and purity by eliminating fine ferrous particles from grains and spices.'],
+                ['name' => 'Plastics & Chemical',       'icon' => 'fa-flask',      'desc' => 'Protection of injection moulding and granulators in chemical and polymer processing.'],
+                ['name' => 'Ceramic & Glass',           'icon' => 'fa-gem',        'desc' => 'Fine iron removal from raw glaze, china clay, and cullet before firing.'],
+                ['name' => 'Foundries & Steel Plants',  'icon' => 'fa-industry',   'desc' => 'Slag recovery, sand reconditioning, and heavy magnetic lifting solutions.'],
+            ];
+            foreach($industries_list as $ind): 
+            ?>
+            <a href="products.php" class="industry-card">
+                <div class="industry-icon"><i class="fas <?php echo $ind['icon']; ?>"></i></div>
+                <h3><?php echo htmlspecialchars($ind['name']); ?></h3>
+                <p><?php echo htmlspecialchars($ind['desc']); ?></p>
                 <span class="industry-arrow"><i class="fas fa-arrow-right"></i></span>
             </a>
             <?php endforeach; ?>

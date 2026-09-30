@@ -688,10 +688,24 @@ include 'includes/navbar.php';
                         <?php foreach ($recent_products as $p): ?>
                             <div class="recent-item">
                                 <div class="item-icon">
-                                    <?php if (!empty($p['image']) && file_exists("../" . $p['image'])): ?>
-                                        <img src="../<?php echo $p['image']; ?>" style="width:32px;height:32px;object-fit:cover;border-radius:6px;">
+                                    <?php
+                                    $dash_img = trim($p['image'] ?? '');
+                                    $dash_src = '';
+                                    if (!empty($dash_img)) {
+                                        if (stripos($dash_img, 'http://') === 0 || stripos($dash_img, 'https://') === 0 || strpos($dash_img, '../') === 0) {
+                                            $dash_src = $dash_img;
+                                        } elseif (strpos($dash_img, '/') === 0) {
+                                            $dash_src = '..' . $dash_img;
+                                        } else {
+                                            $dash_src = '../' . $dash_img;
+                                        }
+                                    }
+                                    ?>
+                                    <?php if (!empty($dash_src)): ?>
+                                        <img src="<?php echo htmlspecialchars($dash_src); ?>" style="width:32px;height:32px;object-fit:cover;border-radius:6px;" alt="<?php echo htmlspecialchars($p['name']); ?>" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-block';">
+                                        <i class="fas fa-magnet" style="display:none;"></i>
                                     <?php else: ?>
-                                        <i class="fas fa-cog"></i>
+                                        <i class="fas fa-magnet"></i>
                                     <?php endif; ?>
                                 </div>
                                 <div class="item-info">
