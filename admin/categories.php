@@ -30,6 +30,12 @@ if ($checkPinColumn->num_rows == 0) {
     $conn->query("ALTER TABLE categories ADD COLUMN pin_to_menu TINYINT(1) DEFAULT 0");
 }
 
+// ================= ADD IS_POPULAR COLUMN IF NOT EXISTS =================
+$checkPopColumn = $conn->query("SHOW COLUMNS FROM categories LIKE 'is_popular'");
+if ($checkPopColumn->num_rows == 0) {
+    $conn->query("ALTER TABLE categories ADD COLUMN is_popular TINYINT(1) DEFAULT 1");
+}
+
 // ================= FETCH CATEGORIES =================
 $categories = [];
 $result = $conn->query("
@@ -53,6 +59,7 @@ if (isset($_POST['add_category'])) {
     $sort_order = intval($_POST['sort_order']);
     $show_in_menu = isset($_POST['show_in_menu']) ? 1 : 0;
     $pin_to_menu = isset($_POST['pin_to_menu']) ? 1 : 0;
+    $is_popular = isset($_POST['is_popular']) ? 1 : 0;
     
     $check = $conn->prepare("SELECT id FROM categories WHERE slug = ?");
     $check->bind_param("s", $slug);
@@ -62,9 +69,8 @@ if (isset($_POST['add_category'])) {
     if ($checkResult->num_rows > 0) {
         $_SESSION['error'] = "Category '{$name}' already exists!";
     } else {
-        // FIXED: 7 placeholders, 7 variables: 4 strings + 3 integers = "ssssiii"
-        $stmt = $conn->prepare("INSERT INTO categories (name, slug, description, icon, sort_order, status, show_in_menu, pin_to_menu) VALUES (?, ?, ?, ?, ?, 'active', ?, ?)");
-        $stmt->bind_param("ssssiii", $name, $slug, $description, $icon, $sort_order, $show_in_menu, $pin_to_menu);
+        $stmt = $conn->prepare("INSERT INTO categories (name, slug, description, icon, sort_order, status, show_in_menu, pin_to_menu, is_popular) VALUES (?, ?, ?, ?, ?, 'active', ?, ?, ?)");
+        $stmt->bind_param("ssssiiii", $name, $slug, $description, $icon, $sort_order, $show_in_menu, $pin_to_menu, $is_popular);
         if ($stmt->execute()) {
             $_SESSION['success'] = "Category '{$name}' added successfully!";
             header("Location: categories.php");
@@ -85,10 +91,10 @@ if (isset($_POST['edit_category'])) {
     $sort_order = intval($_POST['edit_sort_order']);
     $show_in_menu = isset($_POST['edit_show_in_menu']) ? 1 : 0;
     $pin_to_menu = isset($_POST['edit_pin_to_menu']) ? 1 : 0;
+    $is_popular = isset($_POST['edit_is_popular']) ? 1 : 0;
     
-    // FIXED: 8 placeholders, 8 variables: 4 strings + 4 integers = "ssssiiii"
-    $stmt = $conn->prepare("UPDATE categories SET name = ?, slug = ?, description = ?, icon = ?, sort_order = ?, show_in_menu = ?, pin_to_menu = ? WHERE id = ?");
-    $stmt->bind_param("ssssiiii", $name, $slug, $description, $icon, $sort_order, $show_in_menu, $pin_to_menu, $id);
+    $stmt = $conn->prepare("UPDATE categories SET name = ?, slug = ?, description = ?, icon = ?, sort_order = ?, show_in_menu = ?, pin_to_menu = ?, is_popular = ? WHERE id = ?");
+    $stmt->bind_param("ssssiiiii", $name, $slug, $description, $icon, $sort_order, $show_in_menu, $pin_to_menu, $is_popular, $id);
     if ($stmt->execute()) {
         $_SESSION['success'] = "Category updated successfully!";
         header("Location: categories.php");
@@ -129,6 +135,18 @@ if (isset($_GET['toggle_pin'])) {
     $stmt->bind_param("i", $id);
     if ($stmt->execute()) {
         $_SESSION['success'] = "Category pin status updated!";
+        header("Location: categories.php");
+        exit();
+    }
+}
+
+// ================= TOGGLE POPULAR HERO BUTTON =================
+if (isset($_GET['toggle_popular'])) {
+    $id = intval($_GET['toggle_popular']);
+    $stmt = $conn->prepare("UPDATE categories SET is_popular = IF(is_popular=1, 0, 1) WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    if ($stmt->execute()) {
+        $_SESSION['success'] = "Hero Popular button status updated!";
         header("Location: categories.php");
         exit();
     }
@@ -351,6 +369,8 @@ $icons = [
         .badge-hidden { background: #fef3c7; color: #b45309; }
         .badge-pinned { background: #fef3c7; color: #b45309; }
         .badge-unpinned { background: #e0e7ff; color: #4338ca; }
+        .badge-popular { background: #fef3c7; color: #b45309; border: 1px solid #f59e0b; }
+        .badge-not-popular { background: #f3f4f6; color: #6b7280; border: 1px solid #e5e7eb; }
 
         .icon-picker-grid {
             display: flex;
@@ -531,6 +551,7 @@ $icons = [
                                     <th style="width:80px;">Status</th>
                                     <th style="width:100px;">Show in Menu</th>
                                     <th style="width:100px;">Pin to Main Menu</th>
+                                    <th style="width:105px;">Popular Hero</th>
                                     <th style="width:120px;">Actions</th>
                                 </tr>
                             </thead>
@@ -584,14 +605,22 @@ $icons = [
                                                 </a>
                                             </td>
                                             <td>
+                                                <a href="?toggle_popular=<?php echo $cat['id']; ?>" 
+                                                   class="badge-status <?php echo ($cat['is_popular'] ?? 1) ? 'badge-popular' : 'badge-not-popular'; ?>"
+                                                   onclick="return confirm('Toggle popular hero button for \'<?php echo htmlspecialchars($cat['name']); ?>\'?')">
+                                                    <i class="fas fa-star me-1" style="<?php echo ($cat['is_popular'] ?? 1) ? 'color:var(--gold);' : ''; ?>"></i>
+                                                    <?php echo ($cat['is_popular'] ?? 1) ? 'Popular' : 'Hidden'; ?>
+                                                </a>
+                                            </td>
+                                            <td>
                                                 <div class="d-flex gap-1">
                                                     <button class="btn btn-sm btn-outline-gold" 
-                                                            onclick="editCategory(<?php echo $cat['id']; ?>, '<?php echo htmlspecialchars($cat['name']); ?>', '<?php echo htmlspecialchars($cat['description'] ?? ''); ?>', '<?php echo $cat['icon'] ?? 'fa-tag'; ?>', <?php echo $cat['sort_order']; ?>, <?php echo $cat['show_in_menu'] ?? 1; ?>, <?php echo $cat['pin_to_menu'] ?? 0; ?>)">
+                                                            onclick="editCategory(<?php echo $cat['id']; ?>, '<?php echo htmlspecialchars($cat['name']); ?>', '<?php echo htmlspecialchars($cat['description'] ?? ''); ?>', '<?php echo $cat['icon'] ?? 'fa-tag'; ?>', <?php echo $cat['sort_order']; ?>, <?php echo $cat['show_in_menu'] ?? 1; ?>, <?php echo $cat['pin_to_menu'] ?? 0; ?>, <?php echo $cat['is_popular'] ?? 1; ?>)">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                     <a href="?delete_id=<?php echo $cat['id']; ?>" 
-                                                       class="btn btn-sm btn-outline-danger" 
-                                                       onclick="return confirm('Delete category \'<?php echo htmlspecialchars($cat['name']); ?>\'?')">
+                                                        class="btn btn-sm btn-outline-danger" 
+                                                        onclick="return confirm('Delete category \'<?php echo htmlspecialchars($cat['name']); ?>\'?')">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
                                                 </div>
@@ -658,23 +687,31 @@ $icons = [
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <label class="form-label">Sort Order</label>
                                 <input type="number" name="sort_order" class="form-control" value="0" min="0">
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <div class="form-check form-switch mt-3">
                                     <input class="form-check-input" type="checkbox" name="show_in_menu" id="addShowInMenu" checked value="1">
                                     <label class="form-check-label fw-bold" for="addShowInMenu" style="font-size:0.75rem;">
-                                        <i class="fas fa-eye me-1" style="color:var(--gold);"></i> Show in Dropdown
+                                        <i class="fas fa-eye me-1" style="color:var(--gold);"></i> Dropdown
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <div class="form-check form-switch mt-3">
                                     <input class="form-check-input" type="checkbox" name="pin_to_menu" id="addPinToMenu" value="1">
                                     <label class="form-check-label fw-bold" for="addPinToMenu" style="font-size:0.75rem;">
-                                        <i class="fas fa-thumbtack me-1" style="color:var(--gold);"></i> Pin to Main Menu
+                                        <i class="fas fa-thumbtack me-1" style="color:var(--gold);"></i> Pin Menu
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <div class="form-check form-switch mt-3">
+                                    <input class="form-check-input" type="checkbox" name="is_popular" id="addIsPopular" checked value="1">
+                                    <label class="form-check-label fw-bold" for="addIsPopular" style="font-size:0.75rem;">
+                                        <i class="fas fa-star me-1" style="color:var(--gold);"></i> Popular Hero
                                     </label>
                                 </div>
                             </div>
@@ -733,23 +770,31 @@ $icons = [
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <label class="form-label">Sort Order</label>
                                 <input type="number" name="edit_sort_order" id="editSortOrder" class="form-control" min="0">
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <div class="form-check form-switch mt-3">
                                     <input class="form-check-input" type="checkbox" name="edit_show_in_menu" id="editShowInMenu" value="1" checked>
                                     <label class="form-check-label fw-bold" for="editShowInMenu" style="font-size:0.75rem;">
-                                        <i class="fas fa-eye me-1" style="color:var(--gold);"></i> Show in Dropdown
+                                        <i class="fas fa-eye me-1" style="color:var(--gold);"></i> Dropdown
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <div class="form-check form-switch mt-3">
                                     <input class="form-check-input" type="checkbox" name="edit_pin_to_menu" id="editPinToMenu" value="1">
                                     <label class="form-check-label fw-bold" for="editPinToMenu" style="font-size:0.75rem;">
-                                        <i class="fas fa-thumbtack me-1" style="color:var(--gold);"></i> Pin to Main Menu
+                                        <i class="fas fa-thumbtack me-1" style="color:var(--gold);"></i> Pin Menu
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <div class="form-check form-switch mt-3">
+                                    <input class="form-check-input" type="checkbox" name="edit_is_popular" id="editIsPopular" value="1">
+                                    <label class="form-check-label fw-bold" for="editIsPopular" style="font-size:0.75rem;">
+                                        <i class="fas fa-star me-1" style="color:var(--gold);"></i> Popular Hero
                                     </label>
                                 </div>
                             </div>
@@ -792,7 +837,7 @@ $icons = [
             document.getElementById('editIconPreview').innerHTML = '<i class="fas ' + this.value + '"></i>';
         });
 
-        function editCategory(id, name, description, icon, sort_order, show_in_menu, pin_to_menu) {
+        function editCategory(id, name, description, icon, sort_order, show_in_menu, pin_to_menu, is_popular) {
             document.getElementById('editId').value = id;
             document.getElementById('editName').value = name;
             document.getElementById('editIcon').value = icon || 'fa-tag';
@@ -801,6 +846,7 @@ $icons = [
             document.getElementById('editSortOrder').value = sort_order || 0;
             document.getElementById('editShowInMenu').checked = show_in_menu == 1;
             document.getElementById('editPinToMenu').checked = pin_to_menu == 1;
+            document.getElementById('editIsPopular').checked = (is_popular === undefined || is_popular == 1);
             
             document.querySelectorAll('#editCategoryModal .icon-option').forEach(el => {
                 el.classList.toggle('selected', el.dataset.icon === (icon || 'fa-tag'));

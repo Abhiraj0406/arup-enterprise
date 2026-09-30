@@ -265,6 +265,26 @@ if (isset($conn) && $conn) {
 }
 
 // ============================================================
+// POPULAR TAGS FOR HERO (Configurable from Admin Categories)
+// ============================================================
+$hero_popular_tags = [];
+if (!empty($active_categories)) {
+    // Check if is_popular column exists
+    $chkPop = $conn->query("SHOW COLUMNS FROM categories LIKE 'is_popular'");
+    if ($chkPop && $chkPop->num_rows == 0) {
+        $conn->query("ALTER TABLE categories ADD COLUMN is_popular TINYINT(1) DEFAULT 1");
+    }
+    foreach ($active_categories as $c) {
+        if (!isset($c['is_popular']) || ($c['is_popular'] == 1)) {
+            $hero_popular_tags[] = $c['name'];
+        }
+    }
+}
+if (empty($hero_popular_tags)) {
+    $hero_popular_tags = ['Magnetic Separator', 'Single Drum', 'Double Drum', 'Chalna Feeder', 'Magnetic Head Pulley', 'Roller Separator', 'Overband Magnet', 'Floor Sweeper', 'Lifting Magnet'];
+}
+
+// ============================================================
 // STATIC DATA (Exact Content from Arup Enterprise)
 // ============================================================
 $stats = [
@@ -335,28 +355,25 @@ function dipban_stars($r){
         <p class="hero-sub">At Arup Enterprise, we manufacture and supply cutting-edge magnetic separator systems engineered for performance, precision, and durability. From mining to food processing, our equipment ensures high purity and protects your machinery from tramp iron damage.</p>
         
         <!-- Live Quick Search -->
-        <div class="hero-search-box mb-2" style="max-width:500px;">
-            <form action="products.php" method="GET" class="d-flex gap-2">
-                <div class="input-group" style="box-shadow: 0 4px 20px rgba(0,0,0,0.3); border-radius:8px; overflow:hidden;">
-                    <span class="input-group-text bg-white border-0 text-muted ps-3"><i class="fas fa-search text-warning"></i></span>
-                    <input type="text" name="search" class="form-control border-0 py-2" placeholder="Search magnetic separators (e.g. Drum, Pulley, Roller)..." style="font-size:0.88rem;">
-                    <button type="submit" class="btn btn-warning px-3 fw-bold text-dark" style="background:var(--gold);border:none;font-size:0.88rem;">Search</button>
-                </div>
+        <div class="hero-search-wrap">
+            <form action="products.php" method="GET" class="hero-search-bar">
+                <i class="fas fa-search hero-search-icon"></i>
+                <input type="text" name="search" class="hero-search-input" placeholder="Search magnetic separators (e.g. Drum, Pulley, Roller)..." autocomplete="off">
+                <button type="submit" class="hero-search-btn">
+                    <span>Search</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </form>
         </div>
 
-        <div class="hero-tags-strip mb-3" style="display:flex; flex-wrap:wrap; gap:7px; align-items:center; max-width:760px;">
-            <span style="color:rgba(255,255,255,0.75); font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; font-weight:700;"><i class="fas fa-tags me-1 text-warning"></i> Popular:</span>
-            <a href="products.php?search=Magnetic+Separator" class="hero-tag-link">Magnetic Separator</a>
-            <a href="products.php?search=Single+Drum" class="hero-tag-link">Single Drum</a>
-            <a href="products.php?search=Double+Drum" class="hero-tag-link">Double Drum</a>
-            <a href="products.php?search=Chalna" class="hero-tag-link">Chalna Feeder</a>
-            <a href="products.php?search=Head+Pulley" class="hero-tag-link">Magnetic Head Pulley</a>
-            <a href="products.php?search=Roller" class="hero-tag-link">Roller Separator</a>
-            <a href="products.php?search=Overband" class="hero-tag-link">Overband Magnet</a>
-            <a href="products.php?search=Floor+Sweeper" class="hero-tag-link">Floor Sweeper</a>
-            <a href="products.php?search=Lifting+Magnet" class="hero-tag-link">Lifting Magnet</a>
+        <?php if (!empty($hero_popular_tags)): ?>
+        <div class="hero-tags-strip">
+            <span class="hero-tags-label"><i class="fas fa-tags me-1 text-warning"></i> Popular:</span>
+            <?php foreach ($hero_popular_tags as $tag): ?>
+                <a href="products.php?search=<?php echo urlencode($tag); ?>" class="hero-tag-link"><?php echo htmlspecialchars($tag); ?></a>
+            <?php endforeach; ?>
         </div>
+        <?php endif; ?>
 
         <div class="hero-ctas">
             <a href="#contact-form" class="cta-primary"><i class="fas fa-paper-plane"></i> Get a Free Quote</a>
@@ -723,9 +740,22 @@ img{max-width:100%;display:block}
 .cta-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,146,10,.45);color:#fff}
 .cta-secondary{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.45);color:#fff;font-size:.88rem;font-weight:600;padding:11px 22px;border-radius:8px;transition:all var(--tr);text-decoration:none}
 .cta-secondary:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,146,10,.12)}
+/* Hero Search Bar */
+.hero-search-wrap{max-width:540px;width:100%;margin-bottom:14px}
+.hero-search-bar{display:flex;align-items:center;background:#fff;border-radius:50px;padding:4px 5px 4px 16px;box-shadow:0 8px 30px rgba(0,0,0,.35);border:2px solid rgba(201,146,10,.45);transition:all var(--tr);width:100%;box-sizing:border-box}
+.hero-search-bar:focus-within{border-color:var(--gold);box-shadow:0 8px 35px rgba(201,146,10,.45)}
+.hero-search-icon{color:var(--gold);font-size:.95rem;margin-right:10px;flex-shrink:0}
+.hero-search-input{flex:1;border:none!important;outline:none!important;background:transparent!important;font-size:.9rem;color:#1c1c1c;padding:7px 4px!important;height:auto!important;box-shadow:none!important;font-family:inherit;min-width:0}
+.hero-search-input::placeholder{color:#777;font-size:.85rem}
+.hero-search-btn{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff!important;border:none!important;border-radius:40px;padding:8px 20px;font-weight:700;font-size:.85rem;cursor:pointer;transition:all var(--tr);display:inline-flex;align-items:center;gap:6px;flex-shrink:0;box-shadow:0 3px 12px rgba(201,146,10,.35)}
+.hero-search-btn:hover{background:linear-gradient(135deg,#d89f10,var(--gold));transform:translateY(-1px);box-shadow:0 5px 18px rgba(201,146,10,.45)}
+
+/* Hero Tags */
+.hero-tags-strip{display:flex;flex-wrap:wrap;gap:7px;align-items:center;max-width:780px;margin-bottom:20px}
+.hero-tags-label{color:rgba(255,255,255,.85);font-size:.72rem;text-transform:uppercase;letter-spacing:1px;font-weight:700;display:inline-flex;align-items:center;gap:5px;margin-right:3px}
+.hero-tags-label i{color:var(--gold)}
 .hero-tag-link{display:inline-flex;align-items:center;background:rgba(255,255,255,.12);color:#fff;padding:4px 12px;border-radius:16px;font-size:.74rem;font-weight:600;border:1px solid rgba(255,255,255,.2);transition:all var(--tr);backdrop-filter:blur(4px);text-decoration:none}
 .hero-tag-link:hover{background:var(--gold);color:#fff;border-color:var(--gold);transform:translateY(-1px);box-shadow:0 4px 12px rgba(201,146,10,.35)}
-.hero-search-box .form-control:focus{box-shadow:none}
 .hero-trust{display:flex;gap:18px;flex-wrap:wrap}
 .trust-item{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font-size:.8rem;font-weight:500}
 .trust-item i{color:var(--gold)}
@@ -765,7 +795,7 @@ img{max-width:100%;display:block}
 /* KPI */
 .section-kpi{background:linear-gradient(135deg,#1a1a1a,#111);padding:72px 0}
 .kpi-header{text-align:center;margin-bottom:40px}
-.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1200px;margin:0 auto;justify-content:center}
 .kpi-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,146,10,.18);border-radius:12px;padding:28px 18px;text-align:center;transition:all var(--tr)}
 .kpi-card:hover{background:rgba(201,146,10,.08);border-color:var(--gold);transform:translateY(-6px)}
 .kpi-icon{width:54px;height:54px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.2rem;color:#fff;box-shadow:var(--sh-gold)}
@@ -930,7 +960,7 @@ img{max-width:100%;display:block}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
-    .kpi-grid{grid-template-columns:repeat(3,1fr)}
+    .kpi-grid{grid-template-columns:repeat(2,1fr);max-width:680px;margin:0 auto}
     .why-grid,.industry-grid{grid-template-columns:repeat(2,1fr)}
     .process-grid{grid-template-columns:repeat(2,1fr)}
     .products-grid{grid-template-columns:repeat(2,1fr)}
@@ -948,7 +978,7 @@ img{max-width:100%;display:block}
 }
 @media(max-width:640px){
     .section{padding:52px 0}
-    .kpi-grid{grid-template-columns:1fr 1fr}
+    .kpi-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}
     .why-grid,.industry-grid,.products-grid,.process-grid{grid-template-columns:1fr}
     .hero-headline{font-size:1.65rem}
     .form-row{grid-template-columns:1fr}
