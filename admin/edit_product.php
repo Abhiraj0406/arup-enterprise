@@ -441,9 +441,22 @@ if (isset($_POST['update_product'])) {
                                 <div class="mb-3">
                                     <label class="form-label">Product Image</label>
                                     
-                                    <?php if (!empty($product['image']) && file_exists("../" . $product['image'])): ?>
+                                    <?php
+                                    $edit_img = trim($product['image'] ?? '');
+                                    $edit_src = '';
+                                    if (!empty($edit_img)) {
+                                        if (stripos($edit_img, 'http://') === 0 || stripos($edit_img, 'https://') === 0 || strpos($edit_img, '../') === 0) {
+                                            $edit_src = $edit_img;
+                                        } elseif (strpos($edit_img, '/') === 0) {
+                                            $edit_src = '..' . $edit_img;
+                                        } else {
+                                            $edit_src = '../' . $edit_img;
+                                        }
+                                    }
+                                    ?>
+                                    <?php if (!empty($edit_src)): ?>
                                         <div class="text-center">
-                                            <img src="../<?php echo $product['image']; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="current-image">
+                                            <img src="<?php echo htmlspecialchars($edit_src); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="current-image" onerror="this.parentElement.style.display='none';">
                                             <p><small class="text-muted">Current image</small></p>
                                         </div>
                                     <?php endif; ?>

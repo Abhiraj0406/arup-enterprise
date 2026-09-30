@@ -498,11 +498,25 @@ include 'includes/navbar.php';
                                         <tr data-product-name="<?php echo htmlspecialchars(mb_strtolower($p['name'])); ?>">
                                             <td class="fw-bold text-muted"><?php echo $p['id']; ?></td>
                                             <td>
-                                                <?php if (!empty($p['image']) && file_exists("../" . $p['image'])): ?>
-                                                    <img src="../<?php echo $p['image']; ?>" alt="<?php echo htmlspecialchars($p['name']); ?>" class="image-preview-small">
+                                                <?php
+                                                $prod_img = trim($p['image'] ?? '');
+                                                $prod_src = '';
+                                                if (!empty($prod_img)) {
+                                                    if (stripos($prod_img, 'http://') === 0 || stripos($prod_img, 'https://') === 0 || strpos($prod_img, '../') === 0) {
+                                                        $prod_src = $prod_img;
+                                                    } elseif (strpos($prod_img, '/') === 0) {
+                                                        $prod_src = '..' . $prod_img;
+                                                    } else {
+                                                        $prod_src = '../' . $prod_img;
+                                                    }
+                                                }
+                                                ?>
+                                                <?php if (!empty($prod_src)): ?>
+                                                    <img src="<?php echo htmlspecialchars($prod_src); ?>" alt="<?php echo htmlspecialchars($p['name']); ?>" class="image-preview-small" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+                                                    <div class="image-placeholder" style="display:none;"><i class="fas fa-image"></i></div>
                                                 <?php else: ?>
                                                     <div class="image-placeholder">
-                                                        <i class="fas fa-cog"></i>
+                                                        <i class="fas fa-image"></i>
                                                     </div>
                                                 <?php endif; ?>
                                             </td>
