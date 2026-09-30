@@ -320,30 +320,52 @@ function dipban_stars($r){
 ?>
 
 <!-- ===== HERO ===== -->
-<section class="hero" id="home">
-    <div class="hero-video-wrap">
-        <video autoplay muted loop playsinline class="hero-video"
-               poster="assets/images/about/hero-section.avif">
-            <source src="assets/video/machine-hero.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-    </div>
+<section class="hero" id="home" style="background-image: linear-gradient(135deg, rgba(16,16,16,0.85) 0%, rgba(20,20,20,0.68) 55%, rgba(14,14,14,0.80) 100%), url('assets/images/hero-bg.png'); background-size: cover; background-position: center 65%; background-repeat: no-repeat; position: relative;">
     <div class="hero-gears" aria-hidden="true">
         <svg class="gear gear-1" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
         <svg class="gear gear-2" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
         <svg class="gear gear-3" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
     </div>
     <svg style="display:none"><symbol id="gear-svg" viewBox="0 0 100 100"><path d="M43 2h14l2 10a35 35 0 0 1 8.5 3.5l9-5 10 10-5 9A35 35 0 0 1 85 38l10 2v14l-10 2a35 35 0 0 1-3.5 8.5l5 9-10 10-9-5A35 35 0 0 1 59 82l-2 10H43l-2-10a35 35 0 0 1-8.5-3.5l-9 5-10-10 5-9A35 35 0 0 1 15 56L5 54V40l10-2a35 35 0 0 1 3.5-8.5l-5-9 10-10 9 5A35 35 0 0 1 41 12zm7 22a26 26 0 1 0 0 52 26 26 0 0 0 0-52zm0 10a16 16 0 1 1 0 32 16 16 0 0 1 0-32z" fill="currentColor"/></symbol></svg>
+    
     <div class="hero-content">
-        <div class="hero-badge"><span class="badge-dot"></span>Manufacturer · Supplier · Exporter</div>
-        <h1 class="hero-headline">Industrial Magnetic Separator Manufacturer | <em>Arup Enterprise</em></h1>
-        <p class="hero-sub">Empowering industries with superior magnetic separation solutions. 38+ years of engineering excellence in Drum Separators, Suspended Magnets, Roller Separators, and custom magnetic machinery across India.</p>
+        <div class="hero-badge"><span class="badge-dot"></span>Industrial Magnetic Separator Manufacturer</div>
+        <h1 class="hero-headline">Welcome to <em>Arup Enterprise</em>,<br>Premier Industrial Magnetic Separator Manufacturer</h1>
+        <p class="hero-subhead">Empowering Industries with Superior Magnetic Separation Solutions.</p>
+        <p class="hero-sub">At Arup Enterprise, we manufacture and supply cutting-edge magnetic separator systems engineered for performance, precision, and durability. From mining to food processing, our equipment ensures high purity and protects your machinery from tramp iron damage.</p>
+        
+        <!-- Live Quick Search -->
+        <div class="hero-search-box mb-2" style="max-width:500px;">
+            <form action="products.php" method="GET" class="d-flex gap-2">
+                <div class="input-group" style="box-shadow: 0 4px 20px rgba(0,0,0,0.3); border-radius:8px; overflow:hidden;">
+                    <span class="input-group-text bg-white border-0 text-muted ps-3"><i class="fas fa-search text-warning"></i></span>
+                    <input type="text" name="search" class="form-control border-0 py-2" placeholder="Search magnetic separators (e.g. Drum, Pulley, Roller)..." style="font-size:0.88rem;">
+                    <button type="submit" class="btn btn-warning px-3 fw-bold text-dark" style="background:var(--gold);border:none;font-size:0.88rem;">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="hero-tags-strip mb-3" style="display:flex; flex-wrap:wrap; gap:7px; align-items:center; max-width:760px;">
+            <span style="color:rgba(255,255,255,0.75); font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; font-weight:700;"><i class="fas fa-tags me-1 text-warning"></i> Popular:</span>
+            <a href="products.php?search=Magnetic+Separator" class="hero-tag-link">Magnetic Separator</a>
+            <a href="products.php?search=Single+Drum" class="hero-tag-link">Single Drum</a>
+            <a href="products.php?search=Double+Drum" class="hero-tag-link">Double Drum</a>
+            <a href="products.php?search=Chalna" class="hero-tag-link">Chalna Feeder</a>
+            <a href="products.php?search=Head+Pulley" class="hero-tag-link">Magnetic Head Pulley</a>
+            <a href="products.php?search=Roller" class="hero-tag-link">Roller Separator</a>
+            <a href="products.php?search=Overband" class="hero-tag-link">Overband Magnet</a>
+            <a href="products.php?search=Floor+Sweeper" class="hero-tag-link">Floor Sweeper</a>
+            <a href="products.php?search=Lifting+Magnet" class="hero-tag-link">Lifting Magnet</a>
+        </div>
+
         <div class="hero-ctas">
             <a href="#contact-form" class="cta-primary"><i class="fas fa-paper-plane"></i> Get a Free Quote</a>
-            <a href="#products" class="cta-secondary"><i class="fas fa-th-large"></i> Explore Products</a>
+            <a href="products.php" class="cta-secondary"><i class="fas fa-th-large"></i> Explore Products</a>
         </div>
-        <div class="hero-trust">
+
+        <div class="hero-trust mt-3">
             <div class="trust-item"><i class="fas fa-check-circle"></i> ISO 9001:2015 Certified</div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i> 38+ Years Experience</div>
             <div class="trust-item"><i class="fas fa-check-circle"></i> 24/7 Expert Support</div>
             <div class="trust-item"><i class="fas fa-check-circle"></i> Pan-India Service</div>
         </div>
@@ -681,36 +703,37 @@ img{max-width:100%;display:block}
 .btn-outline-gold:hover{background:var(--gold);color:#fff;transform:translateY(-2px)}
 
 /* HERO */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;margin-top:0}
-.hero-video-wrap{position:absolute;inset:0;z-index:0}
-.hero-video{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,28,28,.92) 0%,rgba(28,28,28,.70) 60%,rgba(201,146,10,.08) 100%)}
+.hero{position:relative;min-height:calc(100vh - 110px);display:flex;align-items:center;overflow:hidden;margin-top:0}
 .hero-gears{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .gear{position:absolute;color:var(--gold);opacity:.05}
-.gear-1{width:420px;top:-80px;right:-80px;animation:gspin 42s linear infinite}
-.gear-2{width:200px;bottom:10%;left:5%;animation:gspin 28s linear infinite reverse}
-.gear-3{width:140px;top:40%;right:15%;animation:gspin 20s linear infinite}
+.gear-1{width:360px;top:-60px;right:-60px;animation:gspin 42s linear infinite}
+.gear-2{width:180px;bottom:10%;left:5%;animation:gspin 28s linear infinite reverse}
+.gear-3{width:120px;top:40%;right:15%;animation:gspin 20s linear infinite}
 @keyframes gspin{to{transform:rotate(360deg)}}
-.hero-content{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto;padding:120px 24px 100px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,146,10,.15);border:1px solid rgba(201,146,10,.4);color:var(--gold-light);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px}
+.hero-content{position:relative;z-index:2;max-width:1240px;width:100%;margin:0 auto;padding:44px 24px 36px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(201,146,10,.15);border:1px solid rgba(201,146,10,.4);color:var(--gold-light);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:12px}
 .badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:bdot 2s ease-in-out infinite}
 @keyframes bdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
-.hero-headline{font-size:clamp(2.4rem,6vw,5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px;max-width:680px}
+.hero-headline{font-size:clamp(1.75rem,2.8vw,2.6rem);font-weight:800;color:#fff;line-height:1.22;margin-bottom:12px;max-width:820px}
 .hero-headline em{color:var(--gold);font-style:normal}
-.hero-sub{color:rgba(255,255,255,.75);font-size:clamp(1rem,1.5vw,1.15rem);max-width:560px;margin-bottom:36px;line-height:1.7}
-.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:32px}
-.cta-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;font-size:.95rem;font-weight:700;padding:14px 28px;border-radius:10px;box-shadow:var(--sh-gold);transition:all var(--tr)}
-.cta-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,146,10,.5)}
-.cta-secondary{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.4);color:#fff;font-size:.95rem;font-weight:600;padding:14px 28px;border-radius:10px;transition:all var(--tr)}
-.cta-secondary:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,146,10,.1)}
-.hero-trust{display:flex;gap:20px;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:.82rem;font-weight:500}
+.hero-subhead{font-size:1.05rem;font-weight:600;color:var(--gold-light);margin-bottom:10px;line-height:1.4}
+.hero-sub{color:rgba(255,255,255,.8);font-size:.92rem;max-width:680px;margin-bottom:20px;line-height:1.6}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.cta-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;font-size:.88rem;font-weight:700;padding:11px 22px;border-radius:8px;box-shadow:var(--sh-gold);transition:all var(--tr);text-decoration:none}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,146,10,.45);color:#fff}
+.cta-secondary{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.45);color:#fff;font-size:.88rem;font-weight:600;padding:11px 22px;border-radius:8px;transition:all var(--tr);text-decoration:none}
+.cta-secondary:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,146,10,.12)}
+.hero-tag-link{display:inline-flex;align-items:center;background:rgba(255,255,255,.12);color:#fff;padding:4px 12px;border-radius:16px;font-size:.74rem;font-weight:600;border:1px solid rgba(255,255,255,.2);transition:all var(--tr);backdrop-filter:blur(4px);text-decoration:none}
+.hero-tag-link:hover{background:var(--gold);color:#fff;border-color:var(--gold);transform:translateY(-1px);box-shadow:0 4px 12px rgba(201,146,10,.35)}
+.hero-search-box .form-control:focus{box-shadow:none}
+.hero-trust{display:flex;gap:18px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font-size:.8rem;font-weight:500}
 .trust-item i{color:var(--gold)}
-.hero-scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.5);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;animation:hscroll 2s ease-in-out infinite;z-index:2}
-.scroll-mouse{width:22px;height:34px;border:2px solid rgba(255,255,255,.4);border-radius:11px;display:flex;justify-content:center;padding-top:5px}
-.scroll-dot{width:4px;height:8px;background:var(--gold);border-radius:2px;animation:sdot 2s ease-in-out infinite}
-@keyframes sdot{0%,100%{transform:translateY(0);opacity:1}60%{transform:translateY(12px);opacity:0}}
-@keyframes hscroll{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.hero-scroll-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.45);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;animation:hscroll 2s ease-in-out infinite;z-index:2}
+.scroll-mouse{width:18px;height:28px;border:1.5px solid rgba(255,255,255,.35);border-radius:9px;display:flex;justify-content:center;padding-top:4px}
+.scroll-dot{width:3px;height:6px;background:var(--gold);border-radius:2px;animation:sdot 2s ease-in-out infinite}
+@keyframes sdot{0%,100%{transform:translateY(0);opacity:1}60%{transform:translateY(10px);opacity:0}}
+@keyframes hscroll{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}
 
 /* STATS */
 .section-stats{background:linear-gradient(135deg,var(--charcoal),#2a2a2a);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);padding:40px 24px}
@@ -927,7 +950,7 @@ img{max-width:100%;display:block}
     .section{padding:52px 0}
     .kpi-grid{grid-template-columns:1fr 1fr}
     .why-grid,.industry-grid,.products-grid,.process-grid{grid-template-columns:1fr}
-    .hero-headline{font-size:2rem}
+    .hero-headline{font-size:1.65rem}
     .form-row{grid-template-columns:1fr}
     .hero-ctas{flex-direction:column}
     .about-img-secondary{display:none}
