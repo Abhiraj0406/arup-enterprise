@@ -1201,6 +1201,15 @@ foreach ($pinned_categories as $pc) {
                 </div>
             </div>
 
+            <!-- Pinned Categories -->
+            <?php foreach ($pinned_categories as $pc): ?>
+            <div class="db-nav-item">
+                <a href="<?php echo $base_url; ?>/products?category=<?php echo urlencode($pc['name']); ?>" class="db-nav-link <?php echo (isset($_GET['category']) && strtolower($_GET['category']) == strtolower($pc['name'])) ? 'active' : ''; ?>">
+                    <?php echo htmlspecialchars($pc['name']); ?>
+                </a>
+            </div>
+            <?php endforeach; ?>
+
             <!-- Our Products -->
             <div class="db-nav-item">
                 <a href="<?php echo $base_url; ?>/products" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
@@ -1282,8 +1291,8 @@ foreach ($pinned_categories as $pc) {
                      class="db-mn-logo-img">
             <?php else: ?>
                 <div>
-                    <div class="db-mn-logo-text">Dip<em>Ban</em></div>
-                    <span class="db-mn-logo-sub">Technical Services</span>
+                    <div class="db-mn-logo-text">Arup<em>Enterprise</em></div>
+                    <span class="db-mn-logo-sub">Magnetic Separators</span>
                 </div>
             <?php endif; ?>
         </a>
@@ -1299,8 +1308,6 @@ foreach ($pinned_categories as $pc) {
                 Home
             </span>
         </a>
-
-     
 
         <!-- Application accordion -->
         <button class="db-mn-link db-mn-product-toggle" id="dbMnProductToggle" aria-expanded="false">
@@ -1320,6 +1327,15 @@ foreach ($pinned_categories as $pc) {
                 All Applications
             </a>
         </div>
+
+        <?php foreach ($pinned_categories as $pc): ?>
+        <a href="<?php echo $base_url; ?>/products?category=<?php echo urlencode($pc['name']); ?>" class="db-mn-link">
+            <span class="db-mn-link-left">
+                <i class="fas <?php echo !empty($pc['icon']) ? htmlspecialchars($pc['icon']) : 'fa-tag'; ?>" style="color:var(--gold); width:20px;"></i>
+                <?php echo htmlspecialchars($pc['name']); ?>
+            </span>
+        </a>
+        <?php endforeach; ?>
 
         <a href="<?php echo $base_url; ?>/products" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
@@ -1356,9 +1372,9 @@ foreach ($pinned_categories as $pc) {
             <i class="fas fa-paper-plane"></i> Get a Free Quote
         </a>
         <div class="db-mn-contact-row">
-            <a href="tel:+918013635806"><i class="fas fa-phone-alt"></i> +91 8013635806</a>
+            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '+918013635806')); ?>"><i class="fas fa-phone-alt"></i> <?php echo htmlspecialchars($site_settings['phone'] ?? '+91 8013635806'); ?></a>
             <span class="sep">·</span>
-            <a href="mailto:sudip@dipbantechnicalsolution.in"><i class="fas fa-envelope"></i> Email</a>
+            <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? 'enterprisearup@gmail.com'); ?>"><i class="fas fa-envelope"></i> Email</a>
         </div>
     </div>
 

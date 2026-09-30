@@ -93,6 +93,7 @@ CREATE TABLE `categories` (
   `name` varchar(120) NOT NULL,
   `slug` varchar(130) NOT NULL,
   `description` text DEFAULT NULL,
+  `icon` varchar(100) DEFAULT 'fa-tag',
   `image` varchar(400) DEFAULT NULL,
   `show_in_menu` tinyint(1) NOT NULL DEFAULT 1,
   `pin_to_menu` tinyint(1) NOT NULL DEFAULT 0,

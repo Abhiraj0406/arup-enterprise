@@ -88,8 +88,19 @@ if (isset($_POST['update_product'])) {
         $image_path = trim($_POST['image_url']);
     }
     
-    $stmt = $conn->prepare("UPDATE products SET name = ?, category = ?, sub_category = ?, description = ?, features = ?, specifications = ?, image = ?, status = ?, featured = ?, sort_order = ? WHERE id = ?");
-    $stmt->bind_param("ssssssssiii", $name, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order, $product_id);
+    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
+    if (empty($slug)) $slug = 'product-' . time();
+
+    // Ensure slug uniqueness
+    $slugCheck = $conn->prepare("SELECT id FROM products WHERE slug = ? AND id != ?");
+    $slugCheck->bind_param("si", $slug, $product_id);
+    $slugCheck->execute();
+    if ($slugCheck->get_result()->num_rows > 0) {
+        $slug .= '-' . time();
+    }
+
+    $stmt = $conn->prepare("UPDATE products SET name = ?, slug = ?, category = ?, sub_category = ?, description = ?, features = ?, specifications = ?, image = ?, status = ?, featured = ?, sort_order = ? WHERE id = ?");
+    $stmt->bind_param("sssssssssiii", $name, $slug, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order, $product_id);
     if ($stmt->execute()) {
         $_SESSION['success'] = "Product '{$name}' updated successfully!";
         header("Location: products.php");

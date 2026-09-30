@@ -82,12 +82,23 @@ if (isset($_POST['save_product'])) {
         $image_path = trim($_POST['image_url']);
     }
 
+    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
+    if (empty($slug)) $slug = 'product-' . time();
+
+    // Ensure slug uniqueness
+    $slugCheck = $conn->prepare("SELECT id FROM products WHERE slug = ? AND id != ?");
+    $slugCheck->bind_param("si", $slug, $edit_id);
+    $slugCheck->execute();
+    if ($slugCheck->get_result()->num_rows > 0) {
+        $slug .= '-' . time();
+    }
+
     if ($edit_mode && $edit_id > 0) {
-        $stmt = $conn->prepare("UPDATE products SET name=?, category=?, sub_category=?, description=?, features=?, specifications=?, image=?, status=?, featured=?, sort_order=? WHERE id=?");
-        $stmt->bind_param("ssssssssiii", $name, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order, $edit_id);
+        $stmt = $conn->prepare("UPDATE products SET name=?, slug=?, category=?, sub_category=?, description=?, features=?, specifications=?, image=?, status=?, featured=?, sort_order=? WHERE id=?");
+        $stmt->bind_param("sssssssssiii", $name, $slug, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order, $edit_id);
     } else {
-        $stmt = $conn->prepare("INSERT INTO products (name, category, sub_category, description, features, specifications, image, status, featured, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("ssssssssii", $name, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order);
+        $stmt = $conn->prepare("INSERT INTO products (name, slug, category, sub_category, description, features, specifications, image, status, featured, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("sssssssssii", $name, $slug, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order);
     }
 
     if ($stmt && $stmt->execute()) {
