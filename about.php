@@ -7,149 +7,119 @@ include 'includes/header.php';
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- ═══════════════════════════════════════════════
-     ABOUT HERO  —  Real Background + Blueprint Sparks
-════════════════════════════════════════════════ -->
-<section class="ab-hero" id="ab-hero">
-  <!-- Hero background photo with dark industrial gradient overlay -->
-  <div class="ab-hero-bg" style="background-image: url('assets/images/about/ab-scaled.jpg');"></div>
-  <div class="ab-hero-overlay"></div>
-
-  <!-- Particle canvas (golden sparks) -->
-  <canvas class="ab-sparks" id="sparksCanvas" aria-hidden="true"></canvas>
-
-  <!-- Blueprint grid overlay -->
-  <div class="ab-grid-overlay" aria-hidden="true"></div>
-
-  <!-- Hero content -->
-  <div class="ab-hero-content container">
-    <nav class="ab-breadcrumb" aria-label="breadcrumb">
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 1: HERO BANNER (Matches Live Elementor Section 1)
+═══════════════════════════════════════════════════════════════ -->
+<section class="ae-hero-banner" style="background-image: url('assets/images/about/ab-scaled.jpg');">
+  <div class="ae-hero-overlay"></div>
+  <div class="container ae-hero-container">
+    <h1 class="ae-hero-title">About us</h1>
+    <nav class="ae-breadcrumb" aria-label="breadcrumb">
       <a href="index.php">Home</a>
-      <svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 2l4 3-4 3" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-      <span>About Us</span>
+      <span class="ae-bc-sep">/</span>
+      <span class="ae-bc-current">About us</span>
     </nav>
+  </div>
+  <!-- Wave shape divider matching Elementor bottom divider -->
+  <div class="ae-shape-bottom" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+      <path class="ae-shape-fill" d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V100H0V0c0,0,76.3,23.4,124.7,29.9c48.4,6.5,99.8-3.1,148.2-12.8C321.3,7.4,374.8,9,421.9,6.5z"></path>
+    </svg>
+  </div>
+</section>
 
-    <div class="ab-hero-badge">
-      <i class="fas fa-certificate" style="color:var(--gold)"></i>
-      Est. 1986 · Tangra, Kolkata
-    </div>
 
-    <h1 class="ab-hero-title">
-      <span class="ab-title-line1">Driven by Innovation</span>
-      <span class="ab-title-line2">Trusted for Quality</span>
-      <span class="ab-title-line3">Since 1986 · 38+ Years</span>
-    </h1>
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 2: DRIVEN BY INNOVATION & 4 CORE CAPABILITIES
+═══════════════════════════════════════════════════════════════ -->
+<section class="ae-section ae-sec-innovation">
+  <div class="container">
+    <div class="ae-innov-grid">
 
-    <p class="ab-hero-sub">
-      Established in 1986, Arup Enterprise has been a trusted name in the field of magnetic equipment and industrial solutions. Based in Tangra, Kolkata, we serve clients across the city and throughout India with high-quality products, dedicated engineering service, and unmatched dependability.
-    </p>
-
-    <div class="ab-hero-stats">
-      <div class="ab-hs">
-        <span class="ab-hs-n" data-target="38">0</span><sup>+</sup>
-        <span class="ab-hs-l">Years of Service</span>
+      <!-- Left Column: 4-Image Equipment Showcase Grid -->
+      <div class="ae-innov-images">
+        <div class="ae-img-grid">
+          <div class="ae-grid-item">
+            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.07-AM.jpeg" alt="Arup Enterprise Magnetic Equipment" loading="lazy">
+          </div>
+          <div class="ae-grid-item">
+            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.29-AM-1024x1024.jpeg" alt="Magnetic Separator Machinery" loading="lazy">
+          </div>
+          <div class="ae-grid-item">
+            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.26-AM-1024x1024.jpeg" alt="Precision Drum Fabrication" loading="lazy">
+          </div>
+          <div class="ae-grid-item">
+            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.20-AM-1024x1024.jpeg" alt="Industrial Pulley & Drum Components" loading="lazy">
+          </div>
+        </div>
       </div>
-      <div class="ab-hs-div"></div>
-      <div class="ab-hs">
-        <span class="ab-hs-n" data-target="500">0</span><sup>+</sup>
-        <span class="ab-hs-l">Industrial Clients</span>
-      </div>
-      <div class="ab-hs-div"></div>
-      <div class="ab-hs">
-        <span class="ab-hs-n" data-target="100">0</span><sup>%</sup>
-        <span class="ab-hs-l">Satisfaction</span>
-      </div>
-    </div>
 
-    <div class="ab-hero-scroll" aria-hidden="true">
-      <span></span>Scroll to explore our story
+      <!-- Right Column: Heading, Paragraph & 4 Feature Cards -->
+      <div class="ae-innov-content">
+        <h2 class="ae-innov-heading">Driven by Innovation, Trusted for Quality Since 1986</h2>
+        <p class="ae-innov-desc">
+          Established in 1986, Arup Enterprise has been a trusted name in the field of magnetic equipment and industrial solutions. Based in Tangra, Kolkata, we serve clients across the city with high-quality products and dedicated service. Our commitment to innovation and customer satisfaction has helped us build long-term relationships. We continue to expand and evolve, offering reliable solutions that meet modern industrial demands.
+        </p>
+
+        <!-- 4 Feature Cards (2x2 Icon Boxes) -->
+        <div class="ae-cards-grid">
+          <div class="ae-card-item">
+            <div class="ae-card-icon">
+              <i class="fas fa-quote-right"></i>
+            </div>
+            <div class="ae-card-text">
+              <h3>Magnetic Separation Systems</h3>
+              <p>Efficiently remove ferrous contaminants from bulk materials using advanced magnetic separation technology.</p>
+            </div>
+          </div>
+
+          <div class="ae-card-item">
+            <div class="ae-card-icon">
+              <i class="fas fa-check-double"></i>
+            </div>
+            <div class="ae-card-text">
+              <h3>Pulley and Industrial Components</h3>
+              <p>High-performance pulleys and components designed to ensure smooth industrial operations with long-lasting durability.</p>
+            </div>
+          </div>
+
+          <div class="ae-card-item">
+            <div class="ae-card-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="ae-card-text">
+              <h3>Custom Steel Solutions</h3>
+              <p>Tailor-made stainless steel products built to match your specific industrial requirements with precision and strength.</p>
+            </div>
+          </div>
+
+          <div class="ae-card-item">
+            <div class="ae-card-icon">
+              <i class="fas fa-th"></i>
+            </div>
+            <div class="ae-card-text">
+              <h3>Magnetic Tools and Grids</h3>
+              <p>Reliable magnetic tools and grids for safe, easy handling and separation of metallic particles in various applications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════════════
-     CORE CAPABILITIES / SOLUTION CARDS
-════════════════════════════════════════════════ -->
-<section class="ab-section ab-capabilities">
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 3: ABOUT US (Company Story & Industries We Serve)
+═══════════════════════════════════════════════════════════════ -->
+<section class="ae-section ae-sec-story">
   <div class="container">
-    <div class="ab-section-head">
-      <span class="ab-eyebrow">What We Deliver</span>
-      <h2 class="ab-h2">High-Performance <em>Magnetic &amp; Industrial</em> Solutions</h2>
-      <p class="ab-head-desc">Precision-engineered machinery built to withstand demanding industrial environments.</p>
-    </div>
+    <div class="ae-story-wrap">
+      <h2 class="ae-sec-title">About Us</h2>
 
-    <div class="ab-cap-layout">
-      <!-- Showcase Image Column -->
-      <div class="ab-cap-media">
-        <div class="ab-media-card">
-          <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.07-AM.jpeg" alt="Arup Enterprise Manufacturing Equipment" class="ab-media-img" loading="lazy">
-          <div class="ab-media-badge">
-            <i class="fas fa-check-circle"></i>
-            <span>Heavy-Duty Industrial Manufacturing</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 Solution Cards -->
-      <div class="ab-cap-grid">
-        <div class="ab-cap-card">
-          <div class="ab-cap-icon">
-            <i class="fas fa-magnet"></i>
-          </div>
-          <div class="ab-cap-content">
-            <h3>Magnetic Separation Systems</h3>
-            <p>Efficiently remove ferrous contaminants from bulk materials using advanced magnetic separation technology.</p>
-          </div>
-        </div>
-
-        <div class="ab-cap-card">
-          <div class="ab-cap-icon">
-            <i class="fas fa-cog"></i>
-          </div>
-          <div class="ab-cap-content">
-            <h3>Pulley &amp; Industrial Components</h3>
-            <p>High-performance pulleys and components designed to ensure smooth industrial operations with long-lasting durability.</p>
-          </div>
-        </div>
-
-        <div class="ab-cap-card">
-          <div class="ab-cap-icon">
-            <i class="fas fa-industry"></i>
-          </div>
-          <div class="ab-cap-content">
-            <h3>Custom Steel Solutions</h3>
-            <p>Tailor-made stainless steel products built to match your specific industrial requirements with precision and strength.</p>
-          </div>
-        </div>
-
-        <div class="ab-cap-card">
-          <div class="ab-cap-icon">
-            <i class="fas fa-th-large"></i>
-          </div>
-          <div class="ab-cap-content">
-            <h3>Magnetic Tools &amp; Grids</h3>
-            <p>Reliable magnetic tools and grids for safe, easy handling and separation of metallic particles in various applications.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════
-     OUR STORY & WORKSHOP SHOWCASE
-════════════════════════════════════════════════ -->
-<section class="ab-section ab-who">
-  <div class="container">
-    <div class="ab-who-grid">
-      <!-- Text side -->
-      <div class="ab-who-text">
-        <span class="ab-eyebrow">Our Story</span>
-        <h2 class="ab-h2">Powering Industries with <em>Precision &amp; Integrity</em></h2>
-        
-        <p class="ab-p-highlight">
+      <div class="ae-story-paragraphs">
+        <p>
           Established in 1986, Arup Enterprise has earned a strong reputation as a trusted name in the field of magnetic separation and industrial machinery manufacturing. Based in Tangra, Kolkata, we are known as one of the leading Magnetic Drum Manufacturers in the region, serving industries across India with reliable and effective solutions.
         </p>
         <p>
@@ -158,202 +128,19 @@ include 'includes/header.php';
         <p>
           Our team consists of skilled professionals who are passionate about innovation, precision engineering, and delivering results. From product design to customer service, every process is handled with care, dedication, and professionalism.
         </p>
-
-        <div class="ab-who-tags">
-          <span><i class="fas fa-map-marker-alt"></i>Tangra, Kolkata</span>
-          <span><i class="fas fa-calendar-check"></i>Est. 1986</span>
-          <span><i class="fas fa-globe"></i>Pan-India Service</span>
-          <span><i class="fas fa-shield-alt"></i>Tested Quality</span>
-        </div>
-
-        <div class="ab-who-actions">
-          <a href="contact.php" class="ab-cta-inline">
-            Get a Free Consultation
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </a>
-        </div>
       </div>
 
-      <!-- Workshop Gallery Showcase -->
-      <div class="ab-who-gallery">
-        <div class="ab-gallery-main">
-          <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.20-AM-1024x1024.jpeg" alt="Workshop Assembly" loading="lazy">
-          <div class="ab-gallery-badge">
-            <i class="fas fa-tools"></i> Kolkata Fabrication Facility
-          </div>
-        </div>
-        <div class="ab-gallery-thumbs">
-          <div class="ab-thumb">
-            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.26-AM-1024x1024.jpeg" alt="Magnetic Drum Precision Fabrication" loading="lazy">
-            <span class="ab-thumb-lbl">Precision Drum Assembly</span>
-          </div>
-          <div class="ab-thumb">
-            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.29-AM-1024x1024.jpeg" alt="Industrial Drum Fabrication" loading="lazy">
-            <span class="ab-thumb-lbl">Heavy Machine Component</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════
-     INDUSTRIES WE SERVE
-════════════════════════════════════════════════ -->
-<section class="ab-section ab-industries">
-  <div class="container">
-    <div class="ab-section-head">
-      <span class="ab-eyebrow">Sectors We Empower</span>
-      <h2 class="ab-h2">Trusted Across <em>Heavy &amp; Processing</em> Industries</h2>
-      <p class="ab-head-desc">We are proud to serve a wide range of industries with specialized iron recovery and tramp metal separation systems:</p>
-    </div>
-
-    <div class="ab-ind-grid">
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">01</div>
-        <div class="ab-ind-icon"><i class="fas fa-cubes"></i></div>
-        <h3>Iron &amp; Steel Plants</h3>
-        <p>Continuous tramp iron extraction from burden conveyors, scrap processing, and furnace charge protection.</p>
-      </div>
-
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">02</div>
-        <div class="ab-ind-icon"><i class="fas fa-fire"></i></div>
-        <h3>Casting Plants</h3>
-        <p>Reclaiming sprue, gate metal, and cleansing moulding sand for recycled reuse in foundry processes.</p>
-      </div>
-
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">03</div>
-        <div class="ab-ind-icon"><i class="fas fa-mountain"></i></div>
-        <h3>Cement Plants</h3>
-        <p>Protecting crushers, roller presses, and ball mills from destructive ferrous debris in raw material streams.</p>
-      </div>
-
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">04</div>
-        <div class="ab-ind-icon"><i class="fas fa-layer-group"></i></div>
-        <h3>Sponge Iron &amp; Pig Iron</h3>
-        <p>High-gradient separation of metallized DRI fines, char separation, and iron yield optimization.</p>
-      </div>
-
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">05</div>
-        <div class="ab-ind-icon"><i class="fas fa-dumpster"></i></div>
-        <h3>Iron Slag Separation</h3>
-        <p>Recovering high-purity metallic content from blast furnace and induction furnace slag waste.</p>
-      </div>
-
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">06</div>
-        <div class="ab-ind-icon"><i class="fas fa-wind"></i></div>
-        <h3>Sand Recovery from Castings</h3>
-        <p>Complete de-ironing of thermal or mechanically reclaimed foundry sands for zero-defect casting production.</p>
-      </div>
-
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">07</div>
-        <div class="ab-ind-icon"><i class="fas fa-recycle"></i></div>
-        <h3>Recycling Units</h3>
-        <p>Sorting shredded metal, plastic flakes, rubber crumbs, and municipal solid waste streams.</p>
-      </div>
-
-      <div class="ab-ind-card">
-        <div class="ab-ind-num">08</div>
-        <div class="ab-ind-icon"><i class="fas fa-microchip"></i></div>
-        <h3>E-Waste Metal Recovery</h3>
-        <p>Precision extraction of ferrous pins, brackets, and electronic shred residue in compliance with clean recovery standards.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════
-     OUR PROCESS: From Concept to Completion
-════════════════════════════════════════════════ -->
-<section class="ab-section ab-process" style="background-image: linear-gradient(rgba(14,14,14,0.92), rgba(14,14,14,0.92)), url('assets/images/about/hero-section.avif');">
-  <div class="container">
-    <div class="ab-section-head">
-      <span class="ab-eyebrow">Our Workflow</span>
-      <h2 class="ab-h2" style="color:#FFF;">From Concept to <em>Completion</em></h2>
-      <p class="ab-head-desc" style="color:rgba(255,255,255,0.7);">
-        At Arup Enterprise, we follow a structured and efficient workflow that ensures quality, customization, and timely delivery. From understanding your unique requirements to delivering reliable magnetic solutions, every stage is handled with precision and dedication.
-      </p>
-    </div>
-
-    <div class="ab-proc-grid">
-      <div class="ab-proc-card">
-        <div class="ab-proc-step">STEP 01</div>
-        <div class="ab-proc-icon"><i class="fas fa-clipboard-list"></i></div>
-        <h3>Client Requirement Analysis</h3>
-        <p>We analyze your specific raw material characteristics, flow rate, particle size distribution, and plant operating environment.</p>
-      </div>
-
-      <div class="ab-proc-card">
-        <div class="ab-proc-step">STEP 02</div>
-        <div class="ab-proc-icon"><i class="fas fa-pencil-ruler"></i></div>
-        <h3>Design &amp; Engineering</h3>
-        <p>Our engineering team models the optimal magnetic circuit, drum dimensions, and structural framework tailored to your layout.</p>
-      </div>
-
-      <div class="ab-proc-card">
-        <div class="ab-proc-step">STEP 03</div>
-        <div class="ab-proc-icon"><i class="fas fa-cogs"></i></div>
-        <h3>Production &amp; Testing</h3>
-        <p>In-house precision fabrication in Kolkata using high-grade magnetic cores and stainless steel, followed by rigorous Gauss testing.</p>
-      </div>
-
-      <div class="ab-proc-card">
-        <div class="ab-proc-step">STEP 04</div>
-        <div class="ab-proc-icon"><i class="fas fa-truck-loading"></i></div>
-        <h3>Delivery &amp; Installation</h3>
-        <p>Safe on-site dispatch across India accompanied by installation guidance, operational testing, and ongoing spare parts support.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════
-     MISSION  VISION  VALUES
-════════════════════════════════════════════════ -->
-<section class="ab-section ab-mvv">
-  <div class="container">
-    <div class="ab-section-head">
-      <span class="ab-eyebrow">Our Foundation</span>
-      <h2 class="ab-h2">Mission, Vision &amp; <em>Values</em></h2>
-    </div>
-
-    <div class="ab-mvv-grid">
-      <div class="ab-mvv-card ab-mvv-mission">
-        <div class="ab-mvv-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
-        </div>
-        <h3>Our Mission</h3>
-        <p>To empower industrial plants with durable, high-efficiency magnetic separation equipment backed by prompt engineering assistance, genuine spare components, and continuous operational reliability.</p>
-      </div>
-
-      <div class="ab-mvv-card ab-mvv-vision">
-        <div class="ab-mvv-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
-        </div>
-        <h3>Our Vision</h3>
-        <p>To remain the preferred manufacturer and technological authority in magnetic separation across India — recognized for precision engineering, product durability, and long-standing client relationships.</p>
-      </div>
-
-      <div class="ab-mvv-card ab-mvv-values">
-        <div class="ab-mvv-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Our Values</h3>
-        <ul class="ab-values-list">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Precision in every magnetic core</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Integrity and transparency in client deals</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Custom engineering built for real site demands</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Rugged materials with zero compromise</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Dedicated after-sales service and support</li>
+      <div class="ae-industries-block">
+        <h3 class="ae-ind-subtitle">We are proud to serve a wide range of industries, including:</h3>
+        <ul class="ae-industries-list">
+          <li><i class="fas fa-check-circle"></i><span>Iron and Steel Plants</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Casting Plants</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Cement Plants</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Sponge Iron and Pig Iron Processing</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Iron Slag Separation</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Sand Recovery from Castings</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Recycling Units</span></li>
+          <li><i class="fas fa-check-circle"></i><span>E-Waste Metal Recovery Facilities</span></li>
         </ul>
       </div>
     </div>
@@ -361,159 +148,217 @@ include 'includes/header.php';
 </section>
 
 
-<!-- ═══════════════════════════════════════════
-     TIMELINE: 1986 to Present
-════════════════════════════════════════════ -->
-<section class="ab-section ab-timeline-section">
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 4: STATISTICS / COUNTERS (Matches Live Elementor Section 4)
+═══════════════════════════════════════════════════════════════ -->
+<section class="ae-section ae-sec-counters">
   <div class="container">
-    <div class="ab-section-head">
-      <span class="ab-eyebrow">Our Journey</span>
-      <h2 class="ab-h2">Milestones That <em>Define Us</em></h2>
-    </div>
-
-    <div class="ab-timeline">
-      <div class="ab-tl-spine"></div>
-
-      <div class="ab-tl-item">
-        <div class="ab-tl-yr">1986</div>
-        <div class="ab-tl-node"></div>
-        <div class="ab-tl-card">
-          <h4>Established in Kolkata</h4>
-          <p>Arup Enterprise was founded in Tangra, Kolkata, starting with specialized manufacturing of magnetic separation machinery and magnetic drums for regional industries.</p>
+    <div class="ae-counters-grid">
+      <!-- Counter 1: 100% Satisfied Clients -->
+      <div class="ae-counter-card">
+        <div class="ae-cnt-icon">
+          <i class="fas fa-users"></i>
         </div>
+        <div class="ae-cnt-number-wrap">
+          <span class="ae-cnt-num" data-target="100">0</span><span class="ae-cnt-suffix">%</span>
+        </div>
+        <h4 class="ae-cnt-title">Satisfied Clients</h4>
       </div>
 
-      <div class="ab-tl-item ab-tl-right">
-        <div class="ab-tl-yr">1995</div>
-        <div class="ab-tl-node"></div>
-        <div class="ab-tl-card">
-          <h4>Expanding Industrial Capabilities</h4>
-          <p>Expanded product lines to include heavy-duty pulleys, permanent magnetic head pulleys, and custom stainless steel separation equipment.</p>
+      <!-- Counter 2: 7,000+ Custom Solutions Delivered -->
+      <div class="ae-counter-card">
+        <div class="ae-cnt-icon">
+          <i class="fas fa-shipping-fast"></i>
         </div>
+        <div class="ae-cnt-number-wrap">
+          <span class="ae-cnt-num" data-target="7000">0</span><span class="ae-cnt-suffix">+</span>
+        </div>
+        <h4 class="ae-cnt-title">Custom Solutions Delivered</h4>
       </div>
 
-      <div class="ab-tl-item">
-        <div class="ab-tl-yr">2010</div>
-        <div class="ab-tl-node"></div>
-        <div class="ab-tl-card">
-          <h4>Pan-India Supply Network</h4>
-          <p>Extended our trusted delivery network to steel, cement, foundry, and recycling plants nationwide, becoming a recognized manufacturer across India.</p>
+      <!-- Counter 3: 28k+ Products Delivered -->
+      <div class="ae-counter-card">
+        <div class="ae-cnt-icon">
+          <i class="fas fa-project-diagram"></i>
         </div>
+        <div class="ae-cnt-number-wrap">
+          <span class="ae-cnt-num" data-target="28">0</span><span class="ae-cnt-suffix">k+</span>
+        </div>
+        <h4 class="ae-cnt-title">Products Delivered</h4>
       </div>
 
-      <div class="ab-tl-item ab-tl-right">
-        <div class="ab-tl-yr">2025+</div>
-        <div class="ab-tl-node ab-tl-node-latest"></div>
-        <div class="ab-tl-card ab-tl-card-latest">
-          <span class="ab-tl-live">38+ YEARS</span>
-          <h4>Continuous Engineering Innovation</h4>
-          <p>Combining four decades of technical mastery with contemporary fabrication standards to provide high-Gauss, long-lasting industrial separation systems.</p>
+      <!-- Counter 4: 38+ Years Experience -->
+      <div class="ae-counter-card">
+        <div class="ae-cnt-icon">
+          <i class="fas fa-award"></i>
         </div>
+        <div class="ae-cnt-number-wrap">
+          <span class="ae-cnt-num" data-target="38">0</span><span class="ae-cnt-suffix">+</span>
+        </div>
+        <h4 class="ae-cnt-title">Years Experience</h4>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════════
-     FREQUENTLY ASKED QUESTIONS
-════════════════════════════════════════════ -->
-<section class="ab-section ab-faqs">
-  <div class="container">
-    <div class="ab-section-head">
-      <span class="ab-eyebrow">Need Answers?</span>
-      <h2 class="ab-h2">Frequently Asked <em>Questions</em></h2>
-      <p class="ab-head-desc">Common questions about our magnetic separation systems, custom options, and technical support.</p>
-    </div>
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 5: OUR PROCESS (From Concept to Completion)
+═══════════════════════════════════════════════════════════════ -->
+<section class="ae-section ae-sec-process" style="background-image: url('assets/images/about/hero-section.avif');">
+  <div class="ae-proc-overlay"></div>
+  <div class="container ae-proc-container">
+    <div class="ae-proc-grid">
 
-    <div class="ab-faq-layout">
-      <!-- Left side: visual box -->
-      <div class="ab-faq-visual">
-        <div class="ab-faq-img-card">
-          <img src="assets/images/about/airport-security.avif" alt="Industrial Technical Inspection" loading="lazy">
-          <div class="ab-faq-highlight">
-            <div class="ab-faq-highlight-badge">38+ Years of Service</div>
-            <h3>Magnetic Separation Solutions Since 1986</h3>
-            <p>Delivering reliable magnetic separation solutions with unmatched industry experience and direct engineering support.</p>
+      <!-- Left Column: Process text -->
+      <div class="ae-proc-text">
+        <span class="ae-proc-eyebrow">Our Process</span>
+        <h2 class="ae-proc-heading">From Concept to Completion</h2>
+        <p class="ae-proc-desc">
+          At Arup Enterprise, we follow a structured and efficient workflow that ensures quality, customization, and timely delivery. From understanding your unique requirements to delivering reliable magnetic solutions, every stage is handled with precision and dedication. Our experienced team works closely with clients to provide the most effective and durable systems tailored to specific industrial applications.
+        </p>
+      </div>
+
+      <!-- Right Column: 4 Progress Bars -->
+      <div class="ae-proc-bars">
+        <div class="ae-skill-item">
+          <div class="ae-skill-head">
+            <span class="ae-skill-title">Client Requirement Analysis</span>
+            <span class="ae-skill-pct">98%</span>
+          </div>
+          <div class="ae-skill-track">
+            <div class="ae-skill-fill" data-pct="98"></div>
+          </div>
+        </div>
+
+        <div class="ae-skill-item">
+          <div class="ae-skill-head">
+            <span class="ae-skill-title">Design &amp; Engineering</span>
+            <span class="ae-skill-pct">90%</span>
+          </div>
+          <div class="ae-skill-track">
+            <div class="ae-skill-fill" data-pct="90"></div>
+          </div>
+        </div>
+
+        <div class="ae-skill-item">
+          <div class="ae-skill-head">
+            <span class="ae-skill-title">Production &amp; Testing</span>
+            <span class="ae-skill-pct">95%</span>
+          </div>
+          <div class="ae-skill-track">
+            <div class="ae-skill-fill" data-pct="95"></div>
+          </div>
+        </div>
+
+        <div class="ae-skill-item">
+          <div class="ae-skill-head">
+            <span class="ae-skill-title">Delivery &amp; Installation</span>
+            <span class="ae-skill-pct">85%</span>
+          </div>
+          <div class="ae-skill-track">
+            <div class="ae-skill-fill" data-pct="85"></div>
           </div>
         </div>
       </div>
 
-      <!-- Right side: Accordion -->
-      <div class="ab-faq-list">
-        <div class="ab-faq-item active">
-          <button type="button" class="ab-faq-trigger" aria-expanded="true">
-            <span>What is a magnetic separator and how does it work?</span>
-            <i class="fas fa-chevron-down ab-faq-icon"></i>
-          </button>
-          <div class="ab-faq-body" style="display:block;">
-            <p>A magnetic separator is a machine used to separate magnetic materials from non-magnetic ones, commonly used in metal recycling, waste processing, casting plants, and industrial material handling applications.</p>
-          </div>
-        </div>
-
-        <div class="ab-faq-item">
-          <button type="button" class="ab-faq-trigger" aria-expanded="false">
-            <span>What types of magnetic separation equipment do you provide?</span>
-            <i class="fas fa-chevron-down ab-faq-icon"></i>
-          </button>
-          <div class="ab-faq-body">
-            <p>We offer Drum Magnetic Separators (Single &amp; Double Drum), Overband Magnetic Separators, Electromagnetic Separators, Permanent Magnetic Head Pulleys, and custom magnetic tools &amp; grids for various industrial needs.</p>
-          </div>
-        </div>
-
-        <div class="ab-faq-item">
-          <button type="button" class="ab-faq-trigger" aria-expanded="false">
-            <span>Can your magnetic separators be customized?</span>
-            <i class="fas fa-chevron-down ab-faq-icon"></i>
-          </button>
-          <div class="ab-faq-body">
-            <p>Yes, we provide fully customizable magnetic separation systems based on your material type, bulk density, particle size, conveyor belt width, operating capacity, and industry requirements.</p>
-          </div>
-        </div>
-
-        <div class="ab-faq-item">
-          <button type="button" class="ab-faq-trigger" aria-expanded="false">
-            <span>Do you provide installation and maintenance support?</span>
-            <i class="fas fa-chevron-down ab-faq-icon"></i>
-          </button>
-          <div class="ab-faq-body">
-            <p>Yes, we provide complete support including installation guidance, testing, genuine spare parts replacement, and periodic maintenance to ensure continuous long-term performance.</p>
-          </div>
-        </div>
-
-        <div class="ab-faq-item">
-          <button type="button" class="ab-faq-trigger" aria-expanded="false">
-            <span>Why choose ARUP ENTERPRISE?</span>
-            <i class="fas fa-chevron-down ab-faq-icon"></i>
-          </button>
-          <div class="ab-faq-body">
-            <p>ARUP ENTERPRISE is a trusted manufacturer with over 38 years of proven experience since 1986. We engineer heavy-duty, high-Gauss solutions for iron contamination removal across minerals, steel, cement, foundry, chemicals, plastics, and recycling units.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════════
-     CTA STRIP
-════════════════════════════════════════════ -->
-<section class="ab-cta-strip">
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 6: FREQUENTLY ASKED QUESTIONS (FAQ)
+═══════════════════════════════════════════════════════════════ -->
+<section class="ae-section ae-sec-faq">
   <div class="container">
-    <div class="ab-cta-inner">
-      <div class="ab-cta-text">
-        <span class="ab-eyebrow" style="color:#E8B84B; background:rgba(232,184,75,0.1); border-color:rgba(232,184,75,0.25);">Let's Work Together</span>
-        <h2>Ready to Upgrade Your<br>Magnetic Separation Setup?</h2>
-        <p>Talk to our Kolkata engineering team today. We'll identify the right magnetic separator or custom pulley for your specifications and budget.</p>
+    <div class="ae-faq-header">
+      <h2 class="ae-sec-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="ae-faq-grid">
+      <!-- Left Column: Image with 3D Flip Box -->
+      <div class="ae-faq-left">
+        <div class="ae-faq-media-wrap">
+          <img src="assets/images/about/airport-security.avif" alt="Technical Inspection" class="ae-faq-img" loading="lazy">
+          
+          <!-- Flip Box Card -->
+          <div class="ae-flip-card">
+            <div class="ae-flip-inner">
+              <div class="ae-flip-front">
+                <i class="fas fa-award ae-flip-icon"></i>
+                <h3 class="ae-flip-front-title">38+ Years of Service</h3>
+                <p>Delivering reliable magnetic separation solutions</p>
+              </div>
+              <div class="ae-flip-back">
+                <h3>Since 1986</h3>
+                <p>Delivering reliable magnetic separation solutions since 1986 with unmatched industry experience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="ab-cta-btns">
-        <a href="contact.php#quote" class="ab-btn-primary">
-          <i class="fas fa-paper-plane"></i> Request a Free Quote
-        </a>
-        <a href="tel:+918013635806" class="ab-btn-secondary">
-          <i class="fas fa-phone-alt"></i> +91 8013635806
-        </a>
+
+      <!-- Right Column: Accordion with the 5 questions -->
+      <div class="ae-faq-right">
+        <div class="ae-accordion">
+
+          <!-- FAQ Item 1 -->
+          <div class="ae-acc-item active">
+            <button type="button" class="ae-acc-trigger" aria-expanded="true">
+              <span>What is a magnetic separator and how does it work?</span>
+              <i class="fas fa-angle-down ae-acc-chevron"></i>
+            </button>
+            <div class="ae-acc-content" style="display:block;">
+              <p>A magnetic separator is a machine used to separate magnetic materials from non-magnetic ones, commonly used in metal recycling, waste processing, and industrial applications.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="ae-acc-item">
+            <button type="button" class="ae-acc-trigger" aria-expanded="false">
+              <span>What types of magnetic separation equipment do you provide?</span>
+              <i class="fas fa-angle-down ae-acc-chevron"></i>
+            </button>
+            <div class="ae-acc-content">
+              <p>We offer Drum Magnetic Separators, Overband Magnetic Separators, Electromagnetic Separators, Pulley systems, and custom magnetic tools for various industrial needs.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="ae-acc-item">
+            <button type="button" class="ae-acc-trigger" aria-expanded="false">
+              <span>Can your magnetic separators be customized?</span>
+              <i class="fas fa-angle-down ae-acc-chevron"></i>
+            </button>
+            <div class="ae-acc-content">
+              <p>Yes, we provide fully customizable magnetic separation systems based on your material type, size, process flow, and industry.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="ae-acc-item">
+            <button type="button" class="ae-acc-trigger" aria-expanded="false">
+              <span>Do you provide installation and maintenance services?</span>
+              <i class="fas fa-angle-down ae-acc-chevron"></i>
+            </button>
+            <div class="ae-acc-content">
+              <p>Yes, we provide complete support including installation, testing, and periodic maintenance to ensure long-term performance.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="ae-acc-item">
+            <button type="button" class="ae-acc-trigger" aria-expanded="false">
+              <span>Why choose ARUP ENTERPRISE?</span>
+              <i class="fas fa-angle-down ae-acc-chevron"></i>
+            </button>
+            <div class="ae-acc-content">
+              <p>ARUP ENTERPRISE is a trusted manufacturer of magnetic separation equipment, delivering high-quality solutions for iron contamination removal across industries like minerals, chemicals, plastics, casting, and recycling.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
@@ -521,1070 +366,649 @@ include 'includes/header.php';
 
 <?php include 'includes/footer.php'; ?>
 
-<!-- ═══════════════════════════════════════════
-     STYLES
-════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════
+     STYLES: EXACT MATCH FOR LIVE ELEMENTOR AESTHETICS & LAYOUT
+═══════════════════════════════════════════════════════════════ -->
 <style>
-/* ── COLOR TOKENS ── */
+/* ── GLOBAL TOKENS ── */
 :root {
-  --gold:       #C9920A;
-  --gold-lt:    #E8B84B;
-  --gold-dk:    #8B6508;
-  --char:       #0E0E0E;
-  --ink:        #181818;
-  --cream:      #F7F4EE;
-  --ivory:      #FAFAF6;
-  --steel:      #ECE8DF;
-  --smoke:      #6B6560;
-  --white:      #FFFFFF;
-  --font-d:     'Bebas Neue', 'Impact', sans-serif;
-  --font-b:     'Inter', -apple-system, sans-serif;
-  --ease:       cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-g:   0 8px 32px rgba(201,146,10,0.18);
-  --radius:     12px;
+  --ae-gold:      #C9920A;
+  --ae-gold-hover:#B38008;
+  --ae-dark:      #1A1A1A;
+  --ae-charcoal:  #242424;
+  --ae-text:      #555555;
+  --ae-text-dark: #222222;
+  --ae-light-bg:  #F9F9F9;
+  --ae-border:    #EAEAEA;
+  --ae-font-head: 'Bebas Neue', 'Inter', sans-serif;
+  --ae-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ae-radius:    8px;
+  --ae-transition:0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-b); color: var(--ink); background: var(--ivory); }
-.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
-a { text-decoration: none; color: inherit; }
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: var(--ae-font-body); color: var(--ae-text); line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.ae-section { padding: 80px 0; }
 
-/* ── TYPOGRAPHY & HEADINGS ── */
-.ab-eyebrow {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  background: rgba(201,146,10,0.09);
-  border: 1px solid rgba(201,146,10,0.25);
-  border-radius: 100px;
-  padding: 5px 16px;
-  margin-bottom: 14px;
-}
-.ab-section-head { text-align: center; margin-bottom: 50px; }
-.ab-h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+/* ── COMMON HEADINGS ── */
+.ae-sec-title {
+  font-family: var(--ae-font-head);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  color: var(--ae-text-dark);
   letter-spacing: 0.03em;
-  color: var(--char);
-  line-height: 1.1;
+  margin-bottom: 24px;
   text-transform: uppercase;
+  line-height: 1.15;
 }
-.ab-h2 em { color: var(--gold); font-style: normal; }
-.ab-head-desc {
-  max-width: 680px;
-  margin: 12px auto 0;
-  color: var(--smoke);
-  font-size: 1rem;
-  line-height: 1.6;
-}
-.ab-section { padding: 88px 0; }
 
-/* ── HERO SECTION ── */
-.ab-hero {
+/* ═══════════════════════════════════════════
+   SECTION 1: HERO BANNER
+════════════════════════════════════════════ */
+.ae-hero-banner {
   position: relative;
-  min-height: 88vh;
-  background: var(--char);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  border-bottom: 3px solid var(--gold);
-}
-.ab-hero-bg {
-  position: absolute;
-  inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.35) contrast(1.1);
-  transform: scale(1.02);
-  transition: transform 8s ease;
+  background-repeat: no-repeat;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
 }
-.ab-hero-overlay {
+.ae-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(14,14,14,0.94) 0%, rgba(14,14,14,0.8) 55%, rgba(201,146,10,0.15) 100%);
+  background: rgba(14, 14, 14, 0.65);
 }
-.ab-sparks {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0.65;
-  z-index: 1;
-}
-.ab-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(201,146,10,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,146,10,0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: 1;
-}
-.ab-hero-content {
+.ae-hero-container {
   position: relative;
   z-index: 2;
-  padding: 120px 24px 80px;
-  max-width: 820px;
+  padding: 60px 20px 80px;
 }
-.ab-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: #888;
-  margin-bottom: 20px;
+.ae-hero-title {
+  font-family: var(--ae-font-head);
+  font-size: clamp(3rem, 7vw, 4.8rem);
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
-.ab-breadcrumb a { color: var(--gold); font-weight: 500; }
-.ab-breadcrumb a:hover { color: var(--gold-lt); }
-.ab-hero-badge {
+.ae-breadcrumb {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  border: 1px solid rgba(201,146,10,0.35);
-  background: rgba(201,146,10,0.12);
-  border-radius: 100px;
-  padding: 6px 18px;
-  margin-bottom: 22px;
-  backdrop-filter: blur(8px);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #CCCCCC;
 }
-.ab-hero-title {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+.ae-breadcrumb a { color: var(--ae-gold); text-decoration: none; transition: color 0.2s; }
+.ae-breadcrumb a:hover { color: #FFFFFF; }
+.ae-bc-sep { color: #888; }
+.ae-bc-current { color: #FFFFFF; }
+
+.ae-shape-bottom {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 2;
 }
-.ab-title-line1 {
-  font-family: var(--font-d);
-  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.7);
-  line-height: 1;
-}
-.ab-title-line2 {
-  font-family: var(--font-d);
-  font-size: clamp(3.8rem, 9.5vw, 7.5rem);
-  letter-spacing: 0.02em;
-  color: var(--gold);
-  line-height: 0.95;
-  text-shadow: 0 0 60px rgba(201,146,10,0.4);
-}
-.ab-title-line3 {
-  font-family: var(--font-d);
-  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.4);
-  line-height: 1.1;
-}
-.ab-hero-sub {
-  color: rgba(255,255,255,0.72);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  max-width: 660px;
-  margin-bottom: 34px;
-}
-.ab-hero-stats {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(201,146,10,0.22);
-  border-radius: 14px;
-  padding: 16px 28px;
-  backdrop-filter: blur(10px);
-  margin-bottom: 34px;
-}
-.ab-hs {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 24px;
-}
-.ab-hs-n {
-  font-family: var(--font-d);
-  font-size: 2.8rem;
-  color: var(--gold);
-  line-height: 1;
-}
-.ab-hs sup {
-  font-family: var(--font-b);
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--gold-lt);
-  vertical-align: super;
-}
-.ab-hs-l {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  margin-top: 4px;
-}
-.ab-hs-div {
-  width: 1px;
-  height: 40px;
-  background: rgba(201,146,10,0.25);
-}
-.ab-hero-scroll {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.74rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-}
-.ab-hero-scroll span {
+.ae-shape-bottom svg {
   display: block;
-  width: 1px;
-  height: 32px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
+  width: calc(100% + 1.3px);
+  height: 48px;
 }
-@keyframes scrollPulse {
-  0%,100% { opacity: 0.3; transform: scaleY(1); }
-  50%      { opacity: 0.9; transform: scaleY(1.3); }
+.ae-shape-fill { fill: #FFFFFF; }
+
+/* ═══════════════════════════════════════════
+   SECTION 2: DRIVEN BY INNOVATION & CAPABILITIES
+════════════════════════════════════════════ */
+.ae-sec-innovation { background: #FFFFFF; }
+.ae-innov-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 50px;
+  align-items: center;
 }
 
-/* ── CORE CAPABILITIES ── */
-.ab-capabilities { background: #FFFFFF; }
-.ab-cap-layout {
+/* 4 Image 2x2 Showcase */
+.ae-img-grid {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 40px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
-.ab-media-card {
-  position: relative;
-  border-radius: var(--radius);
+.ae-grid-item {
+  border-radius: var(--ae-radius);
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-  border: 1px solid var(--steel);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid var(--ae-border);
+  background: #FFF;
 }
-.ab-media-img {
+.ae-grid-item img {
   width: 100%;
-  height: 440px;
+  height: 220px;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s var(--ae-transition);
 }
-.ab-media-card:hover .ab-media-img {
-  transform: scale(1.03);
+.ae-grid-item:hover img {
+  transform: scale(1.05);
 }
-.ab-media-badge {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  background: rgba(14,14,14,0.85);
-  border: 1px solid rgba(201,146,10,0.35);
-  padding: 12px 18px;
-  border-radius: 8px;
-  color: #FFF;
-  font-size: 0.82rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  backdrop-filter: blur(6px);
+
+/* Right Content */
+.ae-innov-heading {
+  font-family: var(--ae-font-head);
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  color: var(--ae-text-dark);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-transform: uppercase;
 }
-.ab-media-badge i { color: var(--gold); font-size: 1.1rem; }
-.ab-cap-grid {
+.ae-innov-desc {
+  color: var(--ae-text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* 4 Feature Cards (Icon Boxes) */
+.ae-cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
-.ab-cap-card {
-  background: var(--ivory);
-  border: 1px solid var(--steel);
-  border-radius: var(--radius);
-  padding: 24px;
-  transition: all 0.3s var(--ease);
-  position: relative;
-  overflow: hidden;
-}
-.ab-cap-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 4px; height: 0;
-  background: var(--gold);
-  transition: height 0.3s var(--ease);
-}
-.ab-cap-card:hover {
-  background: #FFF;
-  border-color: rgba(201,146,10,0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
-}
-.ab-cap-card:hover::before { height: 100%; }
-.ab-cap-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: rgba(201,146,10,0.12);
-  color: var(--gold);
+.ae-card-item {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  margin-bottom: 16px;
-  transition: background 0.3s, color 0.3s;
-}
-.ab-cap-card:hover .ab-cap-icon {
-  background: var(--gold);
-  color: #FFF;
-}
-.ab-cap-card h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--char);
-  margin-bottom: 8px;
-}
-.ab-cap-card p {
-  font-size: 0.88rem;
-  color: var(--smoke);
-  line-height: 1.55;
-}
-
-/* ── OUR STORY & GALLERY ── */
-.ab-who { background: var(--cream); }
-.ab-who-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 56px;
-  align-items: center;
-}
-.ab-who-text p {
-  color: #3a3530;
-  font-size: 0.96rem;
-  line-height: 1.75;
-  margin-bottom: 16px;
-}
-.ab-p-highlight {
-  font-size: 1.05rem !important;
-  font-weight: 600;
-  color: var(--char) !important;
-  border-left: 3px solid var(--gold);
-  padding-left: 14px;
-}
-.ab-who-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 24px 0 30px;
-}
-.ab-who-tags span {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #FFF;
-  border: 1px solid var(--steel);
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--char);
-}
-.ab-who-tags i { color: var(--gold); }
-.ab-cta-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--gold);
-  color: #FFF;
-  font-weight: 700;
-  font-size: 0.88rem;
-  padding: 13px 28px;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(201,146,10,0.3);
-  transition: all 0.25s var(--ease);
-}
-.ab-cta-inline:hover {
-  background: var(--gold-dk);
-  transform: translateY(-2px);
-  color: #FFF;
-}
-.ab-who-gallery {
-  display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
+  padding: 18px;
+  background: var(--ae-light-bg);
+  border-radius: var(--ae-radius);
+  border: 1px solid var(--ae-border);
+  transition: var(--ae-transition);
 }
-.ab-gallery-main {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--steel);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-}
-.ab-gallery-main img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  display: block;
-}
-.ab-gallery-badge {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(14,14,14,0.85);
-  border: 1px solid rgba(201,146,10,0.3);
-  color: #FFF;
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 6px;
-  backdrop-filter: blur(4px);
-}
-.ab-gallery-badge i { color: var(--gold); margin-right: 4px; }
-.ab-gallery-thumbs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.ab-thumb {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--steel);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-}
-.ab-thumb img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-.ab-thumb:hover img { transform: scale(1.05); }
-.ab-thumb-lbl {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  right: 8px;
-  background: rgba(14,14,14,0.75);
-  color: #FFF;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 4px;
-  text-align: center;
-  backdrop-filter: blur(4px);
-}
-
-/* ── INDUSTRIES WE SERVE ── */
-.ab-industries { background: #FFFFFF; }
-.ab-ind-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
-.ab-ind-card {
-  background: var(--ivory);
-  border: 1px solid var(--steel);
-  border-radius: var(--radius);
-  padding: 28px 22px;
-  position: relative;
-  transition: all 0.3s var(--ease);
-}
-.ab-ind-card:hover {
+.ae-card-item:hover {
   background: #FFF;
-  border-color: var(--gold);
-  transform: translateY(-5px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+  border-color: var(--ae-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
-.ab-ind-num {
-  font-family: var(--font-d);
-  font-size: 1.8rem;
-  color: rgba(201,146,10,0.25);
-  position: absolute;
-  top: 18px;
-  right: 20px;
-  line-height: 1;
-}
-.ab-ind-icon {
+.ae-card-icon {
   width: 44px;
   height: 44px;
-  background: rgba(201,146,10,0.1);
-  color: var(--gold);
-  border-radius: 10px;
+  background: var(--ae-gold);
+  color: #FFF;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  margin-bottom: 16px;
-  transition: all 0.3s ease;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  transition: background 0.3s;
 }
-.ab-ind-card:hover .ab-ind-icon {
-  background: var(--gold);
-  color: #FFF;
+.ae-card-item:hover .ae-card-icon {
+  background: var(--ae-gold-hover);
 }
-.ab-ind-card h3 {
-  font-size: 1.05rem;
+.ae-card-text h3 {
+  font-size: 0.98rem;
   font-weight: 700;
-  color: var(--char);
-  margin-bottom: 8px;
+  color: var(--ae-text-dark);
+  margin-bottom: 6px;
   line-height: 1.3;
 }
-.ab-ind-card p {
+.ae-card-text p {
   font-size: 0.82rem;
-  color: var(--smoke);
-  line-height: 1.55;
+  color: var(--ae-text);
+  line-height: 1.5;
+  margin: 0;
 }
 
-/* ── OUR PROCESS ── */
-.ab-process {
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: #FFF;
+/* ═══════════════════════════════════════════
+   SECTION 3: ABOUT US (STORY & INDUSTRIES)
+════════════════════════════════════════════ */
+.ae-sec-story {
+  background: var(--ae-light-bg);
+  border-top: 1px solid var(--ae-border);
+  border-bottom: 1px solid var(--ae-border);
 }
-.ab-proc-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+.ae-story-wrap {
+  max-width: 960px;
+  margin: 0 auto;
 }
-.ab-proc-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(201,146,10,0.25);
-  border-radius: var(--radius);
-  padding: 30px 22px;
-  backdrop-filter: blur(8px);
-  position: relative;
-  transition: all 0.3s ease;
+.ae-story-paragraphs p {
+  color: var(--ae-text);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 18px;
 }
-.ab-proc-card:hover {
-  background: rgba(255,255,255,0.09);
-  border-color: var(--gold);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+.ae-industries-block {
+  margin-top: 36px;
+  background: #FFFFFF;
+  padding: 32px 36px;
+  border-radius: var(--ae-radius);
+  border: 1px solid var(--ae-border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
 }
-.ab-proc-step {
-  font-family: var(--font-d);
+.ae-ind-subtitle {
   font-size: 1.15rem;
-  letter-spacing: 0.1em;
-  color: var(--gold);
-  margin-bottom: 14px;
-}
-.ab-proc-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(201,146,10,0.15);
-  border: 1px solid rgba(201,146,10,0.3);
-  color: var(--gold-lt);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.15rem;
-  margin-bottom: 16px;
-}
-.ab-proc-card h3 {
-  font-size: 1.05rem;
   font-weight: 700;
-  color: #FFF;
-  margin-bottom: 10px;
-}
-.ab-proc-card p {
-  font-size: 0.84rem;
-  color: rgba(255,255,255,0.68);
-  line-height: 1.6;
-}
-
-/* ── MISSION, VISION, VALUES ── */
-.ab-mvv { background: var(--ivory); }
-.ab-mvv-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 28px;
-}
-.ab-mvv-card {
-  background: #FFF;
-  border: 1px solid var(--steel);
-  border-radius: var(--radius);
-  padding: 36px 28px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-  transition: all 0.3s var(--ease);
-}
-.ab-mvv-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--gold);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.08);
-}
-.ab-mvv-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background: rgba(201,146,10,0.1);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: var(--ae-text-dark);
   margin-bottom: 20px;
 }
-.ab-mvv-card h3 {
-  font-family: var(--font-d);
-  font-size: 1.65rem;
-  letter-spacing: 0.04em;
-  color: var(--char);
-  margin-bottom: 12px;
+.ae-industries-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.ab-mvv-card p {
-  font-size: 0.9rem;
-  color: var(--smoke);
-  line-height: 1.7;
-}
-.ab-values-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.ab-values-list li {
+.ae-industries-list li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.85rem;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--ae-charcoal);
   font-weight: 500;
-  color: var(--char);
+}
+.ae-industries-list li i {
+  color: var(--ae-gold);
+  font-size: 1rem;
+  flex-shrink: 0;
 }
 
-/* ── TIMELINE ── */
-.ab-timeline-section { background: var(--cream); }
-.ab-timeline {
+/* ═══════════════════════════════════════════
+   SECTION 4: STATISTICS / COUNTERS
+════════════════════════════════════════════ */
+.ae-sec-counters {
+  background: #FFFFFF;
+  padding: 60px 0;
+}
+.ae-counters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.ae-counter-card {
+  text-align: center;
+  padding: 32px 20px;
+  border-radius: var(--ae-radius);
+  background: var(--ae-light-bg);
+  border: 1px solid var(--ae-border);
+  transition: var(--ae-transition);
+}
+.ae-counter-card:hover {
+  background: #FFFFFF;
+  border-color: var(--ae-gold);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+}
+.ae-cnt-icon {
+  font-size: 2rem;
+  color: var(--ae-gold);
+  margin-bottom: 12px;
+}
+.ae-cnt-number-wrap {
+  font-family: var(--ae-font-head);
+  font-size: 3.2rem;
+  color: var(--ae-text-dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.ae-cnt-suffix {
+  color: var(--ae-gold);
+  margin-left: 2px;
+}
+.ae-cnt-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ae-text);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 5: OUR PROCESS (FROM CONCEPT TO COMPLETION)
+════════════════════════════════════════════ */
+.ae-sec-process {
   position: relative;
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 40px 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  padding: 90px 0;
 }
-.ab-tl-spine {
+.ae-proc-overlay {
   position: absolute;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 2px;
-  background: rgba(201,146,10,0.3);
-  transform: translateX(-50%);
+  inset: 0;
+  background: rgba(18, 18, 18, 0.88);
 }
-.ab-tl-item {
+.ae-proc-container {
   position: relative;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: calc(50% + 40px);
-}
-.ab-tl-item.ab-tl-right {
-  justify-content: flex-start;
-  padding-right: 0;
-  padding-left: calc(50% + 40px);
-}
-.ab-tl-yr {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%, -50%);
-  background: var(--char);
-  color: var(--gold);
-  font-family: var(--font-d);
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  padding: 3px 12px;
-  border-radius: 100px;
-  border: 1px solid var(--gold);
-  z-index: 3;
-}
-.ab-tl-node {
-  position: absolute;
-  left: 50%;
-  top: 24px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--gold);
-  border: 3px solid var(--cream);
-  transform: translate(-50%, -50%);
   z-index: 2;
 }
-.ab-tl-node-latest {
-  background: #27ae60;
-  box-shadow: 0 0 12px rgba(39,174,96,0.6);
+.ae-proc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
 }
-.ab-tl-card {
-  background: #FFF;
-  border: 1px solid var(--steel);
-  border-radius: 10px;
-  padding: 24px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  position: relative;
-}
-.ab-tl-card h4 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--char);
-  margin-bottom: 8px;
-}
-.ab-tl-card p {
-  font-size: 0.86rem;
-  color: var(--smoke);
-  line-height: 1.6;
-}
-.ab-tl-live {
+.ae-proc-eyebrow {
   display: inline-block;
-  background: #27ae60;
-  color: #FFF;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 2px 8px;
-  border-radius: 4px;
+  font-family: var(--ae-font-head);
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  color: var(--ae-gold);
+  text-transform: uppercase;
   margin-bottom: 8px;
+}
+.ae-proc-heading {
+  font-family: var(--ae-font-head);
+  font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+  color: #FFFFFF;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+.ae-proc-desc {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.98rem;
+  line-height: 1.75;
 }
 
-/* ── FAQS ── */
-.ab-faqs { background: #FFFFFF; }
-.ab-faq-layout {
+/* Skill / Progress Bars */
+.ae-proc-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.ae-skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ae-skill-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.ae-skill-pct {
+  color: var(--ae-gold);
+  font-weight: 700;
+}
+.ae-skill-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.ae-skill-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--ae-gold), #E8B84B);
+  border-radius: 100px;
+  transition: width 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 6: FREQUENTLY ASKED QUESTIONS
+════════════════════════════════════════════ */
+.ae-sec-faq {
+  background: #FFFFFF;
+}
+.ae-faq-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.ae-faq-grid {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
+  grid-template-columns: 1fr 1.25fr;
   gap: 48px;
   align-items: start;
 }
-.ab-faq-img-card {
+
+/* Left Image & 3D Flip Card */
+.ae-faq-media-wrap {
   position: relative;
-  border-radius: var(--radius);
+  border-radius: var(--ae-radius);
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-  border: 1px solid var(--steel);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  border: 1px solid var(--ae-border);
 }
-.ab-faq-img-card img {
+.ae-faq-img {
   width: 100%;
   height: 480px;
   object-fit: cover;
   display: block;
 }
-.ab-faq-highlight {
+
+/* Flip Card Widget */
+.ae-flip-card {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(14,14,14,0.95), rgba(14,14,14,0.7) 70%, transparent);
-  padding: 30px 24px 24px;
-  color: #FFF;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  height: 140px;
+  perspective: 1000px;
 }
-.ab-faq-highlight-badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  background: rgba(201,146,10,0.2);
-  border: 1px solid rgba(201,146,10,0.4);
-  padding: 4px 12px;
-  border-radius: 100px;
-  margin-bottom: 10px;
+.ae-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 8px;
 }
-.ab-faq-highlight h3 {
-  font-family: var(--font-d);
-  font-size: 1.5rem;
-  letter-spacing: 0.04em;
-  color: #FFF;
-  margin-bottom: 6px;
+.ae-flip-card:hover .ae-flip-inner {
+  transform: rotateY(180deg);
 }
-.ab-faq-highlight p {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.5;
-}
-.ab-faq-list {
+.ae-flip-front, .ae-flip-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 }
-.ab-faq-item {
-  border: 1px solid var(--steel);
-  border-radius: 10px;
-  background: var(--ivory);
+.ae-flip-front {
+  background: rgba(20, 20, 20, 0.88);
+  border: 1px solid rgba(201, 146, 10, 0.4);
+  color: #FFFFFF;
+}
+.ae-flip-icon {
+  font-size: 1.5rem;
+  color: var(--ae-gold);
+  margin-bottom: 6px;
+}
+.ae-flip-front-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ae-gold);
+  margin: 0 0 4px;
+}
+.ae-flip-front p {
+  font-size: 0.8rem;
+  color: #DDD;
+  margin: 0;
+}
+.ae-flip-back {
+  background: var(--ae-gold);
+  color: #FFFFFF;
+  transform: rotateY(180deg);
+  border: 1px solid #B38008;
+}
+.ae-flip-back h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+.ae-flip-back p {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Right Accordion */
+.ae-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ae-acc-item {
+  border: 1px solid var(--ae-border);
+  border-radius: var(--ae-radius);
+  background: var(--ae-light-bg);
   overflow: hidden;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
-.ab-faq-item.active {
-  border-color: var(--gold);
-  background: #FFF;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+.ae-acc-item.active {
+  border-color: var(--ae-gold);
+  background: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
 }
-.ab-faq-trigger {
+.ae-acc-trigger {
   width: 100%;
   text-align: left;
   background: none;
   border: none;
-  padding: 18px 22px;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   cursor: pointer;
-  font-family: var(--font-b);
+  font-family: var(--ae-font-body);
   font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--char);
-  transition: color 0.2s;
+  font-weight: 600;
+  color: var(--ae-text-dark);
 }
-.ab-faq-item.active .ab-faq-trigger {
-  color: var(--gold-dk);
+.ae-acc-item.active .ae-acc-trigger {
+  color: var(--ae-gold);
 }
-.ab-faq-icon {
-  font-size: 0.85rem;
-  color: var(--smoke);
-  transition: transform 0.3s ease, color 0.3s;
+.ae-acc-chevron {
+  font-size: 1rem;
+  color: #888888;
+  transition: transform 0.3s ease;
   flex-shrink: 0;
 }
-.ab-faq-item.active .ab-faq-icon {
+.ae-acc-item.active .ae-acc-chevron {
   transform: rotate(180deg);
-  color: var(--gold);
+  color: var(--ae-gold);
 }
-.ab-faq-body {
+.ae-acc-content {
   display: none;
-  padding: 0 22px 20px;
+  padding: 0 20px 18px;
   font-size: 0.9rem;
-  color: var(--smoke);
+  color: var(--ae-text);
   line-height: 1.65;
-  border-top: 1px solid rgba(0,0,0,0.05);
-  margin-top: 4px;
+  border-top: 1px solid var(--ae-border);
   padding-top: 14px;
 }
 
-/* ── CTA STRIP ── */
-.ab-cta-strip {
-  background: var(--char);
-  padding: 72px 0;
-  border-top: 2px solid var(--gold);
-}
-.ab-cta-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-}
-.ab-cta-text h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  letter-spacing: 0.04em;
-  color: #FFF;
-  line-height: 1.1;
-  margin-bottom: 12px;
-}
-.ab-cta-text p {
-  color: rgba(255,255,255,0.65);
-  font-size: 0.96rem;
-  max-width: 520px;
-  line-height: 1.65;
-}
-.ab-cta-btns {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
-}
-.ab-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--gold);
-  color: #FFF;
-  font-weight: 700;
-  font-size: 0.9rem;
-  padding: 14px 28px;
-  border-radius: 8px;
-  box-shadow: 0 4px 18px rgba(201,146,10,0.35);
-  transition: all 0.25s var(--ease);
-}
-.ab-btn-primary:hover {
-  background: var(--gold-lt);
-  color: var(--char);
-  transform: translateY(-2px);
-}
-.ab-btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #FFF;
-  font-weight: 600;
-  font-size: 0.9rem;
-  padding: 14px 26px;
-  border-radius: 8px;
-  transition: all 0.25s var(--ease);
-}
-.ab-btn-secondary:hover {
-  background: rgba(255,255,255,0.16);
-  border-color: rgba(255,255,255,0.4);
-  color: #FFF;
+/* ═══════════════════════════════════════════
+   RESPONSIVE DESIGN
+════════════════════════════════════════════ */
+@media (max-width: 992px) {
+  .ae-innov-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ae-counters-grid { grid-template-columns: repeat(2, 1fr); }
+  .ae-proc-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ae-faq-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ae-faq-img { height: 360px; }
 }
 
-/* ── RESPONSIVE DESIGN ── */
-@media (max-width: 1024px) {
-  .ab-cap-layout { grid-template-columns: 1fr; }
-  .ab-media-img { height: 320px; }
-  .ab-who-grid { grid-template-columns: 1fr; gap: 40px; }
-  .ab-ind-grid { grid-template-columns: repeat(2, 1fr); }
-  .ab-proc-grid { grid-template-columns: repeat(2, 1fr); }
-  .ab-mvv-grid { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
-  .ab-faq-layout { grid-template-columns: 1fr; }
-  .ab-faq-img-card img { height: 340px; }
-}
-
-@media (max-width: 768px) {
-  .ab-section { padding: 60px 0; }
-  .ab-hero { min-height: auto; }
-  .ab-hero-content { padding: 90px 20px 60px; }
-  .ab-cap-grid { grid-template-columns: 1fr; }
-  .ab-ind-grid { grid-template-columns: 1fr; }
-  .ab-proc-grid { grid-template-columns: 1fr; }
-  .ab-hero-stats { padding: 12px 16px; flex-wrap: wrap; justify-content: center; }
-  .ab-hs { padding: 0 14px; }
-  .ab-hs-n { font-size: 2.2rem; }
-  
-  /* Timeline mobile */
-  .ab-tl-spine { left: 20px; transform: none; }
-  .ab-tl-item, .ab-tl-item.ab-tl-right {
-    padding-left: 54px;
-    padding-right: 0;
-    justify-content: flex-start;
-  }
-  .ab-tl-yr { left: 20px; transform: translate(-50%, -50%); }
-  .ab-tl-node { left: 20px; transform: translate(-50%, -50%); }
-  
-  .ab-cta-inner { flex-direction: column; text-align: center; }
-  .ab-cta-btns { flex-direction: column; width: 100%; }
-  .ab-btn-primary, .ab-btn-secondary { width: 100%; justify-content: center; }
+@media (max-width: 600px) {
+  .ae-section { padding: 50px 0; }
+  .ae-img-grid { grid-template-columns: 1fr; }
+  .ae-grid-item img { height: 200px; }
+  .ae-cards-grid { grid-template-columns: 1fr; }
+  .ae-industries-list { grid-template-columns: 1fr; }
+  .ae-industries-block { padding: 24px 20px; }
+  .ae-counters-grid { grid-template-columns: 1fr; }
+  .ae-hero-banner { min-height: 300px; }
 }
 </style>
 
-<!-- ═══════════════════════════════════════════
-     SCRIPTS
-════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════
+     SCRIPTS: COUNTER ANIMATION, PROGRESS BARS & ACCORDION
+═══════════════════════════════════════════════════════════════ -->
 <script>
-/* ── Golden Sparks Canvas ── */
-(function(){
-  const canvas = document.getElementById('sparksCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-
-  function resize(){
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function rand(a,b){ return a + Math.random()*(b-a); }
-
-  class Spark {
-    reset(){
-      this.x = rand(0, W);
-      this.y = rand(0, H);
-      this.vx = rand(-0.3, 0.3);
-      this.vy = rand(-0.8, -0.2);
-      this.size = rand(0.8, 2.4);
-      this.life = 0;
-      this.maxLife = rand(90, 220);
-      this.gold = Math.random() > 0.4;
-    }
-    constructor(){ this.reset(); this.life = rand(0, 200); }
-    update(){
-      this.x += this.vx;
-      this.y += this.vy;
-      this.life++;
-      if(this.life > this.maxLife) this.reset();
-    }
-    draw(){
-      const a = Math.sin(Math.PI * this.life / this.maxLife) * 0.75;
-      ctx.save();
-      ctx.globalAlpha = a;
-      ctx.fillStyle = this.gold ? '#C9920A' : '#E8B84B';
-      ctx.shadowColor = this.gold ? '#C9920A' : '#E8B84B';
-      ctx.shadowBlur = 5;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  for(let i = 0; i < 80; i++) particles.push(new Spark());
-
-  function loop(){
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(loop);
-  }
-  loop();
-})();
-
 /* ── Counter Animation ── */
-function animateCounters(els){
+function animateCounters(els) {
   els.forEach(el => {
     const target = +el.dataset.target;
     const dur = 1800;
     const start = performance.now();
-    function tick(now){
-      const t = Math.min((now - start)/dur, 1);
+    function tick(now) {
+      const t = Math.min((now - start) / dur, 1);
       const ease = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.floor(ease * target);
-      if(t < 1) requestAnimationFrame(tick);
-      else el.textContent = target;
+      el.textContent = Math.floor(ease * target).toLocaleString();
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString();
     }
     requestAnimationFrame(tick);
   });
 }
 
-/* ── Intersection Observer for Counters & Timeline ── */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(!e.isIntersecting) return;
-    const el = e.target;
-
-    if(el.matches('.ab-hero')){
-      const counters = el.querySelectorAll('.ab-hs-n');
-      animateCounters(counters);
-    }
-    if(el.classList.contains('ab-tl-card')){
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    }
-    io.unobserve(el);
+/* ── Progress Bars Animation ── */
+function animateBars(bars) {
+  bars.forEach(bar => {
+    const pct = bar.dataset.pct;
+    bar.style.width = pct + '%';
   });
-}, { threshold: 0.15 });
+}
 
-document.querySelectorAll('.ab-hero').forEach(el => io.observe(el));
+/* ── Intersection Observer ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const target = e.target;
 
-document.querySelectorAll('.ab-tl-card').forEach(card => {
-  card.style.opacity = '0';
-  card.style.transform = 'translateY(16px)';
-  card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  io.observe(card);
-});
+    if (target.classList.contains('ae-sec-counters')) {
+      animateCounters(target.querySelectorAll('.ae-cnt-num'));
+    }
+    if (target.classList.contains('ae-sec-process')) {
+      animateBars(target.querySelectorAll('.ae-skill-fill'));
+    }
+    observer.unobserve(target);
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.ae-sec-counters, .ae-sec-process').forEach(sec => observer.observe(sec));
 
 /* ── FAQ Accordion ── */
-document.querySelectorAll('.ab-faq-trigger').forEach(trigger => {
-  trigger.addEventListener('click', function(){
-    const item = this.closest('.ab-faq-item');
-    const body = item.querySelector('.ab-faq-body');
-    const isOpen = item.classList.contains('active');
+document.querySelectorAll('.ae-acc-trigger').forEach(trigger => {
+  trigger.addEventListener('click', function() {
+    const item = this.closest('.ae-acc-item');
+    const content = item.querySelector('.ae-acc-content');
+    const isActive = item.classList.contains('active');
 
-    // Close all other items
-    document.querySelectorAll('.ab-faq-item').forEach(other => {
+    // Close all items
+    document.querySelectorAll('.ae-acc-item').forEach(other => {
       other.classList.remove('active');
-      other.querySelector('.ab-faq-trigger').setAttribute('aria-expanded', 'false');
-      other.querySelector('.ab-faq-body').style.display = 'none';
+      other.querySelector('.ae-acc-trigger').setAttribute('aria-expanded', 'false');
+      other.querySelector('.ae-acc-content').style.display = 'none';
     });
 
-    // Toggle current item
-    if(!isOpen) {
+    // Toggle current
+    if (!isActive) {
       item.classList.add('active');
       this.setAttribute('aria-expanded', 'true');
-      body.style.display = 'block';
+      content.style.display = 'block';
     }
   });
 });
