@@ -61,8 +61,8 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                         <?php endif; ?>
                     </div>
                     <div>
-                        <div class="footer-logo-name">Arup <span>Enterprise</span></div>
-                        <div class="footer-logo-tag">Magnetic Separator Manufacturer</div>
+                        <div class="footer-logo-name"><?php echo htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise'); ?></div>
+                        <div class="footer-logo-tag"><?php echo htmlspecialchars($site_settings['tagline'] ?? 'Magnetic Separator Manufacturer'); ?></div>
                     </div>
                 </div>
                 <p class="footer-about-text">
@@ -70,10 +70,18 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     Manufacturer, Supplier &amp; Service Provider since 1986 — built for performance, trusted for reliability.
                 </p>
                 <div class="footer-socials">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.youtube.com/@dipbantechnicalservices" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://wa.me/918013635806" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <?php if(!empty($site_settings['facebook_url'])): ?>
+                    <a href="<?php echo htmlspecialchars($site_settings['facebook_url']); ?>" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty($site_settings['youtube_url'])): ?>
+                    <a href="<?php echo htmlspecialchars($site_settings['youtube_url']); ?>" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty($site_settings['whatsapp_number'])): ?>
+                    <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number']); ?>" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty($site_settings['linkedin_url'])): ?>
+                    <a href="<?php echo htmlspecialchars($site_settings['linkedin_url']); ?>" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <?php endif; ?>
                 </div>
                 <div class="footer-badges">
                     <div class="badge"><i class="fas fa-certificate"></i><span>ISO Certified</span></div>
@@ -140,33 +148,44 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
             <div class="footer-col">
                 <h4 class="footer-heading">Contact Us</h4>
                 <ul class="footer-contact-list">
+                    <?php if(!empty($site_settings['address'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        <span>316, Bhattanagar, Liluah, Howrah – 711204, West Bengal</span>
+                        <span><?php echo nl2br(htmlspecialchars($site_settings['address'])); ?></span>
                     </li>
-                    <li>
-                        <span class="contact-icon"><i class="fas fa-map-pin"></i></span>
-                        <span>11/B Kundan Lane, Liluah, Howrah – 711204</span>
-                    </li>
+                    <?php endif; ?>
+                    
+                    <?php if(!empty($site_settings['phone']) || !empty($site_settings['phone2'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
                         <span>
-                            <a href="tel:+918013635806">+91 8013635806</a><br>
-                            <a href="tel:8839019950">+91 8839019950</a>
+                            <?php if(!empty($site_settings['phone'])): ?>
+                            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'])); ?>"><?php echo htmlspecialchars($site_settings['phone']); ?></a><br>
+                            <?php endif; ?>
+                            <?php if(!empty($site_settings['phone2'])): ?>
+                            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone2'])); ?>"><?php echo htmlspecialchars($site_settings['phone2']); ?></a>
+                            <?php endif; ?>
                         </span>
                     </li>
+                    <?php endif; ?>
+                    
+                    <?php if(!empty($site_settings['email'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fas fa-envelope"></i></span>
                         <span>
-                            <a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a>
+                            <a href="mailto:<?php echo htmlspecialchars($site_settings['email']); ?>"><?php echo htmlspecialchars($site_settings['email']); ?></a>
                         </span>
                     </li>
+                    <?php endif; ?>
+                    
+                    <?php if(!empty($site_settings['whatsapp_number'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
                         <span>
-                            <a href="https://wa.me/918013635806" target="_blank">WhatsApp: +91 8013635806</a>
+                            <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number']); ?>" target="_blank">WhatsApp: +<?php echo htmlspecialchars($site_settings['whatsapp_number']); ?></a>
                         </span>
                     </li>
+                    <?php endif; ?>
                 </ul>
 
                 <!-- MAP EMBED -->

@@ -1114,18 +1114,34 @@ foreach ($pinned_categories as $pc) {
 <div class="db-topbar">
     <div class="db-topbar-inner">
         <div class="db-topbar-left">
-            <a href="tel:+918013635806"><i class="fas fa-phone-alt"></i> +91 8013635806</a>
+            <?php if(!empty($site_settings['phone'])): ?>
+            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'])); ?>"><i class="fas fa-phone-alt"></i> <?php echo htmlspecialchars($site_settings['phone']); ?></a>
+            <?php endif; ?>
+            
+            <?php if(!empty($site_settings['phone2'])): ?>
             <div class="db-topbar-sep"></div>
-            <a href="tel:8839019950"><i class="fas fa-phone"></i> +91 8839019950</a>
+            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone2'])); ?>"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($site_settings['phone2']); ?></a>
+            <?php endif; ?>
+            
+            <?php if(!empty($site_settings['email'])): ?>
             <div class="db-topbar-sep"></div>
-            <a href="mailto:enterprisearup@gmail.com"><i class="fas fa-envelope"></i> enterprisearup@gmail.com</a>
+            <a href="mailto:<?php echo htmlspecialchars($site_settings['email']); ?>"><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($site_settings['email']); ?></a>
+            <?php endif; ?>
         </div>
         <div class="db-topbar-right">
-            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <?php if(!empty($site_settings['facebook_url'])): ?>
+            <a href="<?php echo htmlspecialchars($site_settings['facebook_url']); ?>" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <?php endif; ?>
+            
+            <?php if(!empty($site_settings['instagram_url'])): ?>
             <div class="db-topbar-sep"></div>
-            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="<?php echo htmlspecialchars($site_settings['instagram_url']); ?>" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <?php endif; ?>
+            
+            <?php if(!empty($site_settings['linkedin_url'])): ?>
             <div class="db-topbar-sep"></div>
-            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="<?php echo htmlspecialchars($site_settings['linkedin_url']); ?>" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -1149,8 +1165,8 @@ foreach ($pinned_categories as $pc) {
                     </svg>
                 </div>
                 <div class="db-logo-text-wrap">
-                    <span class="db-logo-name">Arup<em>Enterprise</em></span>
-                    <span class="db-logo-tag">Magnetic Separators</span>
+                    <span class="db-logo-name"><?php echo htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise'); ?></span>
+                    <span class="db-logo-tag"><?php echo htmlspecialchars($site_settings['tagline'] ?? 'Magnetic Separators'); ?></span>
                 </div>
             <?php endif; ?>
         </a>

@@ -42,6 +42,7 @@ php_error.log
 *.sql
 *.sql.gz
 *.dump
+!database/schema.sql
 
 # ----- Backup files -----
 *.bak
