@@ -1,5 +1,5 @@
 <?php
-$page_title = "About Us";
+$page_title = "About Us | Arup Enterprise";
 include 'includes/header.php';
 ?>
 
@@ -8,110 +8,20 @@ include 'includes/header.php';
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- ═══════════════════════════════════════════════
-     ABOUT HERO  —  Full-viewport, blueprint sparks
+     ABOUT HERO  —  Real Background + Blueprint Sparks
 ════════════════════════════════════════════════ -->
 <section class="ab-hero" id="ab-hero">
+  <!-- Hero background photo with dark industrial gradient overlay -->
+  <div class="ab-hero-bg" style="background-image: url('assets/images/about/ab-scaled.jpg');"></div>
+  <div class="ab-hero-overlay"></div>
+
   <!-- Particle canvas (golden sparks) -->
   <canvas class="ab-sparks" id="sparksCanvas" aria-hidden="true"></canvas>
 
   <!-- Blueprint grid overlay -->
   <div class="ab-grid-overlay" aria-hidden="true"></div>
 
-  <!-- Crosshair + machine visual -->
-  <div class="ab-hero-machine" aria-hidden="true">
-    <svg viewBox="0 0 560 420" xmlns="http://www.w3.org/2000/svg" class="machine-svg">
-      <!-- Blueprint base -->
-      <defs>
-        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#C9920A" stop-opacity="0.18"/>
-          <stop offset="100%" stop-color="#C9920A" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="blur2">
-          <feGaussianBlur stdDeviation="2.5"/>
-        </filter>
-        <filter id="glow3">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-
-      <!-- Glow halo -->
-      <ellipse cx="280" cy="210" rx="220" ry="160" fill="url(#glow)"/>
-
-      <!-- CNC Machine Body -->
-      <rect x="80" y="90" width="200" height="230" rx="10" fill="none" stroke="#C9920A" stroke-width="1.2" stroke-dasharray="6 3" opacity="0.4"/>
-      <rect x="88" y="98" width="184" height="214" rx="7" fill="rgba(201,146,10,0.04)" stroke="#C9920A" stroke-width="0.6" opacity="0.6"/>
-
-      <!-- Machine screen -->
-      <rect x="98" y="110" width="164" height="108" rx="5" fill="rgba(0,0,0,0.6)" stroke="#C9920A" stroke-width="1"/>
-      <!-- Screen scanlines -->
-      <line x1="98" y1="122" x2="262" y2="122" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-      <line x1="98" y1="134" x2="262" y2="134" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-      <line x1="98" y1="146" x2="262" y2="146" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-      <line x1="98" y1="158" x2="262" y2="158" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-      <line x1="98" y1="170" x2="262" y2="170" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-      <line x1="98" y1="182" x2="262" y2="182" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-      <line x1="98" y1="194" x2="262" y2="194" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-      <line x1="98" y1="206" x2="262" y2="206" stroke="#C9920A" stroke-width="0.3" opacity="0.3"/>
-
-      <!-- CNC spindle/crosshair on screen -->
-      <circle cx="180" cy="164" r="40" fill="none" stroke="#C9920A" stroke-width="1.2" filter="url(#glow3)" opacity="0.85"/>
-      <circle cx="180" cy="164" r="26" fill="none" stroke="#C9920A" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.6"/>
-      <circle cx="180" cy="164" r="10" fill="none" stroke="#C9920A" stroke-width="1" opacity="0.9"/>
-      <circle cx="180" cy="164" r="3.5" fill="#C9920A" opacity="0.95"/>
-      <line x1="148" y1="164" x2="168" y2="164" stroke="#C9920A" stroke-width="0.9" opacity="0.8"/>
-      <line x1="192" y1="164" x2="212" y2="164" stroke="#C9920A" stroke-width="0.9" opacity="0.8"/>
-      <line x1="180" y1="132" x2="180" y2="152" stroke="#C9920A" stroke-width="0.9" opacity="0.8"/>
-      <line x1="180" y1="176" x2="180" y2="196" stroke="#C9920A" stroke-width="0.9" opacity="0.8"/>
-
-      <!-- Control panel row -->
-      <rect x="94" y="228" width="172" height="28" rx="5" fill="rgba(201,146,10,0.06)" stroke="#C9920A" stroke-width="0.8" opacity="0.7"/>
-      <circle cx="114" cy="242" r="7" fill="rgba(39,174,96,0.25)" stroke="#27ae60" stroke-width="1.2"/>
-      <circle cx="137" cy="242" r="7" fill="rgba(201,146,10,0.25)" stroke="#C9920A" stroke-width="1.2"/>
-      <circle cx="160" cy="242" r="7" fill="rgba(231,76,60,0.25)" stroke="#e74c3c" stroke-width="1.2"/>
-      <rect x="176" y="235" width="80" height="14" rx="3" fill="rgba(201,146,10,0.08)" stroke="#C9920A" stroke-width="0.6" opacity="0.7"/>
-
-      <!-- Machine legs -->
-      <rect x="104" y="276" width="24" height="36" rx="3" fill="none" stroke="#C9920A" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
-      <rect x="232" y="276" width="24" height="36" rx="3" fill="none" stroke="#C9920A" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
-
-      <!-- Sheet metal bender (right machine) -->
-      <rect x="320" y="110" width="150" height="160" rx="8" fill="none" stroke="#C9920A" stroke-width="1" stroke-dasharray="5 3" opacity="0.45"/>
-      <rect x="330" y="124" width="130" height="88" rx="4" fill="rgba(201,146,10,0.04)" stroke="#C9920A" stroke-width="0.6" opacity="0.55"/>
-      <!-- bending blade lines -->
-      <line x1="330" y1="168" x2="460" y2="168" stroke="#C9920A" stroke-width="1.8" opacity="0.7" filter="url(#glow3)"/>
-      <rect x="340" y="172" width="110" height="32" rx="2" fill="rgba(201,146,10,0.07)" stroke="#C9920A" stroke-width="0.7" opacity="0.6"/>
-      <!-- side cylinder -->
-      <ellipse cx="320" cy="168" rx="8" ry="16" fill="none" stroke="#C9920A" stroke-width="0.9" opacity="0.5"/>
-      <ellipse cx="470" cy="168" rx="8" ry="16" fill="none" stroke="#C9920A" stroke-width="0.9" opacity="0.5"/>
-      <!-- control box -->
-      <rect x="458" y="128" width="28" height="48" rx="4" fill="rgba(201,146,10,0.07)" stroke="#C9920A" stroke-width="0.8" opacity="0.6"/>
-      <circle cx="472" cy="148" r="5" fill="none" stroke="#C9920A" stroke-width="1" opacity="0.7"/>
-      <circle cx="472" cy="162" r="3" fill="#C9920A" opacity="0.7"/>
-
-      <!-- Conveyor floor -->
-      <rect x="60" y="312" width="440" height="10" rx="5" fill="none" stroke="#C9920A" stroke-width="0.8" opacity="0.35"/>
-      <circle cx="100" cy="317" r="5" fill="none" stroke="#C9920A" stroke-width="0.7" opacity="0.4"/>
-      <circle cx="160" cy="317" r="5" fill="none" stroke="#C9920A" stroke-width="0.7" opacity="0.4"/>
-      <circle cx="220" cy="317" r="5" fill="none" stroke="#C9920A" stroke-width="0.7" opacity="0.4"/>
-      <circle cx="280" cy="317" r="5" fill="none" stroke="#C9920A" stroke-width="0.7" opacity="0.4"/>
-      <circle cx="340" cy="317" r="5" fill="none" stroke="#C9920A" stroke-width="0.7" opacity="0.4"/>
-      <circle cx="400" cy="317" r="5" fill="none" stroke="#C9920A" stroke-width="0.7" opacity="0.4"/>
-      <circle cx="460" cy="317" r="5" fill="none" stroke="#C9920A" stroke-width="0.7" opacity="0.4"/>
-
-      <!-- dimension lines / annotations -->
-      <line x1="80" y1="76" x2="280" y2="76" stroke="#C9920A" stroke-width="0.6" opacity="0.35" marker-start="url(#arr)" marker-end="url(#arr)"/>
-      <text x="180" y="72" fill="#C9920A" font-size="8" text-anchor="middle" opacity="0.5" font-family="Inter,sans-serif">2400mm</text>
-      <line x1="66" y1="90" x2="66" y2="280" stroke="#C9920A" stroke-width="0.6" opacity="0.35"/>
-      <text x="58" y="190" fill="#C9920A" font-size="8" text-anchor="middle" opacity="0.5" font-family="Inter,sans-serif" transform="rotate(-90,58,190)">1800mm</text>
-
-      <!-- Label -->
-      <text x="280" y="390" fill="#C9920A" font-size="9.5" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" letter-spacing="3.5" opacity="0.6">DIPBAN PRODUCTION FLOOR  ·  HOWRAH</text>
-      <line x1="80" y1="382" x2="480" y2="382" stroke="#C9920A" stroke-width="0.5" opacity="0.3"/>
-    </svg>
-  </div>
-
-  <!-- Hero text -->
+  <!-- Hero content -->
   <div class="ab-hero-content container">
     <nav class="ab-breadcrumb" aria-label="breadcrumb">
       <a href="index.php">Home</a>
@@ -119,187 +29,296 @@ include 'includes/header.php';
       <span>About Us</span>
     </nav>
 
-    <div class="ab-hero-badge">Est. 2022 · Howrah, West Bengal</div>
+    <div class="ab-hero-badge">
+      <i class="fas fa-certificate" style="color:var(--gold)"></i>
+      Est. 1986 · Tangra, Kolkata
+    </div>
 
     <h1 class="ab-hero-title">
-      <span class="ab-title-line1">Engineering</span>
-      <span class="ab-title-line2">Excellence</span>
-      <span class="ab-title-line3">38+ Years</span>
+      <span class="ab-title-line1">Driven by Innovation</span>
+      <span class="ab-title-line2">Trusted for Quality</span>
+      <span class="ab-title-line3">Since 1986 · 38+ Years</span>
     </h1>
 
-    <p class="ab-hero-sub">Trusted manufacturer, supplier &amp; service provider of industrial machinery for woodworking and sheet metal industries across India.</p>
+    <p class="ab-hero-sub">
+      Established in 1986, Arup Enterprise has been a trusted name in the field of magnetic equipment and industrial solutions. Based in Tangra, Kolkata, we serve clients across the city and throughout India with high-quality products, dedicated engineering service, and unmatched dependability.
+    </p>
 
     <div class="ab-hero-stats">
-      <div class="ab-hs"><span class="ab-hs-n" data-target="3">0</span><sup>+</sup><span class="ab-hs-l">Years</span></div>
+      <div class="ab-hs">
+        <span class="ab-hs-n" data-target="38">0</span><sup>+</sup>
+        <span class="ab-hs-l">Years of Service</span>
+      </div>
       <div class="ab-hs-div"></div>
-      <div class="ab-hs"><span class="ab-hs-n" data-target="200">0</span><sup>+</sup><span class="ab-hs-l">Installations</span></div>
+      <div class="ab-hs">
+        <span class="ab-hs-n" data-target="500">0</span><sup>+</sup>
+        <span class="ab-hs-l">Industrial Clients</span>
+      </div>
       <div class="ab-hs-div"></div>
-      <div class="ab-hs"><span class="ab-hs-n" data-target="100">0</span><sup>%</sup><span class="ab-hs-l">Satisfaction</span></div>
+      <div class="ab-hs">
+        <span class="ab-hs-n" data-target="100">0</span><sup>%</sup>
+        <span class="ab-hs-l">Satisfaction</span>
+      </div>
     </div>
 
     <div class="ab-hero-scroll" aria-hidden="true">
-      <span></span>Scroll to explore
+      <span></span>Scroll to explore our story
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     WHO WE ARE
-════════════════════════════════════════════ -->
+
+<!-- ═══════════════════════════════════════════════
+     CORE CAPABILITIES / SOLUTION CARDS
+════════════════════════════════════════════════ -->
+<section class="ab-section ab-capabilities">
+  <div class="container">
+    <div class="ab-section-head">
+      <span class="ab-eyebrow">What We Deliver</span>
+      <h2 class="ab-h2">High-Performance <em>Magnetic &amp; Industrial</em> Solutions</h2>
+      <p class="ab-head-desc">Precision-engineered machinery built to withstand demanding industrial environments.</p>
+    </div>
+
+    <div class="ab-cap-layout">
+      <!-- Showcase Image Column -->
+      <div class="ab-cap-media">
+        <div class="ab-media-card">
+          <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.07-AM.jpeg" alt="Arup Enterprise Manufacturing Equipment" class="ab-media-img" loading="lazy">
+          <div class="ab-media-badge">
+            <i class="fas fa-check-circle"></i>
+            <span>Heavy-Duty Industrial Manufacturing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Solution Cards -->
+      <div class="ab-cap-grid">
+        <div class="ab-cap-card">
+          <div class="ab-cap-icon">
+            <i class="fas fa-magnet"></i>
+          </div>
+          <div class="ab-cap-content">
+            <h3>Magnetic Separation Systems</h3>
+            <p>Efficiently remove ferrous contaminants from bulk materials using advanced magnetic separation technology.</p>
+          </div>
+        </div>
+
+        <div class="ab-cap-card">
+          <div class="ab-cap-icon">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div class="ab-cap-content">
+            <h3>Pulley &amp; Industrial Components</h3>
+            <p>High-performance pulleys and components designed to ensure smooth industrial operations with long-lasting durability.</p>
+          </div>
+        </div>
+
+        <div class="ab-cap-card">
+          <div class="ab-cap-icon">
+            <i class="fas fa-industry"></i>
+          </div>
+          <div class="ab-cap-content">
+            <h3>Custom Steel Solutions</h3>
+            <p>Tailor-made stainless steel products built to match your specific industrial requirements with precision and strength.</p>
+          </div>
+        </div>
+
+        <div class="ab-cap-card">
+          <div class="ab-cap-icon">
+            <i class="fas fa-th-large"></i>
+          </div>
+          <div class="ab-cap-content">
+            <h3>Magnetic Tools &amp; Grids</h3>
+            <p>Reliable magnetic tools and grids for safe, easy handling and separation of metallic particles in various applications.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     OUR STORY & WORKSHOP SHOWCASE
+════════════════════════════════════════════════ -->
 <section class="ab-section ab-who">
   <div class="container">
     <div class="ab-who-grid">
-
-      <!-- Visual side -->
-      <div class="ab-who-visual">
-        <div class="ab-visual-frame">
-          <!-- Premium 3D-style machine illustration -->
-          <svg viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
-            <defs>
-              <linearGradient id="machineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#2a2a2a"/>
-                <stop offset="100%" stop-color="#1a1a1a"/>
-              </linearGradient>
-              <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#3a3530"/>
-                <stop offset="100%" stop-color="#2a2520"/>
-              </linearGradient>
-              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#8B6508"/>
-                <stop offset="50%" stop-color="#C9920A"/>
-                <stop offset="100%" stop-color="#E8B84B"/>
-              </linearGradient>
-              <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#C9920A" stop-opacity="0.25"/>
-                <stop offset="100%" stop-color="#C9920A" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-
-            <!-- Background -->
-            <rect width="480" height="340" fill="#1a1714" rx="12"/>
-            <!-- Floor grid -->
-            <line x1="0" y1="290" x2="480" y2="290" stroke="#C9920A" stroke-width="0.5" opacity="0.2"/>
-            <line x1="0" y1="300" x2="480" y2="300" stroke="#C9920A" stroke-width="0.3" opacity="0.1"/>
-
-            <!-- MACHINE 1: CNC Panel Borer -->
-            <!-- Shadow -->
-            <ellipse cx="160" cy="288" rx="90" ry="10" fill="rgba(0,0,0,0.6)"/>
-            <!-- Base cabinet -->
-            <rect x="52" y="155" width="216" height="130" rx="8" fill="url(#machineGrad)" stroke="#C9920A" stroke-width="1"/>
-            <!-- Top surface -->
-            <rect x="48" y="148" width="224" height="18" rx="4" fill="url(#panelGrad)" stroke="#C9920A" stroke-width="0.8"/>
-            <!-- Gantry arm -->
-            <rect x="60" y="72" width="200" height="16" rx="4" fill="url(#panelGrad)" stroke="#C9920A" stroke-width="0.8"/>
-            <!-- Gantry posts -->
-            <rect x="60" y="72" width="14" height="80" rx="3" fill="url(#panelGrad)" stroke="#C9920A" stroke-width="0.7"/>
-            <rect x="246" y="72" width="14" height="80" rx="3" fill="url(#panelGrad)" stroke="#C9920A" stroke-width="0.7"/>
-            <!-- Work table -->
-            <rect x="74" y="148" width="172" height="8" rx="2" fill="#C9920A" opacity="0.8"/>
-            <!-- Spindle head -->
-            <rect x="138" y="80" width="44" height="74" rx="5" fill="#2d2a24" stroke="#C9920A" stroke-width="1.2"/>
-            <circle cx="160" cy="125" r="18" fill="url(#screenGlow)" stroke="#C9920A" stroke-width="1.4"/>
-            <circle cx="160" cy="125" r="10" fill="#0a0a0a" stroke="#C9920A" stroke-width="1"/>
-            <circle cx="160" cy="125" r="4" fill="#C9920A"/>
-            <!-- spindle bit -->
-            <rect x="157" y="143" width="6" height="16" rx="2" fill="url(#goldGrad)"/>
-            <!-- Control panel on cabinet -->
-            <rect x="62" y="168" width="196" height="100" rx="5" fill="#111" stroke="#C9920A" stroke-width="0.6" opacity="0.8"/>
-            <!-- Screen on cabinet -->
-            <rect x="72" y="176" width="96" height="58" rx="4" fill="#0d1a0d" stroke="#27ae60" stroke-width="0.8"/>
-            <rect x="76" y="180" width="88" height="50" rx="2" fill="url(#screenGlow)" opacity="0.6"/>
-            <text x="116" y="208" fill="#00ff88" font-size="7" text-anchor="middle" font-family="monospace" opacity="0.9">RPM: 3400</text>
-            <text x="116" y="218" fill="#00ff88" font-size="7" text-anchor="middle" font-family="monospace" opacity="0.9">FEED: 24mm/s</text>
-            <text x="116" y="228" fill="#00cc66" font-size="6" text-anchor="middle" font-family="monospace" opacity="0.7">STATUS: RUNNING</text>
-            <!-- Buttons -->
-            <circle cx="188" cy="188" r="6" fill="rgba(39,174,96,0.3)" stroke="#27ae60" stroke-width="1.2"/>
-            <circle cx="206" cy="188" r="6" fill="rgba(231,76,60,0.3)" stroke="#e74c3c" stroke-width="1.2"/>
-            <circle cx="224" cy="188" r="6" fill="rgba(201,146,10,0.3)" stroke="#C9920A" stroke-width="1.2"/>
-            <!-- Dial -->
-            <circle cx="218" cy="220" r="16" fill="#1a1a1a" stroke="#C9920A" stroke-width="1"/>
-            <circle cx="218" cy="220" r="10" fill="none" stroke="#C9920A" stroke-width="0.7" stroke-dasharray="3 2"/>
-            <line x1="218" y1="220" x2="224" y2="212" stroke="#C9920A" stroke-width="1.5"/>
-            <!-- Legs -->
-            <rect x="68" y="283" width="20" height="8" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-            <rect x="232" y="283" width="20" height="8" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-
-            <!-- MACHINE 2: Sheet Metal Bender (right) -->
-            <ellipse cx="380" cy="288" rx="72" ry="8" fill="rgba(0,0,0,0.5)"/>
-            <!-- Body -->
-            <rect x="310" y="120" width="140" height="165" rx="7" fill="url(#machineGrad)" stroke="#C9920A" stroke-width="1"/>
-            <!-- Top beam -->
-            <rect x="305" y="112" width="150" height="20" rx="5" fill="url(#panelGrad)" stroke="#C9920A" stroke-width="1"/>
-            <!-- Bending beam (glowing) -->
-            <rect x="315" y="178" width="130" height="12" rx="3" fill="url(#goldGrad)" opacity="0.9" filter="url(#blur2)"/>
-            <rect x="315" y="178" width="130" height="10" rx="3" fill="#C9920A" opacity="0.7"/>
-            <!-- Back plate -->
-            <rect x="322" y="192" width="116" height="68" rx="4" fill="#111" stroke="#C9920A" stroke-width="0.5" opacity="0.7"/>
-            <!-- Side pistons -->
-            <rect x="303" y="142" width="12" height="50" rx="3" fill="#2a2520" stroke="#C9920A" stroke-width="0.7"/>
-            <rect x="445" y="142" width="12" height="50" rx="3" fill="#2a2520" stroke="#C9920A" stroke-width="0.7"/>
-            <!-- Control box -->
-            <rect x="446" y="122" width="30" height="52" rx="4" fill="#1a1a1a" stroke="#C9920A" stroke-width="0.8"/>
-            <circle cx="461" cy="140" r="5" fill="none" stroke="#27ae60" stroke-width="1"/>
-            <rect x="453" y="148" width="16" height="3" rx="1" fill="#C9920A" opacity="0.6"/>
-            <rect x="453" y="154" width="12" height="3" rx="1" fill="#C9920A" opacity="0.4"/>
-            <rect x="453" y="160" width="14" height="3" rx="1" fill="#C9920A" opacity="0.5"/>
-            <!-- Legs -->
-            <rect x="320" y="282" width="20" height="9" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-            <rect x="420" y="282" width="20" height="9" rx="2" fill="#111" stroke="#C9920A" stroke-width="0.5"/>
-
-            <!-- Label bar -->
-            <rect x="0" y="315" width="480" height="25" rx="0" fill="rgba(201,146,10,0.07)"/>
-            <text x="240" y="331" fill="#C9920A" font-size="8.5" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" letter-spacing="4">DIPBAN TECHNICAL SERVICES  ·  HOWRAH</text>
-          </svg>
-
-          <div class="ab-visual-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#C9920A" stroke-width="2" stroke-linecap="round"/></svg>
-            Factory-Trained Engineers
-          </div>
-        </div>
-
-        <!-- Stat pills below image -->
-        <div class="ab-stat-row">
-          <div class="ab-stat">
-            <span class="ab-sn" data-target="3">0</span><sup>+</sup>
-            <span class="ab-sl">Yrs Excellence</span>
-          </div>
-          <div class="ab-stat">
-            <span class="ab-sn" data-target="200">0</span><sup>+</sup>
-            <span class="ab-sl">Installations</span>
-          </div>
-          <div class="ab-stat">
-            <span class="ab-sn" data-target="100">0</span><sup>%</sup>
-            <span class="ab-sl">Satisfaction</span>
-          </div>
-        </div>
-      </div>
-
       <!-- Text side -->
       <div class="ab-who-text">
         <span class="ab-eyebrow">Our Story</span>
-        <h2 class="ab-h2">Powering Industries with <em>Precision &amp; Innovation</em></h2>
-        <p>Arup Enterprise was established in 2022 with a clear vision: to deliver world-class industrial machinery that gives businesses a genuine competitive edge. We entered the market as a wholesaler and trader of woodworking panel processing machinery and hydraulic machines — and quickly earned a reputation built on performance, reliability, and true after-sales partnership.</p>
-        <p>Headquartered in Liluah, Howrah, we serve clients across West Bengal, Odhisha, Assam, Jharkhand, Northeast and beyond, offering a comprehensive range of machines alongside factory-trained service engineers and genuine spare parts always in stock.</p>
-        <p>Our philosophy is straightforward — a machine is only as valuable as the support behind it. That's why every Arup Enterprise client benefits from 24×7 technical assistance, rapid response deployment, and a commitment that doesn't end at delivery.</p>
+        <h2 class="ab-h2">Powering Industries with <em>Precision &amp; Integrity</em></h2>
+        
+        <p class="ab-p-highlight">
+          Established in 1986, Arup Enterprise has earned a strong reputation as a trusted name in the field of magnetic separation and industrial machinery manufacturing. Based in Tangra, Kolkata, we are known as one of the leading Magnetic Drum Manufacturers in the region, serving industries across India with reliable and effective solutions.
+        </p>
+        <p>
+          Over the years, our growth has been driven by a firm commitment to quality, integrity, and customer satisfaction. We believe that true value comes not just from delivering high-quality products, but also from building lasting relationships with our clients. This approach has helped us build a loyal customer base in Kolkata and across the country.
+        </p>
+        <p>
+          Our team consists of skilled professionals who are passionate about innovation, precision engineering, and delivering results. From product design to customer service, every process is handled with care, dedication, and professionalism.
+        </p>
 
         <div class="ab-who-tags">
-          <span><i class="fas fa-map-marker-alt"></i>Howrah, West Bengal</span>
-          <span><i class="fas fa-calendar-check"></i>Est. 2022</span>
+          <span><i class="fas fa-map-marker-alt"></i>Tangra, Kolkata</span>
+          <span><i class="fas fa-calendar-check"></i>Est. 1986</span>
           <span><i class="fas fa-globe"></i>Pan-India Service</span>
+          <span><i class="fas fa-shield-alt"></i>Tested Quality</span>
         </div>
 
-        <a href="contact.php" class="ab-cta-inline">
-          Get a Free Consultation
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </a>
+        <div class="ab-who-actions">
+          <a href="contact.php" class="ab-cta-inline">
+            Get a Free Consultation
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Workshop Gallery Showcase -->
+      <div class="ab-who-gallery">
+        <div class="ab-gallery-main">
+          <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.20-AM-1024x1024.jpeg" alt="Workshop Assembly" loading="lazy">
+          <div class="ab-gallery-badge">
+            <i class="fas fa-tools"></i> Kolkata Fabrication Facility
+          </div>
+        </div>
+        <div class="ab-gallery-thumbs">
+          <div class="ab-thumb">
+            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.26-AM-1024x1024.jpeg" alt="Magnetic Drum Precision Fabrication" loading="lazy">
+            <span class="ab-thumb-lbl">Precision Drum Assembly</span>
+          </div>
+          <div class="ab-thumb">
+            <img src="assets/images/about/WhatsApp-Image-2025-05-13-at-11.50.29-AM-1024x1024.jpeg" alt="Industrial Drum Fabrication" loading="lazy">
+            <span class="ab-thumb-lbl">Heavy Machine Component</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
+
+<!-- ═══════════════════════════════════════════════
+     INDUSTRIES WE SERVE
+════════════════════════════════════════════════ -->
+<section class="ab-section ab-industries">
+  <div class="container">
+    <div class="ab-section-head">
+      <span class="ab-eyebrow">Sectors We Empower</span>
+      <h2 class="ab-h2">Trusted Across <em>Heavy &amp; Processing</em> Industries</h2>
+      <p class="ab-head-desc">We are proud to serve a wide range of industries with specialized iron recovery and tramp metal separation systems:</p>
+    </div>
+
+    <div class="ab-ind-grid">
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">01</div>
+        <div class="ab-ind-icon"><i class="fas fa-cubes"></i></div>
+        <h3>Iron &amp; Steel Plants</h3>
+        <p>Continuous tramp iron extraction from burden conveyors, scrap processing, and furnace charge protection.</p>
+      </div>
+
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">02</div>
+        <div class="ab-ind-icon"><i class="fas fa-fire"></i></div>
+        <h3>Casting Plants</h3>
+        <p>Reclaiming sprue, gate metal, and cleansing moulding sand for recycled reuse in foundry processes.</p>
+      </div>
+
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">03</div>
+        <div class="ab-ind-icon"><i class="fas fa-mountain"></i></div>
+        <h3>Cement Plants</h3>
+        <p>Protecting crushers, roller presses, and ball mills from destructive ferrous debris in raw material streams.</p>
+      </div>
+
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">04</div>
+        <div class="ab-ind-icon"><i class="fas fa-layer-group"></i></div>
+        <h3>Sponge Iron &amp; Pig Iron</h3>
+        <p>High-gradient separation of metallized DRI fines, char separation, and iron yield optimization.</p>
+      </div>
+
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">05</div>
+        <div class="ab-ind-icon"><i class="fas fa-dumpster"></i></div>
+        <h3>Iron Slag Separation</h3>
+        <p>Recovering high-purity metallic content from blast furnace and induction furnace slag waste.</p>
+      </div>
+
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">06</div>
+        <div class="ab-ind-icon"><i class="fas fa-wind"></i></div>
+        <h3>Sand Recovery from Castings</h3>
+        <p>Complete de-ironing of thermal or mechanically reclaimed foundry sands for zero-defect casting production.</p>
+      </div>
+
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">07</div>
+        <div class="ab-ind-icon"><i class="fas fa-recycle"></i></div>
+        <h3>Recycling Units</h3>
+        <p>Sorting shredded metal, plastic flakes, rubber crumbs, and municipal solid waste streams.</p>
+      </div>
+
+      <div class="ab-ind-card">
+        <div class="ab-ind-num">08</div>
+        <div class="ab-ind-icon"><i class="fas fa-microchip"></i></div>
+        <h3>E-Waste Metal Recovery</h3>
+        <p>Precision extraction of ferrous pins, brackets, and electronic shred residue in compliance with clean recovery standards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     OUR PROCESS: From Concept to Completion
+════════════════════════════════════════════════ -->
+<section class="ab-section ab-process" style="background-image: linear-gradient(rgba(14,14,14,0.92), rgba(14,14,14,0.92)), url('assets/images/about/hero-section.avif');">
+  <div class="container">
+    <div class="ab-section-head">
+      <span class="ab-eyebrow">Our Workflow</span>
+      <h2 class="ab-h2" style="color:#FFF;">From Concept to <em>Completion</em></h2>
+      <p class="ab-head-desc" style="color:rgba(255,255,255,0.7);">
+        At Arup Enterprise, we follow a structured and efficient workflow that ensures quality, customization, and timely delivery. From understanding your unique requirements to delivering reliable magnetic solutions, every stage is handled with precision and dedication.
+      </p>
+    </div>
+
+    <div class="ab-proc-grid">
+      <div class="ab-proc-card">
+        <div class="ab-proc-step">STEP 01</div>
+        <div class="ab-proc-icon"><i class="fas fa-clipboard-list"></i></div>
+        <h3>Client Requirement Analysis</h3>
+        <p>We analyze your specific raw material characteristics, flow rate, particle size distribution, and plant operating environment.</p>
+      </div>
+
+      <div class="ab-proc-card">
+        <div class="ab-proc-step">STEP 02</div>
+        <div class="ab-proc-icon"><i class="fas fa-pencil-ruler"></i></div>
+        <h3>Design &amp; Engineering</h3>
+        <p>Our engineering team models the optimal magnetic circuit, drum dimensions, and structural framework tailored to your layout.</p>
+      </div>
+
+      <div class="ab-proc-card">
+        <div class="ab-proc-step">STEP 03</div>
+        <div class="ab-proc-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Production &amp; Testing</h3>
+        <p>In-house precision fabrication in Kolkata using high-grade magnetic cores and stainless steel, followed by rigorous Gauss testing.</p>
+      </div>
+
+      <div class="ab-proc-card">
+        <div class="ab-proc-step">STEP 04</div>
+        <div class="ab-proc-icon"><i class="fas fa-truck-loading"></i></div>
+        <h3>Delivery &amp; Installation</h3>
+        <p>Safe on-site dispatch across India accompanied by installation guidance, operational testing, and ongoing spare parts support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
      MISSION  VISION  VALUES
-════════════════════════════════════════════ -->
+════════════════════════════════════════════════ -->
 <section class="ab-section ab-mvv">
   <div class="container">
     <div class="ab-section-head">
@@ -313,7 +332,7 @@ include 'includes/header.php';
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
         </div>
         <h3>Our Mission</h3>
-        <p>To empower manufacturing businesses with advanced, reliable industrial machinery — backed by exceptional engineering support, genuine spare parts, and a commitment to zero downtime for every client we serve.</p>
+        <p>To empower industrial plants with durable, high-efficiency magnetic separation equipment backed by prompt engineering assistance, genuine spare components, and continuous operational reliability.</p>
       </div>
 
       <div class="ab-mvv-card ab-mvv-vision">
@@ -321,7 +340,7 @@ include 'includes/header.php';
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
         </div>
         <h3>Our Vision</h3>
-        <p>To become the most trusted industrial machinery partner in Eastern India — recognized for precision, team integrity, and the transformative impact we create in every factory we work with.</p>
+        <p>To remain the preferred manufacturer and technological authority in magnetic separation across India — recognized for precision engineering, product durability, and long-standing client relationships.</p>
       </div>
 
       <div class="ab-mvv-card ab-mvv-values">
@@ -330,19 +349,20 @@ include 'includes/header.php';
         </div>
         <h3>Our Values</h3>
         <ul class="ab-values-list">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Precision in every component</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Integrity in every interaction</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Innovation that creates real value</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Sustainability in design &amp; process</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Partnership beyond the sale</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Precision in every magnetic core</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Integrity and transparency in client deals</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Custom engineering built for real site demands</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Rugged materials with zero compromise</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#C9920A" stroke-width="2.5" stroke-linecap="round"/></svg> Dedicated after-sales service and support</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════════
-     TIMELINE
+     TIMELINE: 1986 to Present
 ════════════════════════════════════════════ -->
 <section class="ab-section ab-timeline-section">
   <div class="container">
@@ -355,132 +375,144 @@ include 'includes/header.php';
       <div class="ab-tl-spine"></div>
 
       <div class="ab-tl-item">
-        <div class="ab-tl-yr">2022</div>
+        <div class="ab-tl-yr">1986</div>
         <div class="ab-tl-node"></div>
         <div class="ab-tl-card">
-          <h4>Founded</h4>
-          <p>Arup Enterprise established in Howrah as a wholesale trader of woodworking and hydraulic machinery — setting the foundation for a full-service industrial machinery company.</p>
+          <h4>Established in Kolkata</h4>
+          <p>Arup Enterprise was founded in Tangra, Kolkata, starting with specialized manufacturing of magnetic separation machinery and magnetic drums for regional industries.</p>
         </div>
       </div>
 
       <div class="ab-tl-item ab-tl-right">
-        <div class="ab-tl-yr">2022</div>
+        <div class="ab-tl-yr">1995</div>
         <div class="ab-tl-node"></div>
         <div class="ab-tl-card">
-          <h4>First 25 Installations</h4>
-          <p>Completed 25 machine installations across furniture and fabrication workshops in West Bengal, earning early recognition for responsive service and machine quality.</p>
+          <h4>Expanding Industrial Capabilities</h4>
+          <p>Expanded product lines to include heavy-duty pulleys, permanent magnetic head pulleys, and custom stainless steel separation equipment.</p>
         </div>
       </div>
 
       <div class="ab-tl-item">
-        <div class="ab-tl-yr">2023</div>
+        <div class="ab-tl-yr">2010</div>
         <div class="ab-tl-node"></div>
         <div class="ab-tl-card">
-          <h4>Expanded Product Portfolio</h4>
-          <p>Added CNC Boring Machines and Sheet Metal Machinery — becoming a one-stop solution for both woodworking and metal fabrication industries.</p>
+          <h4>Pan-India Supply Network</h4>
+          <p>Extended our trusted delivery network to steel, cement, foundry, and recycling plants nationwide, becoming a recognized manufacturer across India.</p>
         </div>
       </div>
 
       <div class="ab-tl-item ab-tl-right">
-        <div class="ab-tl-yr">2023</div>
-        <div class="ab-tl-node"></div>
-        <div class="ab-tl-card">
-          <h4>Service Network Growth</h4>
-          <p>Established dedicated service centers and expanded our field engineer team to ensure same-day or next-day response for all clients across the region.</p>
-        </div>
-      </div>
-
-      <div class="ab-tl-item">
-        <div class="ab-tl-yr">2024</div>
-        <div class="ab-tl-node"></div>
-        <div class="ab-tl-card">
-          <h4>100+ Active Clients</h4>
-          <p>Crossed 100 active clients with installations spanning Howrah, Kolkata, Durgapur, extending into Jharkhand and Odisha.</p>
-        </div>
-      </div>
-
-      <div class="ab-tl-item ab-tl-right">
-        <div class="ab-tl-yr">2025</div>
+        <div class="ab-tl-yr">2025+</div>
         <div class="ab-tl-node ab-tl-node-latest"></div>
         <div class="ab-tl-card ab-tl-card-latest">
-          <span class="ab-tl-live">LATEST</span>
-          <h4>200+ Installations &amp; Digital Expansion</h4>
-          <p>Surpassed 200 total installations. Launched our digital platform and AI-powered website to better serve clients and streamline quote &amp; support requests 24×7.</p>
+          <span class="ab-tl-live">38+ YEARS</span>
+          <h4>Continuous Engineering Innovation</h4>
+          <p>Combining four decades of technical mastery with contemporary fabrication standards to provide high-Gauss, long-lasting industrial separation systems.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════════
-     PERFORMANCE METRICS
+     FREQUENTLY ASKED QUESTIONS
 ════════════════════════════════════════════ -->
-<section class="ab-section ab-metrics">
+<section class="ab-section ab-faqs">
   <div class="container">
     <div class="ab-section-head">
-      <span class="ab-eyebrow">By the Numbers</span>
-      <h2 class="ab-h2">Engineering <em>Performance</em></h2>
+      <span class="ab-eyebrow">Need Answers?</span>
+      <h2 class="ab-h2">Frequently Asked <em>Questions</em></h2>
+      <p class="ab-head-desc">Common questions about our magnetic separation systems, custom options, and technical support.</p>
     </div>
 
-    <div class="ab-metrics-wrap">
-      <div class="ab-metric-item">
-        <div class="ab-metric-head">
-          <span class="ab-metric-lbl">Production Quality</span>
-          <span class="ab-metric-pct">98%</span>
-        </div>
-        <div class="ab-metric-track">
-          <div class="ab-metric-bar" data-pct="98"></div>
-        </div>
-      </div>
-      <div class="ab-metric-item">
-        <div class="ab-metric-head">
-          <span class="ab-metric-lbl">Technology Integration</span>
-          <span class="ab-metric-pct">97%</span>
-        </div>
-        <div class="ab-metric-track">
-          <div class="ab-metric-bar" data-pct="97"></div>
+    <div class="ab-faq-layout">
+      <!-- Left side: visual box -->
+      <div class="ab-faq-visual">
+        <div class="ab-faq-img-card">
+          <img src="assets/images/about/airport-security.avif" alt="Industrial Technical Inspection" loading="lazy">
+          <div class="ab-faq-highlight">
+            <div class="ab-faq-highlight-badge">38+ Years of Service</div>
+            <h3>Magnetic Separation Solutions Since 1986</h3>
+            <p>Delivering reliable magnetic separation solutions with unmatched industry experience and direct engineering support.</p>
+          </div>
         </div>
       </div>
-      <div class="ab-metric-item">
-        <div class="ab-metric-head">
-          <span class="ab-metric-lbl">Customer Satisfaction</span>
-          <span class="ab-metric-pct">100%</span>
+
+      <!-- Right side: Accordion -->
+      <div class="ab-faq-list">
+        <div class="ab-faq-item active">
+          <button type="button" class="ab-faq-trigger" aria-expanded="true">
+            <span>What is a magnetic separator and how does it work?</span>
+            <i class="fas fa-chevron-down ab-faq-icon"></i>
+          </button>
+          <div class="ab-faq-body" style="display:block;">
+            <p>A magnetic separator is a machine used to separate magnetic materials from non-magnetic ones, commonly used in metal recycling, waste processing, casting plants, and industrial material handling applications.</p>
+          </div>
         </div>
-        <div class="ab-metric-track">
-          <div class="ab-metric-bar" data-pct="100"></div>
+
+        <div class="ab-faq-item">
+          <button type="button" class="ab-faq-trigger" aria-expanded="false">
+            <span>What types of magnetic separation equipment do you provide?</span>
+            <i class="fas fa-chevron-down ab-faq-icon"></i>
+          </button>
+          <div class="ab-faq-body">
+            <p>We offer Drum Magnetic Separators (Single &amp; Double Drum), Overband Magnetic Separators, Electromagnetic Separators, Permanent Magnetic Head Pulleys, and custom magnetic tools &amp; grids for various industrial needs.</p>
+          </div>
         </div>
-      </div>
-      <div class="ab-metric-item">
-        <div class="ab-metric-head">
-          <span class="ab-metric-lbl">On-Time Delivery</span>
-          <span class="ab-metric-pct">95%</span>
+
+        <div class="ab-faq-item">
+          <button type="button" class="ab-faq-trigger" aria-expanded="false">
+            <span>Can your magnetic separators be customized?</span>
+            <i class="fas fa-chevron-down ab-faq-icon"></i>
+          </button>
+          <div class="ab-faq-body">
+            <p>Yes, we provide fully customizable magnetic separation systems based on your material type, bulk density, particle size, conveyor belt width, operating capacity, and industry requirements.</p>
+          </div>
         </div>
-        <div class="ab-metric-track">
-          <div class="ab-metric-bar" data-pct="95"></div>
+
+        <div class="ab-faq-item">
+          <button type="button" class="ab-faq-trigger" aria-expanded="false">
+            <span>Do you provide installation and maintenance support?</span>
+            <i class="fas fa-chevron-down ab-faq-icon"></i>
+          </button>
+          <div class="ab-faq-body">
+            <p>Yes, we provide complete support including installation guidance, testing, genuine spare parts replacement, and periodic maintenance to ensure continuous long-term performance.</p>
+          </div>
+        </div>
+
+        <div class="ab-faq-item">
+          <button type="button" class="ab-faq-trigger" aria-expanded="false">
+            <span>Why choose ARUP ENTERPRISE?</span>
+            <i class="fas fa-chevron-down ab-faq-icon"></i>
+          </button>
+          <div class="ab-faq-body">
+            <p>ARUP ENTERPRISE is a trusted manufacturer with over 38 years of proven experience since 1986. We engineer heavy-duty, high-Gauss solutions for iron contamination removal across minerals, steel, cement, foundry, chemicals, plastics, and recycling units.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════════
      CTA STRIP
 ════════════════════════════════════════════ -->
 <section class="ab-cta-strip">
-  <div class="ab-cta-sparks" aria-hidden="true"></div>
   <div class="container">
     <div class="ab-cta-inner">
       <div class="ab-cta-text">
-        <span class="ab-eyebrow" style="color:#E8B84B">Let's Work Together</span>
-        <h2>Ready to Transform Your<br>Production Capabilities?</h2>
-        <p>Talk to our experts today. We'll identify the right machinery for your requirements and budget.</p>
+        <span class="ab-eyebrow" style="color:#E8B84B; background:rgba(232,184,75,0.1); border-color:rgba(232,184,75,0.25);">Let's Work Together</span>
+        <h2>Ready to Upgrade Your<br>Magnetic Separation Setup?</h2>
+        <p>Talk to our Kolkata engineering team today. We'll identify the right magnetic separator or custom pulley for your specifications and budget.</p>
       </div>
       <div class="ab-cta-btns">
         <a href="contact.php#quote" class="ab-btn-primary">
-          <i class="fas fa-paper-plane"></i> Get a Free Quote
+          <i class="fas fa-paper-plane"></i> Request a Free Quote
         </a>
         <a href="tel:+918013635806" class="ab-btn-secondary">
-          <i class="fas fa-phone-alt"></i> Call Us Now
+          <i class="fas fa-phone-alt"></i> +91 8013635806
         </a>
       </div>
     </div>
@@ -493,200 +525,191 @@ include 'includes/header.php';
      STYLES
 ════════════════════════════════════════════ -->
 <style>
-/* ── TOKENS ── */
+/* ── COLOR TOKENS ── */
 :root {
   --gold:       #C9920A;
   --gold-lt:    #E8B84B;
   --gold-dk:    #8B6508;
   --char:       #0E0E0E;
-  --ink:        #1C1C1C;
-  --cream:      #F5EED8;
-  --ivory:      #FAFAF5;
-  --steel:      #E8E4DC;
+  --ink:        #181818;
+  --cream:      #F7F4EE;
+  --ivory:      #FAFAF6;
+  --steel:      #ECE8DF;
   --smoke:      #6B6560;
   --white:      #FFFFFF;
   --font-d:     'Bebas Neue', 'Impact', sans-serif;
   --font-b:     'Inter', -apple-system, sans-serif;
   --ease:       cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-g:   0 8px 32px rgba(201,146,10,0.22);
+  --shadow-g:   0 8px 32px rgba(201,146,10,0.18);
+  --radius:     12px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-b); }
+body { font-family: var(--font-b); color: var(--ink); background: var(--ivory); }
 .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
-a { text-decoration: none; }
+a { text-decoration: none; color: inherit; }
 
-/* ── EYEBROW ── */
+/* ── TYPOGRAPHY & HEADINGS ── */
 .ab-eyebrow {
   display: inline-block;
-  font-size: 0.67rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
   background: rgba(201,146,10,0.09);
-  border: 1px solid rgba(201,146,10,0.22);
+  border: 1px solid rgba(201,146,10,0.25);
   border-radius: 100px;
-  padding: 4px 14px;
-  margin-bottom: 12px;
+  padding: 5px 16px;
+  margin-bottom: 14px;
 }
-
-/* ── SECTION HEAD ── */
-.ab-section-head { text-align: center; margin-bottom: 56px; }
+.ab-section-head { text-align: center; margin-bottom: 50px; }
 .ab-h2 {
   font-family: var(--font-d);
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: 0.02em;
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  letter-spacing: 0.03em;
   color: var(--char);
-  line-height: 1.12;
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 .ab-h2 em { color: var(--gold); font-style: normal; }
-
-/* ── SECTION BASE ── */
+.ab-head-desc {
+  max-width: 680px;
+  margin: 12px auto 0;
+  color: var(--smoke);
+  font-size: 1rem;
+  line-height: 1.6;
+}
 .ab-section { padding: 88px 0; }
 
-/* ═══════════════════════════════════════════
-   HERO
-════════════════════════════════════════════ */
+/* ── HERO SECTION ── */
 .ab-hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 88vh;
   background: var(--char);
   display: flex;
   align-items: center;
   overflow: hidden;
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
 }
-
-/* Sparks canvas */
+.ab-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) contrast(1.1);
+  transform: scale(1.02);
+  transition: transform 8s ease;
+}
+.ab-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14,14,14,0.94) 0%, rgba(14,14,14,0.8) 55%, rgba(201,146,10,0.15) 100%);
+}
 .ab-sparks {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.65;
+  z-index: 1;
 }
-
-/* Blueprint grid */
 .ab-grid-overlay {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201,146,10,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,146,10,0.04) 1px, transparent 1px);
-  background-size: 52px 52px;
+    linear-gradient(rgba(201,146,10,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,146,10,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
   pointer-events: none;
+  z-index: 1;
 }
-
-/* Machine visual (right side) */
-.ab-hero-machine {
-  position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: clamp(380px, 50vw, 640px);
-  opacity: 0.38;
-  pointer-events: none;
-  filter: drop-shadow(0 0 40px rgba(201,146,10,0.15));
-}
-.machine-svg { width: 100%; }
-
-/* Hero content */
 .ab-hero-content {
   position: relative;
   z-index: 2;
   padding: 120px 24px 80px;
-  max-width: 680px;
+  max-width: 820px;
 }
-
 .ab-breadcrumb {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.78rem;
-  color: #666;
-  margin-bottom: 24px;
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 20px;
 }
-.ab-breadcrumb a { color: var(--gold); transition: color 0.2s; }
+.ab-breadcrumb a { color: var(--gold); font-weight: 500; }
 .ab-breadcrumb a:hover { color: var(--gold-lt); }
-.ab-breadcrumb svg { color: #555; }
-
 .ab-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid rgba(201,146,10,0.3);
+  color: var(--gold-lt);
+  border: 1px solid rgba(201,146,10,0.35);
+  background: rgba(201,146,10,0.12);
   border-radius: 100px;
   padding: 6px 18px;
-  margin-bottom: 24px;
-  background: rgba(201,146,10,0.07);
+  margin-bottom: 22px;
+  backdrop-filter: blur(8px);
 }
-
 .ab-hero-title {
   display: flex;
   flex-direction: column;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 .ab-title-line1 {
   font-family: var(--font-d);
-  font-size: clamp(3rem, 7vw, 6rem);
-  letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.55);
+  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.7);
   line-height: 1;
 }
 .ab-title-line2 {
   font-family: var(--font-d);
-  font-size: clamp(4.5rem, 11vw, 9.5rem);
+  font-size: clamp(3.8rem, 9.5vw, 7.5rem);
   letter-spacing: 0.02em;
   color: var(--gold);
-  line-height: 0.92;
-  text-shadow: 0 0 80px rgba(201,146,10,0.35);
+  line-height: 0.95;
+  text-shadow: 0 0 60px rgba(201,146,10,0.4);
 }
 .ab-title-line3 {
   font-family: var(--font-d);
-  font-size: clamp(2rem, 4.5vw, 4rem);
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.35);
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
   line-height: 1.1;
 }
-
 .ab-hero-sub {
-  color: rgba(255,255,255,0.58);
-  font-size: 1rem;
+  color: rgba(255,255,255,0.72);
+  font-size: 1.05rem;
   line-height: 1.7;
-  max-width: 500px;
-  margin-bottom: 40px;
+  max-width: 660px;
+  margin-bottom: 34px;
 }
-
-/* Hero stats bar */
 .ab-hero-stats {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(201,146,10,0.18);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,146,10,0.22);
   border-radius: 14px;
-  padding: 18px 28px;
-  width: fit-content;
+  padding: 16px 28px;
   backdrop-filter: blur(10px);
-  margin-bottom: 44px;
+  margin-bottom: 34px;
 }
 .ab-hs {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 28px;
+  padding: 0 24px;
 }
 .ab-hs-n {
   font-family: var(--font-d);
   font-size: 2.8rem;
-  letter-spacing: 0.03em;
   color: var(--gold);
   line-height: 1;
 }
@@ -696,456 +719,744 @@ a { text-decoration: none; }
   font-weight: 800;
   color: var(--gold-lt);
   vertical-align: super;
-  line-height: 1;
 }
 .ab-hs-l {
   font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.5);
   margin-top: 4px;
 }
 .ab-hs-div {
   width: 1px;
   height: 40px;
-  background: rgba(201,146,10,0.2);
-  flex-shrink: 0;
+  background: rgba(201,146,10,0.25);
 }
-
-/* Scroll hint */
 .ab-hero-scroll {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.4);
 }
 .ab-hero-scroll span {
   display: block;
   width: 1px;
-  height: 36px;
+  height: 32px;
   background: linear-gradient(to bottom, var(--gold), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 @keyframes scrollPulse {
   0%,100% { opacity: 0.3; transform: scaleY(1); }
-  50%      { opacity: 0.8; transform: scaleY(1.3); }
+  50%      { opacity: 0.9; transform: scaleY(1.3); }
 }
 
-/* ═══════════════════════════════════════════
-   WHO WE ARE
-════════════════════════════════════════════ */
+/* ── CORE CAPABILITIES ── */
+.ab-capabilities { background: #FFFFFF; }
+.ab-cap-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 40px;
+  align-items: center;
+}
+.ab-media-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  border: 1px solid var(--steel);
+}
+.ab-media-img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.ab-media-card:hover .ab-media-img {
+  transform: scale(1.03);
+}
+.ab-media-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(14,14,14,0.85);
+  border: 1px solid rgba(201,146,10,0.35);
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: #FFF;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(6px);
+}
+.ab-media-badge i { color: var(--gold); font-size: 1.1rem; }
+.ab-cap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.ab-cap-card {
+  background: var(--ivory);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.ab-cap-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 0;
+  background: var(--gold);
+  transition: height 0.3s var(--ease);
+}
+.ab-cap-card:hover {
+  background: #FFF;
+  border-color: rgba(201,146,10,0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+}
+.ab-cap-card:hover::before { height: 100%; }
+.ab-cap-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(201,146,10,0.12);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  transition: background 0.3s, color 0.3s;
+}
+.ab-cap-card:hover .ab-cap-icon {
+  background: var(--gold);
+  color: #FFF;
+}
+.ab-cap-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--char);
+  margin-bottom: 8px;
+}
+.ab-cap-card p {
+  font-size: 0.88rem;
+  color: var(--smoke);
+  line-height: 1.55;
+}
+
+/* ── OUR STORY & GALLERY ── */
 .ab-who { background: var(--cream); }
 .ab-who-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-
-/* Visual frame */
-.ab-visual-frame {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(201,146,10,0.18);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.18), var(--shadow-g);
-  margin-bottom: 20px;
-  background: #1a1714;
-}
-.ab-visual-badge {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  display: inline-flex;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
   align-items: center;
-  gap: 7px;
-  background: rgba(0,0,0,0.75);
-  border: 1px solid rgba(201,146,10,0.3);
-  color: rgba(255,255,255,0.82);
-  font-size: 0.74rem;
+}
+.ab-who-text p {
+  color: #3a3530;
+  font-size: 0.96rem;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.ab-p-highlight {
+  font-size: 1.05rem !important;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 100px;
-  backdrop-filter: blur(8px);
+  color: var(--char) !important;
+  border-left: 3px solid var(--gold);
+  padding-left: 14px;
 }
-
-/* Stat row */
-.ab-stat-row {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 12px;
+.ab-who-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 30px;
 }
-.ab-stat {
-  background: var(--white);
-  border: 1px solid rgba(201,146,10,0.14);
-  border-radius: 12px;
-  padding: 16px 12px;
-  text-align: center;
-  transition: border-color 0.25s, transform 0.25s;
-}
-.ab-stat:hover { border-color: var(--gold); transform: translateY(-3px); }
-.ab-sn {
-  display: inline-block;
-  font-family: var(--font-d);
-  font-size: 2rem;
-  letter-spacing: 0.03em;
-  color: var(--gold);
-  line-height: 1;
-}
-.ab-stat sup {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--gold-lt);
-  vertical-align: super;
-}
-.ab-sl {
-  display: block;
-  font-size: 0.67rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--smoke);
-  margin-top: 4px;
-}
-
-/* Text side */
-.ab-who-text .ab-h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); text-align: left; margin-bottom: 20px; }
-.ab-who-text p { color: var(--smoke); line-height: 1.75; margin-bottom: 14px; font-size: 0.93rem; }
-.ab-who-tags { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 28px; }
 .ab-who-tags span {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-size: 0.76rem;
+  gap: 8px;
+  background: #FFF;
+  border: 1px solid var(--steel);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--gold-dk);
-  background: rgba(201,146,10,0.09);
-  border: 1px solid rgba(201,146,10,0.22);
-  border-radius: 100px;
-  padding: 6px 14px;
+  color: var(--char);
 }
-.ab-who-tags i { font-size: 0.72rem; }
-
+.ab-who-tags i { color: var(--gold); }
 .ab-cta-inline {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%);
-  color: white;
+  background: var(--gold);
+  color: #FFF;
   font-weight: 700;
-  font-size: 0.9rem;
-  padding: 13px 24px;
-  border-radius: 10px;
-  box-shadow: var(--shadow-g);
+  font-size: 0.88rem;
+  padding: 13px 28px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(201,146,10,0.3);
   transition: all 0.25s var(--ease);
 }
-.ab-cta-inline:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201,146,10,0.38); }
-.ab-cta-inline svg { transition: transform 0.25s; }
-.ab-cta-inline:hover svg { transform: translateX(4px); }
-
-/* ═══════════════════════════════════════════
-   MISSION / VISION / VALUES
-════════════════════════════════════════════ */
-.ab-mvv { background: var(--ivory); }
-.ab-mvv-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-.ab-mvv-card {
-  background: var(--white);
-  border-radius: 16px;
-  padding: 34px 28px;
-  border: 1px solid rgba(201,146,10,0.1);
-  border-top: 3px solid var(--gold);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  transition: transform 0.28s var(--ease), box-shadow 0.28s;
+.ab-cta-inline:hover {
+  background: var(--gold-dk);
+  transform: translateY(-2px);
+  color: #FFF;
+}
+.ab-who-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ab-gallery-main {
   position: relative;
+  border-radius: var(--radius);
   overflow: hidden;
+  border: 1px solid var(--steel);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
 }
-.ab-mvv-card::before {
-  content: '';
+.ab-gallery-main img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+.ab-gallery-badge {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top left, rgba(201,146,10,0.04) 0%, transparent 60%);
-  pointer-events: none;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(14,14,14,0.85);
+  border: 1px solid rgba(201,146,10,0.3);
+  color: #FFF;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
 }
-.ab-mvv-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.1), var(--shadow-g); }
-.ab-mvv-icon {
-  width: 56px; height: 56px;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%);
-  border-radius: 14px;
+.ab-gallery-badge i { color: var(--gold); margin-right: 4px; }
+.ab-gallery-thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.ab-thumb {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--steel);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.ab-thumb img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.ab-thumb:hover img { transform: scale(1.05); }
+.ab-thumb-lbl {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background: rgba(14,14,14,0.75);
+  color: #FFF;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+/* ── INDUSTRIES WE SERVE ── */
+.ab-industries { background: #FFFFFF; }
+.ab-ind-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.ab-ind-card {
+  background: var(--ivory);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  position: relative;
+  transition: all 0.3s var(--ease);
+}
+.ab-ind-card:hover {
+  background: #FFF;
+  border-color: var(--gold);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+}
+.ab-ind-num {
+  font-family: var(--font-d);
+  font-size: 1.8rem;
+  color: rgba(201,146,10,0.25);
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  line-height: 1;
+}
+.ab-ind-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(201,146,10,0.1);
+  color: var(--gold);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+.ab-ind-card:hover .ab-ind-icon {
+  background: var(--gold);
+  color: #FFF;
+}
+.ab-ind-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--char);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.ab-ind-card p {
+  font-size: 0.82rem;
+  color: var(--smoke);
+  line-height: 1.55;
+}
+
+/* ── OUR PROCESS ── */
+.ab-process {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #FFF;
+}
+.ab-proc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.ab-proc-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,146,10,0.25);
+  border-radius: var(--radius);
+  padding: 30px 22px;
+  backdrop-filter: blur(8px);
+  position: relative;
+  transition: all 0.3s ease;
+}
+.ab-proc-card:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+.ab-proc-step {
+  font-family: var(--font-d);
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.ab-proc-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(201,146,10,0.15);
+  border: 1px solid rgba(201,146,10,0.3);
+  color: var(--gold-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 16px;
+}
+.ab-proc-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 10px;
+}
+.ab-proc-card p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.6;
+}
+
+/* ── MISSION, VISION, VALUES ── */
+.ab-mvv { background: var(--ivory); }
+.ab-mvv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+}
+.ab-mvv-card {
+  background: #FFF;
+  border: 1px solid var(--steel);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  transition: all 0.3s var(--ease);
+}
+.ab-mvv-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+}
+.ab-mvv-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(201,146,10,0.1);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
-  box-shadow: var(--shadow-g);
 }
 .ab-mvv-card h3 {
-  font-family: var(--font-b);
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-family: var(--font-d);
+  font-size: 1.65rem;
+  letter-spacing: 0.04em;
   color: var(--char);
   margin-bottom: 12px;
 }
-.ab-mvv-card p { color: var(--smoke); font-size: 0.87rem; line-height: 1.72; }
-.ab-values-list { list-style: none; margin-top: 4px; }
+.ab-mvv-card p {
+  font-size: 0.9rem;
+  color: var(--smoke);
+  line-height: 1.7;
+}
+.ab-values-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .ab-values-list li {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 7px 0;
   font-size: 0.85rem;
-  color: var(--smoke);
-  border-bottom: 1px solid rgba(201,146,10,0.07);
+  font-weight: 500;
+  color: var(--char);
 }
-.ab-values-list li:last-child { border-bottom: none; }
 
-/* ═══════════════════════════════════════════
-   TIMELINE
-════════════════════════════════════════════ */
+/* ── TIMELINE ── */
 .ab-timeline-section { background: var(--cream); }
 .ab-timeline {
   position: relative;
   max-width: 860px;
   margin: 0 auto;
+  padding: 40px 0;
 }
 .ab-tl-spine {
   position: absolute;
-  left: 50%;
   top: 0; bottom: 0;
+  left: 50%;
   width: 2px;
-  background: linear-gradient(to bottom, var(--gold) 0%, rgba(201,146,10,0.08) 100%);
+  background: rgba(201,146,10,0.3);
   transform: translateX(-50%);
 }
 .ab-tl-item {
+  position: relative;
+  margin-bottom: 50px;
   display: flex;
   justify-content: flex-end;
-  padding-right: calc(50% + 36px);
-  padding-bottom: 52px;
-  position: relative;
+  padding-right: calc(50% + 40px);
 }
 .ab-tl-item.ab-tl-right {
   justify-content: flex-start;
   padding-right: 0;
-  padding-left: calc(50% + 36px);
+  padding-left: calc(50% + 40px);
 }
 .ab-tl-yr {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  top: 2px;
-  background: var(--gold);
-  color: white;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  padding: 4px 12px;
+  top: 0;
+  transform: translate(-50%, -50%);
+  background: var(--char);
+  color: var(--gold);
+  font-family: var(--font-d);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  padding: 3px 12px;
   border-radius: 100px;
-  white-space: nowrap;
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(201,146,10,0.4);
+  border: 1px solid var(--gold);
+  z-index: 3;
 }
 .ab-tl-node {
   position: absolute;
   left: 50%;
-  top: 28px;
-  transform: translateX(-50%);
-  width: 16px; height: 16px;
-  background: var(--cream);
-  border: 3px solid var(--gold);
+  top: 24px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--cream);
+  transform: translate(-50%, -50%);
   z-index: 2;
-  transition: background 0.25s;
 }
 .ab-tl-node-latest {
-  background: var(--gold);
-  box-shadow: 0 0 0 6px rgba(201,146,10,0.2);
-  animation: nodePulse 2.5s ease-in-out infinite;
-}
-@keyframes nodePulse {
-  0%,100% { box-shadow: 0 0 0 6px rgba(201,146,10,0.2); }
-  50%      { box-shadow: 0 0 0 12px rgba(201,146,10,0.08); }
+  background: #27ae60;
+  box-shadow: 0 0 12px rgba(39,174,96,0.6);
 }
 .ab-tl-card {
-  background: var(--white);
-  border: 1px solid rgba(201,146,10,0.12);
-  border-radius: 14px;
-  padding: 22px 24px;
-  max-width: 360px;
+  background: #FFF;
+  border: 1px solid var(--steel);
+  border-radius: 10px;
+  padding: 24px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
   position: relative;
 }
-.ab-tl-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
-.ab-tl-card-latest { border-color: rgba(201,146,10,0.28); border-top: 2px solid var(--gold); }
-.ab-tl-live {
-  display: inline-block;
-  font-size: 0.6rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  background: rgba(201,146,10,0.12);
-  color: var(--gold);
-  border: 1px solid rgba(201,146,10,0.25);
-  border-radius: 100px;
-  padding: 2px 10px;
-  margin-bottom: 8px;
-}
 .ab-tl-card h4 {
-  font-family: var(--font-b);
-  font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--char);
   margin-bottom: 8px;
 }
-.ab-tl-card p { color: var(--smoke); font-size: 0.83rem; line-height: 1.65; }
-
-/* ═══════════════════════════════════════════
-   METRICS
-════════════════════════════════════════════ */
-.ab-metrics { background: var(--char); }
-.ab-metrics .ab-section-head .ab-h2 { color: var(--white); }
-.ab-metrics .ab-section-head .ab-h2 em { color: var(--gold); }
-.ab-metrics .ab-eyebrow { background: rgba(201,146,10,0.12); }
-
-.ab-metrics-wrap {
-  max-width: 720px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+.ab-tl-card p {
+  font-size: 0.86rem;
+  color: var(--smoke);
+  line-height: 1.6;
 }
-.ab-metric-item {}
-.ab-metric-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+.ab-tl-live {
+  display: inline-block;
+  background: #27ae60;
+  color: #FFF;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+/* ── FAQS ── */
+.ab-faqs { background: #FFFFFF; }
+.ab-faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 48px;
+  align-items: start;
+}
+.ab-faq-img-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  border: 1px solid var(--steel);
+}
+.ab-faq-img-card img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+.ab-faq-highlight {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(14,14,14,0.95), rgba(14,14,14,0.7) 70%, transparent);
+  padding: 30px 24px 24px;
+  color: #FFF;
+}
+.ab-faq-highlight-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,146,10,0.2);
+  border: 1px solid rgba(201,146,10,0.4);
+  padding: 4px 12px;
+  border-radius: 100px;
   margin-bottom: 10px;
 }
-.ab-metric-lbl { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.72); }
-.ab-metric-pct { font-family: var(--font-d); font-size: 1.4rem; letter-spacing: 0.04em; color: var(--gold); }
-.ab-metric-track {
-  height: 8px;
-  background: rgba(255,255,255,0.07);
-  border-radius: 100px;
+.ab-faq-highlight h3 {
+  font-family: var(--font-d);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: #FFF;
+  margin-bottom: 6px;
+}
+.ab-faq-highlight p {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+.ab-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ab-faq-item {
+  border: 1px solid var(--steel);
+  border-radius: 10px;
+  background: var(--ivory);
   overflow: hidden;
+  transition: border-color 0.25s;
 }
-.ab-metric-bar {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--gold-dk) 0%, var(--gold) 50%, var(--gold-lt) 100%);
-  border-radius: 100px;
-  transition: width 1.6s var(--ease);
-  position: relative;
+.ab-faq-item.active {
+  border-color: var(--gold);
+  background: #FFF;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
 }
-.ab-metric-bar::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 14px; height: 14px;
-  background: var(--gold-lt);
-  border-radius: 50%;
-  box-shadow: 0 0 12px rgba(232,184,75,0.7);
-  opacity: 0;
-  transition: opacity 0.3s 1.4s;
+.ab-faq-trigger {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  font-family: var(--font-b);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--char);
+  transition: color 0.2s;
 }
-.ab-metric-bar.animated::after { opacity: 1; }
+.ab-faq-item.active .ab-faq-trigger {
+  color: var(--gold-dk);
+}
+.ab-faq-icon {
+  font-size: 0.85rem;
+  color: var(--smoke);
+  transition: transform 0.3s ease, color 0.3s;
+  flex-shrink: 0;
+}
+.ab-faq-item.active .ab-faq-icon {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+.ab-faq-body {
+  display: none;
+  padding: 0 22px 20px;
+  font-size: 0.9rem;
+  color: var(--smoke);
+  line-height: 1.65;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  margin-top: 4px;
+  padding-top: 14px;
+}
 
-/* ═══════════════════════════════════════════
-   CTA STRIP
-════════════════════════════════════════════ */
+/* ── CTA STRIP ── */
 .ab-cta-strip {
-  position: relative;
-  background: linear-gradient(135deg, #0E0E0E 0%, #1a1410 100%);
-  border-top: 2px solid var(--gold);
+  background: var(--char);
   padding: 72px 0;
-  overflow: hidden;
+  border-top: 2px solid var(--gold);
 }
 .ab-cta-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  flex-wrap: wrap;
 }
 .ab-cta-text h2 {
   font-family: var(--font-d);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  letter-spacing: 0.03em;
-  color: var(--white);
-  margin: 8px 0;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  letter-spacing: 0.04em;
+  color: #FFF;
   line-height: 1.1;
+  margin-bottom: 12px;
 }
-.ab-cta-text p { color: rgba(255,255,255,0.5); font-size: 0.93rem; margin-top: 8px; }
-.ab-cta-btns { display: flex; gap: 14px; flex-wrap: wrap; flex-shrink: 0; }
-
+.ab-cta-text p {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.96rem;
+  max-width: 520px;
+  line-height: 1.65;
+}
+.ab-cta-btns {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
 .ab-btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dk) 100%);
-  color: white;
+  gap: 10px;
+  background: var(--gold);
+  color: #FFF;
   font-weight: 700;
-  font-size: 0.93rem;
+  font-size: 0.9rem;
   padding: 14px 28px;
-  border-radius: 10px;
-  box-shadow: var(--shadow-g);
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(201,146,10,0.35);
   transition: all 0.25s var(--ease);
 }
-.ab-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(201,146,10,0.45); }
-
+.ab-btn-primary:hover {
+  background: var(--gold-lt);
+  color: var(--char);
+  transform: translateY(-2px);
+}
 .ab-btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  border: 2px solid rgba(255,255,255,0.25);
-  color: rgba(255,255,255,0.85);
+  gap: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #FFF;
   font-weight: 600;
-  font-size: 0.93rem;
-  padding: 14px 28px;
-  border-radius: 10px;
+  font-size: 0.9rem;
+  padding: 14px 26px;
+  border-radius: 8px;
   transition: all 0.25s var(--ease);
 }
-.ab-btn-secondary:hover { border-color: var(--gold); color: var(--gold-lt); }
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .ab-who-grid { grid-template-columns: 1fr; gap: 40px; }
-  .ab-mvv-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+.ab-btn-secondary:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.4);
+  color: #FFF;
 }
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 1024px) {
+  .ab-cap-layout { grid-template-columns: 1fr; }
+  .ab-media-img { height: 320px; }
+  .ab-who-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ab-ind-grid { grid-template-columns: repeat(2, 1fr); }
+  .ab-proc-grid { grid-template-columns: repeat(2, 1fr); }
+  .ab-mvv-grid { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; }
+  .ab-faq-layout { grid-template-columns: 1fr; }
+  .ab-faq-img-card img { height: 340px; }
+}
+
 @media (max-width: 768px) {
-  .ab-section { padding: 56px 0; }
-  .ab-hero { min-height: auto; padding-bottom: 60px; }
-  .ab-hero-machine { width: 260px; opacity: 0.12; right: -20px; }
-  .ab-title-line2 { font-size: clamp(3.5rem, 16vw, 5.5rem); }
-  .ab-hero-stats { gap: 0; padding: 14px 14px; }
-  .ab-hs { padding: 0 16px; }
-  .ab-hs-n { font-size: 2rem; }
+  .ab-section { padding: 60px 0; }
+  .ab-hero { min-height: auto; }
+  .ab-hero-content { padding: 90px 20px 60px; }
+  .ab-cap-grid { grid-template-columns: 1fr; }
+  .ab-ind-grid { grid-template-columns: 1fr; }
+  .ab-proc-grid { grid-template-columns: 1fr; }
+  .ab-hero-stats { padding: 12px 16px; flex-wrap: wrap; justify-content: center; }
+  .ab-hs { padding: 0 14px; }
+  .ab-hs-n { font-size: 2.2rem; }
+  
   /* Timeline mobile */
-  .ab-tl-spine { left: 20px; }
+  .ab-tl-spine { left: 20px; transform: none; }
   .ab-tl-item, .ab-tl-item.ab-tl-right {
-    padding-left: 52px;
+    padding-left: 54px;
     padding-right: 0;
     justify-content: flex-start;
   }
-  .ab-tl-yr, .ab-tl-node { left: 20px; }
-  .ab-tl-card { max-width: 100%; }
-  /* Metrics */
-  .ab-metric-lbl { font-size: 0.82rem; }
-  /* CTA */
+  .ab-tl-yr { left: 20px; transform: translate(-50%, -50%); }
+  .ab-tl-node { left: 20px; transform: translate(-50%, -50%); }
+  
   .ab-cta-inner { flex-direction: column; text-align: center; }
-  .ab-cta-btns { justify-content: center; }
-}
-@media (max-width: 480px) {
-  .ab-stat-row { grid-template-columns: 1fr; }
-  .ab-hero-stats { flex-direction: column; gap: 12px; }
-  .ab-hs-div { width: 60px; height: 1px; }
+  .ab-cta-btns { flex-direction: column; width: 100%; }
+  .ab-btn-primary, .ab-btn-secondary { width: 100%; justify-content: center; }
 }
 </style>
 
@@ -1153,7 +1464,7 @@ a { text-decoration: none; }
      SCRIPTS
 ════════════════════════════════════════════ -->
 <script>
-/* ── Sparks particle system ── */
+/* ── Golden Sparks Canvas ── */
 (function(){
   const canvas = document.getElementById('sparksCanvas');
   if(!canvas) return;
@@ -1175,10 +1486,10 @@ a { text-decoration: none; }
       this.y = rand(0, H);
       this.vx = rand(-0.3, 0.3);
       this.vy = rand(-0.8, -0.2);
-      this.size = rand(0.8, 2.5);
+      this.size = rand(0.8, 2.4);
       this.life = 0;
-      this.maxLife = rand(80, 200);
-      this.gold = Math.random() > 0.5;
+      this.maxLife = rand(90, 220);
+      this.gold = Math.random() > 0.4;
     }
     constructor(){ this.reset(); this.life = rand(0, 200); }
     update(){
@@ -1188,12 +1499,12 @@ a { text-decoration: none; }
       if(this.life > this.maxLife) this.reset();
     }
     draw(){
-      const a = Math.sin(Math.PI * this.life / this.maxLife) * 0.7;
+      const a = Math.sin(Math.PI * this.life / this.maxLife) * 0.75;
       ctx.save();
       ctx.globalAlpha = a;
       ctx.fillStyle = this.gold ? '#C9920A' : '#E8B84B';
       ctx.shadowColor = this.gold ? '#C9920A' : '#E8B84B';
-      ctx.shadowBlur = 6;
+      ctx.shadowBlur = 5;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
       ctx.fill();
@@ -1201,17 +1512,17 @@ a { text-decoration: none; }
     }
   }
 
-  for(let i = 0; i < 90; i++) particles.push(new Spark());
+  for(let i = 0; i < 80; i++) particles.push(new Spark());
 
   function loop(){
-    ctx.clearRect(0,0,W,H);
+    ctx.clearRect(0, 0, W, H);
     particles.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(loop);
   }
   loop();
 })();
 
-/* ── Counter animation ── */
+/* ── Counter Animation ── */
 function animateCounters(els){
   els.forEach(el => {
     const target = +el.dataset.target;
@@ -1228,16 +1539,7 @@ function animateCounters(els){
   });
 }
 
-/* ── Metric bars animate on scroll ── */
-function animateBars(bars){
-  bars.forEach(bar => {
-    const pct = bar.dataset.pct;
-    bar.style.width = pct + '%';
-    bar.classList.add('animated');
-  });
-}
-
-/* ── Intersection Observer ── */
+/* ── Intersection Observer for Counters & Timeline ── */
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if(!e.isIntersecting) return;
@@ -1247,14 +1549,6 @@ const io = new IntersectionObserver((entries) => {
       const counters = el.querySelectorAll('.ab-hs-n');
       animateCounters(counters);
     }
-    if(el.matches('.ab-who-visual')){
-      const counters = el.querySelectorAll('.ab-sn');
-      animateCounters(counters);
-    }
-    if(el.matches('.ab-metrics-wrap')){
-      animateBars(el.querySelectorAll('.ab-metric-bar'));
-    }
-    // Fade-in for TL cards
     if(el.classList.contains('ab-tl-card')){
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
@@ -1263,13 +1557,35 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.ab-hero, .ab-who-visual, .ab-metrics-wrap').forEach(el => io.observe(el));
+document.querySelectorAll('.ab-hero').forEach(el => io.observe(el));
 
-// TL card init
 document.querySelectorAll('.ab-tl-card').forEach(card => {
   card.style.opacity = '0';
   card.style.transform = 'translateY(16px)';
-  card.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, box-shadow 0.25s';
+  card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   io.observe(card);
+});
+
+/* ── FAQ Accordion ── */
+document.querySelectorAll('.ab-faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', function(){
+    const item = this.closest('.ab-faq-item');
+    const body = item.querySelector('.ab-faq-body');
+    const isOpen = item.classList.contains('active');
+
+    // Close all other items
+    document.querySelectorAll('.ab-faq-item').forEach(other => {
+      other.classList.remove('active');
+      other.querySelector('.ab-faq-trigger').setAttribute('aria-expanded', 'false');
+      other.querySelector('.ab-faq-body').style.display = 'none';
+    });
+
+    // Toggle current item
+    if(!isOpen) {
+      item.classList.add('active');
+      this.setAttribute('aria-expanded', 'true');
+      body.style.display = 'block';
+    }
+  });
 });
 </script>
