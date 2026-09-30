@@ -30,10 +30,10 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                         <span class="pdf-btn-sub">Product Catalogue PDF</span>
                     </div>
                 </a>
-                <a href="assets/folder/Honney Impex_Wood Working Products_2026.pdf" download class="pdf-btn pdf-btn-alt">
+                <a href="#" class="pdf-btn pdf-btn-alt">
                     <i class="fas fa-download"></i>
                     <div>
-                        <span class="pdf-btn-title">Honney Impex</span>
+                        <span class="pdf-btn-title">Magnetic Separators</span>
                         <span class="pdf-btn-sub">Product Catalogue PDF</span>
                     </div>
                 </a>
@@ -61,13 +61,13 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                         <?php endif; ?>
                     </div>
                     <div>
-                        <div class="footer-logo-name">Dip<span>Ban</span></div>
-                        <div class="footer-logo-tag">Technical Services</div>
+                        <div class="footer-logo-name">Arup <span>Enterprise</span></div>
+                        <div class="footer-logo-tag">Magnetic Separator Manufacturer</div>
                     </div>
                 </div>
                 <p class="footer-about-text">
-                    Precision-engineered industrial machinery for woodworking and sheet metal industries.
-                    Manufacturer, Supplier &amp; Service Provider since 2022 — built for performance, trusted for reliability.
+                    Precision-engineered industrial magnetic separators.
+                    Manufacturer, Supplier &amp; Service Provider since 1986 — built for performance, trusted for reliability.
                 </p>
                 <div class="footer-socials">
                     <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -85,11 +85,11 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
             <div class="footer-col">
                 <h4 class="footer-heading">Quick Links</h4>
                 <ul class="footer-links">
-                    <li><a href="index.php"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="about.php"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="products.php"><i class="fas fa-chevron-right"></i> All Products</a></li>
-                    <li><a href="contact.php"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
-                    <li><a href="contact.php#quote"><i class="fas fa-chevron-right"></i> Get a Quote</a></li>
+                    <li><a href="<?php echo $base_url; ?>/index.php"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="<?php echo $base_url; ?>/about.php"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="<?php echo $base_url; ?>/products.php"><i class="fas fa-chevron-right"></i> All Products</a></li>
+                    <li><a href="<?php echo $base_url; ?>/contact.php"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="<?php echo $base_url; ?>/contact.php#quote"><i class="fas fa-chevron-right"></i> Get a Quote</a></li>
                 </ul>
             </div>
 
@@ -127,7 +127,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     foreach ($footer_categories as $cat): 
                     ?>
                     <li>
-                        <a href="products.php?category=<?php echo urlencode($cat['name']); ?>">
+                        <a href="<?php echo $base_url; ?>/products.php?category=<?php echo urlencode($cat['name']); ?>">
                             <i class="fas <?php echo $cat['icon'] ?? 'fa-tag'; ?>"></i> 
                             <?php echo htmlspecialchars($cat['name']); ?>
                         </a>
@@ -158,8 +158,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     <li>
                         <span class="contact-icon"><i class="fas fa-envelope"></i></span>
                         <span>
-                            <a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a><br>
-                            <a href="mailto:banerjee86@gmail.com">banerjee86@gmail.com</a>
+                            <a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a>
                         </span>
                     </li>
                     <li>

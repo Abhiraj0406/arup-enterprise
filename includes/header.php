@@ -8,6 +8,8 @@ $is_home_page     = ($current_page === 'index');
 $is_about_page    = ($current_page === 'about');
 $is_contact_page  = ($current_page === 'contact');
 
+$base_url = rtrim(env('APP_URL', ''), '/');
+
 // ============================================================
 // FETCH ACTIVE CATEGORIES
 // ============================================================
@@ -1157,7 +1159,7 @@ foreach ($pinned_categories as $pc) {
         <nav class="db-nav" role="navigation" aria-label="Main navigation">
             <!-- Home -->
             <div class="db-nav-item">
-                <a href="index" class="db-nav-link <?php echo $is_home_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/index.php" class="db-nav-link <?php echo $is_home_page?'active':''; ?>">
                     Home
                 </a>
             </div>
@@ -1184,7 +1186,7 @@ foreach ($pinned_categories as $pc) {
 
             <!-- Our Products -->
             <div class="db-nav-item">
-                <a href="products" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/products.php" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
                     Our Products
                 </a>
             </div>
@@ -1198,14 +1200,14 @@ foreach ($pinned_categories as $pc) {
 
             <!-- About Us -->
             <div class="db-nav-item">
-                <a href="about" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/about.php" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
                     About Us
                 </a>
             </div>
 
             <!-- Contact Us -->
             <div class="db-nav-item">
-                <a href="contact" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
+                <a href="<?php echo $base_url; ?>/contact.php" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
                     Contact Us
                 </a>
             </div>
@@ -1275,7 +1277,7 @@ foreach ($pinned_categories as $pc) {
 
     <div class="db-mn-body">
 
-        <a href="index" class="db-mn-link <?php echo $is_home_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/index.php" class="db-mn-link <?php echo $is_home_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Home
             </span>
@@ -1302,7 +1304,7 @@ foreach ($pinned_categories as $pc) {
             </a>
         </div>
 
-        <a href="products" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/products.php" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Our Products
             </span>
@@ -1314,13 +1316,13 @@ foreach ($pinned_categories as $pc) {
             </span>
         </a>
 
-        <a href="about" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/about.php" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 About Us
             </span>
         </a>
 
-        <a href="contact" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
+        <a href="<?php echo $base_url; ?>/contact.php" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Contact Us
             </span>
