@@ -136,8 +136,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                         <!-- Header -->
                                         <tr>
-                                            <td style="background:#1a1410;padding:24px 32px;border-bottom:3px solid #C9920A;">
-                                                <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">' . htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise') . '</span>
+                                            <td style="background:#1a1410;padding:24px 32px;border-bottom:3px solid #EF4444;">
+                                                <span style="color:#EF4444;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">' . htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise') . '</span>
                                                 <h1 style="color:#FFFFFF;font-size:20px;margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;">New Contact Enquiry</h1>
                                             </td>
                                         </tr>
@@ -184,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <!-- Message -->
                                         <tr>
                                             <td style="padding:0 32px 28px;">
-                                                <div style="background:#F5EED8;border-left:4px solid #C9920A;border-radius:8px;padding:16px 18px;">
+                                                <div style="background:#FFF5F5;border-left:4px solid #EF4444;border-radius:8px;padding:16px 18px;">
                                                     <p style="margin:0 0 8px;color:#8B6508;font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:0.6px;">Message</p>
                                                     <p style="margin:0;color:#1e1e1e;font-size:14px;line-height:1.7;white-space:pre-wrap;">' . nl2br($message) . '</p>
                                                 </div>
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <!-- CTA -->
                                         <tr>
                                             <td style="padding:0 32px 32px;">
-                                                <a href="mailto:' . $email . '?subject=Re:%20' . rawurlencode($subject_raw) . '" style="display:inline-block;background:linear-gradient(135deg,#C9920A,#8B6508);background-color:#C9920A;color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 26px;border-radius:8px;">Reply to ' . $fullname . '</a>
+                                                <a href="mailto:' . $email . '?subject=Re:%20' . rawurlencode($subject_raw) . '" style="display:inline-block;background:linear-gradient(135deg,#EF4444,#DC2626);background-color:#EF4444;color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 26px;border-radius:8px;">Reply to ' . $fullname . '</a>
                                             </td>
                                         </tr>
 
@@ -614,14 +614,14 @@ include 'includes/header.php';
         <rect x="30" y="210" width="140" height="80" rx="4" fill="#d9ccb4" stroke="#c9b89a" stroke-width="1.5"/>
         <rect x="830" y="210" width="110" height="80" rx="4" fill="#ddd0b8" stroke="#c9b89a" stroke-width="1.5"/>
         <ellipse cx="320" cy="310" rx="55" ry="35" fill="#d4d9b0" opacity="0.5"/>
-        <circle cx="240" cy="190" r="90" fill="#C9920A" opacity="0.04"/>
-        <circle cx="240" cy="190" r="60" fill="#C9920A" opacity="0.05"/>
-        <circle cx="240" cy="190" r="32" fill="#C9920A" opacity="0.08"/>
-        <circle cx="240" cy="172" r="22" fill="#C9920A" stroke="white" stroke-width="4"/>
+        <circle cx="240" cy="190" r="90" fill="#EF4444" opacity="0.04"/>
+        <circle cx="240" cy="190" r="60" fill="#EF4444" opacity="0.05"/>
+        <circle cx="240" cy="190" r="32" fill="#EF4444" opacity="0.08"/>
+        <circle cx="240" cy="172" r="22" fill="#EF4444" stroke="white" stroke-width="4"/>
         <circle cx="240" cy="172" r="9" fill="white"/>
-        <path d="M240 194 L226 218 L240 210 L254 218 Z" fill="#C9920A" stroke="white" stroke-width="2"/>
+        <path d="M240 194 L226 218 L240 210 L254 218 Z" fill="#EF4444" stroke="white" stroke-width="2"/>
         <rect x="272" y="155" width="230" height="56" rx="8" fill="#1a1a1a" opacity="0.9"/>
-        <text x="387" y="178" fill="#C9920A" font-size="13" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800"><?php echo strtoupper(htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise')); ?></text>
+        <text x="387" y="178" fill="#EF4444" font-size="13" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800"><?php echo strtoupper(htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise')); ?></text>
         <text x="387" y="197" fill="#aaa" font-size="9.5" text-anchor="middle" font-family="Inter,sans-serif"><?php echo htmlspecialchars(substr($site_settings['address'] ?? 'West Bengal', 0, 40)); ?></text>
         <text x="1190" y="368" fill="#c9b89a" font-size="9" text-anchor="end" font-family="Inter,sans-serif">Virtual Map · <?php echo htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise'); ?></text>
       </svg>
@@ -887,7 +887,7 @@ a{text-decoration:none;color:inherit;}
     reset(){this.x=rand(0,W);this.y=rand(0,H);this.vx=rand(-.25,.25);this.vy=rand(-.7,-.15);this.r=rand(.7,2.2);this.life=0;this.max=rand(80,200);this.g=Math.random()>.5;}
     constructor(){this.reset();this.life=rand(0,200);}
     update(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.life>this.max)this.reset();}
-    draw(){const a=Math.sin(Math.PI*this.life/this.max)*.65;ctx.save();ctx.globalAlpha=a;ctx.fillStyle=this.g?'#C9920A':'#E8B84B';ctx.shadowColor=this.g?'#C9920A':'#E8B84B';ctx.shadowBlur=5;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();}
+    draw(){const a=Math.sin(Math.PI*this.life/this.max)*.65;ctx.save();ctx.globalAlpha=a;ctx.fillStyle=this.g?'#EF4444':'#F87171';ctx.shadowColor=this.g?'#EF4444':'#F87171';ctx.shadowBlur=5;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();}}
   }
   for(let i=0;i<85;i++)P.push(new Spark());
   function loop(){ctx.clearRect(0,0,W,H);P.forEach(p=>{p.update();p.draw();});requestAnimationFrame(loop);}
@@ -901,7 +901,7 @@ if(msgBox&&charNum){
   msgBox.addEventListener('input',function(){
     const l=this.value.length;
     charNum.textContent=l;
-    charNum.style.color=l>=900?'#b91c2e':l>=800?'#C9920A':'#C9920A';
+    charNum.style.color=l>=900?'#b91c2e':l>=800?'#EF4444':'#EF4444';
   });
 }
 

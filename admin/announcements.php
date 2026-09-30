@@ -629,8 +629,8 @@ $icons = [
                             <div class="col-md-4 mb-2">
                                 <label class="form-label">Background Color</label>
                                 <div class="color-picker-wrapper">
-                                    <input type="color" name="bg_color" id="addBgColor" value="#C9920A">
-                                    <input type="text" class="form-control" id="addBgColorText" value="#C9920A" style="width:100px;">
+                                    <input type="color" name="bg_color" id="addBgColor" value="#EF4444">
+                                    <input type="text" class="form-control" id="addBgColorText" value="#EF4444" style="width:100px;">
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
@@ -721,8 +721,8 @@ $icons = [
                             <div class="col-md-4 mb-2">
                                 <label class="form-label">Background Color</label>
                                 <div class="color-picker-wrapper">
-                                    <input type="color" name="edit_bg_color" id="editBgColor" value="#C9920A">
-                                    <input type="text" class="form-control" id="editBgColorText" value="#C9920A" style="width:100px;">
+                                    <input type="color" name="edit_bg_color" id="editBgColor" value="#EF4444">
+                                    <input type="text" class="form-control" id="editBgColorText" value="#EF4444" style="width:100px;">
                                 </div>
                             </div>
                             <div class="col-md-4 mb-2">
@@ -809,8 +809,8 @@ $icons = [
             document.getElementById('editMessage').value = message;
             document.getElementById('editLinkUrl').value = link_url || '';
             document.getElementById('editLinkText').value = link_text || '';
-            document.getElementById('editBgColor').value = bg_color || '#C9920A';
-            document.getElementById('editBgColorText').value = bg_color || '#C9920A';
+            document.getElementById('editBgColor').value = bg_color || '#EF4444';
+            document.getElementById('editBgColorText').value = bg_color || '#EF4444';
             document.getElementById('editTextColor').value = text_color || '#FFFFFF';
             document.getElementById('editTextColorText').value = text_color || '#FFFFFF';
             document.getElementById('editIconInput').value = icon || 'fa-bullhorn';

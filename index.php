@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </tr>
                                             <tr>
                                                 <td style="padding:0 32px 28px;">
-                                                    <div style="background:#F5EED8;border-left:4px solid #C9920A;border-radius:8px;padding:16px 18px;">
+                                                    <div style="background:#FFF5F5;border-left:4px solid #EF4444;border-radius:8px;padding:16px 18px;">
                                                         <p style="margin:0 0 8px;color:#8B6508;font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:0.6px;">Message</p>
                                                         <p style="margin:0;color:#1e1e1e;font-size:14px;line-height:1.7;white-space:pre-wrap;">' . nl2br(htmlspecialchars($message)) . '</p>
                                                     </div>
@@ -149,11 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </tr>
                                             <tr>
                                                 <td style="padding:0 32px 32px;">
-                                                    <a href="mailto:' . htmlspecialchars($email) . '?subject=Re:%20Quote%20Enquiry" style="display:inline-block;background:linear-gradient(135deg,#C9920A,#8B6508);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 26px;border-radius:8px;">Reply to ' . htmlspecialchars($first_name) . '</a>
+                                                    <a href="mailto:' . htmlspecialchars($email) . '?subject=Re:%20Quote%20Enquiry" style="display:inline-block;background:linear-gradient(135deg,#EF4444,#DC2626);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 26px;border-radius:8px;">Reply to ' . htmlspecialchars($first_name) . '</a>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="background:#FAF6EE;padding:16px 32px;border-top:1px solid #f0e6d2;">
+                                                <td style="background:#FFF5F5;padding:16px 32px;border-top:1px solid #FECACA;">
                                                     <p style="margin:0;color:#999999;font-size:11px;line-height:1.6;">
                                                         This enquiry was also saved to the admin dashboard. Sent automatically from the Arup Enterprise website.
                                                     </p>
@@ -1040,7 +1040,7 @@ img{max-width:100%;display:block}
     top:20px;
     left:20px;
     z-index:2;
-    background:#C9920A;
+    background:#EF4444;
     color:#fff;
     padding:10px 18px;
     border-radius:50px;
@@ -1058,7 +1058,7 @@ img{max-width:100%;display:block}
 }
 
 .made-india-content h2 span{
-    color:#C9920A;
+    color:#EF4444;
 }
 
 .made-india-content p{
@@ -1082,7 +1082,7 @@ img{max-width:100%;display:block}
 }
 
 .india-features i{
-    color:#C9920A;
+    color:#EF4444;
     margin-right:8px;
 }
 
@@ -1090,7 +1090,7 @@ img{max-width:100%;display:block}
     display:inline-flex;
     align-items:center;
     gap:10px;
-    background:linear-gradient(135deg,#C9920A,#a67a08);
+    background:linear-gradient(135deg,#EF4444,#DC2626);
     color:#fff;
     padding:14px 28px;
     border-radius:8px;
