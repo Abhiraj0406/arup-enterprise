@@ -72,28 +72,35 @@ if (isset($_GET['toggle_status'])) {
 }
 
 // ================= DELETE ASSOCIATE =================
-if (isset($_GET['delete_id'])) {
-    $id = intval($_GET['delete_id']);
+if (isset($_GET['delete_id']) || isset($_POST['delete_id'])) {
+    $id = intval($_GET['delete_id'] ?? $_POST['delete_id']);
     
-    // Get logo path to delete file
-    $stmt = $conn->prepare("SELECT logo FROM associates WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $logo_path = $row['logo'];
-        if (!empty($logo_path) && file_exists("../" . $logo_path)) {
-            unlink("../" . $logo_path);
+    if ($id > 0) {
+        // Get logo path to delete file
+        $stmt = $conn->prepare("SELECT logo FROM associates WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc()) {
+            $logo_path = trim($row['logo'] ?? '');
+            if (!empty($logo_path) && stripos($logo_path, 'http') !== 0) {
+                $clean_path = ltrim(str_replace('../', '', $logo_path), '/');
+                if (file_exists("../" . $clean_path)) {
+                    @unlink("../" . $clean_path);
+                }
+            }
+        }
+        
+        $stmt = $conn->prepare("DELETE FROM associates WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            $_SESSION['success'] = "Partner logo deleted successfully!";
+        } else {
+            $_SESSION['error'] = "Error: " . $stmt->error;
         }
     }
-    
-    $stmt = $conn->prepare("DELETE FROM associates WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    if ($stmt->execute()) {
-        $_SESSION['success'] = "Associate logo deleted successfully!";
-        header("Location: associates.php");
-        exit();
-    }
+    header("Location: associates.php");
+    exit();
 }
 
 // ================= UPLOAD LOGO (100KB LIMIT) =================
@@ -477,8 +484,22 @@ if (isset($_POST['upload_logo'])) {
                                             <td class="fw-bold text-muted"><?php echo $assoc['id']; ?></td>
                                             <td>
                                                 <div class="logo-preview">
-                                                    <?php if (!empty($assoc['logo']) && file_exists("../" . $assoc['logo'])): ?>
-                                                        <img src="<?php echo htmlspecialchars($assoc['logo']); ?>" alt="Partner Logo">
+                                                    <?php
+                                                    $raw_logo = trim($assoc['logo'] ?? '');
+                                                    $logo_src = '';
+                                                    if (!empty($raw_logo)) {
+                                                        if (stripos($raw_logo, 'http://') === 0 || stripos($raw_logo, 'https://') === 0 || strpos($raw_logo, '../') === 0) {
+                                                            $logo_src = $raw_logo;
+                                                        } elseif (strpos($raw_logo, '/') === 0) {
+                                                            $logo_src = '..' . $raw_logo;
+                                                        } else {
+                                                            $logo_src = '../' . $raw_logo;
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <?php if (!empty($logo_src)): ?>
+                                                        <img src="<?php echo htmlspecialchars($logo_src); ?>" alt="Partner Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                        <span class="placeholder" style="display:none;"><i class="fas fa-image"></i><br>No Logo</span>
                                                     <?php else: ?>
                                                         <span class="placeholder"><i class="fas fa-image"></i><br>No Logo</span>
                                                     <?php endif; ?>
@@ -495,12 +516,14 @@ if (isset($_POST['upload_logo'])) {
                                             <td>
                                                 <div class="d-flex gap-1">
                                                     <button class="btn btn-sm btn-outline-gold" 
-                                                            onclick="editAssociate(<?php echo $assoc['id']; ?>, '<?php echo htmlspecialchars($assoc['logo'] ?? ''); ?>', <?php echo $assoc['sort_order']; ?>, '<?php echo $assoc['status']; ?>')">
+                                                            onclick="editAssociate(<?php echo $assoc['id']; ?>, '<?php echo htmlspecialchars($assoc['logo'] ?? ''); ?>', <?php echo $assoc['sort_order']; ?>, '<?php echo $assoc['status']; ?>')"
+                                                            title="Edit Logo">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
-                                                    <a href="?delete_id=<?php echo $assoc['id']; ?>" 
+                                                    <a href="associates.php?delete_id=<?php echo (int)$assoc['id']; ?>" 
                                                        class="btn btn-sm btn-outline-danger" 
-                                                       onclick="return confirm('Delete this logo?')">
+                                                       onclick="return confirmDelete(event, <?php echo (int)$assoc['id']; ?>)"
+                                                       title="Delete Logo">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
                                                 </div>
@@ -645,8 +668,38 @@ if (isset($_POST['upload_logo'])) {
         </div>
     </div>
 
+    <!-- ===== DELETE CONFIRMATION MODAL ===== -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content modal-content-custom text-center p-3">
+                <div class="modal-body">
+                    <div style="font-size:2.4rem; color:#dc3545; margin-bottom:12px;">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <h5 style="font-weight:700; color:var(--charcoal); margin-bottom:8px;">Delete Partner Logo?</h5>
+                    <p style="font-size:0.85rem; color:var(--mid-gray); margin-bottom:20px;">
+                        Are you sure you want to permanently delete this logo? This action cannot be undone.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" id="confirmDeleteBtn" class="btn btn-sm btn-danger px-3">
+                            <i class="fas fa-trash-alt me-1"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // ===== CONFIRM DELETE FUNCTION =====
+        function confirmDelete(e, id) {
+            e.preventDefault();
+            document.getElementById('confirmDeleteBtn').href = 'associates.php?delete_id=' + id;
+            new bootstrap.Modal(document.getElementById('deleteModal')).show();
+            return false;
+        }
         // ===== UPLOAD LOGO FUNCTION =====
         function uploadLogo(type) {
             var input = document.getElementById(type + 'LogoUpload');
