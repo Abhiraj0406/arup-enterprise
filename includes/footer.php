@@ -50,10 +50,21 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                 <div class="footer-logo">
                     <div class="footer-logo-icon">
                         <?php 
-                        $logo_path = 'assets/images/logo.png';
-                        if (file_exists(__DIR__ . '/../' . $logo_path)): 
+                        $footer_logo = false;
+                        $paths = [
+                            'admin/images/logo.png',
+                            'admin/images/bg_logo.png',
+                            'assets/images/logo.png'
+                        ];
+                        foreach($paths as $p) {
+                            if (file_exists(__DIR__ . '/../' . $p)) {
+                                $footer_logo = $p;
+                                break;
+                            }
+                        }
+                        if ($footer_logo): 
                         ?>
-                            <img src="<?php echo $logo_path; ?>" alt="Arup Enterprise" style="width:100%;height:100%;object-fit:contain;background:#ffffff;border-radius:8px;padding:4px;">
+                            <img src="<?php echo htmlspecialchars($footer_logo); ?>" alt="Arup Enterprise" style="max-width:180px; max-height:80px; width:auto; height:auto; object-fit:contain; padding:4px;">
                         <?php else: ?>
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 2a2 2 0 0 1 2 2v2.17A10 10 0 0 1 26 16a10 10 0 0 1-10 10A10 10 0 0 1 6 16a10 10 0 0 1 8-9.83V4a2 2 0 0 1 2-2zm0 7a7 7 0 1 0 0 14A7 7 0 0 0 16 9zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>

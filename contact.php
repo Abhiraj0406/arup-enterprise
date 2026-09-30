@@ -112,8 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // database save, admin panel, and all page CSS/JS are untouched.
                     // ============================================================
                     $to_recipients = [
-                        env('MAIL_NOTIFY_TO', 'enterprisearup@gmail.com'),
-                    
+                        $site_settings['email'] ?? env('MAIL_NOTIFY_TO', 'enterprisearup@gmail.com'),
                     ];
                     $to = implode(", ", $to_recipients);
 
@@ -138,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <!-- Header -->
                                         <tr>
                                             <td style="background:#1a1410;padding:24px 32px;border-bottom:3px solid #C9920A;">
-                                                <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">Arup Enterprise</span>
+                                                <span style="color:#C9920A;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">' . htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise') . '</span>
                                                 <h1 style="color:#FFFFFF;font-size:20px;margin:6px 0 0;font-family:Arial,Helvetica,sans-serif;">New Contact Enquiry</h1>
                                             </td>
                                         </tr>
@@ -622,9 +621,9 @@ include 'includes/header.php';
         <circle cx="240" cy="172" r="9" fill="white"/>
         <path d="M240 194 L226 218 L240 210 L254 218 Z" fill="#C9920A" stroke="white" stroke-width="2"/>
         <rect x="272" y="155" width="230" height="56" rx="8" fill="#1a1a1a" opacity="0.9"/>
-        <text x="387" y="178" fill="#C9920A" font-size="13" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800">DIPBAN TECHNICAL SERVICES</text>
-        <text x="387" y="197" fill="#aaa" font-size="9.5" text-anchor="middle" font-family="Inter,sans-serif">Liluah, Howrah, West Bengal</text>
-        <text x="1190" y="368" fill="#c9b89a" font-size="9" text-anchor="end" font-family="Inter,sans-serif">Virtual Map · Arup Enterprise</text>
+        <text x="387" y="178" fill="#C9920A" font-size="13" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800"><?php echo strtoupper(htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise')); ?></text>
+        <text x="387" y="197" fill="#aaa" font-size="9.5" text-anchor="middle" font-family="Inter,sans-serif"><?php echo htmlspecialchars(substr($site_settings['address'] ?? 'West Bengal', 0, 40)); ?></text>
+        <text x="1190" y="368" fill="#c9b89a" font-size="9" text-anchor="end" font-family="Inter,sans-serif">Virtual Map · <?php echo htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise'); ?></text>
       </svg>
       <a href="https://maps.google.com/?q=Liluah+Howrah+West+Bengal" target="_blank" class="ct-map-btn">
         <i class="fas fa-map-marked-alt"></i> Get Directions
@@ -642,14 +641,22 @@ include 'includes/header.php';
     </div>
     <div class="ct-faq-grid">
       <?php
-      $faqs = [
-        ['q'=>'What types of machinery do you specialize in?','a'=>'We specialize in Wood Working Panel Processing Machinery, Sheet Metal Machinery, CNC Boring Machines, Hydraulic Press Machines, and various industrial tools and spare parts.'],
-        ['q'=>'Do you provide installation and training?','a'=>'Yes! Our team provides complete installation, commissioning, and on-site training for all machinery we supply. We ensure your operators are fully trained.'],
-        ['q'=>'What is your after-sales support policy?','a'=>'We offer 24/7 after-sales support with dedicated service engineers, warranty coverage, spare parts availability, and on-site repair services across India.'],
-        ['q'=>'How can I request a quote?','a'=>'Fill out the contact form on this page or call us directly. Our team will respond within 24 hours with a detailed quotation tailored to your requirements.'],
-        ['q'=>'Do you supply machinery outside India?','a'=>'Yes, we export to several countries. Contact our export team for international shipping, customs, and logistics support.'],
-        ['q'=>'Can I visit your facility?','a'=>'Absolutely! We welcome visitors to our facility in Howrah. Please schedule a visit in advance so we can arrange a proper tour and live machine demonstration.'],
-      ];
+      $faqs = [];
+      if (isset($conn)) {
+          $res = $conn->query("SELECT * FROM faqs WHERE status='active' ORDER BY sort_order ASC, id ASC");
+          if ($res) {
+              while ($row = $res->fetch_assoc()) {
+                  $faqs[] = ['q' => $row['question'], 'a' => $row['answer']];
+              }
+          }
+      }
+      if (empty($faqs)) {
+          $faqs = [
+              ['q'=>'What types of machinery do you specialize in?', 'a'=>'We specialize in premium magnetic separation equipment.'],
+              ['q'=>'Do you provide installation and training?', 'a'=>'Yes! Our team provides complete installation, commissioning, and on-site training for all machinery we supply.'],
+              ['q'=>'How can I request a quote?', 'a'=>'Fill out the contact form on this page or call us directly.']
+          ];
+      }
       foreach($faqs as $f): ?>
       <div class="ct-faq-item">
         <button class="ct-faq-q" type="button">
@@ -673,8 +680,8 @@ include 'includes/header.php';
         <p>Expert advice, quotes, and technical support — one call away.</p>
       </div>
       <div class="ct-cta-btns">
-        <a href="tel:+918013635806" class="ct-btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-        <a href="mailto:enterprisearup@gmail.com" class="ct-btn-secondary"><i class="fas fa-envelope"></i> Email Us</a>
+        <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="ct-btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+        <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? ''); ?>" class="ct-btn-secondary"><i class="fas fa-envelope"></i> Email Us</a>
       </div>
     </div>
   </div>

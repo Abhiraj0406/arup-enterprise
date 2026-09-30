@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         // Recipients
                         $mail->setFrom('noreply@arup-enterprise.com', 'Arup Enterprise');
-                        $mail->addAddress('enterprisearup@gmail.com');  // Main email
+                        $mail->addAddress($site_settings['email'] ?? env('MAIL_NOTIFY_TO', 'enterprisearup@gmail.com'));  // Main email
                       
 
                         // Reply-to
@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $_SESSION['quote_error'] = !empty($errors)
             ? implode(", ", $errors)
-            : "Database connection error. Please call us directly at +91 8013635806.";
+            : "Database connection error. Please call us directly at " . htmlspecialchars($site_settings['phone'] ?? '+91 8013635806') . ".";
         ob_end_clean();
         header("Location: index.php#contact-form");
         exit();
@@ -246,23 +246,7 @@ if (isset($conn) && $conn) {
     }
 }
 
-// Fallback products if table is empty or doesn't exist
-if (empty($products)) {
-    $products = [
-        ['id'=>1, 'name'=>'Hi-90 R High Speed Router',    'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=900&auto=format&fit=crop','description'=>'High-speed CNC routing for precision woodworking panels with auto tool-change capability.'],
-        ['id'=>2, 'name'=>'Hi-50 P Portable Edge Bander', 'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=900&auto=format&fit=crop','description'=>'Portable edge banding machine delivering flawless finish on all panel types up to 60mm.'],
-        ['id'=>3, 'name'=>'CNC Bending Machine',          'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=900&auto=format&fit=crop','description'=>'CNC-controlled hydraulic bending machine for accurate metal forming across varied thicknesses.'],
-        ['id'=>4, 'name'=>'Metal Sheet Shearing Machine', 'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1565514020179-026b92b2d70b?q=80&w=900&auto=format&fit=crop','description'=>'Heavy-duty guillotine shearing machine for clean, precise cuts on steel and aluminium sheets.'],
-        ['id'=>5, 'name'=>'CNC Boring Machine',           'category'=>'CNC Machines',      'image'=>'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=900&auto=format&fit=crop','description'=>'Multi-spindle CNC boring with programmable depth control for furniture panel drilling.'],
-        ['id'=>6, 'name'=>'Hydraulic Press Machine',      'category'=>'Hydraulic Systems', 'image'=>'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=900&auto=format&fit=crop','description'=>'Industrial hydraulic press for bending, forming, and punching with high tonnage output.'],
-        ['id'=>7, 'name'=>'Panel Saw Machine',            'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1567789884554-0b844b597180?q=80&w=900&auto=format&fit=crop','description'=>'High-precision panel saw for cutting wood, MDF, and particle boards with ease.'],
-        ['id'=>8, 'name'=>'CNC Laser Cutter',             'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=900&auto=format&fit=crop','description'=>'Fiber laser cutting machine for sheet metal with high speed and accuracy.'],
-        ['id'=>9, 'name'=>'Hydraulic Bending Press',      'category'=>'Hydraulic Systems', 'image'=>'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=900&auto=format&fit=crop','description'=>'Heavy-duty hydraulic bending press for metal fabrication and forming operations.'],
-        ['id'=>10,'name'=>'Edge Banding Machine',         'category'=>'Wood Working',      'image'=>'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=900&auto=format&fit=crop','description'=>'Automatic edge banding machine for furniture panels with glue pot and trimming units.'],
-        ['id'=>11,'name'=>'CNC Drilling Machine',         'category'=>'CNC Machines',      'image'=>'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=900&auto=format&fit=crop','description'=>'Precision CNC drilling machine with multi-spindle heads for mass production.'],
-        ['id'=>12,'name'=>'Pneumatic Punching Machine',   'category'=>'Sheet Metal',       'image'=>'https://images.unsplash.com/photo-1551038247-3d9af20df552?q=80&w=900&auto=format&fit=crop','description'=>'Pneumatic punching press for metal sheets with high speed and easy operation.'],
-    ];
-}
+// No fallback products to ensure we don't show unrelated dummy data.
 
 // ============================================================
 // FETCH CATEGORIES for Industries section
@@ -279,14 +263,7 @@ if (isset($conn) && $conn) {
         }
     }
 }
-if (empty($industry_categories)) {
-    $industry_categories = [
-        ['name'=>'Wood Working',      'icon'=>'fa-tree'],
-        ['name'=>'Sheet Metal',       'icon'=>'fa-layer-group'],
-        ['name'=>'CNC Machines',      'icon'=>'fa-microchip'],
-        ['name'=>'Hydraulic Systems', 'icon'=>'fa-cogs'],
-    ];
-}
+// No fallback industry categories.
 
 // ============================================================
 // STATIC DATA
@@ -422,59 +399,7 @@ function dipban_stars($r){
     </div></div></div>
 </section>
 
-<!-- ===== MADE IN INDIA VIDEO SECTION ===== -->
-<section class="made-india-section">
-    <div class="container">
-        <div class="made-india-grid">
 
-            <!-- Content Side -->
-            <div class="made-india-content">
-                <span class="section-eyebrow">Manufacturing Excellence</span>
-
-                <h2>
-                    Proudly Engineered &
-                    <span>Manufactured in India</span>
-                </h2>
-
-                <p>
-                    At Arup Enterprise, every machine is designed and
-                    manufactured with precision, innovation, and world-class
-                    engineering standards. We proudly support India's industrial
-                    growth through reliable and high-performance machinery.
-                </p>
-
-                <p>
-                    Our commitment to quality, durability, and advanced technology
-                    helps businesses achieve higher productivity while contributing
-                    to the vision of a stronger manufacturing ecosystem.
-                </p>
-
-                <div class="india-features">
-                    <div><i class="fas fa-check-circle"></i> Indian Engineering Excellence</div>
-                    <div><i class="fas fa-check-circle"></i> Premium Quality Manufacturing</div>
-                    <div><i class="fas fa-check-circle"></i> Pan India Installation Support</div>
-                    <div><i class="fas fa-check-circle"></i> Trusted Industrial Solutions</div>
-                </div>
-
-                <a href="#products" class="india-btn">
-                    Explore Our Products
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <!-- Video Side -->
-            <div class="made-india-video">
-                <div class="video-badge">
-                    🇮🇳 MADE IN INDIA
-                </div>
-
-                <video autoplay muted loop playsinline>
-                    <source src="assets/video/v2.mp4" type="video/mp4">
-                </video>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 <!-- ===== PRODUCTS ===== -->
 <section class="section section-products" id="products">
@@ -509,7 +434,7 @@ function dipban_stars($r){
                     <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,95)); ?>...</p>
                     <div class="product-card-footer">
                         <a href="product-detail.php?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
-                        <a href="https://wa.me/918013635806?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? '918013635806'); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -669,13 +594,13 @@ function dipban_stars($r){
                 <?php endif; ?>
 
                 <div class="cta-contact-items">
-                    <a href="https://wa.me/918013635806" target="_blank" class="cta-whatsapp-premium">
+                    <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? ''); ?>" target="_blank" class="cta-whatsapp-premium">
                         <div class="whatsapp-icon-wrap"><i class="fab fa-whatsapp"></i></div>
                         <div class="whatsapp-text"><span>Chat with us</span><strong>WhatsApp Now</strong></div>
                         <div class="whatsapp-arrow"><i class="fas fa-arrow-right"></i></div>
                     </a>
-                    <a href="tel:+918013635806" class="cta-contact-item"><i class="fas fa-phone-alt"></i><div><span>Call Us Now</span><strong>+91 8013635806</strong></div></a>
-                    <a href="mailto:enterprisearup@gmail.com" class="cta-contact-item"><i class="fas fa-envelope"></i><div><span>Email Us</span><strong>enterprisearup@gmail.com</strong></div></a>
+                    <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="cta-contact-item"><i class="fas fa-phone-alt"></i><div><span>Call Us Now</span><strong><?php echo htmlspecialchars($site_settings['phone'] ?? ''); ?></strong></div></a>
+                    <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? ''); ?>" class="cta-contact-item"><i class="fas fa-envelope"></i><div><span>Email Us</span><strong><?php echo htmlspecialchars($site_settings['email'] ?? ''); ?></strong></div></a>
                 </div>
             </div>
 

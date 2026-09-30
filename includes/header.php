@@ -57,15 +57,7 @@ foreach ($categories as $cat) {
     }
 }
 
-// If no dropdown categories, show fallback
-if (empty($product_dropdown)) {
-    $product_dropdown = [
-        ['href'=>'products?category=Wood+Working',     'label'=>'Wood Working Machinery', 'icon'=>'fa-tree'],
-        ['href'=>'products?category=Sheet+Metal',      'label'=>'Sheet Metal Machinery',  'icon'=>'fa-layer-group'],
-        ['href'=>'products?category=CNC+Machines',     'label'=>'CNC Machines',           'icon'=>'fa-microchip'],
-        ['href'=>'products?category=Hydraulic+Systems','label'=>'Hydraulic Systems',      'icon'=>'fa-cogs'],
-    ];
-}
+// Fallback removed to rely entirely on dynamic database categories
 
 // ============================================================
 // FETCH ANNOUNCEMENT STRIPS
@@ -88,6 +80,8 @@ if (isset($conn) && $conn) {
 // Logo path helper
 function getLogoPath() {
     $paths = [
+        __DIR__ . '/../admin/images/bg_logo.png',
+        __DIR__ . '/../admin/images/logo.png',
         __DIR__ . '/../assets/images/logo.png',
         __DIR__ . '/../assets/images/logo.jpg',
         __DIR__ . '/../assets/images/logo.webp',
@@ -121,9 +115,9 @@ foreach ($pinned_categories as $pc) {
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Arup Enterprise – Premium Industrial Machinery for Industrial Magnetic Separation. Manufacturer, Supplier & Service Provider since 2022."/>
+    <meta name="description" content="<?php echo htmlspecialchars($site_settings['meta_description'] ?? 'Arup Enterprise'); ?>"/>
     <meta name="theme-color" content="#C9920A"/>
-    <title><?php echo isset($page_title) ? $page_title . ' | Arup Enterprise' : 'Arup Enterprise – Industrial Machinery'; ?></title>
+    <title><?php echo isset($page_title) ? $page_title . ' | ' . htmlspecialchars($site_settings['company_name'] ?? 'Arup Enterprise') : htmlspecialchars($site_settings['meta_title'] ?? 'Arup Enterprise'); ?></title>
 
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -283,18 +277,26 @@ foreach ($pinned_categories as $pc) {
         height: 58px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         flex-shrink: 0;
     }
     .db-logo-img-wrap img {
-        height: 58px;
+        max-height: 100%;
+        max-width: 250px;
         width: auto;
-        max-width: 220px;
         object-fit: contain;
         display: block;
         transition: transform var(--ease);
     }
     .db-logo:hover .db-logo-img-wrap img { transform: scale(1.04); }
+    @media (max-width: 768px) {
+        .db-logo-img-wrap {
+            height: 44px;
+        }
+        .db-logo-img-wrap img {
+            max-width: 180px;
+        }
+    }
 
     .db-logo-text-wrap {
         display: flex;
@@ -1155,8 +1157,7 @@ foreach ($pinned_categories as $pc) {
             <?php if ($logo_path): ?>
                 <div class="db-logo-img-wrap">
                     <img src="<?php echo htmlspecialchars($logo_path); ?>"
-                         alt="Arup Enterprise"
-                         width="220" height="58">
+                         alt="Arup Enterprise" class="img-fluid">
                 </div>
             <?php else: ?>
                 <div class="db-logo-icon" aria-hidden="true">
