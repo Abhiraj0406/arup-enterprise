@@ -57,21 +57,20 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     }
 
     .sidebar-logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 14px;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     .sidebar-logo img {
-        height: 42px;
+        height: 65px;
         width: auto;
-        border-radius: 10px;
+        max-width: 95%;
+        object-fit: contain;
+        transform: scale(1.9);
     }
 
     .sidebar-logo span {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: 800;
         color: #111827;
         letter-spacing: 0.5px;
@@ -304,7 +303,6 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     <div class="sidebar-header">
         <div class="sidebar-logo">
             <img src="images/logo.png" alt="Arup Enterprise" onerror="this.src='../admin/images/logo.png'">
-            <span>Arup<span class="gold"> Enterprise</span></span>
         </div>
         <div class="admin-info">
             <span class="admin-name">
