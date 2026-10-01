@@ -728,7 +728,7 @@ img{max-width:100%;display:block}
 /* HERO */
 .hero{position:relative;min-height:calc(100vh - 110px);display:flex;align-items:center;overflow:hidden;margin-top:0;background:#0e0e0e}
 /* Video Background */
-.hero-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+.hero-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;transform:scale(1.2);}
 .hero-video-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.82) 0%,rgba(16,16,16,0.65) 55%,rgba(10,10,10,0.78) 100%);z-index:1}
 .hero-gears{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
 .gear{position:absolute;color:var(--gold);opacity:.05}

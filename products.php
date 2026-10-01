@@ -88,14 +88,11 @@ $total_count = count($products);
     }
     .page-header-bg {
         position: absolute; inset: 0; z-index: 0;
-        background-image: url('https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=1800&auto=format&fit=crop');
-        background-size: cover;
-        background-position: center;
-        transform: scale(1.02);
+        width: 100%; height: 100%; object-fit: cover;
+        transform: scale(1.2);
     }
-    .page-header-bg::after {
-        content: '';
-        position: absolute; inset: 0;
+    .page-header-overlay {
+        position: absolute; inset: 0; z-index: 0;
         background: linear-gradient(135deg, rgba(20,20,20,0.93) 0%, rgba(20,20,20,0.74) 55%, rgba(239,68,68,0.18) 100%);
     }
     .page-header-gears { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.06; }
@@ -433,7 +430,10 @@ $total_count = count($products);
      PREMIUM PAGE HEADER / HERO
 ============================================= -->
 <section class="page-header">
-    <div class="page-header-bg"></div>
+    <video class="page-header-bg" autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/machine-hero.mp4" type="video/mp4">
+    </video>
+    <div class="page-header-overlay"></div>
     <div class="page-header-gears" aria-hidden="true">
         <svg class="pg-1" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
         <svg class="pg-2" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
