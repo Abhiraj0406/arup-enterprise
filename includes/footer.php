@@ -168,21 +168,23 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     <li>
                         <span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
                         <span>
-                            <?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; ?>
-                            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>"><?php echo htmlspecialchars($wa); ?></a>
+                            <?php $ph = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+                            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $ph)); ?>"><?php echo htmlspecialchars($ph); ?></a>
                         </span>
                     </li>
                     
                     <li>
                         <span class="contact-icon"><i class="fas fa-envelope"></i></span>
                         <span>
-                            <a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a>
+                            <?php $em = !empty($site_settings['email']) ? $site_settings['email'] : 'enterprisearup@gmail.com'; ?>
+                            <a href="mailto:<?php echo htmlspecialchars($em); ?>"><?php echo htmlspecialchars($em); ?></a>
                         </span>
                     </li>
                     
                     <li>
                         <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
                         <span>
+                            <?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; ?>
                             <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa)); ?>" target="_blank">WhatsApp: <?php echo htmlspecialchars($wa); ?></a>
                         </span>
                     </li>

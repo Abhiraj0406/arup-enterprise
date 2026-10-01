@@ -69,6 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // ---------------- Update company name ----------------
         if ($action === 'update_company') {
             $new_company = trim($_POST['company_name'] ?? '');
+            $new_phone = trim($_POST['phone'] ?? '');
+            $new_email = trim($_POST['email'] ?? '');
+            $new_address = trim($_POST['address'] ?? '');
+            
             if ($new_company === '') {
                 $errors[] = "Company name cannot be empty.";
             } elseif (mb_strlen($new_company) > 150) {
@@ -77,20 +81,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
                     $exists = $conn->query("SELECT id FROM site_settings WHERE id = 1");
                     if ($exists && $exists->num_rows > 0) {
-                        $upd = $conn->prepare("UPDATE site_settings SET company_name = ? WHERE id = 1");
-                        $upd->bind_param("s", $new_company);
+                        $upd = $conn->prepare("UPDATE site_settings SET company_name = ?, phone = ?, email = ?, address = ? WHERE id = 1");
+                        $upd->bind_param("ssss", $new_company, $new_phone, $new_email, $new_address);
                         $upd->execute();
                         $upd->close();
                     } else {
-                        $ins = $conn->prepare("INSERT INTO site_settings (id, company_name) VALUES (1, ?)");
-                        $ins->bind_param("s", $new_company);
+                        $ins = $conn->prepare("INSERT INTO site_settings (id, company_name, phone, email, address) VALUES (1, ?, ?, ?, ?)");
+                        $ins->bind_param("ssss", $new_company, $new_phone, $new_email, $new_address);
                         $ins->execute();
                         $ins->close();
                     }
                     $company_name = $new_company;
-                    $success[] = "Company name updated successfully.";
+                    $success[] = "Company profile updated successfully.";
                 } catch (mysqli_sql_exception $e) {
-                    $errors[] = "Could not save company name.";
+                    $errors[] = "Could not save company profile.";
                 }
             }
         }
@@ -516,18 +520,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="settings-grid">
 
-                <!-- ===== COMPANY NAME ===== -->
+                <!-- ===== COMPANY PROFILE ===== -->
                 <div class="settings-card">
-                    <h3><i class="fas fa-building"></i> Company Name</h3>
-                    <p class="desc">This name appears across the admin dashboard and your public site.</p>
+                    <h3><i class="fas fa-building"></i> Company Profile</h3>
+                    <p class="desc">This info appears across the admin dashboard and your public site contact sections.</p>
                     <form method="POST">
                         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                         <input type="hidden" name="action" value="update_company">
                         <label class="field-label">Company Name</label>
-                        <div class="field-input-wrap">
+                        <div class="field-input-wrap mb-3">
                             <input type="text" name="company_name" class="field-input" value="<?php echo htmlspecialchars($company_name); ?>" maxlength="150" required>
                         </div>
-                        <button type="submit" class="btn-save"><i class="fas fa-save"></i> Save Company</button>
+                        <label class="field-label">Public Phone Number</label>
+                        <div class="field-input-wrap mb-3">
+                            <input type="text" name="phone" class="field-input" value="<?php echo htmlspecialchars($settings_row['phone'] ?? ''); ?>" placeholder="+91 98765 43210">
+                        </div>
+                        <label class="field-label">Public Email Address</label>
+                        <div class="field-input-wrap mb-3">
+                            <input type="email" name="email" class="field-input" value="<?php echo htmlspecialchars($settings_row['email'] ?? ''); ?>" placeholder="contact@example.com">
+                        </div>
+                        <label class="field-label">Office Address</label>
+                        <div class="field-input-wrap mb-3">
+                            <textarea name="address" class="field-input" style="height:80px;resize:vertical;" placeholder="123 Industrial Area, City"><?php echo htmlspecialchars($settings_row['address'] ?? ''); ?></textarea>
+                        </div>
+                        <button type="submit" class="btn-save"><i class="fas fa-save"></i> Save Profile</button>
                     </form>
                 </div>
 

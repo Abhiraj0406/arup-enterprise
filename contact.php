@@ -398,8 +398,8 @@ include 'includes/header.php';
     <p>Have a question about our machinery? Need a custom quote or on-site demo? Our engineers are standing by — reach out through any channel below.</p>
     <div class="ph-stats" style="margin-top:20px;">
       <a href="#contact-form" class="ct-btn-primary"><i class="fas fa-paper-plane"></i> Send a Message</a>
-      <?php $wa_raw = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; ?>
-      <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa_raw)); ?>" class="ct-btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
+      <?php $ph = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+      <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $ph)); ?>" class="ct-btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
     </div>
   </div>
 </section>
@@ -539,7 +539,8 @@ include 'includes/header.php';
             <div class="ct-info-ico"><i class="fas fa-phone-alt"></i></div>
             <div class="ct-info-body">
               <strong>Phone Numbers</strong>
-              <span><a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>"><?php echo htmlspecialchars($wa); ?></a></span>
+              <?php $ph = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+              <span><a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $ph)); ?>"><?php echo htmlspecialchars($ph); ?></a></span>
             </div>
           </div>
           
@@ -547,7 +548,8 @@ include 'includes/header.php';
             <div class="ct-info-ico"><i class="fas fa-envelope"></i></div>
             <div class="ct-info-body">
               <strong>Email Address</strong>
-              <span><a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a></span>
+              <?php $em = !empty($site_settings['email']) ? $site_settings['email'] : 'enterprisearup@gmail.com'; ?>
+              <span><a href="mailto:<?php echo htmlspecialchars($em); ?>"><?php echo htmlspecialchars($em); ?></a></span>
             </div>
           </div>
           <div class="ct-info-item">
@@ -600,9 +602,10 @@ include 'includes/header.php';
         <p>Expert advice, quotes, and technical support — one call away.</p>
       </div>
       <div class="ct-cta-btns">
-        <?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; ?>
-        <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>" class="ct-btn-primary"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($wa); ?></a>
-        <a href="mailto:enterprisearup@gmail.com" class="ct-btn-secondary"><i class="fas fa-envelope"></i> enterprisearup@gmail.com</a>
+        <?php $ph = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+        <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $ph)); ?>" class="ct-btn-primary"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($ph); ?></a>
+        <?php $em = !empty($site_settings['email']) ? $site_settings['email'] : 'enterprisearup@gmail.com'; ?>
+        <a href="mailto:<?php echo htmlspecialchars($em); ?>" class="ct-btn-secondary"><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($em); ?></a>
       </div>
     </div>
   </div>

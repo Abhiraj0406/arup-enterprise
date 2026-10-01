@@ -25,6 +25,7 @@ $form        = [
     'featured'       => 0,
     'sort_order'     => 0,
     'image'          => '',
+    'gallery'        => '[]',
 ];
 
 // ── Load categories ──────────────────────────────────────────
@@ -55,16 +56,22 @@ if (isset($_POST['save_product'])) {
     $featured       = isset($_POST['featured']) ? 1 : 0;
     $sort_order     = intval($_POST['sort_order'] ?? 0);
     $image_path     = trim($_POST['existing_image'] ?? '');
+    
+    $error_msg = "";
 
-    // Handle file upload
+    // Handle main image upload
     if (!empty($_FILES['product_image']['name']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
-        $upload_dir = '../assets/uploads/products/';
-        if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-        $ext = strtolower(pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION));
-        if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) {
-            $fname = 'prod_' . time() . '_' . rand(100,999) . '.' . $ext;
-            if (move_uploaded_file($_FILES['product_image']['tmp_name'], $upload_dir . $fname)) {
-                $image_path = 'assets/uploads/products/' . $fname;
+        if ($_FILES['product_image']['size'] > 1048576) {
+            $error_msg .= "Main image exceeds 1MB max size. ";
+        } else {
+            $upload_dir = '../assets/uploads/products/';
+            if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+            $ext = strtolower(pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) {
+                $fname = 'prod_' . time() . '_' . rand(100,999) . '.' . $ext;
+                if (move_uploaded_file($_FILES['product_image']['tmp_name'], $upload_dir . $fname)) {
+                    $image_path = 'assets/uploads/products/' . $fname;
+                }
             }
         }
     }
@@ -72,6 +79,43 @@ if (isset($_POST['save_product'])) {
     if (empty($image_path) && !empty($_POST['image_url'])) {
         $image_path = trim($_POST['image_url']);
     }
+
+    // Handle gallery uploads
+    $gallery = [];
+    if ($edit_mode && !empty($_POST['existing_gallery'])) {
+        $gallery = json_decode(stripslashes($_POST['existing_gallery']), true) ?: [];
+    }
+    if (!empty($_POST['delete_gallery'])) {
+        foreach ($_POST['delete_gallery'] as $del_img) {
+            $gallery = array_diff($gallery, [$del_img]);
+            if (file_exists('../' . $del_img)) {
+                @unlink('../' . $del_img);
+            }
+        }
+        $gallery = array_values($gallery);
+    }
+    if (!empty($_FILES['gallery_images']['name'][0])) {
+        $total_uploaded = count($_FILES['gallery_images']['name']);
+        for ($i=0; $i<$total_uploaded; $i++) {
+            if (count($gallery) >= 5) break; // Max 5 gallery images
+            if ($_FILES['gallery_images']['error'][$i] === UPLOAD_ERR_OK) {
+                if ($_FILES['gallery_images']['size'][$i] > 102400) {
+                     $error_msg .= "Gallery image " . htmlspecialchars($_FILES['gallery_images']['name'][$i]) . " exceeds 100KB max size. ";
+                     continue;
+                }
+                $upload_dir = '../assets/uploads/products/';
+                if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+                $ext = strtolower(pathinfo($_FILES['gallery_images']['name'][$i], PATHINFO_EXTENSION));
+                if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) {
+                    $fname = 'gal_' . time() . '_' . rand(100,999) . '.' . $ext;
+                    if (move_uploaded_file($_FILES['gallery_images']['tmp_name'][$i], $upload_dir . $fname)) {
+                        $gallery[] = 'assets/uploads/products/' . $fname;
+                    }
+                }
+            }
+        }
+    }
+    $gallery_json = json_encode($gallery);
 
     $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
     if (empty($slug)) $slug = 'product-' . time();
@@ -85,17 +129,17 @@ if (isset($_POST['save_product'])) {
     }
 
     if ($edit_mode && $edit_id > 0) {
-        $stmt = $conn->prepare("UPDATE products SET name=?, slug=?, category=?, sub_category=?, description=?, features=?, specifications=?, image=?, status=?, featured=?, sort_order=? WHERE id=?");
-        $stmt->bind_param("sssssssssiii", $name, $slug, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order, $edit_id);
+        $stmt = $conn->prepare("UPDATE products SET name=?, slug=?, category=?, sub_category=?, description=?, features=?, specifications=?, image=?, gallery=?, status=?, featured=?, sort_order=? WHERE id=?");
+        $stmt->bind_param("ssssssssssiii", $name, $slug, $category, $sub_category, $description, $features, $specifications, $image_path, $gallery_json, $status, $featured, $sort_order, $edit_id);
     } else {
-        $stmt = $conn->prepare("INSERT INTO products (name, slug, category, sub_category, description, features, specifications, image, status, featured, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssssssssii", $name, $slug, $category, $sub_category, $description, $features, $specifications, $image_path, $status, $featured, $sort_order);
+        $stmt = $conn->prepare("INSERT INTO products (name, slug, category, sub_category, description, features, specifications, image, gallery, status, featured, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssssssii", $name, $slug, $category, $sub_category, $description, $features, $specifications, $image_path, $gallery_json, $status, $featured, $sort_order);
     }
 
     if ($stmt && $stmt->execute()) {
         $_SESSION['success'] = $edit_mode
-            ? "Product '{$name}' updated successfully!"
-            : "Product '{$name}' added successfully!";
+            ? "Product '{$name}' updated successfully! " . $error_msg
+            : "Product '{$name}' added successfully! " . $error_msg;
         header("Location: products.php");
         exit();
     } else {
@@ -532,6 +576,39 @@ include 'includes/navbar.php';
                                     <i class="fas fa-check-circle" style="color:var(--gold);"></i>
                                     Current: <?php echo htmlspecialchars(basename($form['image'])); ?>
                                 </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Images -->
+                    <div class="form-card">
+                        <div class="form-card-head">
+                            <h5><i class="fas fa-images"></i> Gallery Images</h5>
+                        </div>
+                        <div class="form-card-body">
+                            <label class="form-label" style="font-size:0.75rem;">Upload up to 5 additional images (Max 100KB each)</label>
+                            <input type="file" name="gallery_images[]" class="form-control" multiple accept="image/*" style="font-size:0.8rem; margin-bottom: 12px;">
+                            <div class="form-hint mb-3">Only JPG, PNG, WebP allowed. Images > 100KB will be skipped.</div>
+                            
+                            <?php
+                            $existing_gallery = [];
+                            if (!empty($form['gallery'])) {
+                                $existing_gallery = json_decode($form['gallery'], true) ?: [];
+                            }
+                            ?>
+                            <input type="hidden" name="existing_gallery" value="<?php echo htmlspecialchars($form['gallery'] ?? '[]'); ?>">
+                            <?php if (!empty($existing_gallery)): ?>
+                                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                    <?php foreach ($existing_gallery as $g_img): ?>
+                                        <div style="position:relative; width: 60px; height: 60px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+                                            <img src="../<?php echo htmlspecialchars($g_img); ?>" style="width:100%;height:100%;object-fit:cover;">
+                                            <label style="position:absolute; bottom:0; left:0; right:0; background:rgba(220,38,38,0.9); color:#fff; font-size:10px; text-align:center; cursor:pointer; margin:0; padding:2px 0;">
+                                                <input type="checkbox" name="delete_gallery[]" value="<?php echo htmlspecialchars($g_img); ?>"> Del
+                                            </label>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="form-hint mt-2" style="font-size: 0.7rem;">Check 'Del' to remove an image on save.</div>
                             <?php endif; ?>
                         </div>
                     </div>
