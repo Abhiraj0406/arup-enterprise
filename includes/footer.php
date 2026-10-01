@@ -23,7 +23,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                 <span>Download Our Product Catalogues</span>
             </div>
             <div class="pdf-strip-buttons">
-                <a href="assets/folder/Dipban-Technical-Services-Brochure.pdf" download class="pdf-btn">
+                <a href="javascript:void(0)" class="pdf-btn">
                     <i class="fas fa-download"></i>
                     <div>
                         <span class="pdf-btn-title">Arup Enterprise Technical</span>

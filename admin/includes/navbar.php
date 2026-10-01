@@ -444,23 +444,27 @@ $admin_email = $_SESSION['admin_email'] ?? '';
     const sidebar = document.getElementById("sidebar");
 
     if (toggleBtn) {
-        toggleBtn.addEventListener("click", function() {
+        toggleBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
             sidebar.classList.toggle("active");
         });
     }
 
     if (closeBtn) {
-        closeBtn.addEventListener("click", function() {
+        closeBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
             sidebar.classList.remove("active");
         });
     }
 
     // Close sidebar on outside click (mobile)
     document.addEventListener('click', function(event) {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 768 && sidebar && sidebar.classList.contains('active')) {
             const isClickInside = sidebar.contains(event.target);
-            const isToggleBtn = toggleBtn && toggleBtn.contains(event.target);
-            if (!isClickInside && !isToggleBtn && sidebar.classList.contains('active')) {
+            const isToggleBtn = toggleBtn && (toggleBtn === event.target || toggleBtn.contains(event.target));
+            if (!isClickInside && !isToggleBtn) {
                 sidebar.classList.remove('active');
             }
         }
