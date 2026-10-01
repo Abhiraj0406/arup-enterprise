@@ -564,7 +564,7 @@ include 'includes/header.php';
           </div>
         </div>
 
-        <a href="javascript:void(0)" class="ct-pdf">
+        <a href="javascript:void(0)" class="ct-pdf" style="display: none;">
           <i class="fas fa-file-pdf ct-pdf-icon"></i>
           <div><span>Download Our</span><strong>Product Catalogue (PDF)</strong></div>
           <i class="fas fa-arrow-down ct-pdf-arrow"></i>

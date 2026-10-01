@@ -35,10 +35,16 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
             padding: 45px 40px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(239, 68, 68, 0.12);
-            width: 100%;
+            width: 90%;
             max-width: 420px;
             border: 1px solid rgba(239, 68, 68, 0.2);
             text-align: center;
+        }
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 35px 25px;
+                width: 95%;
+            }
         }
         .login-logo img {
             width: 80%;

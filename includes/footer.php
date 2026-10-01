@@ -15,8 +15,8 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
         <span class="divider-line"></span>
     </div>
 
-    <!-- PDF DOWNLOAD STRIP -->
-    <div class="pdf-strip">
+    <!-- PDF DOWNLOAD STRIP (Hidden until PDFs are ready) -->
+    <div class="pdf-strip" style="display: none;">
         <div class="pdf-strip-inner">
             <div class="pdf-strip-label">
                 <i class="fas fa-file-pdf"></i>
