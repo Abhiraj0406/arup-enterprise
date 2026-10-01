@@ -489,7 +489,7 @@ function dipban_stars($r){
                     <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,110)); ?>...</p>
                     <div class="product-card-footer">
                         <a href="product-detail?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
-                        <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? $site_settings['phone'] ?? '')); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp Enquiry"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/<?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa)); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp Enquiry"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -663,13 +663,13 @@ function dipban_stars($r){
                 <?php endif; ?>
 
                 <div class="cta-contact-items">
-                    <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? ''); ?>" target="_blank" class="cta-whatsapp-premium">
+                    <a href="https://wa.me/<?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa)); ?>" target="_blank" class="cta-whatsapp-premium">
                         <div class="whatsapp-icon-wrap"><i class="fab fa-whatsapp"></i></div>
                         <div class="whatsapp-text"><span>Chat with us</span><strong>WhatsApp Now</strong></div>
                         <div class="whatsapp-arrow"><i class="fas fa-arrow-right"></i></div>
                     </a>
-                    <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="cta-contact-item"><i class="fas fa-phone-alt"></i><div><span>Call Us Now</span><strong><?php echo htmlspecialchars($site_settings['phone'] ?? ''); ?></strong></div></a>
-                    <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? ''); ?>" class="cta-contact-item"><i class="fas fa-envelope"></i><div><span>Email Us</span><strong><?php echo htmlspecialchars($site_settings['email'] ?? ''); ?></strong></div></a>
+                    <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>" class="cta-contact-item"><i class="fas fa-phone-alt"></i><div><span>Call Us Now</span><strong><?php echo htmlspecialchars($wa); ?></strong></div></a>
+                    <a href="mailto:enterprisearup@gmail.com" class="cta-contact-item"><i class="fas fa-envelope"></i><div><span>Email Us</span><strong>enterprisearup@gmail.com</strong></div></a>
                 </div>
             </div>
 

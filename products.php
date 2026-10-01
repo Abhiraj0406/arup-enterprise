@@ -533,7 +533,7 @@ $total_count = count($products);
                             <a href="product-detail.php?id=<?php echo (int)($p['id'] ?? 0); ?>" class="btn-detail">
                                 View Details <i class="fas fa-arrow-right"></i>
                             </a>
-                            <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $site_settings['whatsapp'] ?? $site_settings['phone'] ?? '')); ?>?text=Hi%2C%20I%20need%20a%20quote%20for%20<?php echo urlencode($p['name'] ?? 'this product'); ?>" target="_blank" class="btn-quote-small" title="Request Quote">
+                            <a href="https://wa.me/<?php $wa_raw = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa_raw)); ?>?text=Hi%2C%20I%20need%20a%20quote%20for%20<?php echo urlencode($p['name'] ?? 'this product'); ?>" target="_blank" class="btn-quote-small" title="Request Quote">
                                 <i class="fab fa-whatsapp"></i> <span>Quote</span>
                             </a>
                         </div>

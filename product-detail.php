@@ -89,7 +89,8 @@ if (isset($product['in_stock'])) {
 
 // ── WhatsApp Message ──────────────────────────────────────────
 $whatsapp_msg = "Hi Arup Enterprise,%0A%0AI am interested in your product:%0A%0A📌 *" . urlencode($product['name']) . "*%0A📂 Category: " . urlencode($product['category']) . "%0A%0ACould you please share more details, price, and availability?%0A%0AThank you!";
-$wa_number = preg_replace('/[^0-9]/', '', $site_settings['whatsapp'] ?? $site_settings['phone'] ?? '');
+$wa_raw = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806';
+$wa_number = preg_replace('/[^0-9]/', '', $wa_raw);
 $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
 ?>
 
@@ -153,7 +154,7 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
                     <a href="<?php echo $whatsapp_url; ?>" target="_blank" class="pd-btn-whatsapp">
                         <span class="pd-wa-icon-wrap"><i class="fab fa-whatsapp"></i></span> Enquire on WhatsApp
                     </a>
-                    <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="pd-btn-call">
+                    <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa_raw)); ?>" class="pd-btn-call">
                         <i class="fas fa-phone-alt"></i> Call Now
                     </a>
                 </div>

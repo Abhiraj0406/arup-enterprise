@@ -1132,7 +1132,7 @@ foreach ($pinned_categories as $pc) {
 <div class="db-topbar">
     <div class="db-topbar-inner">
         <div class="db-topbar-left">
-            <?php $wa = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+            <?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; ?>
             <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>"><i class="fas fa-phone-alt"></i> <?php echo htmlspecialchars($wa); ?></a>
             <div class="db-topbar-sep"></div>
             
@@ -1159,7 +1159,7 @@ foreach ($pinned_categories as $pc) {
             <?php endif; ?>
 
             <div class="db-topbar-sep"></div>
-            <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? $site_settings['phone'] ?? '')); ?>?text=Hi%2C+I+have+an+enquiry." target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa)); ?>?text=Hi%2C+I+have+an+enquiry." target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
             
             <div class="db-topbar-sep"></div>
             <a href="<?php echo htmlspecialchars($site_settings['youtube_url'] ?? 'https://youtube.com/'); ?>" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i> YouTube</a>
@@ -1383,7 +1383,8 @@ foreach ($pinned_categories as $pc) {
     </div>
 
     <div class="db-mn-footer">
-        <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $site_settings['whatsapp'] ?? $site_settings['phone'] ?? '')); ?>?text=Hi%2C+I+need+a+quote+for+machinery."
+        <?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; ?>
+        <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa)); ?>?text=Hi%2C+I+need+a+quote+for+machinery."
            target="_blank" rel="noopener" class="db-mn-btn-wa">
             <i class="fab fa-whatsapp"></i> Chat on WhatsApp
         </a>
@@ -1391,7 +1392,6 @@ foreach ($pinned_categories as $pc) {
             <i class="fas fa-paper-plane"></i> Get a Free Quote
         </a>
         <div class="db-mn-contact-row">
-            <?php $wa = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
             <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>"><i class="fas fa-phone-alt"></i> <?php echo htmlspecialchars($wa); ?></a>
             <span class="sep">·</span>
             <a href="mailto:enterprisearup@gmail.com"><i class="fas fa-envelope"></i> Email</a>

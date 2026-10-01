@@ -168,7 +168,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     <li>
                         <span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
                         <span>
-                            <?php $wa = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+                            <?php $wa = !empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'; ?>
                             <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>"><?php echo htmlspecialchars($wa); ?></a>
                         </span>
                     </li>
