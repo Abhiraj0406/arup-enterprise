@@ -527,15 +527,15 @@ include 'includes/header.php';
             <div class="ct-info-ico"><i class="fas fa-map-marker-alt"></i></div>
             <div class="ct-info-body">
               <strong>Office Address</strong>
-              <span>Arup Enterprise<br>Liluah, Howrah, West Bengal</span>
+              <span>B/5/H/4 Parikshit Roy Lane,<br>Beleaghata Road, Kolkata – 700015</span>
             </div>
           </div>
           <div class="ct-info-item">
             <div class="ct-info-ico"><i class="fas fa-phone-alt"></i></div>
             <div class="ct-info-body">
               <strong>Phone Numbers</strong>
-              <span><a href="tel:+918013635806">+91 99031 26940</a></span>
-              <span><a href="tel:+91 8839019950">+91 8839019950</a></span>
+              <span><a href="tel:+918013635806">+91 8013635806</a></span>
+              <span><a href="tel:+919231646429">+91 9231646429</a></span>
             </div>
           </div>
           <div class="ct-info-item">
@@ -549,8 +549,7 @@ include 'includes/header.php';
             <div class="ct-info-ico"><i class="fas fa-clock"></i></div>
             <div class="ct-info-body">
               <strong>Business Hours</strong>
-              <span>Mon – Sat: 10:30 AM – 6:00 PM</span>
-              <span>Sunday: Closed</span>
+              <span>Monday to Sunday<br>10:00 AM — 8:30 PM</span>
             </div>
           </div>
         </div>
@@ -580,7 +579,7 @@ include 'includes/header.php';
 <section class="ct-map-section">
   <div class="container">
     <div class="ct-map-wrap">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.033785501712!2d88.33783777598808!3d22.615214031405903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89d5337eb137b%3A0xc47de6d628d09f7a!2sLiluah%2C%20Howrah%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1714400000000!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://maps.google.com/maps?q=Arup%20Enterprise,%20B/5/H/4%20Parikshit%20Roy%20Lane,%20Kolkata&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </section>

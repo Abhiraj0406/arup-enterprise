@@ -203,7 +203,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                 <!-- MAP EMBED -->
                 <div class="footer-map">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.3!2d88.3166!3d22.6172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDM3JzAyLjAiTiA4OMKwMTknMDAuMCJF!5e0!3m2!1sen!2sin!4v1710000000000"
+                        src="https://maps.google.com/maps?q=Parikshit%20Roy%20Lane,%20Main%20road,%20Beleghata,%20Kolkata,%20West%20Bengal%20700015&t=&z=15&ie=UTF8&iwloc=&output=embed"
                         width="100%" height="130" style="border:0;border-radius:8px;" allowfullscreen="" loading="lazy">
                     </iframe>
                 </div>

@@ -1135,7 +1135,7 @@ foreach ($pinned_categories as $pc) {
             <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '+918013635806')); ?>"><i class="fas fa-phone-alt"></i> <?php echo htmlspecialchars($site_settings['phone'] ?? '+91 80136 35806'); ?></a>
             
             <div class="db-topbar-sep"></div>
-            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone2'] ?? '+918839019950')); ?>"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($site_settings['phone2'] ?? '+91 88390 19950'); ?></a>
+            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone2'] ?? '+919231646429')); ?>"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($site_settings['phone2'] ?? '+91 92316 46429'); ?></a>
             
             <div class="db-topbar-sep"></div>
             <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? 'enterprisearup@gmail.com'); ?>"><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($site_settings['email'] ?? 'enterprisearup@gmail.com'); ?></a>
