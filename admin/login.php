@@ -86,7 +86,9 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
 <body>
     <div class="login-card">
         <div class="login-logo">
-            <img src="images/logo.png" alt="Arup Enterprise" onerror="this.src='../assets/images/logo.png'">
+            <a href="../">
+                <img src="images/logo.png" alt="Arup Enterprise" onerror="this.src='../assets/images/logo.png'">
+            </a>
         </div>
         <h3 class="login-title">Welcome Back</h3>
         <p class="login-subtitle">Arup Enterprise Admin Panel</p>
@@ -116,6 +118,9 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
         </form>
+        <div style="margin-top: 25px; font-size: 0.82rem; color: #6b7280;">
+            Design & Developed by <a href="https://aidigitalinnovation.com/" target="_blank" style="color: #EF4444; text-decoration: none; font-weight: 600;">AI Digital Innovation</a>
+        </div>
     </div>
 </body>
 </html>

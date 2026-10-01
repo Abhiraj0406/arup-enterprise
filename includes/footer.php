@@ -270,7 +270,7 @@ if (isset($conn) && $conn) {
                 &copy; <?php echo date('Y'); ?> Arup Enterprise. All rights reserved.
             </p>
             <p class="footer-credit">
-                Powered by <a href="https://ai-digitalsolution.com/">AI Digital Innovation</a> &nbsp;|&nbsp; Designed with <i class="fas fa-heart" style="color:var(--gold)"></i>
+                Design & Developed by <a href="https://aidigitalinnovation.com/" target="_blank">AI Digital Innovation</a> &nbsp;|&nbsp; Designed with <i class="fas fa-heart" style="color:var(--gold)"></i>
             </p>
         </div>
     </div>
