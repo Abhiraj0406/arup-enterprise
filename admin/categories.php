@@ -166,11 +166,11 @@ if (isset($_GET['delete_id'])) {
 
 // ================= ICONS LIST =================
 $icons = [
-    'fa-tag', 'fa-tree', 'fa-industry', 'fa-cogs', 'fa-microchip', 
-    'fa-wrench', 'fa-tools', 'fa-cog', 'fa-gear', 'fa-saw',
-    'fa-hammer', 'fa-bolt', 'fa-fire', 'fa-shield-alt', 'fa-star',
-    'fa-award', 'fa-gem', 'fa-crown', 'fa-layer-group', 'fa-boxes',
-    'fa-cubes', 'fa-chart-line', 'fa-robot', 'fa-flask'
+    'fa-magnet', 'fa-industry', 'fa-cogs', 'fa-gear', 'fa-circle-notch', 
+    'fa-filter', 'fa-recycle', 'fa-box', 'fa-boxes-stacked', 'fa-truck-loading',
+    'fa-dumpster', 'fa-wrench', 'fa-tools', 'fa-hammer', 'fa-bolt',
+    'fa-shield-halved', 'fa-water', 'fa-drum', 'fa-link', 'fa-sort',
+    'fa-layer-group', 'fa-cubes', 'fa-check-circle', 'fa-star'
 ];
 ?>
 <!DOCTYPE html>
@@ -664,10 +664,10 @@ $icons = [
                             <label class="form-label">Icon <small class="text-muted">(FontAwesome)</small></label>
                             <div class="row g-2">
                                 <div class="col-9">
-                                    <input type="text" name="icon" id="addIconInput" class="form-control" placeholder="fa-tree" value="fa-tag">
+                                    <input type="text" name="icon" id="addIconInput" class="form-control" placeholder="fa-magnet" value="fa-magnet">
                                 </div>
                                 <div class="col-3">
-                                    <div id="addIconPreview" class="icon-preview-box"><i class="fas fa-tag"></i></div>
+                                    <div id="addIconPreview" class="icon-preview-box"><i class="fas fa-magnet"></i></div>
                                 </div>
                             </div>
                             <div class="icon-picker-grid">
@@ -749,10 +749,10 @@ $icons = [
                             <label class="form-label">Icon</label>
                             <div class="row g-2">
                                 <div class="col-9">
-                                    <input type="text" name="edit_icon" id="editIcon" class="form-control" placeholder="fa-tree">
+                                    <input type="text" name="edit_icon" id="editIcon" class="form-control" placeholder="fa-magnet">
                                 </div>
                                 <div class="col-3">
-                                    <div id="editIconPreview" class="icon-preview-box"><i class="fas fa-tag"></i></div>
+                                    <div id="editIconPreview" class="icon-preview-box"><i class="fas fa-magnet"></i></div>
                                 </div>
                             </div>
                             <div class="icon-picker-grid">
