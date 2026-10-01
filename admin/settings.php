@@ -169,6 +169,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+        // ---------------- Update social media links ----------------
+        if (isset($action) && $action === 'update_social') {
+            $whatsapp = trim($_POST['whatsapp_number'] ?? '');
+            $youtube   = trim($_POST['youtube_url']     ?? '');
+            $facebook  = trim($_POST['facebook_url']    ?? '');
+            $instagram = trim($_POST['instagram_url']   ?? '');
+            $linkedin  = trim($_POST['linkedin_url']    ?? '');
+            try {
+                @$conn->query("ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS whatsapp_number VARCHAR(20) DEFAULT NULL");
+                @$conn->query("ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS youtube_url VARCHAR(400) DEFAULT NULL");
+                @$conn->query("ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS facebook_url VARCHAR(400) DEFAULT NULL");
+                @$conn->query("ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS instagram_url VARCHAR(400) DEFAULT NULL");
+                @$conn->query("ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS linkedin_url VARCHAR(400) DEFAULT NULL");
+                $exists = $conn->query("SELECT id FROM site_settings WHERE id = 1");
+                if ($exists && $exists->num_rows > 0) {
+                    $upd = $conn->prepare("UPDATE site_settings SET whatsapp_number=?, youtube_url=?, facebook_url=?, instagram_url=?, linkedin_url=? WHERE id=1");
+                } else {
+                    $upd = $conn->prepare("INSERT INTO site_settings (id, whatsapp_number, youtube_url, facebook_url, instagram_url, linkedin_url) VALUES (1,?,?,?,?,?)");
+                }
+                $upd->bind_param('sssss', $whatsapp, $youtube, $facebook, $instagram, $linkedin);
+                $upd->execute();
+                $upd->close();
+                $success[] = "Social media links updated!";
+                $settings_check = $conn->query("SELECT * FROM site_settings WHERE id = 1 LIMIT 1");
+                if ($settings_check && $settings_check->num_rows > 0) {
+                    $settings_row = $settings_check->fetch_assoc();
+                }
+            } catch (mysqli_sql_exception $e) {
+                $errors[] = "Could not update social links: " . $e->getMessage();
+            }
+        }
+
     // Refresh admin data after any update
     if ($admin_id) {
         $stmt = $conn->prepare("SELECT * FROM admin_users WHERE id = ?");
@@ -557,6 +589,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button type="submit" class="btn-save" <?php echo !$admin_id ? 'disabled' : ''; ?>>
                             <i class="fas fa-save"></i> Update Password
                         </button>
+                    </form>
+                </div>
+
+                <!-- ===== SOCIAL MEDIA ===== -->
+                <div class="settings-card">
+                    <h3><i class="fas fa-share-alt"></i> Social Media & Contact Links</h3>
+                    <p class="desc">These links appear in the topbar and footer of your public site.</p>
+                    <form method="POST">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+                        <input type="hidden" name="action" value="update_social">
+
+                        <label class="field-label"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Number</label>
+                        <div class="field-input-wrap">
+                            <input type="text" name="whatsapp_number" class="field-input" placeholder="918013635806" value="<?php echo htmlspecialchars($settings_row['whatsapp_number'] ?? ''); ?>">
+                        </div>
+
+                        <label class="field-label" style="margin-top:10px"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube Channel URL</label>
+                        <div class="field-input-wrap">
+                            <input type="url" name="youtube_url" class="field-input" placeholder="https://youtube.com/@yourchannel" value="<?php echo htmlspecialchars($settings_row['youtube_url'] ?? ''); ?>">
+                        </div>
+
+                        <label class="field-label" style="margin-top:10px"><i class="fab fa-facebook-f" style="color:#1877F2"></i> Facebook URL</label>
+                        <div class="field-input-wrap">
+                            <input type="url" name="facebook_url" class="field-input" placeholder="https://facebook.com/yourpage" value="<?php echo htmlspecialchars($settings_row['facebook_url'] ?? ''); ?>">
+                        </div>
+
+                        <label class="field-label" style="margin-top:10px"><i class="fab fa-instagram" style="color:#E1306C"></i> Instagram URL</label>
+                        <div class="field-input-wrap">
+                            <input type="url" name="instagram_url" class="field-input" placeholder="https://instagram.com/yourhandle" value="<?php echo htmlspecialchars($settings_row['instagram_url'] ?? ''); ?>">
+                        </div>
+
+                        <label class="field-label" style="margin-top:10px"><i class="fab fa-linkedin-in" style="color:#0A66C2"></i> LinkedIn URL</label>
+                        <div class="field-input-wrap">
+                            <input type="url" name="linkedin_url" class="field-input" placeholder="https://linkedin.com/company/yourcompany" value="<?php echo htmlspecialchars($settings_row['linkedin_url'] ?? ''); ?>">
+                        </div>
+
+                        <button type="submit" class="btn-save" style="margin-top:14px"><i class="fas fa-save"></i> Save Social Links</button>
                     </form>
                 </div>
 

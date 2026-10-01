@@ -12,6 +12,21 @@ $is_gallery_page  = ($current_page === 'gallery');
 $base_url = rtrim(env('APP_URL', ''), '/');
 
 // ============================================================
+// FETCH SITE SETTINGS
+// ============================================================
+$site_settings = [];
+if (isset($conn) && $conn) {
+    try {
+        $res = $conn->query("SELECT * FROM site_settings WHERE id = 1 LIMIT 1");
+        if ($res && $res->num_rows > 0) {
+            $site_settings = $res->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $site_settings = [];
+    }
+}
+
+// ============================================================
 // FETCH ACTIVE CATEGORIES
 // ============================================================
 $categories = [];
@@ -1117,19 +1132,13 @@ foreach ($pinned_categories as $pc) {
 <div class="db-topbar">
     <div class="db-topbar-inner">
         <div class="db-topbar-left">
-            <?php if(!empty($site_settings['phone'])): ?>
-            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'])); ?>"><i class="fas fa-phone-alt"></i> <?php echo htmlspecialchars($site_settings['phone']); ?></a>
-            <?php endif; ?>
+            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '+918013635806')); ?>"><i class="fas fa-phone-alt"></i> <?php echo htmlspecialchars($site_settings['phone'] ?? '+91 80136 35806'); ?></a>
             
-            <?php if(!empty($site_settings['phone2'])): ?>
             <div class="db-topbar-sep"></div>
-            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone2'])); ?>"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($site_settings['phone2']); ?></a>
-            <?php endif; ?>
+            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone2'] ?? '+918839019950')); ?>"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($site_settings['phone2'] ?? '+91 88390 19950'); ?></a>
             
-            <?php if(!empty($site_settings['email'])): ?>
             <div class="db-topbar-sep"></div>
-            <a href="mailto:<?php echo htmlspecialchars($site_settings['email']); ?>"><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($site_settings['email']); ?></a>
-            <?php endif; ?>
+            <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? 'enterprisearup@gmail.com'); ?>"><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($site_settings['email'] ?? 'enterprisearup@gmail.com'); ?></a>
         </div>
         <div class="db-topbar-right">
             <?php if(!empty($site_settings['facebook_url'])): ?>
@@ -1145,6 +1154,12 @@ foreach ($pinned_categories as $pc) {
             <div class="db-topbar-sep"></div>
             <a href="<?php echo htmlspecialchars($site_settings['linkedin_url']); ?>" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <?php endif; ?>
+
+            <div class="db-topbar-sep"></div>
+            <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? '918013635806')); ?>?text=Hi%2C+I+have+an+enquiry." target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            
+            <div class="db-topbar-sep"></div>
+            <a href="<?php echo htmlspecialchars($site_settings['youtube_url'] ?? 'https://youtube.com/'); ?>" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i> YouTube</a>
         </div>
     </div>
 </div>
