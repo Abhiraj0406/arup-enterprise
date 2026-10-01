@@ -1169,7 +1169,7 @@ foreach ($pinned_categories as $pc) {
     <div class="db-header-inner">
 
         <!-- LOGO -->
-        <a href="index.php" class="db-logo" aria-label="Arup Enterprise — Home">
+        <a href="./" class="db-logo" aria-label="Arup Enterprise — Home">
             <?php if ($logo_path): ?>
                 <div class="db-logo-img-wrap">
                     <img src="<?php echo htmlspecialchars($logo_path); ?>"
@@ -1192,14 +1192,14 @@ foreach ($pinned_categories as $pc) {
         <nav class="db-nav" role="navigation" aria-label="Main navigation">
             <!-- Home -->
             <div class="db-nav-item">
-                <a href="index.php" class="db-nav-link <?php echo $is_home_page?'active':''; ?>">
+                <a href="./" class="db-nav-link <?php echo $is_home_page?'active':''; ?>">
                     Home
                 </a>
             </div>
 
             <!-- Application Dropdown -->
             <div class="db-nav-item">
-                <a href="products.php" class="db-nav-link" aria-haspopup="true">
+                <a href="products" class="db-nav-link" aria-haspopup="true">
                     Application <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
                 </a>
                 <div class="db-dropdown" role="menu">
@@ -1211,7 +1211,7 @@ foreach ($pinned_categories as $pc) {
                     </a>
                     <?php endforeach; ?>
                     <div class="db-dropdown-divider"></div>
-                    <a href="products.php" class="db-dropdown-all">
+                    <a href="products" class="db-dropdown-all">
                         View All Products <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -1220,7 +1220,7 @@ foreach ($pinned_categories as $pc) {
             <!-- Pinned Categories -->
             <?php foreach ($pinned_categories as $pc): ?>
             <div class="db-nav-item">
-                <a href="products.php?category=<?php echo urlencode($pc['name']); ?>" class="db-nav-link <?php echo (isset($_GET['category']) && strtolower($_GET['category']) == strtolower($pc['name'])) ? 'active' : ''; ?>">
+                <a href="products?category=<?php echo urlencode($pc['name']); ?>" class="db-nav-link <?php echo (isset($_GET['category']) && strtolower($_GET['category']) == strtolower($pc['name'])) ? 'active' : ''; ?>">
                     <?php echo htmlspecialchars($pc['name']); ?>
                 </a>
             </div>
@@ -1228,28 +1228,28 @@ foreach ($pinned_categories as $pc) {
 
             <!-- Our Products -->
             <div class="db-nav-item">
-                <a href="products.php" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
+                <a href="products" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
                     Our Products
                 </a>
             </div>
 
             <!-- Gallery -->
             <div class="db-nav-item">
-                <a href="gallery.php" class="db-nav-link <?php echo $is_gallery_page?'active':''; ?>">
+                <a href="gallery" class="db-nav-link <?php echo $is_gallery_page?'active':''; ?>">
                     Gallery
                 </a>
             </div>
 
             <!-- About Us -->
             <div class="db-nav-item">
-                <a href="about.php" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
+                <a href="about" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
                     About Us
                 </a>
             </div>
 
             <!-- Contact Us -->
             <div class="db-nav-item">
-                <a href="contact.php" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
+                <a href="contact" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
                     Contact Us
                 </a>
             </div>
@@ -1257,7 +1257,7 @@ foreach ($pinned_categories as $pc) {
 
         <!-- RIGHT ACTIONS -->
         <div class="db-header-actions">
-            <a href="products.php" title="Search Products" class="db-btn-quote" style="border-radius: 50%; padding: 12px 14px; background: #DC2626;">
+            <a href="products" title="Search Products" class="db-btn-quote" style="border-radius: 50%; padding: 12px 14px; background: #DC2626;">
                 <i class="fas fa-search" aria-hidden="true"></i>
             </a>
             <button class="db-hamburger" id="dbHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="dbMobileNav">
@@ -1300,7 +1300,7 @@ foreach ($pinned_categories as $pc) {
 <nav class="db-mobile-nav" id="dbMobileNav" aria-label="Mobile navigation" aria-hidden="true">
 
     <div class="db-mn-head">
-        <a href="index.php" class="db-mn-logo" aria-label="Arup Enterprise — Home">
+        <a href="./" class="db-mn-logo" aria-label="Arup Enterprise — Home">
             <?php if ($logo_path): ?>
                 <img src="<?php echo htmlspecialchars($logo_path); ?>"
                      alt="Arup Enterprise"
@@ -1319,7 +1319,7 @@ foreach ($pinned_categories as $pc) {
 
     <div class="db-mn-body">
 
-        <a href="index.php" class="db-mn-link <?php echo $is_home_page?'mn-active':''; ?>">
+        <a href="./" class="db-mn-link <?php echo $is_home_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Home
             </span>
@@ -1339,13 +1339,13 @@ foreach ($pinned_categories as $pc) {
                 <?php echo htmlspecialchars($pd['label']); ?>
             </a>
             <?php endforeach; ?>
-            <a href="products.php" role="menuitem">
+            <a href="products" role="menuitem">
                 All Applications
             </a>
         </div>
 
         <?php foreach ($pinned_categories as $pc): ?>
-        <a href="products.php?category=<?php echo urlencode($pc['name']); ?>" class="db-mn-link">
+        <a href="products?category=<?php echo urlencode($pc['name']); ?>" class="db-mn-link">
             <span class="db-mn-link-left">
                 <i class="fas <?php echo !empty($pc['icon']) ? htmlspecialchars($pc['icon']) : 'fa-tag'; ?>" style="color:var(--gold); width:20px;"></i>
                 <?php echo htmlspecialchars($pc['name']); ?>
@@ -1353,25 +1353,25 @@ foreach ($pinned_categories as $pc) {
         </a>
         <?php endforeach; ?>
 
-        <a href="products.php" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
+        <a href="products" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Our Products
             </span>
         </a>
 
-        <a href="gallery.php" class="db-mn-link <?php echo $is_gallery_page?'mn-active':''; ?>">
+        <a href="gallery" class="db-mn-link <?php echo $is_gallery_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Gallery
             </span>
         </a>
 
-        <a href="about.php" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
+        <a href="about" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 About Us
             </span>
         </a>
 
-        <a href="contact.php" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
+        <a href="contact" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Contact Us
             </span>
@@ -1384,7 +1384,7 @@ foreach ($pinned_categories as $pc) {
            target="_blank" rel="noopener" class="db-mn-btn-wa">
             <i class="fab fa-whatsapp"></i> Chat on WhatsApp
         </a>
-        <a href="contact.php" class="db-mn-btn-quote">
+        <a href="contact" class="db-mn-btn-quote">
             <i class="fas fa-paper-plane"></i> Get a Free Quote
         </a>
         <div class="db-mn-contact-row">

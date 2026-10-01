@@ -376,14 +376,14 @@ function dipban_stars($r){
         <div class="hero-tags-strip">
             <span class="hero-tags-label"><i class="fas fa-tags me-1 text-warning"></i> Popular:</span>
             <?php foreach ($hero_popular_tags as $tag): ?>
-                <a href="products.php?search=<?php echo urlencode($tag); ?>" class="hero-tag-link"><?php echo htmlspecialchars($tag); ?></a>
+                <a href="products?search=<?php echo urlencode($tag); ?>" class="hero-tag-link"><?php echo htmlspecialchars($tag); ?></a>
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
 
         <div class="hero-ctas">
             <a href="#contact-form" class="cta-primary"><i class="fas fa-paper-plane"></i> Get a Free Quote</a>
-            <a href="products.php" class="cta-secondary"><i class="fas fa-th-large"></i> Explore Products</a>
+            <a href="products" class="cta-secondary"><i class="fas fa-th-large"></i> Explore Products</a>
         </div>
 
         <div class="hero-trust mt-3">
@@ -431,7 +431,7 @@ function dipban_stars($r){
                     <div class="af-item"><i class="fas fa-check"></i> Pan-India Installation & Service</div>
                     <div class="af-item"><i class="fas fa-check"></i> 38+ Years of Industry Experience</div>
                 </div>
-                <a href="about.php" class="btn-outline-gold">Discover Our Story <i class="fas fa-arrow-right"></i></a>
+                <a href="about" class="btn-outline-gold">Discover Our Story <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -488,14 +488,14 @@ function dipban_stars($r){
                     <h3 class="product-name"><?php echo htmlspecialchars($p['name']??''); ?></h3>
                     <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,110)); ?>...</p>
                     <div class="product-card-footer">
-                        <a href="product-detail.php?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
+                        <a href="product-detail?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
                         <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? '918013635806'); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp Enquiry"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
-        <div class="products-cta-wrap"><a href="products.php" class="btn-outline-gold">View All Products <i class="fas fa-th-large"></i></a></div>
+        <div class="products-cta-wrap"><a href="products" class="btn-outline-gold">View All Products <i class="fas fa-th-large"></i></a></div>
     </div>
 </section>
 
@@ -548,7 +548,7 @@ function dipban_stars($r){
             ];
             foreach($industries_list as $ind): 
             ?>
-            <a href="products.php" class="industry-card">
+            <a href="products" class="industry-card">
                 <div class="industry-icon"><i class="fas <?php echo $ind['icon']; ?>"></i></div>
                 <h3><?php echo htmlspecialchars($ind['name']); ?></h3>
                 <p><?php echo htmlspecialchars($ind['desc']); ?></p>
