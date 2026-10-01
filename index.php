@@ -340,7 +340,13 @@ function dipban_stars($r){
 ?>
 
 <!-- ===== HERO ===== -->
-<section class="hero" id="home" style="background-image: linear-gradient(135deg, rgba(16,16,16,0.85) 0%, rgba(20,20,20,0.68) 55%, rgba(14,14,14,0.80) 100%), url('assets/images/hero-bg.png'); background-size: cover; background-position: center 65%; background-repeat: no-repeat; position: relative;">
+<section class="hero" id="home">
+    <!-- Video Background -->
+    <video class="hero-video-bg" autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/machine-hero.mp4" type="video/mp4">
+    </video>
+    <!-- Dark overlay -->
+    <div class="hero-video-overlay"></div>
     <div class="hero-gears" aria-hidden="true">
         <svg class="gear gear-1" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
         <svg class="gear gear-2" viewBox="0 0 100 100"><use href="#gear-svg"/></svg>
@@ -720,14 +726,17 @@ img{max-width:100%;display:block}
 .btn-outline-gold:hover{background:var(--gold);color:#fff;transform:translateY(-2px)}
 
 /* HERO */
-.hero{position:relative;min-height:calc(100vh - 110px);display:flex;align-items:center;overflow:hidden;margin-top:0}
-.hero-gears{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero{position:relative;min-height:calc(100vh - 110px);display:flex;align-items:center;overflow:hidden;margin-top:0;background:#0e0e0e}
+/* Video Background */
+.hero-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+.hero-video-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.82) 0%,rgba(16,16,16,0.65) 55%,rgba(10,10,10,0.78) 100%);z-index:1}
+.hero-gears{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
 .gear{position:absolute;color:var(--gold);opacity:.05}
 .gear-1{width:360px;top:-60px;right:-60px;animation:gspin 42s linear infinite}
 .gear-2{width:180px;bottom:10%;left:5%;animation:gspin 28s linear infinite reverse}
 .gear-3{width:120px;top:40%;right:15%;animation:gspin 20s linear infinite}
 @keyframes gspin{to{transform:rotate(360deg)}}
-.hero-content{position:relative;z-index:2;max-width:1240px;width:100%;margin:0 auto;padding:44px 24px 36px}
+.hero-content{position:relative;z-index:3;max-width:1240px;width:100%;margin:0 auto;padding:44px 24px 36px}
 .hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.4);color:var(--gold-light);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:12px}
 .badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:bdot 2s ease-in-out infinite}
 @keyframes bdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
