@@ -32,17 +32,18 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
         }
         .login-card {
             background: #ffffff;
-            padding: 40px;
+            padding: 45px 40px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(239, 68, 68, 0.12);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             border: 1px solid rgba(239, 68, 68, 0.2);
             text-align: center;
         }
         .login-logo img {
-            max-width: 200px;
-            margin-bottom: 20px;
+            width: 80%;
+            max-width: 280px;
+            margin-bottom: 3px;
         }
         .login-title {
             color: var(--charcoal);
@@ -52,29 +53,66 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
         .login-subtitle {
             color: #EF4444;
             font-size: 0.9rem;
-            margin-bottom: 30px;
+            margin-bottom: 1px;
             font-weight: 600;
         }
+        .input-group-text.left-icon {
+            background: #fff;
+            border: 1px solid #FECACA;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            color: #9CA3AF;
+        }
+        .input-group-text.right-icon {
+            background: #fff;
+            border: 1px solid #FECACA;
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            color: #9CA3AF;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .input-group-text.right-icon:hover {
+            color: #EF4444;
+        }
         .form-control {
-            border-radius: 8px;
             padding: 12px 15px;
             border: 1px solid #FECACA;
-            margin-bottom: 20px;
+            border-left: none;
+            border-right: none; /* Removed right border to connect with right icon */
+            background: #fff;
+            color: var(--charcoal);
+            border-radius: 0; /* Reset radius so right icon can be rounded */
+        }
+        /* Email field has no right icon, so we round it */
+        input[type="email"].form-control {
+            border-right: 1px solid #FECACA;
+            border-radius: 0 8px 8px 0;
         }
         .form-control:focus {
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+            box-shadow: none;
             border-color: #EF4444;
+        }
+        .input-group:focus-within .input-group-text,
+        .input-group:focus-within .form-control {
+            border-color: #EF4444;
+            color: #EF4444;
+        }
+        /* Autofill background fix */
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px white inset !important;
         }
         .btn-login {
             background: linear-gradient(135deg, #EF4444, #DC2626);
             color: #fff;
             border: none;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s;
+            margin-top: 10px;
         }
         .btn-login:hover {
             background: linear-gradient(135deg, #DC2626, #B91C1C);
@@ -107,12 +145,15 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
 
         <form action="do_login.php" method="POST">
             <div class="input-group mb-3">
-                <span class="input-group-text" style="background:#fff; border-right:none;"><i class="fas fa-envelope text-muted"></i></span>
-                <input type="email" name="email" class="form-control" placeholder="Email Address" required style="border-left:none;">
+                <span class="input-group-text left-icon"><i class="fas fa-envelope"></i></span>
+                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
             </div>
             <div class="input-group mb-4">
-                <span class="input-group-text" style="background:#fff; border-right:none;"><i class="fas fa-lock text-muted"></i></span>
-                <input type="password" name="password" class="form-control" placeholder="Password" required style="border-left:none;">
+                <span class="input-group-text left-icon"><i class="fas fa-lock"></i></span>
+                <input type="password" name="password" id="passwordField" class="form-control" placeholder="Password" required>
+                <span class="input-group-text right-icon" id="togglePassword">
+                    <i class="fas fa-eye" id="eyeIcon"></i>
+                </span>
             </div>
             <button type="submit" class="btn-login">
                 <i class="fas fa-sign-in-alt"></i> Login
@@ -122,5 +163,24 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
             Design & Developed by <a href="https://aidigitalinnovation.com/" target="_blank" style="color: #EF4444; text-decoration: none; font-weight: 600;">AI Digital Innovation</a>
         </div>
     </div>
+
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#passwordField');
+        const eyeIcon = document.querySelector('#eyeIcon');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            if(type === 'password') {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            } else {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+        });
+    </script>
 </body>
 </html>
