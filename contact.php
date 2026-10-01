@@ -584,43 +584,6 @@ include 'includes/header.php';
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="ct-faq">
-  <div class="container">
-    <div class="ct-sec-head">
-      <span class="ct-eyebrow">Common Questions</span>
-      <h2 class="ct-h2">Frequently Asked <em>Questions</em></h2>
-    </div>
-    <div class="ct-faq-grid">
-      <?php
-      $faqs = [];
-      if (isset($conn)) {
-          $res = $conn->query("SELECT * FROM faqs WHERE status='active' ORDER BY sort_order ASC, id ASC");
-          if ($res) {
-              while ($row = $res->fetch_assoc()) {
-                  $faqs[] = ['q' => $row['question'], 'a' => $row['answer']];
-              }
-          }
-      }
-      if (empty($faqs)) {
-          $faqs = [
-              ['q'=>'What types of machinery do you specialize in?', 'a'=>'We specialize in premium magnetic separation equipment.'],
-              ['q'=>'Do you provide installation and training?', 'a'=>'Yes! Our team provides complete installation, commissioning, and on-site training for all machinery we supply.'],
-              ['q'=>'How can I request a quote?', 'a'=>'Fill out the contact form on this page or call us directly.']
-          ];
-      }
-      foreach($faqs as $f): ?>
-      <div class="ct-faq-item">
-        <button class="ct-faq-q" type="button">
-          <span><?php echo htmlspecialchars($f['q']); ?></span>
-          <svg class="ct-faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-        <div class="ct-faq-a"><p><?php echo htmlspecialchars($f['a']); ?></p></div>
-      </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
 
 <!-- CTA BAND -->
 <section class="ct-cta">
@@ -823,15 +786,15 @@ a{text-decoration:none;color:inherit;}
 
 /* FAQ */
 .ct-faq{background:var(--ivory);padding:80px 0;}
-.ct-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;max-width:980px;margin:0 auto;}
+.ct-faq-grid{display:grid;grid-template-columns:1fr;gap:12px;max-width:800px;margin:0 auto;}
 .ct-faq-item{border-bottom:1px solid rgba(239,68,68,.1);}
-.ct-faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;padding:16px 0;font-family:var(--font-b);font-size:.9rem;font-weight:700;color:var(--char);text-align:left;cursor:pointer;transition:color .2s;}
+.ct-faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;padding:16px 0;font-family:var(--font-b);font-size:.95rem;font-weight:700;color:var(--char);text-align:left;cursor:pointer;transition:color .2s;}
 .ct-faq-q:hover{color:var(--gold);}
 .ct-faq-icon{color:var(--gold);flex-shrink:0;transition:transform .3s var(--ease);}
 .ct-faq-item.open .ct-faq-icon{transform:rotate(180deg);}
 .ct-faq-a{max-height:0;overflow:hidden;transition:max-height .38s var(--ease);}
 .ct-faq-item.open .ct-faq-a{max-height:200px;}
-.ct-faq-a p{color:var(--smoke);font-size:.86rem;line-height:1.72;padding-bottom:16px;}
+.ct-faq-a p{color:var(--smoke);font-size:.9rem;line-height:1.72;padding-bottom:16px;}
 
 /* CTA */
 .ct-cta{background:linear-gradient(135deg,#0E0E0E 0%,#1a1410 100%);border-top:2px solid var(--gold);padding:64px 0;}
