@@ -31,15 +31,6 @@ $form        = [
 $categories = [];
 $catR = $conn->query("SELECT * FROM categories WHERE status='active' ORDER BY name ASC");
 if ($catR) { while ($r = $catR->fetch_assoc()) $categories[] = $r; }
-if (empty($categories)) {
-    $categories = [
-        ['name'=>'Wood Working'],
-        ['name'=>'Sheet Metal'],
-        ['name'=>'CNC'],
-        ['name'=>'Hydraulic'],
-        ['name'=>'Other'],
-    ];
-}
 
 // ── Edit mode: pre-fill form ─────────────────────────────────
 if (isset($_GET['edit'])) {
