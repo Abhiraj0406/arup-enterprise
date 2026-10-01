@@ -515,6 +515,11 @@ foreach ($pinned_categories as $pc) {
         gap: 10px;
         flex-shrink: 0;
     }
+    @media (max-width: 768px) {
+        .header-search-form input {
+            width: 100px !important;
+        }
+    }
     .db-btn-call {
         display: inline-flex;
         align-items: center;
@@ -1260,9 +1265,12 @@ foreach ($pinned_categories as $pc) {
 
         <!-- RIGHT ACTIONS -->
         <div class="db-header-actions">
-            <a href="products" title="Search Products" class="db-btn-quote" style="border-radius: 50%; padding: 12px 14px; background: #DC2626;">
-                <i class="fas fa-search" aria-hidden="true"></i>
-            </a>
+            <form action="products.php" method="GET" class="header-search-form" style="display:flex; align-items:center; background:#f9fafb; border:1px solid #e5e7eb; border-radius:30px; padding:2px 8px;">
+                <input type="text" name="search" placeholder="Search..." style="border:none; background:transparent; outline:none; padding:6px 8px; font-size:0.85rem; width:140px; color:#111827;" required>
+                <button type="submit" style="background:none; border:none; color:#DC2626; cursor:pointer; padding:6px; outline:none;">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
             <button class="db-hamburger" id="dbHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="dbMobileNav">
                 <span></span><span></span><span></span>
             </button>
