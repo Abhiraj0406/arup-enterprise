@@ -1199,7 +1199,7 @@ foreach ($pinned_categories as $pc) {
 
             <!-- Application Dropdown -->
             <div class="db-nav-item">
-                <a href="products.php" class="db-nav-link" aria-haspopup="true">
+                <a href="products" class="db-nav-link" aria-haspopup="true">
                     Application <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
                 </a>
                 <div class="db-dropdown" role="menu">
@@ -1211,7 +1211,7 @@ foreach ($pinned_categories as $pc) {
                     </a>
                     <?php endforeach; ?>
                     <div class="db-dropdown-divider"></div>
-                    <a href="products.php" class="db-dropdown-all">
+                    <a href="products" class="db-dropdown-all">
                         View All Products <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -1220,7 +1220,7 @@ foreach ($pinned_categories as $pc) {
             <!-- Pinned Categories -->
             <?php foreach ($pinned_categories as $pc): ?>
             <div class="db-nav-item">
-                <a href="products.php?category=<?php echo urlencode($pc['name']); ?>" class="db-nav-link <?php echo (isset($_GET['category']) && strtolower($_GET['category']) == strtolower($pc['name'])) ? 'active' : ''; ?>">
+                <a href="products?category=<?php echo urlencode($pc['name']); ?>" class="db-nav-link <?php echo (isset($_GET['category']) && strtolower($_GET['category']) == strtolower($pc['name'])) ? 'active' : ''; ?>">
                     <?php echo htmlspecialchars($pc['name']); ?>
                 </a>
             </div>
@@ -1228,28 +1228,28 @@ foreach ($pinned_categories as $pc) {
 
             <!-- Our Products -->
             <div class="db-nav-item">
-                <a href="products.php" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
+                <a href="products" class="db-nav-link <?php echo $is_products_page?'active':''; ?>">
                     Our Products
                 </a>
             </div>
 
             <!-- Gallery -->
             <div class="db-nav-item">
-                <a href="gallery.php" class="db-nav-link <?php echo $is_gallery_page?'active':''; ?>">
+                <a href="gallery" class="db-nav-link <?php echo $is_gallery_page?'active':''; ?>">
                     Gallery
                 </a>
             </div>
 
             <!-- About Us -->
             <div class="db-nav-item">
-                <a href="about.php" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
+                <a href="about" class="db-nav-link <?php echo $is_about_page?'active':''; ?>">
                     About Us
                 </a>
             </div>
 
             <!-- Contact Us -->
             <div class="db-nav-item">
-                <a href="contact.php" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
+                <a href="contact" class="db-nav-link <?php echo $is_contact_page?'active':''; ?>">
                     Contact Us
                 </a>
             </div>
@@ -1353,25 +1353,25 @@ foreach ($pinned_categories as $pc) {
         </a>
         <?php endforeach; ?>
 
-        <a href="products.php" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
+        <a href="products" class="db-mn-link <?php echo $is_products_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Our Products
             </span>
         </a>
 
-        <a href="gallery.php" class="db-mn-link <?php echo $is_gallery_page?'mn-active':''; ?>">
+        <a href="gallery" class="db-mn-link <?php echo $is_gallery_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Gallery
             </span>
         </a>
 
-        <a href="about.php" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
+        <a href="about" class="db-mn-link <?php echo $is_about_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 About Us
             </span>
         </a>
 
-        <a href="contact.php" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
+        <a href="contact" class="db-mn-link <?php echo $is_contact_page?'mn-active':''; ?>">
             <span class="db-mn-link-left">
                 Contact Us
             </span>
