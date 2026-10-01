@@ -515,7 +515,7 @@ include 'includes/header.php';
           <div class="ct-wa-icon"><i class="fab fa-whatsapp"></i></div>
           <div class="ct-wa-text">
             <span>Fastest Response</span>
-            <strong>Chat on WhatsApp</strong>
+            <strong>+91 8013635806</strong>
           </div>
           <div class="ct-wa-arrow">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -595,8 +595,8 @@ include 'includes/header.php';
         <p>Expert advice, quotes, and technical support — one call away.</p>
       </div>
       <div class="ct-cta-btns">
-        <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="ct-btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-        <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? ''); ?>" class="ct-btn-secondary"><i class="fas fa-envelope"></i> Email Us</a>
+        <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="ct-btn-primary"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($site_settings['phone'] ?? '+91 8013635806'); ?></a>
+        <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? ''); ?>" class="ct-btn-secondary"><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($site_settings['email'] ?? 'enterprisearup@gmail.com'); ?></a>
       </div>
     </div>
   </div>
