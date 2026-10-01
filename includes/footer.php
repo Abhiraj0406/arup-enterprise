@@ -105,11 +105,11 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                 <h4 class="footer-heading">Quick Links</h4>
                 <ul class="footer-links">
                     <li><a href="./"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="about"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="products"><i class="fas fa-chevron-right"></i> All Products</a></li>
-                    <li><a href="gallery"><i class="fas fa-chevron-right"></i> Gallery</a></li>
-                    <li><a href="contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
-                    <li><a href="contact#quote"><i class="fas fa-chevron-right"></i> Get a Quote</a></li>
+                    <li><a href="about.php"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="products.php"><i class="fas fa-chevron-right"></i> All Products</a></li>
+                    <li><a href="gallery.php"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a href="contact.php"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="contact.php#quote"><i class="fas fa-chevron-right"></i> Get a Quote</a></li>
                 </ul>
             </div>
 
@@ -147,7 +147,7 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                     foreach ($footer_categories as $cat): 
                     ?>
                     <li>
-                        <a href="products?category=<?php echo urlencode($cat['name']); ?>">
+                        <a href="products.php?category=<?php echo urlencode($cat['name']); ?>">
                             <i class="fas <?php echo $cat['icon'] ?? 'fa-tag'; ?>"></i> 
                             <?php echo htmlspecialchars($cat['name']); ?>
                         </a>

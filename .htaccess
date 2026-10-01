@@ -1,6 +1,5 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /arup-enterprise/
 
     # If the requested URL is not a directory
     RewriteCond %{REQUEST_FILENAME} !-d
