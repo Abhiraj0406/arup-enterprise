@@ -628,7 +628,7 @@ foreach ($pinned_categories as $pc) {
     .db-mobile-nav.open { right: 0; }
 
     .db-mn-head {
-        background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal2) 100%);
+        background: #ffffff;
         padding: 20px 20px 18px;
         display: flex;
         align-items: center;
@@ -653,7 +653,7 @@ foreach ($pinned_categories as $pc) {
         font-family: var(--font-serif);
         font-size: 1.2rem;
         font-weight: 900;
-        color: #fff;
+        color: var(--charcoal);
         line-height: 1;
     }
     .db-mn-logo-text em { color: var(--gold); font-style: normal; }
@@ -663,26 +663,26 @@ foreach ($pinned_categories as $pc) {
         font-weight: 600;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.5);
+        color: rgba(14,14,14,0.5);
         margin-top: 2px;
         display: block;
     }
     .db-mn-close {
         width: 36px;
         height: 36px;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(14,14,14,0.05);
+        border: 1px solid rgba(14,14,14,0.1);
         border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: rgba(255,255,255,0.7);
+        color: rgba(14,14,14,0.7);
         font-size: 0.9rem;
         cursor: pointer;
         transition: all var(--ease);
         flex-shrink: 0;
     }
-    .db-mn-close:hover { background: rgba(239,68,68,0.25); color: var(--gold-light); }
+    .db-mn-close:hover { background: rgba(239,68,68,0.1); color: var(--gold); border-color: var(--gold); }
 
     .db-mn-body {
         flex: 1;

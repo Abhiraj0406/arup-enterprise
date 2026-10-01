@@ -843,9 +843,44 @@ a{text-decoration:none;color:inherit;}
 /* RESPONSIVE */
 @media(max-width:1024px){.ct-grid{grid-template-columns:1fr;gap:40px;}.ct-faq-grid{grid-template-columns:1fr;}}
 @media(max-width:768px){
+  .page-header {
+    min-height: auto;
+    padding: 120px 0 60px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .ct-hero-machine {
+    display: none !important;
+  }
+  .page-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .page-header h1 {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .page-header p {
+    text-align: center;
+    margin: 0 auto 20px auto;
+  }
+  .ph-stats {
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .ph-stats a {
+    width: 100%;
+    justify-content: center;
+  }
   .ct-hero{min-height:auto;}
   .ct-hero-content{padding:100px 24px 60px;}
-  .ct-hero-machine{width:240px;opacity:.1;right:-10px;}
   .ct-tl2{font-size:clamp(4rem,18vw,5rem);}
   .ct-form-row{grid-template-columns:1fr;}
   .ct-form-panel{padding:24px 20px;}
