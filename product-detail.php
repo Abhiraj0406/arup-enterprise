@@ -69,8 +69,6 @@ $features = isset($product['features']) ? parse_lines($product['features']) : []
 $specs = isset($product['specifications']) ? parse_lines($product['specifications']) : [];
 
 // ── Image path helper ────────────────────────────────────────
-// ✅ null/empty-safe: works for both a full http(s) image URL and a local file path,
-// and never crashes if 'image' is NULL or missing on this row.
 $img_src = '';
 $raw_img = isset($product['image']) ? (string)$product['image'] : '';
 if ($raw_img !== '') {
@@ -78,6 +76,18 @@ if ($raw_img !== '') {
         $img_src = $raw_img;
     } elseif (file_exists($raw_img)) {
         $img_src = $raw_img;
+    }
+}
+
+// ── Prepare all images (main + gallery) ─────────────────────
+$all_images = [];
+if ($img_src !== '') {
+    $all_images[] = $img_src;
+}
+$raw_gallery = json_decode($product['gallery'] ?? '[]', true) ?: [];
+foreach ($raw_gallery as $g_img) {
+    if (file_exists($g_img) && !in_array($g_img, $all_images)) {
+        $all_images[] = $g_img;
     }
 }
 
@@ -119,8 +129,8 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
             <!-- ── LEFT: Image Panel ── -->
             <div class="pd-image-col">
                 <div class="pd-image-card">
-                    <?php if ($img_src): ?>
-                        <img src="<?php echo htmlspecialchars($img_src); ?>"
+                    <?php if (!empty($all_images)): ?>
+                        <img src="<?php echo htmlspecialchars($all_images[0]); ?>"
                              alt="<?php echo htmlspecialchars($product['name']); ?>"
                              class="pd-main-img" id="mainProductImg" tabindex="0" role="button"
                              aria-label="Click to view full-size image">
@@ -148,6 +158,49 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
                         </span>
                     </div>
                 </div>
+
+                <?php if (count($all_images) > 1): ?>
+                <div class="pd-gallery-strip" id="pdGalleryStrip" style="display:flex; gap:10px; margin-top:16px; overflow-x:auto; padding-bottom:8px; scrollbar-width:thin;">
+                    <?php foreach ($all_images as $index => $g_img): ?>
+                        <img src="<?php echo htmlspecialchars($g_img); ?>" 
+                             alt="Gallery image <?php echo $index + 1; ?>"
+                             class="pd-gallery-thumb <?php echo $index === 0 ? 'active' : ''; ?>"
+                             onclick="changePdImage(this, <?php echo $index; ?>)"
+                             style="width:72px; height:72px; object-fit:cover; border-radius:8px; cursor:pointer; border:2px solid <?php echo $index === 0 ? '#DC2626' : 'transparent'; ?>; transition:all 0.2s; flex-shrink:0;">
+                    <?php endforeach; ?>
+                </div>
+                <style>
+                    .pd-gallery-thumb:hover { border-color: #EF4444 !important; opacity: 0.9; transform: translateY(-2px); }
+                    .pd-gallery-thumb.active { border-color: #DC2626 !important; opacity: 1; }
+                    .pd-gallery-strip::-webkit-scrollbar { height: 6px; }
+                    .pd-gallery-strip::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+                </style>
+                <script>
+                    let pdImgIndex = 0;
+                    const pdThumbs = document.querySelectorAll('.pd-gallery-thumb');
+                    const pdMainImg = document.getElementById('mainProductImg');
+                    let pdAutoSwipe = setInterval(pdNextImage, 2000);
+                    
+                    function changePdImage(thumb, index) {
+                        pdImgIndex = index;
+                        pdMainImg.src = thumb.src;
+                        pdThumbs.forEach(el => el.classList.remove('active'));
+                        thumb.classList.add('active');
+                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        clearInterval(pdAutoSwipe);
+                        pdAutoSwipe = setInterval(pdNextImage, 2000);
+                    }
+                    function pdNextImage() {
+                        pdImgIndex = (pdImgIndex + 1) % pdThumbs.length;
+                        let thumb = pdThumbs[pdImgIndex];
+                        pdMainImg.src = thumb.src;
+                        pdThumbs.forEach(el => el.classList.remove('active'));
+                        thumb.classList.add('active');
+                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                </script>
+                <?php endif; ?>
+
 
                 <!-- Quick Action Buttons -->
                 <div class="pd-quick-actions">

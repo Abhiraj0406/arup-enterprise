@@ -8,7 +8,7 @@ $gallery_items = [];
 if (isset($conn) && $conn) {
     try {
         $result = $conn->query("
-            SELECT id, name, category, image, description
+            SELECT id, name, category, image, gallery, description
             FROM products
             WHERE status = 'active' AND image != '' AND image IS NOT NULL
             ORDER BY featured DESC, sort_order ASC, id DESC
@@ -131,6 +131,17 @@ $total = count($gallery_items);
                 $desc = !empty($item['description'])
                     ? strip_tags($item['description'])
                     : 'High-quality industrial magnetic equipment built for durability and performance.';
+                
+                $all_images = [];
+                if ($img_src !== '') {
+                    $all_images[] = $img_src;
+                }
+                $raw_gallery = json_decode($item['gallery'] ?? '[]', true) ?: [];
+                foreach ($raw_gallery as $g_img) {
+                    if (file_exists($g_img) && !in_array($g_img, $all_images)) {
+                        $all_images[] = $g_img;
+                    }
+                }
             ?>
             <div class="gallery-card" data-category="<?php echo htmlspecialchars($item['category'], ENT_QUOTES); ?>">
                 <div class="gallery-img-wrap">
@@ -138,6 +149,9 @@ $total = count($gallery_items);
                     <img src="<?php echo htmlspecialchars($img_src); ?>"
                          alt="<?php echo htmlspecialchars($item['name']); ?>"
                          loading="lazy"
+                         class="gallery-auto-swipe"
+                         data-images="<?php echo htmlspecialchars(json_encode($all_images), ENT_QUOTES); ?>"
+                         data-index="0"
                          onerror="this.style.display='none';this.parentElement.querySelector('.gallery-img-placeholder').style.display='flex';">
                     <div class="gallery-img-placeholder" style="display:none;"><i class="fas fa-cogs"></i></div>
                     <?php else: ?>
@@ -182,6 +196,45 @@ $total = count($gallery_items);
             });
         });
     });
+
+    // Auto-swipe images: on hover for desktop, automatically for mobile
+    var swipeImgs = document.querySelectorAll('.gallery-auto-swipe');
+    var isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    function nextImg(img) {
+        var images = JSON.parse(img.getAttribute('data-images') || '[]');
+        if (images.length > 1) {
+            var index = parseInt(img.getAttribute('data-index') || '0');
+            index = (index + 1) % images.length;
+            
+            img.style.opacity = '0.5';
+            setTimeout(function(){
+                img.src = images[index];
+                img.setAttribute('data-index', index);
+                img.style.opacity = '1';
+            }, 150);
+        }
+    }
+
+    if (isMobile) {
+        setInterval(function(){
+            swipeImgs.forEach(nextImg);
+        }, 2000);
+    } else {
+        var pCards = document.querySelectorAll('.gallery-card');
+        pCards.forEach(function(card) {
+            var img = card.querySelector('.gallery-auto-swipe');
+            if (img) {
+                var interval;
+                card.addEventListener('mouseenter', function() {
+                    interval = setInterval(function() { nextImg(img); }, 2000);
+                });
+                card.addEventListener('mouseleave', function() {
+                    clearInterval(interval);
+                });
+            }
+        });
+    }
 })();
 </script>
 

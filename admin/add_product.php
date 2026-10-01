@@ -59,19 +59,68 @@ if (isset($_POST['save_product'])) {
     
     $error_msg = "";
 
+    // ── Helper to compress image < 100KB ──
+    if (!function_exists('compress_image_to_100kb')) {
+        function compress_image_to_100kb($source, $destination) {
+            // Fallback if GD is missing
+            if (!function_exists('imagecreatefromjpeg') || !function_exists('getimagesize')) {
+                return move_uploaded_file($source, $destination);
+            }
+            
+            $info = getimagesize($source);
+            if (!$info) return move_uploaded_file($source, $destination);
+            
+            $image = null;
+            if ($info['mime'] == 'image/jpeg') $image = imagecreatefromjpeg($source);
+            elseif ($info['mime'] == 'image/gif') $image = @imagecreatefromgif($source);
+            elseif ($info['mime'] == 'image/png') $image = @imagecreatefrompng($source);
+            elseif ($info['mime'] == 'image/webp' && function_exists('imagecreatefromwebp')) $image = @imagecreatefromwebp($source);
+            
+            if (!$image) return move_uploaded_file($source, $destination); // Fallback
+            
+            // If PNG/GIF, give it a white background instead of black for transparency
+            if ($info['mime'] == 'image/png' || $info['mime'] == 'image/gif') {
+                $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
+                imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
+                imagealphablending($bg, TRUE);
+                imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+                imagedestroy($image);
+                $image = $bg;
+            }
+
+            $quality = 85;
+            $target_size = 100 * 1024; 
+            
+            if (filesize($source) <= $target_size) {
+                imagejpeg($image, $destination, 90);
+                imagedestroy($image);
+                return true;
+            }
+            
+            do {
+                ob_start();
+                imagejpeg($image, null, $quality);
+                $size = ob_get_length();
+                ob_end_clean();
+                if ($size <= $target_size) break;
+                $quality -= 5;
+            } while ($quality >= 10);
+            
+            imagejpeg($image, $destination, $quality);
+            imagedestroy($image);
+            return true;
+        }
+    }
+
     // Handle main image upload
     if (!empty($_FILES['product_image']['name']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
-        if ($_FILES['product_image']['size'] > 1048576) {
-            $error_msg .= "Main image exceeds 1MB max size. ";
-        } else {
-            $upload_dir = '../assets/uploads/products/';
-            if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-            $ext = strtolower(pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION));
-            if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) {
-                $fname = 'prod_' . time() . '_' . rand(100,999) . '.' . $ext;
-                if (move_uploaded_file($_FILES['product_image']['tmp_name'], $upload_dir . $fname)) {
-                    $image_path = 'assets/uploads/products/' . $fname;
-                }
+        $upload_dir = '../assets/uploads/products/';
+        if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+        $ext = strtolower(pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION));
+        if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) {
+            $fname = 'prod_' . time() . '_' . rand(100,999) . '.jpg'; // Convert all to jpg
+            if (compress_image_to_100kb($_FILES['product_image']['tmp_name'], $upload_dir . $fname)) {
+                $image_path = 'assets/uploads/products/' . $fname;
             }
         }
     }
@@ -99,16 +148,12 @@ if (isset($_POST['save_product'])) {
         for ($i=0; $i<$total_uploaded; $i++) {
             if (count($gallery) >= 5) break; // Max 5 gallery images
             if ($_FILES['gallery_images']['error'][$i] === UPLOAD_ERR_OK) {
-                if ($_FILES['gallery_images']['size'][$i] > 102400) {
-                     $error_msg .= "Gallery image " . htmlspecialchars($_FILES['gallery_images']['name'][$i]) . " exceeds 100KB max size. ";
-                     continue;
-                }
                 $upload_dir = '../assets/uploads/products/';
                 if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
                 $ext = strtolower(pathinfo($_FILES['gallery_images']['name'][$i], PATHINFO_EXTENSION));
                 if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) {
-                    $fname = 'gal_' . time() . '_' . rand(100,999) . '.' . $ext;
-                    if (move_uploaded_file($_FILES['gallery_images']['tmp_name'][$i], $upload_dir . $fname)) {
+                    $fname = 'gal_' . time() . '_' . rand(100,999) . '.jpg';
+                    if (compress_image_to_100kb($_FILES['gallery_images']['tmp_name'][$i], $upload_dir . $fname)) {
                         $gallery[] = 'assets/uploads/products/' . $fname;
                     }
                 }

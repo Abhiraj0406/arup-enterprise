@@ -512,9 +512,22 @@ $total_count = count($products);
                         $image_path = isset($p['image']) ? (string)$p['image'] : '';
                         $is_remote_img = ($image_path !== '' && stripos($image_path, 'http') === 0);
                         $is_local_img  = ($image_path !== '' && !$is_remote_img && file_exists($image_path));
+                        
+                        $all_images = [];
+                        if ($is_remote_img || $is_local_img) {
+                            $all_images[] = $image_path;
+                        }
+                        
+                        // Parse gallery if it exists
+                        $raw_gallery = json_decode($p['gallery'] ?? '[]', true) ?: [];
+                        foreach ($raw_gallery as $g_img) {
+                            if (file_exists($g_img) && !in_array($g_img, $all_images)) {
+                                $all_images[] = $g_img;
+                            }
+                        }
                         ?>
                         <?php if ($is_remote_img || $is_local_img): ?>
-                            <img src="<?php echo htmlspecialchars($image_path); ?>" alt="<?php echo htmlspecialchars($p['name'] ?? 'Product'); ?>" loading="lazy">
+                            <img src="<?php echo htmlspecialchars($image_path); ?>" alt="<?php echo htmlspecialchars($p['name'] ?? 'Product'); ?>" loading="lazy" class="products-auto-swipe" data-images="<?php echo htmlspecialchars(json_encode($all_images), ENT_QUOTES); ?>" data-index="0">
                         <?php else: ?>
                             <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--ivory);color:var(--gold);font-size:3rem;">
                                 <i class="fas fa-cogs"></i>
@@ -552,5 +565,48 @@ $total_count = count($products);
         </div>
     <?php endif; ?>
 </section>
+
+<script>
+(function(){
+    // Auto-swipe images: on hover for desktop, automatically for mobile
+    var swipeImgs = document.querySelectorAll('.products-auto-swipe');
+    var isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    function nextImg(img) {
+        var images = JSON.parse(img.getAttribute('data-images') || '[]');
+        if (images.length > 1) {
+            var index = parseInt(img.getAttribute('data-index') || '0');
+            index = (index + 1) % images.length;
+            
+            img.style.opacity = '0.5';
+            setTimeout(function(){
+                img.src = images[index];
+                img.setAttribute('data-index', index);
+                img.style.opacity = '1';
+            }, 150);
+        }
+    }
+
+    if (isMobile) {
+        setInterval(function(){
+            swipeImgs.forEach(nextImg);
+        }, 2000);
+    } else {
+        var pCards = document.querySelectorAll('.product-card');
+        pCards.forEach(function(card) {
+            var img = card.querySelector('.products-auto-swipe');
+            if (img) {
+                var interval;
+                card.addEventListener('mouseenter', function() {
+                    interval = setInterval(function() { nextImg(img); }, 2000);
+                });
+                card.addEventListener('mouseleave', function() {
+                    clearInterval(interval);
+                });
+            }
+        });
+    }
+})();
+</script>
 
 <?php include 'includes/footer.php'; ?>
