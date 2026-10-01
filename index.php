@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $_SESSION['quote_error'] = !empty($errors)
             ? implode(", ", $errors)
-            : "Database connection error. Please call us directly at " . htmlspecialchars($site_settings['phone'] ?? '+91 8013635806') . ".";
+            : "Database connection error. Please call us directly at " . htmlspecialchars($site_settings['phone'] ?? '') . ".";
         ob_end_clean();
         header("Location: index.php#contact-form");
         exit();
@@ -489,7 +489,7 @@ function dipban_stars($r){
                     <p class="product-desc"><?php echo htmlspecialchars(mb_substr(strip_tags($p['description']??''),0,110)); ?>...</p>
                     <div class="product-card-footer">
                         <a href="product-detail?id=<?php echo (int)($p['id']??0); ?>" class="btn-product-detail">View Details <i class="fas fa-arrow-right"></i></a>
-                        <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number'] ?? '918013635806'); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp Enquiry"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $site_settings['whatsapp_number'] ?? $site_settings['phone'] ?? '')); ?>?text=Hi%2C+I+need+a+quote+for+<?php echo urlencode($p['name']??''); ?>" target="_blank" class="btn-product-quote" title="WhatsApp Enquiry"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>

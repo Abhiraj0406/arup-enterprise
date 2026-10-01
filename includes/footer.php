@@ -160,53 +160,33 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
             <div class="footer-col">
                 <h4 class="footer-heading">Contact Us</h4>
                 <ul class="footer-contact-list">
-                    <?php if(!empty($site_settings['address'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        <span><?php echo nl2br(htmlspecialchars($site_settings['address'])); ?></span>
+                        <span><?php echo nl2br(htmlspecialchars($site_settings['address'] ?? "B/5/H/4 Parikshit Roy Lane,\nBeleaghata Road, Kolkata – 700015")); ?></span>
                     </li>
-                    <?php endif; ?>
                     
-                    <?php if(!empty($site_settings['phone']) || !empty($site_settings['phone2'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
                         <span>
-                            <?php if(!empty($site_settings['phone'])): ?>
-                            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'])); ?>"><?php echo htmlspecialchars($site_settings['phone']); ?></a><br>
-                            <?php endif; ?>
-                            <?php if(!empty($site_settings['phone2'])): ?>
-                            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone2'])); ?>"><?php echo htmlspecialchars($site_settings['phone2']); ?></a>
-                            <?php endif; ?>
+                            <?php $wa = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+                            <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>"><?php echo htmlspecialchars($wa); ?></a>
                         </span>
                     </li>
-                    <?php endif; ?>
                     
-                    <?php if(!empty($site_settings['email'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fas fa-envelope"></i></span>
                         <span>
-                            <a href="mailto:<?php echo htmlspecialchars($site_settings['email']); ?>"><?php echo htmlspecialchars($site_settings['email']); ?></a>
+                            <a href="mailto:enterprisearup@gmail.com">enterprisearup@gmail.com</a>
                         </span>
                     </li>
-                    <?php endif; ?>
                     
-                    <?php if(!empty($site_settings['whatsapp_number'])): ?>
                     <li>
                         <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
                         <span>
-                            <a href="https://wa.me/<?php echo htmlspecialchars($site_settings['whatsapp_number']); ?>" target="_blank">WhatsApp: +<?php echo htmlspecialchars($site_settings['whatsapp_number']); ?></a>
+                            <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa)); ?>" target="_blank">WhatsApp: <?php echo htmlspecialchars($wa); ?></a>
                         </span>
                     </li>
-                    <?php endif; ?>
                 </ul>
-
-                <!-- MAP EMBED -->
-                <div class="footer-map">
-                    <iframe
-                        src="https://maps.google.com/maps?q=Parikshit%20Roy%20Lane,%20Main%20road,%20Beleghata,%20Kolkata,%20West%20Bengal%20700015&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                        width="100%" height="130" style="border:0;border-radius:8px;" allowfullscreen="" loading="lazy">
-                    </iframe>
-                </div>
             </div>
 
         </div>

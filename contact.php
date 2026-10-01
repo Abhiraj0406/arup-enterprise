@@ -398,7 +398,7 @@ include 'includes/header.php';
     <p>Have a question about our machinery? Need a custom quote or on-site demo? Our engineers are standing by — reach out through any channel below.</p>
     <div class="ph-stats" style="margin-top:20px;">
       <a href="#contact-form" class="ct-btn-primary"><i class="fas fa-paper-plane"></i> Send a Message</a>
-      <a href="tel:+918013635806" class="ct-btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
+      <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="ct-btn-secondary"><i class="fas fa-phone-alt"></i> Call Now</a>
     </div>
   </div>
 </section>
@@ -432,7 +432,7 @@ include 'includes/header.php';
             <strong>Message Sent, <?php echo htmlspecialchars($success_name); ?>!</strong>
             <span>Your enquiry has been received. Our team will contact you within 24 hours. You can also reach us on WhatsApp for a faster response.</span>
           </div>
-          <a href="https://wa.me/918013635806" target="_blank" class="ct-success-wa">
+          <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $site_settings['whatsapp'] ?? $site_settings['phone'] ?? '')); ?>" target="_blank" class="ct-success-wa">
             <i class="fab fa-whatsapp"></i> Chat Now
           </a>
         </div>
@@ -511,11 +511,14 @@ include 'includes/header.php';
         <h2 class="ct-info-title">Reach Out Directly</h2>
         <p class="ct-info-sub">Multiple ways to connect — pick what's most convenient for you.</p>
 
-        <a href="https://wa.me/918013635806" target="_blank" class="ct-wa-card">
+        <?php 
+        $wa = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806');
+        ?>
+        <a href="https://wa.me/<?php echo htmlspecialchars(preg_replace('/[^0-9]/', '', $wa)); ?>" target="_blank" class="ct-wa-card">
           <div class="ct-wa-icon"><i class="fab fa-whatsapp"></i></div>
           <div class="ct-wa-text">
             <span>Fastest Response</span>
-            <strong>+91 8013635806</strong>
+            <strong><?php echo htmlspecialchars($wa); ?></strong>
           </div>
           <div class="ct-wa-arrow">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -527,17 +530,18 @@ include 'includes/header.php';
             <div class="ct-info-ico"><i class="fas fa-map-marker-alt"></i></div>
             <div class="ct-info-body">
               <strong>Office Address</strong>
-              <span>B/5/H/4 Parikshit Roy Lane,<br>Beleaghata Road, Kolkata – 700015</span>
+              <span><?php echo nl2br(htmlspecialchars($site_settings['address'] ?? "B/5/H/4 Parikshit Roy Lane,\nBeleaghata Road, Kolkata – 700015")); ?></span>
             </div>
           </div>
+          
           <div class="ct-info-item">
             <div class="ct-info-ico"><i class="fas fa-phone-alt"></i></div>
             <div class="ct-info-body">
               <strong>Phone Numbers</strong>
-              <span><a href="tel:+918013635806">+91 8013635806</a></span>
-              <span><a href="tel:+919231646429">+91 9231646429</a></span>
+              <span><a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>"><?php echo htmlspecialchars($wa); ?></a></span>
             </div>
           </div>
+          
           <div class="ct-info-item">
             <div class="ct-info-ico"><i class="fas fa-envelope"></i></div>
             <div class="ct-info-body">
@@ -595,8 +599,9 @@ include 'includes/header.php';
         <p>Expert advice, quotes, and technical support — one call away.</p>
       </div>
       <div class="ct-cta-btns">
-        <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $site_settings['phone'] ?? '')); ?>" class="ct-btn-primary"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($site_settings['phone'] ?? '+91 8013635806'); ?></a>
-        <a href="mailto:<?php echo htmlspecialchars($site_settings['email'] ?? ''); ?>" class="ct-btn-secondary"><i class="fas fa-envelope"></i> <?php echo htmlspecialchars($site_settings['email'] ?? 'enterprisearup@gmail.com'); ?></a>
+        <?php $wa = !empty($site_settings['phone']) ? $site_settings['phone'] : (!empty($site_settings['whatsapp_number']) ? $site_settings['whatsapp_number'] : '+91 8013635806'); ?>
+        <a href="tel:<?php echo htmlspecialchars(preg_replace('/[^0-9+]/', '', $wa)); ?>" class="ct-btn-primary"><i class="fas fa-phone"></i> <?php echo htmlspecialchars($wa); ?></a>
+        <a href="mailto:enterprisearup@gmail.com" class="ct-btn-secondary"><i class="fas fa-envelope"></i> enterprisearup@gmail.com</a>
       </div>
     </div>
   </div>
