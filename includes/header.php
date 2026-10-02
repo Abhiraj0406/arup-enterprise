@@ -33,12 +33,6 @@ $categories = [];
 $pinned_categories = [];
 if (isset($conn) && $conn) {
     try {
-        // Check if columns exist
-        $chk1 = $conn->query("SHOW COLUMNS FROM categories LIKE 'show_in_menu'");
-        $chk2 = $conn->query("SHOW COLUMNS FROM categories LIKE 'pin_to_menu'");
-        $hasShowInMenu = ($chk1 && $chk1->num_rows > 0);
-        $hasPinToMenu = ($chk2 && $chk2->num_rows > 0);
-        
         // Fetch all active categories
         $sql = "SELECT * FROM categories WHERE status='active' ORDER BY sort_order ASC, name ASC";
         $res = $conn->query($sql);
@@ -47,7 +41,7 @@ if (isset($conn) && $conn) {
                 $categories[] = $r;
                 
                 // Collect pinned categories
-                if ($hasPinToMenu && ($r['pin_to_menu'] ?? 0) == 1) {
+                if (!empty($r['pin_to_menu']) && $r['pin_to_menu'] == 1) {
                     $pinned_categories[] = $r;
                 }
             }

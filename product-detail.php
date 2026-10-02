@@ -25,7 +25,9 @@ if ($product_id > 0 && isset($conn) && $conn) {
 }
 
 // ── Product not found ────────────────────────────────────────
-if (!$product) { ?>
+if (!$product) { 
+    http_response_code(404);
+?>
     <section style="padding:100px 0;text-align:center;background:#FAF6EE;">
         <div style="max-width:560px;margin:0 auto;padding:0 24px;">
             <i class="fas fa-box-open" style="font-size:3.5rem;color:#D5CDB8;display:block;margin-bottom:20px;"></i>

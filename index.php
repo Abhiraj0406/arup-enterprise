@@ -39,15 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Valid email is required";
 
     if (empty($errors) && isset($conn) && $conn) {
-
-        // Check if table exists
-        $tableCheck = $conn->query("SHOW TABLES LIKE 'contact_enquiries'");
-        if ($tableCheck && $tableCheck->num_rows > 0) {
-            $stmt = $conn->prepare("
-                INSERT INTO contact_enquiries
-                    (first_name, last_name, phone, email, message, product_name, source, ip_address, status)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'new')
-            ");
+        $stmt = $conn->prepare("
+            INSERT INTO contact_enquiries
+                (first_name, last_name, phone, email, message, product_name, source, ip_address, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'new')
+        ");
 
             if ($stmt) {
                 $stmt->bind_param("ssssssss",
@@ -195,20 +191,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit();
 
                 } else {
-                    $_SESSION['quote_error'] = "DB Error: " . $conn->error;
+                    $_SESSION['quote_error'] = "Unable to submit your quote request right now. Please call us directly.";
                     $stmt->close();
                 }
             } else {
-                $_SESSION['quote_error'] = "Prepare failed: " . $conn->error;
+                $_SESSION['quote_error'] = "Unable to process your quote request right now. Please contact us directly.";
             }
-        } else {
-            // Table doesn't exist - show success anyway (for testing)
-            $_SESSION['quote_success'] = "Thanks, " . htmlspecialchars($first_name) .
-                "! Your enquiry has been received. Our team will contact you within 24 hours.";
-            ob_end_clean();
-            header("Location: index.php?submitted=1#contact-form");
-            exit();
-        }
 
         ob_end_clean();
         header("Location: index.php#contact-form");
@@ -234,46 +222,24 @@ include 'includes/header.php';
 // ============================================================
 $products = [];
 if (isset($conn) && $conn) {
-    // Check if products table exists
-    $tableCheck = $conn->query("SHOW TABLES LIKE 'products'");
-    if ($tableCheck && $tableCheck->num_rows > 0) {
+    try {
         $result = $conn->query("SELECT * FROM products WHERE status='active' ORDER BY featured DESC, sort_order ASC LIMIT 12");
         if ($result) {
             while ($row = $result->fetch_assoc()) {
                 $products[] = $row;
             }
         }
-    }
-}
-
-// No fallback products to ensure we don't show unrelated dummy data.
-
-// ============================================================
-// FETCH ACTIVE CATEGORIES from DB (for Tabs & Industries)
-// ============================================================
-$active_categories = [];
-if (isset($conn) && $conn) {
-    $tableCheck = $conn->query("SHOW TABLES LIKE 'categories'");
-    if ($tableCheck && $tableCheck->num_rows > 0) {
-        $result = $conn->query("SELECT * FROM categories WHERE status='active' ORDER BY sort_order ASC, name ASC");
-        if ($result) {
-            while ($row = $result->fetch_assoc()) {
-                $active_categories[] = $row;
-            }
-        }
+    } catch (Exception $e) {
+        $products = [];
     }
 }
 
 // ============================================================
-// POPULAR TAGS FOR HERO (Configurable from Admin Categories)
+// ACTIVE CATEGORIES & POPULAR TAGS (Reused from header)
 // ============================================================
+$active_categories = !empty($categories) ? $categories : [];
 $hero_popular_tags = [];
 if (!empty($active_categories)) {
-    // Check if is_popular column exists
-    $chkPop = $conn->query("SHOW COLUMNS FROM categories LIKE 'is_popular'");
-    if ($chkPop && $chkPop->num_rows == 0) {
-        $conn->query("ALTER TABLE categories ADD COLUMN is_popular TINYINT(1) DEFAULT 1");
-    }
     foreach ($active_categories as $c) {
         if (!isset($c['is_popular']) || ($c['is_popular'] == 1)) {
             $hero_popular_tags[] = $c['name'];

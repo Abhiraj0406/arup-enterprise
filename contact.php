@@ -20,29 +20,6 @@ ob_start();
 
 require_once "includes/db.php";
 
-// ============================================================
-// ✅ FORCE ADD THE MISSING COLUMN
-// ============================================================
-if (isset($conn) && !$conn->connect_error) {
-    $checkColumn = $conn->query("SHOW COLUMNS FROM contact_messages LIKE 'ip_address'");
-    if (!$checkColumn || $checkColumn->num_rows === 0) {
-        $conn->query("ALTER TABLE contact_messages ADD COLUMN ip_address VARCHAR(50) DEFAULT NULL AFTER status");
-    }
-    
-    $conn->query("CREATE TABLE IF NOT EXISTS contact_messages (
-        id         INT AUTO_INCREMENT PRIMARY KEY,
-        name       VARCHAR(150) NOT NULL,
-        phone      VARCHAR(30)  NOT NULL,
-        email      VARCHAR(150) NOT NULL,
-        subject    VARCHAR(200) DEFAULT 'General Inquiry',
-        message    TEXT         NOT NULL,
-        status     VARCHAR(20)  DEFAULT 'new',
-        ip_address VARCHAR(50)  DEFAULT NULL,
-        created_at TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
-        INDEX idx_status  (status),
-        INDEX idx_created (created_at)
-    )");
-}
 
 $errors      = [];
 $form_sent   = false;
@@ -882,7 +859,7 @@ a{text-decoration:none;color:inherit;}
     reset(){this.x=rand(0,W);this.y=rand(0,H);this.vx=rand(-.25,.25);this.vy=rand(-.7,-.15);this.r=rand(.7,2.2);this.life=0;this.max=rand(80,200);this.g=Math.random()>.5;}
     constructor(){this.reset();this.life=rand(0,200);}
     update(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.life>this.max)this.reset();}
-    draw(){const a=Math.sin(Math.PI*this.life/this.max)*.65;ctx.save();ctx.globalAlpha=a;ctx.fillStyle=this.g?'#EF4444':'#F87171';ctx.shadowColor=this.g?'#EF4444':'#F87171';ctx.shadowBlur=5;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();}}
+    draw(){const a=Math.sin(Math.PI*this.life/this.max)*.65;ctx.save();ctx.globalAlpha=a;ctx.fillStyle=this.g?'#EF4444':'#F87171';ctx.shadowColor=this.g?'#EF4444':'#F87171';ctx.shadowBlur=5;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();}
   }
   for(let i=0;i<85;i++)P.push(new Spark());
   function loop(){ctx.clearRect(0,0,W,H);P.forEach(p=>{p.update();p.draw();});requestAnimationFrame(loop);}

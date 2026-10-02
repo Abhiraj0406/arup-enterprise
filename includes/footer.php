@@ -119,8 +119,8 @@ $pdf_honney   = 'uploads/pdfs/honney-impex-products.pdf';
                 <ul class="footer-links">
                     <?php
                     // Fetch active categories from database
-                    $footer_categories = [];
-                    if (isset($conn) && $conn) {
+                    $footer_categories = !empty($categories) ? array_slice($categories, 0, 6) : [];
+                    if (empty($footer_categories) && isset($conn) && $conn) {
                         try {
                             $result = $conn->query("SELECT * FROM categories WHERE status = 'active' ORDER BY sort_order ASC LIMIT 6");
                             if ($result) {

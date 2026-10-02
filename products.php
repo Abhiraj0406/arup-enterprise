@@ -47,9 +47,8 @@ if (isset($conn) && $conn) {
     }
 }
 
-// ✅ Get categories for filter dropdown using $conn
-$categories = [];
-if (isset($conn) && $conn) {
+// ✅ Reuse categories from header or fetch if not set
+if (empty($categories) && isset($conn) && $conn) {
     try {
         $result = $conn->query("SELECT * FROM categories WHERE status = 'active' ORDER BY sort_order ASC");
         if ($result) {
