@@ -125,7 +125,7 @@ if (!empty($status_filter)) {
 }
 
 if (!empty($search)) {
-    $sql .= " AND (first_name LIKE ? OR last_name LIKE ? OR phone LIKE ? OR email LIKE ? OR message LIKE ?)";
+    $sql .= " AND (name LIKE ? OR phone LIKE ? OR email LIKE ? OR message LIKE ? OR product_name LIKE ?)";
     $search_param = "%$search%";
     $params = array_merge($params, [$search_param, $search_param, $search_param, $search_param, $search_param]);
     $types .= "sssss";
@@ -300,6 +300,62 @@ if (isset($conn) && $conn) {
         .btn-outline-danger:hover {
             background: #dc3545;
             color: white;
+        }
+
+        /* ===== VIEW & READ MORE BUTTONS ===== */
+        .btn-view {
+            background: #2563eb;
+            color: #ffffff !important;
+            border: 1px solid #2563eb;
+            padding: 4px 9px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-view:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+            color: #ffffff !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(37,99,235,0.35);
+        }
+        .read-more-btn {
+            background: rgba(220, 38, 38, 0.08);
+            border: 1px solid rgba(220, 38, 38, 0.25);
+            color: #DC2626 !important;
+            font-weight: 700;
+            font-size: 0.65rem;
+            padding: 2px 7px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none !important;
+        }
+        .read-more-btn:hover {
+            background: #DC2626;
+            color: #ffffff !important;
+            border-color: #DC2626;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(220,38,38,0.25);
+        }
+        .message-preview-box {
+            cursor: pointer;
+            padding: 3px 6px;
+            margin: -3px -6px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .message-preview-box:hover {
+            background: rgba(220, 38, 38, 0.04);
         }
 
         /* ===== STATUS BADGES ===== */
@@ -624,16 +680,40 @@ if (isset($conn) && $conn) {
                                         </td>
                                         <td class="fw-bold text-muted"><?php echo $e['id']; ?></td>
                                         <td>
-                                            <strong><?php echo htmlspecialchars($e['first_name'] . ' ' . $e['last_name']); ?></strong>
+                                            <strong><?php echo htmlspecialchars(!empty($e['name']) ? $e['name'] : trim(($e['first_name'] ?? '') . ' ' . ($e['last_name'] ?? ''))); ?></strong>
                                         </td>
                                         <td>
                                             <div><i class="fas fa-phone" style="color:var(--gold);font-size:0.65rem;width:14px;"></i> <?php echo htmlspecialchars($e['phone']); ?></div>
                                             <div><i class="fas fa-envelope" style="color:var(--gold);font-size:0.65rem;width:14px;"></i> <?php echo htmlspecialchars($e['email']); ?></div>
                                         </td>
                                         <td>
-                                            <span class="message-preview" title="<?php echo htmlspecialchars($e['message']); ?>">
-                                                <?php echo htmlspecialchars(substr($e['message'] ?? '', 0, 60)); ?>
-                                            </span>
+                                            <?php 
+                                            $rawMsg = $e['message'] ?? '';
+                                            $isLong = mb_strlen($rawMsg) > 40;
+                                            $shortMsg = $isLong ? mb_substr($rawMsg, 0, 40) . '...' : $rawMsg;
+                                            $custName = !empty($e['name']) ? $e['name'] : trim(($e['first_name'] ?? '') . ' ' . ($e['last_name'] ?? ''));
+                                            if (empty($custName)) $custName = 'Customer #' . $e['id'];
+                                            ?>
+                                            <div style="max-width:240px;">
+                                                <span class="message-preview-text" style="color:var(--mid-gray); line-height:1.4; display:block;">
+                                                    <?php echo htmlspecialchars($shortMsg); ?>
+                                                </span>
+                                                <button type="button" class="read-more-btn"
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#enquiryDetailModal"
+                                                        data-id="<?php echo $e['id']; ?>"
+                                                        data-name="<?php echo htmlspecialchars($custName, ENT_QUOTES); ?>"
+                                                        data-phone="<?php echo htmlspecialchars($e['phone'], ENT_QUOTES); ?>"
+                                                        data-email="<?php echo htmlspecialchars($e['email'], ENT_QUOTES); ?>"
+                                                        data-product="<?php echo htmlspecialchars($e['product_name'] ?? 'General Enquiry', ENT_QUOTES); ?>"
+                                                        data-message="<?php echo htmlspecialchars($rawMsg, ENT_QUOTES); ?>"
+                                                        data-status="<?php echo htmlspecialchars($e['status'], ENT_QUOTES); ?>"
+                                                        data-date="<?php echo date('d M Y, h:i A', strtotime($e['created_at'])); ?>"
+                                                        data-ip="<?php echo htmlspecialchars($e['ip_address'] ?? 'Unknown', ENT_QUOTES); ?>"
+                                                        title="Click to view full message">
+                                                    <i class="fas fa-eye"></i> Read More
+                                                </button>
+                                            </div>
                                         </td>
                                         <td>
                                             <?php if (!empty($e['product_name'])): ?>
@@ -658,7 +738,23 @@ if (isset($conn) && $conn) {
                                             <br><i class="far fa-clock" style="color:var(--gold);width:14px;"></i> <?php echo date('h:i A', strtotime($e['created_at'])); ?>
                                         </td>
                                         <td>
-                                            <div class="d-flex gap-1 flex-wrap">
+                                            <div class="d-flex gap-1 flex-wrap align-items-center">
+                                                <!-- Eye Button to View Full Message -->
+                                                <button type="button" class="btn btn-sm btn-view" title="View Full Message & Details"
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#enquiryDetailModal"
+                                                        data-id="<?php echo $e['id']; ?>"
+                                                        data-name="<?php echo htmlspecialchars($custName, ENT_QUOTES); ?>"
+                                                        data-phone="<?php echo htmlspecialchars($e['phone'], ENT_QUOTES); ?>"
+                                                        data-email="<?php echo htmlspecialchars($e['email'], ENT_QUOTES); ?>"
+                                                        data-product="<?php echo htmlspecialchars($e['product_name'] ?? 'General Enquiry', ENT_QUOTES); ?>"
+                                                        data-message="<?php echo htmlspecialchars($e['message'] ?? '', ENT_QUOTES); ?>"
+                                                        data-status="<?php echo htmlspecialchars($e['status'], ENT_QUOTES); ?>"
+                                                        data-date="<?php echo date('d M Y, h:i A', strtotime($e['created_at'])); ?>"
+                                                        data-ip="<?php echo htmlspecialchars($e['ip_address'] ?? 'Unknown', ENT_QUOTES); ?>">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+
                                                 <!-- Status Dropdown -->
                                                 <div class="dropdown">
                                                     <button class="btn btn-sm btn-outline-gold dropdown-toggle" type="button" data-bs-toggle="dropdown" title="Change Status">
@@ -673,7 +769,8 @@ if (isset($conn) && $conn) {
                                                 </div>
 
                                                 <!-- WhatsApp -->
-                                                <a href="https://wa.me/91<?php echo preg_replace('/[^0-9]/', '', $e['phone']); ?>?text=Hi%20<?php echo urlencode($e['first_name']); ?>%2C%20Thank%20you%20for%20your%20enquiry%20about%20<?php echo urlencode($e['product_name'] ?? 'our products'); ?>.%20We%27ll%20get%20back%20to%20you%20shortly." target="_blank" class="btn btn-sm" style="background:#25D366;color:white;border:none;padding:4px 8px;border-radius:6px;font-size:0.65rem;" title="Chat on WhatsApp">
+                                                <?php $cName = !empty($e['name']) ? $e['name'] : ($e['first_name'] ?? 'Valued Customer'); ?>
+                                                <a href="https://wa.me/91<?php echo preg_replace('/[^0-9]/', '', $e['phone']); ?>?text=Hi%20<?php echo urlencode($cName); ?>%2C%20Thank%20you%20for%20your%20enquiry%20about%20<?php echo urlencode($e['product_name'] ?? 'our products'); ?>.%20We%27ll%20get%20back%20to%20you%20shortly." target="_blank" class="btn btn-sm" style="background:#25D366;color:white;border:none;padding:4px 8px;border-radius:6px;font-size:0.65rem;" title="Chat on WhatsApp">
                                                     <i class="fab fa-whatsapp"></i>
                                                 </a>
 
@@ -715,6 +812,107 @@ if (isset($conn) && $conn) {
         </div>
     </div>
 
+    <!-- ===== ENQUIRY DETAIL VIEW MODAL ===== -->
+    <div class="modal fade" id="enquiryDetailModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="border-radius:14px; border:1px solid rgba(220,38,38,0.2); box-shadow:0 12px 40px rgba(0,0,0,0.15); overflow:hidden;">
+                <div class="modal-header" style="background:linear-gradient(135deg, #111827, #1f2937); color:white; border-bottom:3px solid #EF4444; padding:16px 20px;">
+                    <div class="d-flex align-items-center gap-2">
+                        <span style="background:rgba(239,68,68,0.2); color:#EF4444; width:36px; height:36px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </span>
+                        <div>
+                            <h5 class="modal-title m-0 fw-bold" style="font-size:1rem; color:#ffffff;">Enquiry Details <span id="modalEnquiryId" style="color:#F87171; font-weight:700;">#</span></h5>
+                            <div style="font-size:0.75rem; color:#9ca3af;" id="modalEnquiryDate">-</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding:22px; background:#fafafa;">
+                    <!-- Top Info Cards -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <div style="background:white; border-radius:10px; padding:12px 16px; border:1px solid #e5e7eb;">
+                                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color:#EF4444; margin-bottom:4px;">
+                                    <i class="fas fa-user"></i> Customer Name
+                                </div>
+                                <div style="font-size:1rem; font-weight:700; color:#111827;" id="modalName">-</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="background:white; border-radius:10px; padding:12px 16px; border:1px solid #e5e7eb;">
+                                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color:#EF4444; margin-bottom:4px;">
+                                    <i class="fas fa-cube"></i> Product Requested
+                                </div>
+                                <div style="font-size:0.95rem; font-weight:700; color:#111827;" id="modalProduct">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Details Card -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <div style="background:white; border-radius:10px; padding:12px 16px; border:1px solid #e5e7eb;">
+                                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color:#6b7280; margin-bottom:4px;">
+                                    <i class="fas fa-phone"></i> Phone Number
+                                </div>
+                                <div style="font-size:0.9rem; font-weight:600;">
+                                    <a href="#" id="modalPhoneLink" style="color:#111827; text-decoration:none;"><span id="modalPhone">-</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="background:white; border-radius:10px; padding:12px 16px; border:1px solid #e5e7eb;">
+                                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; color:#6b7280; margin-bottom:4px;">
+                                    <i class="fas fa-envelope"></i> Email Address
+                                </div>
+                                <div style="font-size:0.9rem; font-weight:600;">
+                                    <a href="#" id="modalEmailLink" style="color:#111827; text-decoration:none;"><span id="modalEmail">-</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Full Message Card -->
+                    <div style="background:white; border-radius:10px; padding:16px 20px; border:1px solid #e5e7eb; border-left:4px solid #EF4444; margin-bottom:14px;">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:#EF4444; letter-spacing:0.5px;">
+                                <i class="fas fa-comment-alt"></i> Full Message
+                            </span>
+                            <span id="modalStatusBadge" class="badge" style="font-size:0.65rem; padding:4px 10px; text-transform:uppercase;"></span>
+                        </div>
+                        <div style="font-size:0.92rem; color:#1f2937; line-height:1.7; white-space:pre-wrap; max-height:220px; overflow-y:auto; padding-right:6px;" id="modalMessage">
+                            -
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center text-muted" style="font-size:0.75rem;">
+                        <span><i class="fas fa-network-wired"></i> IP Address: <span id="modalIp">-</span></span>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background:#f3f4f6; border-top:1px solid #e5e7eb; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <div class="d-flex gap-2 align-items-center flex-wrap">
+                        <a href="#" id="modalWhatsAppBtn" target="_blank" class="btn btn-sm" style="background:#25D366; color:white; font-weight:600; font-size:0.78rem; padding:6px 14px; border-radius:6px;">
+                            <i class="fab fa-whatsapp me-1"></i> Reply on WhatsApp
+                        </a>
+                        <a href="#" id="modalEmailBtn" class="btn btn-sm btn-outline-secondary" style="font-weight:600; font-size:0.78rem; padding:6px 14px; border-radius:6px;">
+                            <i class="fas fa-reply me-1"></i> Reply by Email
+                        </a>
+                    </div>
+                    <div class="d-flex gap-2 align-items-center">
+                        <a href="#" id="modalMarkReadBtn" class="btn btn-sm btn-outline-warning" style="font-size:0.75rem; padding:5px 12px; font-weight:600;">
+                            <i class="fas fa-check"></i> Mark Read
+                        </a>
+                        <a href="#" id="modalMarkRepliedBtn" class="btn btn-sm btn-outline-success" style="font-size:0.75rem; padding:5px 12px; font-weight:600;">
+                            <i class="fas fa-check-double"></i> Mark Replied
+                        </a>
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" style="font-size:0.78rem; padding:6px 16px; border-radius:6px;">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // ===== SELECT ALL =====
@@ -732,7 +930,10 @@ if (isset($conn) && $conn) {
 
         function updateSelectedCount() {
             const checked = document.querySelectorAll('.row-checkbox:checked').length;
-            document.getElementById('selectedCount').innerHTML = '<i class="fas fa-check-circle"></i> ' + checked + ' selected';
+            const countEl = document.getElementById('selectedCount');
+            if (countEl) {
+                countEl.innerHTML = '<i class="fas fa-check-circle"></i> ' + checked + ' selected';
+            }
         }
 
         // ===== AUTO-HIDE ALERTS =====
@@ -743,6 +944,81 @@ if (isset($conn) && $conn) {
                 setTimeout(() => el.remove(), 500);
             });
         }, 5000);
+
+        // ===== POPULATE ENQUIRY MODAL FUNCTION =====
+        function populateEnquiryModal(elem) {
+            if (!elem) return;
+            const trigger = elem.closest ? (elem.closest('[data-id]') || elem) : elem;
+            const id = trigger.getAttribute('data-id') || '';
+            const name = trigger.getAttribute('data-name') || 'Customer';
+            const phone = trigger.getAttribute('data-phone') || '';
+            const email = trigger.getAttribute('data-email') || '';
+            const product = trigger.getAttribute('data-product') || 'General Enquiry';
+            const message = trigger.getAttribute('data-message') || '';
+            const status = trigger.getAttribute('data-status') || 'new';
+            const date = trigger.getAttribute('data-date') || '';
+            const ip = trigger.getAttribute('data-ip') || '';
+
+            const elId = document.getElementById('modalEnquiryId');
+            if (elId) elId.textContent = '#' + id;
+            const elDate = document.getElementById('modalEnquiryDate');
+            if (elDate) elDate.textContent = 'Received on ' + date;
+            const elName = document.getElementById('modalName');
+            if (elName) elName.textContent = name;
+            const elProd = document.getElementById('modalProduct');
+            if (elProd) elProd.textContent = product;
+            const elPhone = document.getElementById('modalPhone');
+            if (elPhone) elPhone.textContent = phone;
+            const elEmail = document.getElementById('modalEmail');
+            if (elEmail) elEmail.textContent = email;
+            const elMsg = document.getElementById('modalMessage');
+            if (elMsg) elMsg.textContent = message;
+            const elIp = document.getElementById('modalIp');
+            if (elIp) elIp.textContent = ip;
+
+            const elPhoneLink = document.getElementById('modalPhoneLink');
+            if (elPhoneLink) elPhoneLink.href = 'tel:' + phone.replace(/[^0-9+]/g, '');
+            const elEmailLink = document.getElementById('modalEmailLink');
+            if (elEmailLink) elEmailLink.href = 'mailto:' + email;
+            const elEmailBtn = document.getElementById('modalEmailBtn');
+            if (elEmailBtn) elEmailBtn.href = 'mailto:' + email + '?subject=' + encodeURIComponent('Response to your enquiry: ' + product);
+
+            const cleanPhone = phone.replace(/[^0-9]/g, '');
+            const waText = encodeURIComponent('Hi ' + name + ', Thank you for contacting Arup Enterprise regarding ' + product + '. How can we help you?');
+            const elWaBtn = document.getElementById('modalWhatsAppBtn');
+            if (elWaBtn) elWaBtn.href = 'https://wa.me/91' + cleanPhone + '?text=' + waText;
+
+            const elReadBtn = document.getElementById('modalMarkReadBtn');
+            if (elReadBtn) elReadBtn.href = '?status=read&id=' + id;
+            const elRepliedBtn = document.getElementById('modalMarkRepliedBtn');
+            if (elRepliedBtn) elRepliedBtn.href = '?status=replied&id=' + id;
+
+            const badge = document.getElementById('modalStatusBadge');
+            if (badge) {
+                badge.textContent = status.toUpperCase();
+                badge.className = 'badge';
+                if (status === 'new') badge.style.background = '#1d4ed8';
+                else if (status === 'read') badge.style.background = '#b45309';
+                else if (status === 'replied') badge.style.background = '#166534';
+                else badge.style.background = '#6b7280';
+            }
+        }
+
+        // Attach to Bootstrap modal show event
+        const enquiryModal = document.getElementById('enquiryDetailModal');
+        if (enquiryModal) {
+            enquiryModal.addEventListener('show.bs.modal', function(event) {
+                populateEnquiryModal(event.relatedTarget);
+            });
+        }
+
+        // Immediate click handler fallback
+        document.addEventListener('click', function(e) {
+            const trigger = e.target.closest('[data-bs-target="#enquiryDetailModal"]');
+            if (trigger) {
+                populateEnquiryModal(trigger);
+            }
+        });
     </script>
 </body>
 </html>

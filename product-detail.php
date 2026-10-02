@@ -187,7 +187,7 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
                         
                         function scrollThumbStrip(thumb) {
                             if (!pdStrip || !thumb) return;
-                            const targetLeft = thumb.offsetLeft - (pdStrip.clientWidth / 2) + (thumb.offsetWidth / 2);
+                            const targetLeft = Math.max(0, thumb.offsetLeft - (pdStrip.clientWidth / 2) + (thumb.offsetWidth / 2));
                             pdStrip.scrollTo({ left: targetLeft, behavior: 'smooth' });
                         }
 
@@ -206,7 +206,7 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
                             if (pdStrip) {
                                 const rect = pdStrip.getBoundingClientRect();
                                 if (rect.bottom < 0 || rect.top > window.innerHeight) {
-                                    return; // User has scrolled away (e.g. to footer) - do not disturb
+                                    return; // User has scrolled away (e.g. to footer or specs) - do not disturb
                                 }
                             }
                             pdImgIndex = (pdImgIndex + 1) % pdThumbs.length;
@@ -243,10 +243,18 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
                         if (pdImageCard) {
                             pdImageCard.addEventListener('mouseenter', stopAutoSwipe);
                             pdImageCard.addEventListener('mouseleave', startAutoSwipe);
+                            pdImageCard.addEventListener('touchstart', stopAutoSwipe, { passive: true });
+                            pdImageCard.addEventListener('touchend', function() {
+                                setTimeout(startAutoSwipe, 2000);
+                            }, { passive: true });
                         }
                         if (pdStrip) {
                             pdStrip.addEventListener('mouseenter', stopAutoSwipe);
                             pdStrip.addEventListener('mouseleave', startAutoSwipe);
+                            pdStrip.addEventListener('touchstart', stopAutoSwipe, { passive: true });
+                            pdStrip.addEventListener('touchend', function() {
+                                setTimeout(startAutoSwipe, 2000);
+                            }, { passive: true });
                         }
                     })();
                 </script>
@@ -1090,9 +1098,13 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
     var mainImg   = document.getElementById('mainProductImg');
     var lightbox  = document.getElementById('pdLightbox');
     var closeBtn  = document.getElementById('pdLightboxClose');
+    var lightboxImg = document.getElementById('pdLightboxImg');
     if (!mainImg || !lightbox) return;
 
     function openLightbox() {
+        if (lightboxImg && mainImg) {
+            lightboxImg.src = mainImg.src;
+        }
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden'; // lock background scroll while open
         closeBtn.focus();

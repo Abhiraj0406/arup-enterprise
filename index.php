@@ -39,16 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Valid email is required";
 
     if (empty($errors) && isset($conn) && $conn) {
+        $full_name = trim($first_name . ' ' . $last_name);
         $stmt = $conn->prepare("
             INSERT INTO contact_enquiries
-                (first_name, last_name, phone, email, message, product_name, source, ip_address, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'new')
+                (name, phone, email, message, product_name, ip_address, status)
+            VALUES (?, ?, ?, ?, ?, ?, 'new')
         ");
 
             if ($stmt) {
-                $stmt->bind_param("ssssssss",
-                    $first_name, $last_name, $phone, $email,
-                    $message, $product_name, $source, $ip_address
+                $stmt->bind_param("ssssss",
+                    $full_name, $phone, $email,
+                    $message, $product_name, $ip_address
                 );
 
                 if ($stmt->execute()) {
