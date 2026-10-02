@@ -178,28 +178,77 @@ $whatsapp_url = "https://wa.me/" . $wa_number . "?text=" . $whatsapp_msg;
                     .pd-gallery-strip::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
                 </style>
                 <script>
-                    let pdImgIndex = 0;
-                    const pdThumbs = document.querySelectorAll('.pd-gallery-thumb');
-                    const pdMainImg = document.getElementById('mainProductImg');
-                    let pdAutoSwipe = setInterval(pdNextImage, 2000);
-                    
-                    function changePdImage(thumb, index) {
-                        pdImgIndex = index;
-                        pdMainImg.src = thumb.src;
-                        pdThumbs.forEach(el => el.classList.remove('active'));
-                        thumb.classList.add('active');
-                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                        clearInterval(pdAutoSwipe);
-                        pdAutoSwipe = setInterval(pdNextImage, 2000);
-                    }
-                    function pdNextImage() {
-                        pdImgIndex = (pdImgIndex + 1) % pdThumbs.length;
-                        let thumb = pdThumbs[pdImgIndex];
-                        pdMainImg.src = thumb.src;
-                        pdThumbs.forEach(el => el.classList.remove('active'));
-                        thumb.classList.add('active');
-                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }
+                    (function() {
+                        let pdImgIndex = 0;
+                        const pdThumbs = document.querySelectorAll('.pd-gallery-thumb');
+                        const pdMainImg = document.getElementById('mainProductImg');
+                        const pdStrip = document.getElementById('pdGalleryStrip');
+                        let pdAutoSwipe = null;
+                        
+                        function scrollThumbStrip(thumb) {
+                            if (!pdStrip || !thumb) return;
+                            const targetLeft = thumb.offsetLeft - (pdStrip.clientWidth / 2) + (thumb.offsetWidth / 2);
+                            pdStrip.scrollTo({ left: targetLeft, behavior: 'smooth' });
+                        }
+
+                        window.changePdImage = function(thumb, index) {
+                            pdImgIndex = index;
+                            if (pdMainImg) pdMainImg.src = thumb.src;
+                            pdThumbs.forEach(el => el.classList.remove('active'));
+                            thumb.classList.add('active');
+                            scrollThumbStrip(thumb);
+                            restartAutoSwipe();
+                        };
+
+                        function pdNextImage() {
+                            if (!pdThumbs || pdThumbs.length <= 1) return;
+                            // Only advance image if gallery strip is currently within the visible viewport
+                            if (pdStrip) {
+                                const rect = pdStrip.getBoundingClientRect();
+                                if (rect.bottom < 0 || rect.top > window.innerHeight) {
+                                    return; // User has scrolled away (e.g. to footer) - do not disturb
+                                }
+                            }
+                            pdImgIndex = (pdImgIndex + 1) % pdThumbs.length;
+                            let thumb = pdThumbs[pdImgIndex];
+                            if (thumb) {
+                                if (pdMainImg) pdMainImg.src = thumb.src;
+                                pdThumbs.forEach(el => el.classList.remove('active'));
+                                thumb.classList.add('active');
+                                scrollThumbStrip(thumb);
+                            }
+                        }
+
+                        function startAutoSwipe() {
+                            if (!pdAutoSwipe && pdThumbs.length > 1) {
+                                pdAutoSwipe = setInterval(pdNextImage, 2000);
+                            }
+                        }
+
+                        function stopAutoSwipe() {
+                            if (pdAutoSwipe) {
+                                clearInterval(pdAutoSwipe);
+                                pdAutoSwipe = null;
+                            }
+                        }
+
+                        function restartAutoSwipe() {
+                            stopAutoSwipe();
+                            startAutoSwipe();
+                        }
+
+                        startAutoSwipe();
+
+                        const pdImageCard = document.querySelector('.pd-image-card');
+                        if (pdImageCard) {
+                            pdImageCard.addEventListener('mouseenter', stopAutoSwipe);
+                            pdImageCard.addEventListener('mouseleave', startAutoSwipe);
+                        }
+                        if (pdStrip) {
+                            pdStrip.addEventListener('mouseenter', stopAutoSwipe);
+                            pdStrip.addEventListener('mouseleave', startAutoSwipe);
+                        }
+                    })();
                 </script>
                 <?php endif; ?>
 
