@@ -382,7 +382,23 @@ function dipban_stars($r){
         <div class="about-intro-grid">
             <div class="about-intro-visual">
                 <div class="about-img-stack">
-                    <div class="about-img-main"><img src="assets/images/about/ab-scaled.jpg" alt="Arup Enterprise magnetic separator manufacturing facility" loading="lazy"></div>
+                    <div class="about-img-main about-video-box">
+                        <video id="aboutIntroVideo" class="about-video-elem" autoplay muted loop playsinline preload="auto" poster="assets/images/about/plant-facility.png">
+                            <source src="assets/video/machine-hero.mp4" type="video/mp4">
+                            <img src="assets/images/about/plant-facility.png" alt="Arup Enterprise magnetic separator manufacturing facility" loading="lazy">
+                        </video>
+                        <div class="about-video-overlay">
+                            <button type="button" class="about-vid-btn" id="aboutVidPlayPause" title="Play / Pause Video" aria-label="Play or pause machinery video">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button type="button" class="about-vid-btn" id="aboutVidMuteToggle" title="Mute / Unmute Sound" aria-label="Toggle sound">
+                                <i class="fas fa-volume-mute"></i>
+                            </button>
+                        </div>
+                        <div class="about-vid-pill">
+                            <span class="live-indicator"></span> Machinery In Action
+                        </div>
+                    </div>
                     <div class="about-badge-float"><i class="fas fa-award"></i><div><strong>Est. 1986</strong><span>38+ Years Trusted</span></div></div>
                     <div class="about-img-secondary"><img src="assets/images/logo.png" alt="Arup Enterprise Logo"></div>
                 </div>
@@ -766,8 +782,15 @@ img{max-width:100%;display:block}
 .section-about-intro{background:var(--cream)}
 .about-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .about-img-stack{position:relative;padding-bottom:36px}
-.about-img-main{border-radius:16px;overflow:hidden;box-shadow:var(--sh-md);border:2px solid rgba(220,38,38,.18)}
-.about-img-main img{width:100%;height:380px;object-fit:cover;display:block}
+.about-img-main{border-radius:16px;overflow:hidden;box-shadow:var(--sh-md);border:2px solid rgba(220,38,38,.18);position:relative;background:#111}
+.about-img-main img, .about-img-main video{width:100%;height:380px;object-fit:cover;display:block}
+.about-video-box{cursor:pointer}
+.about-video-overlay{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:8px;z-index:4}
+.about-vid-btn{width:36px;height:36px;border-radius:50%;background:rgba(17,24,39,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.75rem;transition:all .25s ease}
+.about-vid-btn:hover{background:var(--gold);color:#fff;border-color:var(--gold);transform:scale(1.08)}
+.about-vid-pill{position:absolute;top:14px;left:14px;z-index:4;background:rgba(17,24,39,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(220,38,38,0.35);color:#fff;padding:5px 12px;border-radius:20px;font-size:0.7rem;font-weight:700;letter-spacing:0.3px;display:flex;align-items:center;gap:6px;pointer-events:none}
+.about-vid-pill .live-indicator{width:7px;height:7px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444;animation:livePulse 1.8s infinite}
+@keyframes livePulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
 .about-img-secondary{position:absolute;bottom:0;left:-28px;width:145px;height:108px;border-radius:12px;overflow:hidden;border:4px solid var(--cream);box-shadow:var(--sh-md)}
 .about-img-secondary img{width:100%;height:100%;object-fit:cover}
 .about-badge-float{position:absolute;bottom:20px;right:-20px;background:var(--gold);color:#fff;padding:13px 17px;border-radius:12px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh-gold);font-size:.82rem;z-index:2}
@@ -1317,6 +1340,47 @@ if(track) {
                 });
             }
         });
+    }
+
+    // About Machinery Video Controls
+    var aboutVid = document.getElementById('aboutIntroVideo');
+    var aboutPlayBtn = document.getElementById('aboutVidPlayPause');
+    var aboutMuteBtn = document.getElementById('aboutVidMuteToggle');
+
+    if (aboutVid) {
+        function toggleAboutVideo(e) {
+            if (e) e.stopPropagation();
+            if (aboutVid.paused) {
+                aboutVid.play();
+                if (aboutPlayBtn) {
+                    aboutPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    aboutPlayBtn.setAttribute('title', 'Pause Video');
+                }
+            } else {
+                aboutVid.pause();
+                if (aboutPlayBtn) {
+                    aboutPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    aboutPlayBtn.setAttribute('title', 'Play Video');
+                }
+            }
+        }
+
+        if (aboutPlayBtn) aboutPlayBtn.addEventListener('click', toggleAboutVideo);
+        aboutVid.addEventListener('click', toggleAboutVideo);
+
+        if (aboutMuteBtn) {
+            aboutMuteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                aboutVid.muted = !aboutVid.muted;
+                if (aboutVid.muted) {
+                    aboutMuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    aboutMuteBtn.setAttribute('title', 'Unmute Sound');
+                } else {
+                    aboutMuteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    aboutMuteBtn.setAttribute('title', 'Mute Sound');
+                }
+            });
+        }
     }
 
 })();
