@@ -775,7 +775,7 @@ if (isset($conn) && $conn) {
                                                 </a>
 
                                                 <!-- Delete -->
-                                                <a href="?delete_id=<?php echo $e['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this enquiry?')" title="Delete">
+                                                <a href="?delete_id=<?php echo $e['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="confirmDelete(event, this.href)" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             </div>
@@ -798,7 +798,7 @@ if (isset($conn) && $conn) {
                             <button type="submit" name="bulk_status" class="btn btn-sm btn-gold" style="font-size:0.7rem;padding:4px 12px;">
                                 <i class="fas fa-check"></i> Update
                             </button>
-                            <button type="submit" name="bulk_delete" class="btn btn-sm btn-outline-danger" style="font-size:0.7rem;padding:4px 12px;" onclick="return confirm('Delete selected enquiries?')">
+                            <button type="submit" name="bulk_delete" id="bulkDeleteBtn" class="btn btn-sm btn-outline-danger" style="font-size:0.7rem;padding:4px 12px;">
                                 <i class="fas fa-trash-alt"></i> Delete
                             </button>
                             <span id="selectedCount" style="font-size:0.7rem;color:var(--mid-gray);"><i class="fas fa-check-circle"></i> 0 selected</span>
@@ -913,6 +913,8 @@ if (isset($conn) && $conn) {
         </div>
     </div>
 
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // ===== SELECT ALL =====
@@ -1019,6 +1021,61 @@ if (isset($conn) && $conn) {
                 populateEnquiryModal(trigger);
             }
         });
+
+        // ===== SWEETALERT DELETE CONFIRMATIONS =====
+        function confirmDelete(e, url) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Delete this enquiry?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        }
+
+        const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+        if (bulkDeleteBtn) {
+            bulkDeleteBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const checked = document.querySelectorAll('.row-checkbox:checked').length;
+                if (checked === 0) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'No Enquiries Selected',
+                        text: 'Please select at least one enquiry to delete.',
+                        confirmButtonColor: '#3b82f6'
+                    });
+                    return;
+                }
+                
+                Swal.fire({
+                    title: 'Delete ' + checked + ' enquiries?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ef4444',
+                    cancelButtonColor: '#6b7280',
+                    confirmButtonText: 'Yes, delete them!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Create a hidden input to simulate the button click name
+                        const hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = 'bulk_delete';
+                        hiddenInput.value = '1';
+                        this.closest('form').appendChild(hiddenInput);
+                        this.closest('form').submit();
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>

@@ -15,6 +15,9 @@ if (!isset($conn) || $conn->connect_error) {
     die("Database connection error. Please check db.php");
 }
 
+// TEMPORARY FIX: Alter table to remove strict ENUM constraint on status
+$conn->query("ALTER TABLE contact_messages MODIFY COLUMN status VARCHAR(50) NOT NULL DEFAULT 'New'");
+
 // ================= UPDATE STATUS =================
 if (isset($_POST['update_status'])) {
     $id = intval($_POST['id']);
@@ -86,6 +89,9 @@ $status_counts = [
 
 foreach($messages as $msg) {
     $s = $msg['status'] ?? 'New';
+    // Normalize case dynamically without hardcoding
+    $s = ucwords(strtolower($s));
+
     if(isset($status_counts[$s])) {
         $status_counts[$s]++;
     }
@@ -417,10 +423,11 @@ $page_title = "Contact Messages Admin";
             color: var(--charcoal);
             padding: 28px;
         }
-        .modal-content-custom .modal-body i {
+        .modal-main-icon {
             color: var(--gold);
             font-size: 2.8rem;
             margin-bottom: 12px;
+            display: inline-block;
         }
         .modal-content-custom .modal-body h4 { 
             color: var(--gold-dark); 
@@ -628,6 +635,9 @@ $page_title = "Contact Messages Admin";
                                         $shortMessage = substr($fullMessage, 0, 120);
                                         $isLong = strlen($fullMessage) > 120;
                                         $status = $row['status'] ?? 'New';
+                                        // Normalize case dynamically without hardcoding
+                                        $status = ucwords(strtolower($status));
+
                                         $statusClass = str_replace(' ', '', $status);
                                         
                                         $displayDate = $row['display_date'] ?? date('d M Y');
@@ -724,7 +734,7 @@ $page_title = "Contact Messages Admin";
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <i class="fas fa-exclamation-triangle"></i>
+                    <i class="fas fa-exclamation-triangle modal-main-icon"></i>
                     <h4>Delete Message?</h4>
                     <p>Are you sure you want to delete the message from <strong id="deleteName"></strong>?</p>
                     <p class="text-muted" style="font-size:0.75rem;">This action cannot be undone.</p>
