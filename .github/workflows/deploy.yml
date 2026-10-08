@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
+    permissions:
+      contents: read
+
     steps:
       - name: 🚀 Sync code and update server
         uses: appleboy/ssh-action@v1.0.3
@@ -29,10 +32,16 @@ jobs:
             if [ ! -d .git ]; then
               echo "  ⚙️ Initializing git repository on server..."
               git init
-              git remote add origin ${{ github.server_url }}/${{ github.repository }}.git
             fi
+
+            # Authenticate using GitHub Actions temporary token
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git 2>/dev/null || git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
             git fetch origin main
             git reset --hard origin/main
+
+            # Sanitize remote URL after fetch
+            git remote set-url origin https://github.com/${{ github.repository }}.git
 
             echo "=================================================="
             echo "  📦 Checking PHP dependencies..."
