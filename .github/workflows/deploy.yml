@@ -44,16 +44,6 @@ jobs:
             git remote set-url origin https://github.com/${{ github.repository }}.git
 
             echo "=================================================="
-            echo "  📦 Checking PHP dependencies..."
-            echo "=================================================="
-            if [ -f composer.json ]; then
-              composer install --no-dev --optimize-autoloader --no-interaction --quiet
-              echo "✅ Composer packages updated"
-            else
-              echo "ℹ️  No composer.json found (PHPMailer bundled), skipping composer install"
-            fi
-
-            echo "=================================================="
             echo "  📁 Ensuring upload and asset directories..."
             echo "=================================================="
             mkdir -p public_html/uploads public_html/admin/uploads public_html/admin/Uploads storage/logs
