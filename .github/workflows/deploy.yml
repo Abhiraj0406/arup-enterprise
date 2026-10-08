@@ -1,0 +1,72 @@
+name: 🚀 Deploy to Hostinger — arup-enterprise.com
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to arup-enterprise.com
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🚀 Sync code and update server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host:        ${{ secrets.HOSTINGER_HOST }}
+          username:    ${{ secrets.HOSTINGER_USER }}
+          key:         ${{ secrets.HOSTINGER_SSH_KEY }}
+          port:        ${{ secrets.HOSTINGER_PORT }}
+          script_stop: true
+          script: |
+            cd "$HOME/domains/arup-enterprise.com"
+
+            echo "=================================================="
+            echo "  📥 Pulling latest code from GitHub..."
+            echo "=================================================="
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "=================================================="
+            echo "  📦 Checking PHP dependencies..."
+            echo "=================================================="
+            if [ -f composer.json ]; then
+              composer install --no-dev --optimize-autoloader --no-interaction --quiet
+              echo "✅ Composer packages updated"
+            else
+              echo "ℹ️  No composer.json found (PHPMailer bundled), skipping composer install"
+            fi
+
+            echo "=================================================="
+            echo "  📁 Ensuring upload and asset directories..."
+            echo "=================================================="
+            mkdir -p public_html/uploads public_html/admin/uploads public_html/admin/Uploads storage/logs
+            chmod -R 775 public_html/uploads public_html/admin/uploads public_html/admin/Uploads storage 2>/dev/null || true
+
+            echo "=================================================="
+            echo "  🔒 Verifying environment configuration..."
+            echo "=================================================="
+            if [ -f .env ]; then
+              chmod 600 .env
+              echo "✅ .env verified and permissions hardened (600)"
+            else
+              echo "⚠️  .env MISSING in $HOME/domains/arup-enterprise.com — site will not work without it!"
+              echo "ℹ️  Create .env from .env.example before launching!"
+            fi
+
+            echo "=================================================="
+            echo "  🗄️  Verifying database schema file..."
+            echo "=================================================="
+            if [ -f database/schema.sql ]; then
+              echo "✅ database/schema.sql present"
+            else
+              echo "⚠️  database/schema.sql NOT found"
+            fi
+            echo "   ℹ️  First-time DB setup: import database/schema.sql via Hostinger phpMyAdmin"
+
+            echo "=================================================="
+            echo "  ✅ Deployment complete!"
+            echo "  🌐 https://arup-enterprise.com"
+            echo "=================================================="

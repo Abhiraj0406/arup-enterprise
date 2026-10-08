@@ -1,11 +1,17 @@
 <?php
 // ============================================================
-// includes/db.php — Database Connection (env-powered)
+// admin/includes/db.php — Database Connection (env-powered)
 // ============================================================
 
-// Load the env parser + values from .env
-require_once __DIR__ . '/env.php';
-load_env(__DIR__ . '/../.env');
+// Load env parser + values from .env
+require_once __DIR__ . '/../../includes/env.php';
+
+// Check root directory first (outside public_html), then fallback to local
+if (file_exists(__DIR__ . '/../../../.env')) {
+    load_env(__DIR__ . '/../../../.env');
+} elseif (file_exists(__DIR__ . '/../../.env')) {
+    load_env(__DIR__ . '/../../.env');
+}
 
 // ----- Environment mode -----
 $app_env = env('APP_ENV', 'production');
@@ -33,12 +39,11 @@ if ($conn->connect_error) {
     if ($is_dev) {
         die("DB Connection failed: " . $conn->connect_error);
     } else {
-        // Never expose DB errors in production
         die("A technical error occurred. Please try again later.");
     }
 }
 
-// ----- Set timezone & charset -----
+// ----- Set MySQL timezone & charset -----
 $conn->query("SET time_zone = '+05:30'");
 $conn->set_charset($charset);
 ?>

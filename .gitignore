@@ -1,17 +1,19 @@
 # ============================================================
-# .gitignore — Arup Enterprise / DipBan Technical Services
+# .gitignore — Arup Enterprise
 # ============================================================
 
-# ----- NEVER commit these -----
+# ----- NEVER commit secrets -----
 .env
 .env.local
 .env.*.local
 *.env
+**/.env
 
-# ----- Uploads (user/admin submitted files) -----
+# ----- Uploads (user & admin media) -----
 uploads/
-admin/Uploads/
-admin/uploads/
+public_html/uploads/
+public_html/admin/uploads/
+public_html/admin/Uploads/
 
 # ----- System / IDE files -----
 .DS_Store
@@ -37,8 +39,9 @@ package-lock.json
 *.log
 error_log
 php_error.log
+storage/logs/
 
-# ----- Database dumps -----
+# ----- Database dumps (keep only base schema) -----
 *.sql
 *.sql.gz
 *.dump
