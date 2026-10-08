@@ -26,6 +26,11 @@ jobs:
             echo "=================================================="
             echo "  📥 Pulling latest code from GitHub..."
             echo "=================================================="
+            if [ ! -d .git ]; then
+              echo "  ⚙️ Initializing git repository on server..."
+              git init
+              git remote add origin ${{ github.server_url }}/${{ github.repository }}.git
+            fi
             git fetch origin main
             git reset --hard origin/main
 

@@ -130,9 +130,8 @@ arup-enterprise/
 * **Database**: MySQL 5.7+ or MariaDB 10.4+
 
 ### 2. Installation
-1. Clone the repository into your local server directory (e.g., `d:/xampp/htdocs/`):
+1. Place or clone the project files into your local web root directory (e.g., `d:/xampp/htdocs/arup-enterprise`):
    ```bash
-   git clone https://github.com/Abhiraj0406/arup-enterprise.git
    cd arup-enterprise
    ```
 
